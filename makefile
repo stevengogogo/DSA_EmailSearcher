@@ -37,7 +37,7 @@ runtest: mergetest
 	gcc -g3 -o $(testbuild)/test.out test_TEMP/*.c
 	./$(testbuild)/test.out 
 
-test: MERGETEST RUNTEST cleantest
+test: mergetest runtest cleantest
 
 
 # Run

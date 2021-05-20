@@ -1,6 +1,6 @@
 # Email Searcher
 
-[![Ubuntu](https://github.com/stevengogogo/CProjectTemplate/actions/workflows/ci.yml/badge.svg)](https://github.com/stevengogogo/CProjectTemplate/actions/workflows/ci.yml)[![codecov](https://codecov.io/gh/stevengogogo/CProjectTemplate/branch/main/graph/badge.svg?token=5F6B6C9M1K)](https://codecov.io/gh/stevengogogo/CProjectTemplate)[![Doxygen Action](https://github.com/stevengogogo/CProjectTemplate/actions/workflows/doc.yml/badge.svg?branch=main)](https://github.com/stevengogogo/CProjectTemplate/actions/workflows/doc.yml)[![Dev](https://img.shields.io/badge/docs-dev-blue.svg)](https://stevengogogo.github.io/CProjectTemplate/)
+[![Ubuntu](https://github.com/stevengogogo/DSA_EmailSearcher/actions/workflows/ci.yml/badge.svg)](https://github.com/stevengogogo/DSA_EmailSearcher/actions/workflows/ci.yml)[![Doxygen Action](https://github.com/stevengogogo/DSA_EmailSearcher/actions/workflows/doc.yml/badge.svg)](https://github.com/stevengogogo/DSA_EmailSearcher/actions/workflows/doc.yml)[![Dev](https://img.shields.io/badge/docs-dev-blue.svg)](https://stevengogogo.github.io/DSA_EmailSearcher/)
 
 An email searcher toolbox implemented in c (See [problem statement](https://github.com/stevengogogo/DSA_EmailSearcher/discussions/13))
 

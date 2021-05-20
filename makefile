@@ -63,7 +63,7 @@ merge_main:
 
 # Memory check
 leak: build
-	valgrind $(outfile) < test/data/test.in
+	valgrind  $(outfile) < test/data/test.in
 	
 
 

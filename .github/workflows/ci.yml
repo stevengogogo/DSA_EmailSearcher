@@ -52,9 +52,9 @@ jobs:
     - name: Scoring
       run: |
         make score
-    - name: Leak test
-      run: |
-        make leak
+    #- name: Leak test
+      #run: |
+        #make leak
     - name: Code coverage using Codecov 
       run: bash <(curl -s https://codecov.io/bash) 
     - name: merge file to main

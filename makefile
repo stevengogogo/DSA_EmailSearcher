@@ -71,5 +71,7 @@ leak: build
 test/validator/validator: test/validator/validator.cpp
 	g++ test/validator/validator.cpp -o test/validator/validator -O3
 
+
 score: build test/validator/validator
-	$(outfile) < test/data/test.in | test/validator/validator
+	$(outfile) < test/data/test.in | test/validator/validator 
+	$(outfile) < test/data/test.in | test/validator/validator > test/validator/score.txt

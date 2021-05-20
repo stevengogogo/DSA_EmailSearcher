@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['final_20report_1',['Final Report',['../index.html',1,'']]]
+  ['email_20searcher_1',['Email Searcher',['../index.html',1,'']]]
 ];

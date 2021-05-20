@@ -32,4 +32,4 @@ Deployment
 
 Reference
 ----------
-- Problem statement (#13)
+- Problem statement ([#13](https://github.com/stevengogogo/DSA_EmailSearcher/discussions/13))

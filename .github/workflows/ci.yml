@@ -49,6 +49,9 @@ jobs:
     - name: Run tests
       run: |
         make test
+    - name: Scoring
+      run: |
+        make score
     - name: Leak test
       run: |
         make leak

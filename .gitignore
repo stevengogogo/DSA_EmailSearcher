@@ -5,3 +5,4 @@ build/
 .vscode/
 test/data/test.ans
 test/validator/validator
+test/validator/score.txt

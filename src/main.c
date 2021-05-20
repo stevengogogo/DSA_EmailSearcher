@@ -1,17 +1,20 @@
-#include <stdio.h>
-#include <stdlib.h>
-#include <stdio.h>
+#include "api.h"
 #include "utils.h"
+#include <stdio.h>
 
-int main()
-{
-    
-    // newnumc("3434");
-    int a = 1;
-    int b = 3;
-    
-    //Print argmax
-    printf("%d\n", argmax(a,b));
+// The testdata only contains the first 100 mails (mail1 ~ mail100)
+// and 2000 queries for you to debug.
 
-    return 0;
+int main(void) {
+    int n_mails, n_queries;
+    mail *mails;
+    query *queries;
+
+	api.init(&n_mails, &n_queries, &mails, &queries);
+
+	for(int i = 0; i < n_queries; i++)
+		if(queries[i].type == expression_match)
+		  api.answer(queries[i].id, NULL, 0);
+
+  return 0;
 }

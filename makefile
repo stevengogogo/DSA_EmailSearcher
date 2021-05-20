@@ -1,10 +1,10 @@
 CFLAGS = -I.
 MAKEFLAGS += --silent
-CC=gcc -g 
+CC=gcc -g -std=c11
 CCm = quom
 
-.PHONY: BUILD TEST RUN  BUILD_RUN  # Main piplines
-.PHONY: RUNTEST  MERGETEST cleantest clean
+.PHONY: build test run_main  build_run  # Main piplines
+.PHONY: runtest  mergetest cleantest clean
 
 
 build_folder = build
@@ -18,13 +18,14 @@ mag = `tput setaf 5; `
 reset=`tput sgr0`
 
 
-
-BUILD: 
+# Build
+build: 
 	mkdir -p  $(build_folder)
 	$(CC) -o $(build_folder)/main.out $(src_folder)/*.c
 	echo "$(green)Built and deploy at $(mag) $(build_folder)/$(outfile)$(reset)";
 
-MERGETEST:
+# Test
+mergetest:
 	mkdir -p test_TEMP 
 	mkdir -p $(testbuild) 
 	cp -R src/* test_TEMP 
@@ -32,19 +33,20 @@ MERGETEST:
 	rm test_TEMP/main.c
 
 
-RUNTEST: MERGETEST  
+runtest: mergetest 
 	gcc -g3 -o $(testbuild)/test.out test_TEMP/*.c
 	./$(testbuild)/test.out 
 
-TEST: MERGETEST RUNTEST cleantest
+test: mergetest runtest cleantest
 
 
-RUN:
+# Run
+run_main:
 	echo "$(green)Run $(mag) $(outfile)$(reset)"
 	./$(outfile)
 	
 
-BUILD_RUN: BUILD RUN
+build_run: build run_main
 
 clean: 
 	mkdir -p tmp_ && mv $(outfile) tmp_  
@@ -54,12 +56,20 @@ clean:
 cleantest:
 	rm -r test_TEMP
 
-MERGE_MAIN:
+merge_main:
 	mkdir -p  $(build_folder)
 	$(CCm) $(src_folder)/main.c  build/main.c
 	$(CC) -o build/main_test_build.out build/main.c
 
-LEAK: TEST
-	valgrind --leak-check=full --show-leak-kinds=all --verbose ./test/build/test.out
+# Memory check
+leak: build
+	valgrind  $(outfile) < test/data/test.in
+	
 
 
+# From DSA Template
+test/validator/validator: test/validator/validator.cpp
+	g++ test/validator/validator.cpp -o test/validator/validator -O3
+
+score: build test/validator/validator
+	$(outfile) < test/data/test.in | test/validator/validator

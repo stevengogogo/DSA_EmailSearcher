@@ -3,3 +3,5 @@ test/build/
 test_TEMP/
 build/
 .vscode/
+test/data/test.ans
+test/validator/validator

@@ -48,6 +48,7 @@ run_main:
 
 build_run: build run_main
 
+# Clean
 clean: 
 	mkdir -p tmp_ && mv $(outfile) tmp_  
 	rm -r $(build_folder)/*
@@ -56,10 +57,24 @@ clean:
 cleantest:
 	rm -r test_TEMP
 
-merge_main:
+# For submission
+merge_main: merge_standalone
+	echo "[Start merging]"
 	mkdir -p  $(build_folder)
-	$(CCm) $(src_folder)/main.c  build/main.c
-	$(CC) -o build/main_test_build.out build/main.c
+	mkdir -p merge_temp
+	cp -R src/* merge_temp
+	python3 merge.py ./merge_temp/main.c remove_api
+	$(CCm) merge_temp/main.c  build/main.c
+	python3 merge.py ./build/main.c add_api
+	rm -r merge_temp
+	echo "[Merge success]"
+
+# For testing compilation: Standalone (STD)
+merge_standalone:
+	mkdir -p  $(build_folder)
+	$(CCm) $(src_folder)/main.c  build/mainSTD.c
+	$(CC) -o build/main.out build/mainSTD.c
+
 
 # Memory check
 leak: build

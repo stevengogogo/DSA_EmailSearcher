@@ -63,9 +63,9 @@ merge_main: merge_standalone
 	mkdir -p  $(build_folder)
 	mkdir -p merge_temp
 	cp -R src/* merge_temp
-	python3 ./build/merge.py ./merge_temp/main.c remove_api
+	python3 build/merge.py ./merge_temp/main.c remove_api
 	$(CCm) merge_temp/main.c  build/main.c
-	python3 ./build/merge.py build/main.c add_api
+	python3 build/merge.py ./build/main.c add_api
 	rm -r merge_temp
 	echo "[Merge success]"
 

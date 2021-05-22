@@ -4,7 +4,7 @@
 int argmax(int a, int b)
 {
    if (a>b){
-       return 1;
+       return 0;
    }
    else{
        return 1;

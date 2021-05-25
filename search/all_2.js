@@ -1,5 +1,4 @@
 var searchData=
 [
-  ['mail_2',['mail',['../structmail.html',1,'']]],
-  ['merge_3',['merge',['../namespacemerge.html',1,'']]]
+  ['indomainint_2',['inDomainInt',['../utils_8h.html#a5e5de4bf768b83c8bb0f35e75cce4d84',1,'utils.c']]]
 ];

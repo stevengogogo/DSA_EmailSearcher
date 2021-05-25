@@ -23,12 +23,16 @@ int popToken(char message[], char token[], int iStr){
             ++i;
         }
         else{
-            break;
+            if (i==0)
+                continue;
+            else 
+                break;
         }
     }
 
-    if (message[iStr] == '\0') // EOF
-        return -1;
+    if (message[iStr] == '\0'){ // EOF
+        iStr= -1;
+    }
 
     token[i] = '\0'; //end of token
 

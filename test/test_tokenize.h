@@ -24,6 +24,7 @@ void test_popToken(void){
     for (int i=0;i<n_token;i++){
         iStr = popToken(message, token, iStr);
         TEST_CHECK(strcmp(token, tokenStr[i]) == 0);
+        TEST_MSG("Expected: %s ; Got: %s (%d)\n",tokenStr[i], token, iStr);
     }
 
 }

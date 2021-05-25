@@ -11,3 +11,10 @@ int argmax(int a, int b)
    }
 }
 
+bool inDomainInt(int val, int lower, int upper){
+    if(val<=upper && val>=lower)
+        return true;
+    else
+        return false;
+}
+

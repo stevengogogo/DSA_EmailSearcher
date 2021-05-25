@@ -11,6 +11,7 @@
 #ifndef UTILS_H
 #define UTILS_H
 
+#include <stdbool.h>
 
 
 /**
@@ -22,6 +23,10 @@
  */
 int argmax(int a,int b);
 
+/**
+ * Check `val` is in [lower,upper]
+ */
+bool inDomainInt(int val, int lower, int upper);
 
 
 #endif

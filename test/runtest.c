@@ -9,5 +9,6 @@
 TEST_LIST = {
     {"Utility", test_utils},
     {"Tokenize", test_popToken},
+    {"Tokenize2", test_token},
     {NULL, NULL} // Terminate the test
 };

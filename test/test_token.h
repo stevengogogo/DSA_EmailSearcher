@@ -7,11 +7,13 @@
 
 void test_token(){
     char message[] = "Dsa Final p-+ro%ject {} \" poopoo";
-    int n_token = 4;
-    char tokenStr[4][300] ={ 
+    int n_token = 6;
+    char tokenStr[6][300] ={ 
         "dsa",
         "final",
-        "project",
+        "p",
+        "ro",
+        "ject",
         "poopoo"
     };
     char token[2048];

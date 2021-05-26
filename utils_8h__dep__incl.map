@@ -1,6 +1,7 @@
 <map id="src/utils.h" name="src/utils.h">
-<area shape="rect" id="node1" title="General Utilities for C language." alt="" coords="103,5,181,32"/>
-<area shape="rect" id="node2" href="$stringParse_8h_source.html" title=" " alt="" coords="13,80,133,107"/>
-<area shape="rect" id="node4" href="$test__utils_8h_source.html" title=" " alt="" coords="157,80,268,107"/>
-<area shape="rect" id="node3" href="$test__tokenize_8h_source.html" title=" " alt="" coords="5,155,140,181"/>
+<area shape="rect" id="node1" title="General Utilities for C language." alt="" coords="169,5,248,32"/>
+<area shape="rect" id="node2" href="$stringParse_8h_source.html" title=" " alt="" coords="79,80,199,107"/>
+<area shape="rect" id="node5" href="$test__utils_8h_source.html" title=" " alt="" coords="224,80,335,107"/>
+<area shape="rect" id="node3" href="$test__token_8h_source.html" title=" " alt="" coords="5,155,124,181"/>
+<area shape="rect" id="node4" href="$test__tokenize_8h_source.html" title=" " alt="" coords="148,155,283,181"/>
 </map>

@@ -1,7 +1,7 @@
 #ifndef TEST_TOKENIZE_H
 #define TEST_TOKENIZE_H
 
-#include "stringParse.h"
+#include "utils.h"
 #include "acutest.h"
 #include <string.h>
 

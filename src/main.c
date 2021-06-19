@@ -1,4 +1,7 @@
 #include "api.h"
+#include "ExpressionMatch.h"
+#include "FindSimilar.h"
+#include "GroupAnalysis.h"
 #include "utils.h"
 #include <stdio.h>
 

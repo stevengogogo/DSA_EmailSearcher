@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['mail_8',['mail',['../structmail.html',1,'']]]
+  ['mail_10',['mail',['../structmail.html',1,'']]]
 ];

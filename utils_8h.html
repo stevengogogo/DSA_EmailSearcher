@@ -75,13 +75,15 @@ $(function() {
 <p>General Utilities for C language.  
 <a href="#details">More...</a></p>
 <div class="textblock"><code>#include &lt;stdbool.h&gt;</code><br />
+<code>#include &lt;ctype.h&gt;</code><br />
 </div><div class="textblock"><div class="dynheader">
 Include dependency graph for utils.h:</div>
 <div class="dyncontent">
 <div class="center"><img src="utils_8h__incl.png" border="0" usemap="#asrc_2utils_8h" alt=""/></div>
 <map name="asrc_2utils_8h" id="asrc_2utils_8h">
-<area shape="rect" title="General Utilities for C language." alt="" coords="5,5,84,32"/>
-<area shape="rect" title=" " alt="" coords="7,80,82,107"/>
+<area shape="rect" title="General Utilities for C language." alt="" coords="50,5,129,32"/>
+<area shape="rect" title=" " alt="" coords="5,80,80,107"/>
+<area shape="rect" title=" " alt="" coords="105,80,167,107"/>
 </map>
 </div>
 </div><div class="textblock"><div class="dynheader">
@@ -89,10 +91,13 @@ This graph shows which files directly or indirectly include this file:</div>
 <div class="dyncontent">
 <div class="center"><img src="utils_8h__dep__incl.png" border="0" usemap="#asrc_2utils_8hdep" alt=""/></div>
 <map name="asrc_2utils_8hdep" id="asrc_2utils_8hdep">
-<area shape="rect" title="General Utilities for C language." alt="" coords="103,5,181,32"/>
-<area shape="rect" href="stringParse_8h_source.html" title=" " alt="" coords="13,80,133,107"/>
-<area shape="rect" href="test__utils_8h_source.html" title=" " alt="" coords="157,80,268,107"/>
-<area shape="rect" href="test__tokenize_8h_source.html" title=" " alt="" coords="5,155,140,181"/>
+<area shape="rect" title="General Utilities for C language." alt="" coords="356,5,435,32"/>
+<area shape="rect" href="ExpressionMatch_8h_source.html" title=" " alt="" coords="5,80,159,107"/>
+<area shape="rect" href="FindSimilar_8h_source.html" title=" " alt="" coords="183,80,301,107"/>
+<area shape="rect" href="GroupAnalysis_8h_source.html" title=" " alt="" coords="326,80,465,107"/>
+<area shape="rect" href="test__tokenize_8h_source.html" title=" " alt="" coords="489,80,624,107"/>
+<area shape="rect" href="test__utils_8h_source.html" title=" " alt="" coords="648,80,759,107"/>
+<area shape="rect" href="test__GroupAnalysis_8h_source.html" title=" " alt="" coords="310,155,481,181"/>
 </map>
 </div>
 </div>
@@ -105,6 +110,21 @@ Functions</h2></td></tr>
 <tr class="separator:a1fa7fd55f201216ebf7800abb1c427a8"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a5e5de4bf768b83c8bb0f35e75cce4d84"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="utils_8h.html#a5e5de4bf768b83c8bb0f35e75cce4d84">inDomainInt</a> (int val, int lower, int upper)</td></tr>
 <tr class="separator:a5e5de4bf768b83c8bb0f35e75cce4d84"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a81f4883411916757a7c41b8a74f73c2b"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="utils_8h.html#a81f4883411916757a7c41b8a74f73c2b">popToken</a> (char message[], char token[], int iStr)</td></tr>
+<tr class="memdesc:a81f4883411916757a7c41b8a74f73c2b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Pop token from message.  <a href="utils_8h.html#a81f4883411916757a7c41b8a74f73c2b">More...</a><br /></td></tr>
+<tr class="separator:a81f4883411916757a7c41b8a74f73c2b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a5ba940f06573ba87adcd6ee567673239"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="utils_8h.html#a5ba940f06573ba87adcd6ee567673239">isRegularExpr_ASCII</a> (int)</td></tr>
+<tr class="memdesc:a5ba940f06573ba87adcd6ee567673239"><td class="mdescLeft">&#160;</td><td class="mdescRight">Judge a character belong to regular expression or not.  <a href="utils_8h.html#a5ba940f06573ba87adcd6ee567673239">More...</a><br /></td></tr>
+<tr class="separator:a5ba940f06573ba87adcd6ee567673239"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a61747ada9fe6caaac8b327e9201d6230"><td class="memItemLeft" align="right" valign="top"><a id="a61747ada9fe6caaac8b327e9201d6230"></a>
+bool&#160;</td><td class="memItemRight" valign="bottom"><b>isNumber_ASCII</b> (int)</td></tr>
+<tr class="separator:a61747ada9fe6caaac8b327e9201d6230"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:adf05e7d8fa581fef68c859a578c69db0"><td class="memItemLeft" align="right" valign="top"><a id="adf05e7d8fa581fef68c859a578c69db0"></a>
+bool&#160;</td><td class="memItemRight" valign="bottom"><b>isUpperCase_ASCII</b> (int)</td></tr>
+<tr class="separator:adf05e7d8fa581fef68c859a578c69db0"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a0ee1be0f3c96a6b89e5e1d0466213583"><td class="memItemLeft" align="right" valign="top"><a id="a0ee1be0f3c96a6b89e5e1d0466213583"></a>
+bool&#160;</td><td class="memItemRight" valign="bottom"><b>isLowerCase_ASCII</b> (int)</td></tr>
+<tr class="separator:a0ee1be0f3c96a6b89e5e1d0466213583"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>General Utilities for C language. </p>
@@ -183,6 +203,75 @@ Functions</h2></td></tr>
       </table>
 </div><div class="memdoc">
 <p>Check <code>val</code> is in [lower,upper] </p>
+
+</div>
+</div>
+<a id="a5ba940f06573ba87adcd6ee567673239"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a5ba940f06573ba87adcd6ee567673239">&#9670;&nbsp;</a></span>isRegularExpr_ASCII()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool isRegularExpr_ASCII </td>
+          <td>(</td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>asc</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Judge a character belong to regular expression or not. </p>
+<dl class="section note"><dt>Note</dt><dd>Regular expression: %[a-zA-Z0-9] </dd></dl>
+<dl class="section return"><dt>Returns</dt><dd>true </dd>
+<dd>
+false </dd></dl>
+
+</div>
+</div>
+<a id="a81f4883411916757a7c41b8a74f73c2b"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a81f4883411916757a7c41b8a74f73c2b">&#9670;&nbsp;</a></span>popToken()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">int popToken </td>
+          <td>(</td>
+          <td class="paramtype">char&#160;</td>
+          <td class="paramname"><em>message</em>[], </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">char&#160;</td>
+          <td class="paramname"><em>token</em>[], </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>iStr</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Pop token from message. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">token</td><td>Buffer string. Token will be saved here. <code>\0</code> if no token left </td></tr>
+    <tr><td class="paramname">message</td><td>main text </td></tr>
+    <tr><td class="paramname">iStr</td><td>reading head </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>int updated reading head <code>iStr</code>. -1: end of string </dd></dl>
 
 </div>
 </div>

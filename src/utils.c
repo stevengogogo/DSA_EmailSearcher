@@ -83,10 +83,16 @@ bool isLowerCase_ASCII(int asc){
     return inDomainInt(asc, 97, 122);
 }
 
-/********Integer stack*********/
+/********Dynamic Array (Int) stack*********/
+
 dymArr init_Arr(int size){
     assert(size>=1);
     int* is = (int*)malloc(size*sizeof(int));
+    if(is==NULL){
+        fprintf(stderr, "Init Error: Insufficient Memory.\n");
+        exit(1);
+    }
+
     dymArr arr = {
         .i = is,
         .len = 0,
@@ -113,8 +119,15 @@ void clear_Arr(dymArr* arr){
 void append_dymArr(dymArr* arr, int val){
     ++(arr->len);
     //Augement size
-    if((arr->len) == arr->size){
-      resize_dymArr(arr, arr->size*2 + 1);
+
+    if((arr->len+1) > arr->size){
+      int new_size = (arr->size)*2 + 1;
+      arr->i = realloc(arr->i, sizeof(int)*new_size);
+      arr->size = new_size;
+      if(arr==NULL){
+        fprintf(stderr, "Append Error: Insufficient Memory.\n");
+        exit(1);
+       }
     }
 
     arr->i[arr->len - 1] = val;
@@ -134,7 +147,7 @@ int pop_item(dymArr* arr){
 }
 
 
-// Queue
+/*************Queue************/
 
 que init_que(int size){
     que q;
@@ -172,7 +185,6 @@ int peek_que(que* q){
     else 
         return q->arr.i[q->head];
 }
-
 
 
 
@@ -299,22 +311,5 @@ void kill_uArray(uArray* arr){
     arr->eleSize = 0;
     arr->len = 0;
     arr->num_maxEle = 0;
-}
-
-/************Generic Stack************/
-
-void init_uStack(uStack *s, size_t eleSize){
-    byte * memory = (byte*)malloc(eleSize*INIT_NUM_ARRAY_ELEMENT);
-    if(memory == NULL){
-        fprintf(stderr, "Stack Init Error: Insufficient Memory.\n");
-        exit(1);
-    }
-
-    /*Initialize*/
-    s->eleSize = eleSize;
-    s->top = 0; //index
-    s->len = -1;
-    s->memory = memory;
-    s->num_maxEle = INIT_NUM_ARRAY_ELEMENT;
 }
 

@@ -195,12 +195,6 @@ void test_array_struct(void){
 }
 
 
-void test_stack_INT(void){
-    uStack s;
-    //Initiate a stack with integer storage
-    init_uStack(&s, sizeof(int));
-}
-
 
 
 

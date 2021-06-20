@@ -15,7 +15,6 @@ TEST_LIST = {
     {"Tokenize2", test_token},
     //Generic Array
     {"Generic Array (int)", test_dynamic_universal_array},
-    {"Generic Stack (int)", test_stack_INT},
     {"Int array insert", array_compare},
     {"Int uArray append", test_uarray_append_int},
     {"Int array append", test_array_append_int},

@@ -15,6 +15,7 @@
 
 #include <stdbool.h>
 #include <stdio.h>
+#include <string.h>
 #include <stdlib.h>
 #include <ctype.h> // tolower
 #define INIT_NUM_ARRAY_ELEMENT 10 
@@ -79,7 +80,8 @@ void set_uArray(uArray* arr, int i,void* item);
 void remove_uArray(uArray* arr, int i);
 void insert_uArray(uArray* arr, int i,void* item);
 void append_uArray(uArray* arr, void* item);
-void update_size(uArray* arr, int new_max_item);
+void update_size_uArray(uArray* arr, int new_max_item);
+
 void kill_uArray(uArray* arr);
 
 /************Generic Stack************/

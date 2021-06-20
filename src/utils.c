@@ -90,9 +90,9 @@ void copy_item_array(void* srcArr, int locSrc,void* dstArr, int locDst,size_t si
     int start_dst = locDst*size;
     int start_src = locSrc*size;
     //Copy
-    for(int j=0;j<size;j++){
-        *(byte*)(srcArr+j+start_src) = *(byte*)(dstArr+j+start_dst);
-    }
+    memcpy((byte*)(srcArr+start_src), (byte*)(dstArr+start_dst), size);
+        //*(byte*)(srcArr+j+start_src) = *(byte*)(dstArr+j+start_dst);
+    
 }
 
 void init_uArray(uArray* arr, size_t eleSize){
@@ -150,26 +150,36 @@ void remove_uArray(uArray* arr, int I){
 
     //Shrink memory
     if(arr->len < arr->num_maxEle/2-10){
-        update_size(arr, arr->num_maxEle/2);
+        update_size_uArray(arr, arr->num_maxEle/2);
     }
 }
 
 void insert_uArray(uArray* arr, int I,void* item){
-    for(int i=I;i<arr->len-1;i++){
-        copy_item_array(arr->memory, i+1, arr->memory, i, arr->eleSize);
+
+    //For empty array 
+    if(arr->len == 0 && I==0){
+        append_uArray(arr, item);
+        return;
     }
 
     ++arr->len;
     //Extend memory
     if(arr->len == arr->num_maxEle){
-        update_size(arr, arr->num_maxEle*2+1);
+        update_size_uArray(arr, arr->num_maxEle*2+1);
     }
+
+    //Shift right
+    for(int i=I;i<arr->len-1;i++){
+        copy_item_array(arr->memory, i+1, arr->memory, i, arr->eleSize);
+    }
+
+
 }
 
 void append_uArray(uArray* arr, void* item){
     //Augment size
     if(arr->len == arr->num_maxEle){
-        update_size(arr, arr->num_maxEle*2+1);
+        update_size_uArray(arr, arr->num_maxEle*2+1);
     }   
 
     copy_item_array(arr->memory, arr->len-1, item, 0, arr->eleSize);
@@ -177,7 +187,7 @@ void append_uArray(uArray* arr, void* item){
     ++arr->len;
 }
 
-void update_size(uArray* arr, int new_max_item){
+void update_size_uArray(uArray* arr, int new_max_item){
     arr->num_maxEle = new_max_item;
     arr->memory = realloc(arr->memory, arr->eleSize*arr->num_maxEle);
     if(arr->memory==NULL){

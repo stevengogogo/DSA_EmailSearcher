@@ -62,7 +62,7 @@ bool isNumber_ASCII(int);
 bool isUpperCase_ASCII(int);
 bool isLowerCase_ASCII(int);
 
-/*****Integer stack*****/
+/*****Dynamic Array (Int)*****/
 
 //dynamic array
 typedef struct{

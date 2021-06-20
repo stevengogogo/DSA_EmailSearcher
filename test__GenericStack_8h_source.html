@@ -73,48 +73,107 @@ $(function() {
 <div class="line"><a name="l00002"></a><span class="lineno">    2</span>&#160;<span class="preprocessor">#define TEST_GENERICSTACK_H</span></div>
 <div class="line"><a name="l00003"></a><span class="lineno">    3</span>&#160; </div>
 <div class="line"><a name="l00004"></a><span class="lineno">    4</span>&#160;<span class="preprocessor">#include &quot;<a class="code" href="utils_8h.html">utils.h</a>&quot;</span></div>
-<div class="line"><a name="l00005"></a><span class="lineno">    5</span>&#160; </div>
-<div class="line"><a name="l00006"></a><span class="lineno">    6</span>&#160;<span class="keywordtype">void</span> test_dynamic_universal_array(<span class="keywordtype">void</span>){</div>
-<div class="line"><a name="l00007"></a><span class="lineno">    7</span>&#160;    <a class="code" href="structuArray.html">uArray</a> arr;</div>
-<div class="line"><a name="l00008"></a><span class="lineno">    8</span>&#160;    init_uArray(&amp;arr, <span class="keyword">sizeof</span>(<span class="keywordtype">int</span>));</div>
-<div class="line"><a name="l00009"></a><span class="lineno">    9</span>&#160;    <span class="keywordtype">int</span> num = 100000;</div>
-<div class="line"><a name="l00010"></a><span class="lineno">   10</span>&#160;    <span class="keywordtype">int</span> item;</div>
-<div class="line"><a name="l00011"></a><span class="lineno">   11</span>&#160;    <span class="keywordtype">int</span> i;</div>
-<div class="line"><a name="l00012"></a><span class="lineno">   12</span>&#160; </div>
-<div class="line"><a name="l00013"></a><span class="lineno">   13</span>&#160;    <span class="comment">//Append Item</span></div>
-<div class="line"><a name="l00014"></a><span class="lineno">   14</span>&#160;    <span class="keywordflow">for</span>(i=0;i&lt;num;i++){</div>
-<div class="line"><a name="l00015"></a><span class="lineno">   15</span>&#160;        append_uArray(&amp;arr, &amp;i); <span class="comment">//[1...100000]</span></div>
-<div class="line"><a name="l00016"></a><span class="lineno">   16</span>&#160;    }</div>
-<div class="line"><a name="l00017"></a><span class="lineno">   17</span>&#160; </div>
-<div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160;    <span class="comment">//Get item</span></div>
-<div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160;    <span class="keywordflow">for</span>(i=0;i&lt;num;i++){</div>
-<div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160;        get_uArray(&amp;arr, i, &amp;item);</div>
-<div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160;        TEST_CHECK(item==i);</div>
-<div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160;        TEST_MSG(<span class="stringliteral">&quot;Got %d; Expected %d&quot;</span>, item, i);</div>
-<div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160;    }</div>
-<div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160; </div>
-<div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160;    <span class="comment">//remove item</span></div>
-<div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160;    <span class="keywordflow">for</span>(i=0;i&lt;num;i++){</div>
-<div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160;        remove_uArray(&amp;arr, arr.len-1);</div>
-<div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160;    }</div>
-<div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160;    TEST_CHECK(arr.len == 0);</div>
-<div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160; </div>
-<div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160;    kill_uArray(&amp;arr);</div>
-<div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160;}</div>
-<div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160; </div>
-<div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160;<span class="keywordtype">void</span> test_stack_INT(<span class="keywordtype">void</span>){</div>
-<div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160;    <a class="code" href="structuStack.html">uStack</a> s;</div>
-<div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160;    <span class="comment">//Initiate a stack with integer storage</span></div>
-<div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160;    init_uStack(&amp;s, <span class="keyword">sizeof</span>(<span class="keywordtype">int</span>));</div>
+<div class="line"><a name="l00005"></a><span class="lineno">    5</span>&#160;<span class="preprocessor">#include &quot;time.h&quot;</span></div>
+<div class="line"><a name="l00006"></a><span class="lineno">    6</span>&#160; </div>
+<div class="line"><a name="l00007"></a><span class="lineno">    7</span>&#160;<span class="keywordtype">void</span> print_clock(<span class="keywordtype">char</span>* s,clock_t str, clock_t end){</div>
+<div class="line"><a name="l00008"></a><span class="lineno">    8</span>&#160;    <span class="keywordtype">double</span> total_t = (double)(end - str) / CLOCKS_PER_SEC;</div>
+<div class="line"><a name="l00009"></a><span class="lineno">    9</span>&#160;    printf(<span class="stringliteral">&quot;%s Elapsed %f&quot;</span>, s,total_t);</div>
+<div class="line"><a name="l00010"></a><span class="lineno">   10</span>&#160;}</div>
+<div class="line"><a name="l00011"></a><span class="lineno">   11</span>&#160; </div>
+<div class="line"><a name="l00012"></a><span class="lineno">   12</span>&#160;<span class="keywordtype">void</span> test_dynamic_universal_array(<span class="keywordtype">void</span>){</div>
+<div class="line"><a name="l00013"></a><span class="lineno">   13</span>&#160;    <a class="code" href="structuArray.html">uArray</a> arr;</div>
+<div class="line"><a name="l00014"></a><span class="lineno">   14</span>&#160;    init_uArray(&amp;arr, <span class="keyword">sizeof</span>(<span class="keywordtype">int</span>));</div>
+<div class="line"><a name="l00015"></a><span class="lineno">   15</span>&#160;    <span class="keywordtype">int</span> num = 10000;</div>
+<div class="line"><a name="l00016"></a><span class="lineno">   16</span>&#160;    <span class="keywordtype">int</span> item;</div>
+<div class="line"><a name="l00017"></a><span class="lineno">   17</span>&#160;    <span class="keywordtype">int</span> i;</div>
+<div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160;    clock_t str;</div>
+<div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160;    clock_t end;</div>
+<div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160; </div>
+<div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160;    <span class="comment">//Append Item</span></div>
+<div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160;    str = clock();</div>
+<div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160;    <span class="keywordflow">for</span>(i=0;i&lt;num;i++){</div>
+<div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160;        append_uArray(&amp;arr, &amp;i); <span class="comment">//[1...100000]</span></div>
+<div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160;    }</div>
+<div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160;    end = clock();</div>
+<div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160;    print_clock(<span class="stringliteral">&quot;\nuArray Append&quot;</span>,str, end);</div>
+<div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160; </div>
+<div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160;    <span class="comment">//Get item</span></div>
+<div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160;    str = clock();</div>
+<div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160;    <span class="keywordflow">for</span>(i=0;i&lt;num;i++){</div>
+<div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160;        get_uArray(&amp;arr, i, &amp;item);</div>
+<div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160;        TEST_CHECK(item==i);</div>
+<div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160;        TEST_MSG(<span class="stringliteral">&quot;Got %d; Expected %d&quot;</span>, item, i);</div>
+<div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160;    }</div>
+<div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160;    end = clock();</div>
+<div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160;    print_clock(<span class="stringliteral">&quot;\nuArray Get&quot;</span>,str, end);</div>
 <div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160; </div>
-<div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160;}</div>
-<div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160; </div>
-<div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160; </div>
-<div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160; </div>
-<div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160; </div>
-<div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160;<span class="preprocessor">#endif</span></div>
-<div class="ttc" id="astructuArray_html"><div class="ttname"><a href="structuArray.html">uArray</a></div><div class="ttdef"><b>Definition:</b> utils.h:68</div></div>
-<div class="ttc" id="astructuStack_html"><div class="ttname"><a href="structuStack.html">uStack</a></div><div class="ttdoc">Universal Stack.</div><div class="ttdef"><b>Definition:</b> utils.h:97</div></div>
+<div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160;    <span class="comment">//remove item</span></div>
+<div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160;    str = clock();</div>
+<div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160;    <span class="keywordflow">for</span>(i=0;i&lt;num;i++){</div>
+<div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160;        remove_uArray(&amp;arr, arr.len-1);</div>
+<div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160;    }</div>
+<div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160;    TEST_CHECK(arr.len == 0);</div>
+<div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160;    end = clock();</div>
+<div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160;    print_clock(<span class="stringliteral">&quot;\nuArray remove&quot;</span>,str, end);</div>
+<div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160; </div>
+<div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160;    <span class="comment">//Insert item</span></div>
+<div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160;    str = clock();</div>
+<div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160;    <span class="keywordflow">for</span>(i=0;i&lt;num;i++){</div>
+<div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160;        insert_uArray(&amp;arr, 0, &amp;i); <span class="comment">//[1...100000]</span></div>
+<div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160;    }</div>
+<div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160;    end = clock();</div>
+<div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160;    print_clock(<span class="stringliteral">&quot;\nuArray Insert&quot;</span>,str, end);</div>
+<div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160; </div>
+<div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160;    kill_uArray(&amp;arr);</div>
+<div class="line"><a name="l00057"></a><span class="lineno">   57</span>&#160;}</div>
+<div class="line"><a name="l00058"></a><span class="lineno">   58</span>&#160; </div>
+<div class="line"><a name="l00059"></a><span class="lineno">   59</span>&#160;<span class="keywordtype">void</span> array_compare(<span class="keywordtype">void</span>){</div>
+<div class="line"><a name="l00060"></a><span class="lineno">   60</span>&#160;    <span class="keywordtype">int</span> num = 10000, i;</div>
+<div class="line"><a name="l00061"></a><span class="lineno">   61</span>&#160;    <span class="keywordtype">int</span> maxlen = INIT_NUM_ARRAY_ELEMENT;</div>
+<div class="line"><a name="l00062"></a><span class="lineno">   62</span>&#160;    <span class="keywordtype">int</span>* arr = (<span class="keywordtype">int</span>*)malloc(maxlen*<span class="keyword">sizeof</span>(<span class="keywordtype">int</span>));</div>
+<div class="line"><a name="l00063"></a><span class="lineno">   63</span>&#160;    <span class="keywordtype">int</span> len = 0;</div>
+<div class="line"><a name="l00064"></a><span class="lineno">   64</span>&#160;    <a class="code" href="structuArray.html">uArray</a> uarr;</div>
+<div class="line"><a name="l00065"></a><span class="lineno">   65</span>&#160;    init_uArray(&amp;uarr, <span class="keyword">sizeof</span>(<span class="keywordtype">int</span>));</div>
+<div class="line"><a name="l00066"></a><span class="lineno">   66</span>&#160; </div>
+<div class="line"><a name="l00067"></a><span class="lineno">   67</span>&#160;    clock_t str = clock();</div>
+<div class="line"><a name="l00068"></a><span class="lineno">   68</span>&#160;    <span class="keywordflow">for</span>(i=0;i&lt;num;i++){</div>
+<div class="line"><a name="l00069"></a><span class="lineno">   69</span>&#160;        ++len;</div>
+<div class="line"><a name="l00070"></a><span class="lineno">   70</span>&#160;        <span class="keywordflow">if</span> (len==maxlen){</div>
+<div class="line"><a name="l00071"></a><span class="lineno">   71</span>&#160;            maxlen = maxlen * 2 + 1;</div>
+<div class="line"><a name="l00072"></a><span class="lineno">   72</span>&#160;            arr = realloc(arr,(maxlen)*<span class="keyword">sizeof</span>(<span class="keywordtype">int</span>));</div>
+<div class="line"><a name="l00073"></a><span class="lineno">   73</span>&#160;        }</div>
+<div class="line"><a name="l00074"></a><span class="lineno">   74</span>&#160; </div>
+<div class="line"><a name="l00075"></a><span class="lineno">   75</span>&#160;        <span class="comment">//Shift right</span></div>
+<div class="line"><a name="l00076"></a><span class="lineno">   76</span>&#160;        <span class="keywordflow">for</span>(<span class="keywordtype">int</span> j=0;j&lt;len-1;j++){</div>
+<div class="line"><a name="l00077"></a><span class="lineno">   77</span>&#160;            arr[j+1] = arr[j];</div>
+<div class="line"><a name="l00078"></a><span class="lineno">   78</span>&#160;        }</div>
+<div class="line"><a name="l00079"></a><span class="lineno">   79</span>&#160;        <span class="comment">//Insert at i</span></div>
+<div class="line"><a name="l00080"></a><span class="lineno">   80</span>&#160;        arr[0] = i;</div>
+<div class="line"><a name="l00081"></a><span class="lineno">   81</span>&#160;    }</div>
+<div class="line"><a name="l00082"></a><span class="lineno">   82</span>&#160;    clock_t end = clock();</div>
+<div class="line"><a name="l00083"></a><span class="lineno">   83</span>&#160;    print_clock(<span class="stringliteral">&quot;\nArray Insert&quot;</span>, str, end);</div>
+<div class="line"><a name="l00084"></a><span class="lineno">   84</span>&#160; </div>
+<div class="line"><a name="l00085"></a><span class="lineno">   85</span>&#160;    str = clock();</div>
+<div class="line"><a name="l00086"></a><span class="lineno">   86</span>&#160;    <span class="keywordflow">for</span>(i=0;i&lt;num;i++){</div>
+<div class="line"><a name="l00087"></a><span class="lineno">   87</span>&#160;        insert_uArray(&amp;uarr, 0, &amp;i); </div>
+<div class="line"><a name="l00088"></a><span class="lineno">   88</span>&#160;    }</div>
+<div class="line"><a name="l00089"></a><span class="lineno">   89</span>&#160;    end = clock();</div>
+<div class="line"><a name="l00090"></a><span class="lineno">   90</span>&#160;    print_clock(<span class="stringliteral">&quot;\nuArray Insert&quot;</span>,str, end);</div>
+<div class="line"><a name="l00091"></a><span class="lineno">   91</span>&#160;}</div>
+<div class="line"><a name="l00092"></a><span class="lineno">   92</span>&#160; </div>
+<div class="line"><a name="l00093"></a><span class="lineno">   93</span>&#160;<span class="keywordtype">void</span> test_stack_INT(<span class="keywordtype">void</span>){</div>
+<div class="line"><a name="l00094"></a><span class="lineno">   94</span>&#160;    <a class="code" href="structuStack.html">uStack</a> s;</div>
+<div class="line"><a name="l00095"></a><span class="lineno">   95</span>&#160;    <span class="comment">//Initiate a stack with integer storage</span></div>
+<div class="line"><a name="l00096"></a><span class="lineno">   96</span>&#160;    init_uStack(&amp;s, <span class="keyword">sizeof</span>(<span class="keywordtype">int</span>));</div>
+<div class="line"><a name="l00097"></a><span class="lineno">   97</span>&#160; </div>
+<div class="line"><a name="l00098"></a><span class="lineno">   98</span>&#160;}</div>
+<div class="line"><a name="l00099"></a><span class="lineno">   99</span>&#160; </div>
+<div class="line"><a name="l00100"></a><span class="lineno">  100</span>&#160; </div>
+<div class="line"><a name="l00101"></a><span class="lineno">  101</span>&#160; </div>
+<div class="line"><a name="l00102"></a><span class="lineno">  102</span>&#160; </div>
+<div class="line"><a name="l00103"></a><span class="lineno">  103</span>&#160;<span class="preprocessor">#endif</span></div>
+<div class="ttc" id="astructuArray_html"><div class="ttname"><a href="structuArray.html">uArray</a></div><div class="ttdef"><b>Definition:</b> utils.h:69</div></div>
+<div class="ttc" id="astructuStack_html"><div class="ttname"><a href="structuStack.html">uStack</a></div><div class="ttdoc">Universal Stack.</div><div class="ttdef"><b>Definition:</b> utils.h:99</div></div>
 <div class="ttc" id="autils_8h_html"><div class="ttname"><a href="utils_8h.html">utils.h</a></div><div class="ttdoc">General Utilities for C language.</div></div>
 </div><!-- fragment --></div><!-- contents -->
 <!-- start footer part -->

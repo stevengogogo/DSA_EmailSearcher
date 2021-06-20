@@ -4,7 +4,9 @@
  * @brief General Utilities for C language
  * @version 0.1
  * @date 2021-03-08
- * 
+ * @note 
+ * Reference
+ * 1. Universal Stack is modified from: https://github.com/igniting/generic-stack
  * @copyright Copyright (c) 2021
  * 
  */
@@ -12,7 +14,16 @@
 #define UTILS_H
 
 #include <stdbool.h>
+#include <stdio.h>
+#include <string.h>
+#include <stdlib.h>
+#include <assert.h>
 #include <ctype.h> // tolower
+#define INIT_NUM_ARRAY_ELEMENT 10
+#define EMTY_QUE_SIG -121242
+typedef unsigned char byte;
+
+/************Math************/
 
 /**
  * @brief Get arg max
@@ -28,7 +39,7 @@ int argmax(int a,int b);
  */
 bool inDomainInt(int val, int lower, int upper);
 
-//Tokenize
+/************Tokenize************/
 
 /**
  * @brief Pop token from message. 
@@ -50,6 +61,105 @@ bool isRegularExpr_ASCII(int);
 bool isNumber_ASCII(int);
 bool isUpperCase_ASCII(int);
 bool isLowerCase_ASCII(int);
+
+/*****Integer stack*****/
+
+//dynamic array
+typedef struct{
+    int len;
+    int size;
+    int* i;
+} dymArr;
+
+//init and kill
+dymArr init_Arr(int size);
+void kill_dymArr(dymArr*);
+
+//clear
+void clear_Arr(dymArr*);
+
+//append
+/**Append at last*/
+void append_dymArr(dymArr*, int val);
+/** Get the item of arr[i]*/
+int get_item(dymArr, int i);
+/** Get the last item*/
+int pop_item(dymArr*);
+
+
+typedef struct{
+    dymArr arr;
+    int head;
+    int tail;
+} que;
+
+que init_que(int size);
+void kill_que(que*);
+void enque(que*, int val);
+int deque(que*);
+int peek_que(que*);
+
+/************Generic Dynamic Array************/
+
+/** Generic copy*/
+void copy_item_array(void* dstArr, int locDst,void* srcArr, int locSrc, size_t size);
+
+/** Universal dynamic Array*/
+typedef struct uArray{
+    int len;
+    size_t eleSize;
+    byte* memory;
+    int num_maxEle;
+} uArray;
+
+
+
+void init_uArray(uArray* arr, size_t eleSize);
+int len_uArray(uArray* arr);
+void get_uArray(uArray* arr, int i,void* item);
+void set_uArray(uArray* arr, int i,void* item);
+void remove_uArray(uArray* arr, int i);
+void insert_uArray(uArray* arr, int i,void* item);
+void append_uArray(uArray* arr, void* item);
+void update_size_uArray(uArray* arr, int new_max_item);
+
+void kill_uArray(uArray* arr);
+
+/************Generic Stack************/
+
+/** Equivalent to one byte*/
+
+/**
+ * @brief Universal Stack
+ * @param top index of top element
+ * @param len number of element stored
+ * @param memory pointer to the allocated memory
+ * @param eleSize size of single element. e.g. `sizeof(int)`
+ * @param num_maxEle maximum number can be stored in the stack. Augemented when reaching the capacity.
+*/
+typedef struct uStack {
+    int top;
+    int len;
+    byte *memory; //allocated memory
+    int eleSize; // size of element
+    int num_maxEle; // Number of max elements
+} uStack;
+
+/** Initiate a generic stack
+ * @param uStack uninitiate struct
+ * @param eleSize size of each element
+ * @example init(s, sizeof(int)); //For integer storage
+*/
+void init_uStack(uStack *s, size_t elemSize);
+
+bool isEmpty_uStack(uStack* s);
+int size_uStack(uStack* s);
+void push_uStack(uStack* s, void *item);
+void* pop_uStack(uStack* s);
+void* top_uStack(uStack* s);
+void* len_uStack(uStack* s);
+void* kill_uStack(uStack* s);
+
 
 
 

@@ -77,10 +77,10 @@ int len_uArray(uArray* arr);
 void get_uArray(uArray* arr, int i,void* item);
 void set_uArray(uArray* arr, int i,void* item);
 void remove_uArray(uArray* arr, int i);
-void insert_uArray(uArray* arr, void* item);
+void insert_uArray(uArray* arr, int i,void* item);
 void append_uArray(uArray* arr, void* item);
+void update_size(uArray* arr, int new_max_item);
 void kill_uArray(uArray* arr);
-
 
 /************Generic Stack************/
 

@@ -137,30 +137,53 @@ void set_uArray(uArray* arr, int i,void* item){
     }
 
     //Copy item
-    int start = (i-1)*arr->eleSize;
-    for(int j=0;j<arr->eleSize;j++){
-        *(arr->memory +start+j) = *(arr->memory+start+i);
+    copy_item_array(arr->memory, arr->len-1, item, 0, arr->eleSize);
+}
+
+void remove_uArray(uArray* arr, int I){
+    
+    for(int i=arr->len-1;i>I;i--){
+        copy_item_array(arr->memory, i-1, arr->memory, i, arr->eleSize);
+    }
+
+    --arr->len;
+
+    //Shrink memory
+    if(arr->len < arr->num_maxEle/2-10){
+        update_size(arr, arr->num_maxEle/2);
     }
 }
 
-void remove_uArray(uArray* arr, int i){
+void insert_uArray(uArray* arr, int I,void* item){
+    for(int i=I;i<arr->len-1;i++){
+        copy_item_array(arr->memory, i+1, arr->memory, i, arr->eleSize);
+    }
 
-}
-
-void insert_uArray(uArray* arr, void* item){
-
+    ++arr->len;
+    //Extend memory
+    if(arr->len == arr->num_maxEle){
+        update_size(arr, arr->num_maxEle*2+1);
+    }
 }
 
 void append_uArray(uArray* arr, void* item){
     //Augment size
     if(arr->len == arr->num_maxEle){
-        arr->num_maxEle = arr->num_maxEle*2+1;
-        arr->memory = realloc(arr->memory, arr->eleSize*(arr->num_maxEle));
+        update_size(arr, arr->num_maxEle*2+1);
     }   
 
     copy_item_array(arr->memory, arr->len-1, item, 0, arr->eleSize);
 
     ++arr->len;
+}
+
+void update_size(uArray* arr, int new_max_item){
+    arr->num_maxEle = new_max_item;
+    arr->memory = realloc(arr->memory, arr->eleSize*arr->num_maxEle);
+    if(arr->memory==NULL){
+        fprintf(stderr, "Update size error: Invalid Memory allocation with size %d\n", arr->num_maxEle);
+        exit(1);
+    }
 }
 
 void kill_uArray(uArray* arr){

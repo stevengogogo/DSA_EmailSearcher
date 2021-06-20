@@ -109,63 +109,64 @@ $(function() {
 <div class="line"><a name="l00073"></a><span class="lineno">   73</span>&#160;<span class="comment">//init and kill</span></div>
 <div class="line"><a name="l00074"></a><span class="lineno">   74</span>&#160;<a class="code" href="structdymArr.html">dymArr</a> init_Arr(<span class="keywordtype">int</span> size);</div>
 <div class="line"><a name="l00075"></a><span class="lineno">   75</span>&#160;<span class="keywordtype">void</span> kill_dymArr(<a class="code" href="structdymArr.html">dymArr</a>*);</div>
-<div class="line"><a name="l00076"></a><span class="lineno">   76</span>&#160; </div>
-<div class="line"><a name="l00077"></a><span class="lineno">   77</span>&#160;<span class="comment">//clear</span></div>
-<div class="line"><a name="l00078"></a><span class="lineno">   78</span>&#160;<span class="keywordtype">void</span> clear_Arr(<a class="code" href="structdymArr.html">dymArr</a>*);</div>
-<div class="line"><a name="l00079"></a><span class="lineno">   79</span>&#160; </div>
-<div class="line"><a name="l00080"></a><span class="lineno">   80</span>&#160;<span class="comment">//append</span></div>
-<div class="line"><a name="l00082"></a><span class="lineno">   82</span>&#160;<span class="comment"></span><span class="keywordtype">void</span> <a class="code" href="utils_8h.html#a4ea2f7a53f848eab32c432864338205b">append_dymArr</a>(<a class="code" href="structdymArr.html">dymArr</a>*, <span class="keywordtype">int</span> val);</div>
-<div class="line"><a name="l00084"></a><span class="lineno">   84</span>&#160;<span class="keywordtype">int</span> <a class="code" href="utils_8h.html#ac1e5006c31331fa7105846623450a1ba">get_item</a>(<a class="code" href="structdymArr.html">dymArr</a>, <span class="keywordtype">int</span> i);</div>
-<div class="line"><a name="l00088"></a><span class="lineno">   88</span>&#160;<span class="keywordtype">int</span> <a class="code" href="utils_8h.html#a49e8d2cc8816925b320ba33f4dcea5e6">pop_item</a>(<a class="code" href="structdymArr.html">dymArr</a>*);</div>
-<div class="line"><a name="l00089"></a><span class="lineno">   89</span>&#160; </div>
-<div class="line"><a name="l00090"></a><span class="lineno">   90</span>&#160;<span class="comment">/*************Queue************/</span></div>
-<div class="line"><a name="l00091"></a><span class="lineno"><a class="line" href="structque.html">   91</a></span>&#160;<span class="keyword">typedef</span> <span class="keyword">struct</span>{</div>
-<div class="line"><a name="l00092"></a><span class="lineno">   92</span>&#160;    <a class="code" href="structdymArr.html">dymArr</a> arr;</div>
-<div class="line"><a name="l00093"></a><span class="lineno">   93</span>&#160;    <span class="keywordtype">int</span> head;</div>
-<div class="line"><a name="l00094"></a><span class="lineno">   94</span>&#160;    <span class="keywordtype">int</span> tail;</div>
-<div class="line"><a name="l00095"></a><span class="lineno">   95</span>&#160;} <a class="code" href="structque.html">que</a>;</div>
-<div class="line"><a name="l00096"></a><span class="lineno">   96</span>&#160; </div>
-<div class="line"><a name="l00097"></a><span class="lineno">   97</span>&#160;<a class="code" href="structque.html">que</a> init_que(<span class="keywordtype">int</span> size);</div>
-<div class="line"><a name="l00098"></a><span class="lineno">   98</span>&#160;<span class="keywordtype">void</span> kill_que(<a class="code" href="structque.html">que</a>*);</div>
-<div class="line"><a name="l00099"></a><span class="lineno">   99</span>&#160;<span class="keywordtype">void</span> enque(<a class="code" href="structque.html">que</a>*, <span class="keywordtype">int</span> val);</div>
-<div class="line"><a name="l00100"></a><span class="lineno">  100</span>&#160;<span class="keywordtype">int</span> deque(<a class="code" href="structque.html">que</a>*);</div>
-<div class="line"><a name="l00101"></a><span class="lineno">  101</span>&#160;<span class="keywordtype">int</span> peek_que(<a class="code" href="structque.html">que</a>*);</div>
-<div class="line"><a name="l00102"></a><span class="lineno">  102</span>&#160; </div>
-<div class="line"><a name="l00103"></a><span class="lineno">  103</span>&#160;<span class="comment">/************Generic Dynamic Array************/</span></div>
-<div class="line"><a name="l00104"></a><span class="lineno">  104</span>&#160; </div>
-<div class="line"><a name="l00106"></a><span class="lineno">  106</span>&#160;<span class="keywordtype">void</span> <a class="code" href="utils_8h.html#a58b04101d0fda8798fca583d882c6a58">copy_item_array</a>(<span class="keywordtype">void</span>* dstArr, <span class="keywordtype">int</span> locDst,<span class="keywordtype">void</span>* srcArr, <span class="keywordtype">int</span> locSrc, <span class="keywordtype">size_t</span> size);</div>
-<div class="line"><a name="l00107"></a><span class="lineno">  107</span>&#160; </div>
-<div class="line"><a name="l00109"></a><span class="lineno"><a class="line" href="structuArray.html">  109</a></span>&#160;<span class="keyword">typedef</span> <span class="keyword">struct </span><a class="code" href="structuArray.html">uArray</a>{</div>
-<div class="line"><a name="l00110"></a><span class="lineno">  110</span>&#160;    <span class="keywordtype">int</span> len;</div>
-<div class="line"><a name="l00111"></a><span class="lineno">  111</span>&#160;    <span class="keywordtype">size_t</span> eleSize;</div>
-<div class="line"><a name="l00112"></a><span class="lineno">  112</span>&#160;    <span class="keywordtype">byte</span>* memory;</div>
-<div class="line"><a name="l00113"></a><span class="lineno">  113</span>&#160;    <span class="keywordtype">int</span> num_maxEle;</div>
-<div class="line"><a name="l00114"></a><span class="lineno"><a class="line" href="utils_8h.html#afa43d1c77d1ea818ac56829c343bee9d">  114</a></span>&#160;} <a class="code" href="utils_8h.html#afa43d1c77d1ea818ac56829c343bee9d">uArray</a>;</div>
-<div class="line"><a name="l00115"></a><span class="lineno">  115</span>&#160; </div>
+<div class="line"><a name="l00076"></a><span class="lineno">   76</span>&#160;<span class="keywordtype">void</span> resize_dymArr(<a class="code" href="structdymArr.html">dymArr</a>*, <span class="keywordtype">int</span> new_max_size);</div>
+<div class="line"><a name="l00077"></a><span class="lineno">   77</span>&#160; </div>
+<div class="line"><a name="l00078"></a><span class="lineno">   78</span>&#160;<span class="comment">//clear</span></div>
+<div class="line"><a name="l00079"></a><span class="lineno">   79</span>&#160;<span class="keywordtype">void</span> clear_Arr(<a class="code" href="structdymArr.html">dymArr</a>*);</div>
+<div class="line"><a name="l00080"></a><span class="lineno">   80</span>&#160; </div>
+<div class="line"><a name="l00081"></a><span class="lineno">   81</span>&#160;<span class="comment">//append</span></div>
+<div class="line"><a name="l00083"></a><span class="lineno">   83</span>&#160;<span class="comment"></span><span class="keywordtype">void</span> <a class="code" href="utils_8h.html#a4ea2f7a53f848eab32c432864338205b">append_dymArr</a>(<a class="code" href="structdymArr.html">dymArr</a>*, <span class="keywordtype">int</span> val);</div>
+<div class="line"><a name="l00085"></a><span class="lineno">   85</span>&#160;<span class="keywordtype">int</span> <a class="code" href="utils_8h.html#ac1e5006c31331fa7105846623450a1ba">get_item</a>(<a class="code" href="structdymArr.html">dymArr</a>, <span class="keywordtype">int</span> i);</div>
+<div class="line"><a name="l00089"></a><span class="lineno">   89</span>&#160;<span class="keywordtype">int</span> <a class="code" href="utils_8h.html#a49e8d2cc8816925b320ba33f4dcea5e6">pop_item</a>(<a class="code" href="structdymArr.html">dymArr</a>*);</div>
+<div class="line"><a name="l00090"></a><span class="lineno">   90</span>&#160; </div>
+<div class="line"><a name="l00091"></a><span class="lineno">   91</span>&#160;<span class="comment">/*************Queue************/</span></div>
+<div class="line"><a name="l00092"></a><span class="lineno"><a class="line" href="structque.html">   92</a></span>&#160;<span class="keyword">typedef</span> <span class="keyword">struct</span>{</div>
+<div class="line"><a name="l00093"></a><span class="lineno">   93</span>&#160;    <a class="code" href="structdymArr.html">dymArr</a> arr;</div>
+<div class="line"><a name="l00094"></a><span class="lineno">   94</span>&#160;    <span class="keywordtype">int</span> head;</div>
+<div class="line"><a name="l00095"></a><span class="lineno">   95</span>&#160;    <span class="keywordtype">int</span> tail;</div>
+<div class="line"><a name="l00096"></a><span class="lineno">   96</span>&#160;} <a class="code" href="structque.html">que</a>;</div>
+<div class="line"><a name="l00097"></a><span class="lineno">   97</span>&#160; </div>
+<div class="line"><a name="l00098"></a><span class="lineno">   98</span>&#160;<a class="code" href="structque.html">que</a> init_que(<span class="keywordtype">int</span> size);</div>
+<div class="line"><a name="l00099"></a><span class="lineno">   99</span>&#160;<span class="keywordtype">void</span> kill_que(<a class="code" href="structque.html">que</a>*);</div>
+<div class="line"><a name="l00100"></a><span class="lineno">  100</span>&#160;<span class="keywordtype">void</span> enque(<a class="code" href="structque.html">que</a>*, <span class="keywordtype">int</span> val);</div>
+<div class="line"><a name="l00101"></a><span class="lineno">  101</span>&#160;<span class="keywordtype">int</span> deque(<a class="code" href="structque.html">que</a>*);</div>
+<div class="line"><a name="l00102"></a><span class="lineno">  102</span>&#160;<span class="keywordtype">int</span> peek_que(<a class="code" href="structque.html">que</a>*);</div>
+<div class="line"><a name="l00103"></a><span class="lineno">  103</span>&#160; </div>
+<div class="line"><a name="l00104"></a><span class="lineno">  104</span>&#160;<span class="comment">/************Generic Dynamic Array************/</span></div>
+<div class="line"><a name="l00105"></a><span class="lineno">  105</span>&#160; </div>
+<div class="line"><a name="l00107"></a><span class="lineno">  107</span>&#160;<span class="keywordtype">void</span> <a class="code" href="utils_8h.html#a58b04101d0fda8798fca583d882c6a58">copy_item_array</a>(<span class="keywordtype">void</span>* dstArr, <span class="keywordtype">int</span> locDst,<span class="keywordtype">void</span>* srcArr, <span class="keywordtype">int</span> locSrc, <span class="keywordtype">size_t</span> size);</div>
+<div class="line"><a name="l00108"></a><span class="lineno">  108</span>&#160; </div>
+<div class="line"><a name="l00110"></a><span class="lineno"><a class="line" href="structuArray.html">  110</a></span>&#160;<span class="keyword">typedef</span> <span class="keyword">struct </span><a class="code" href="structuArray.html">uArray</a>{</div>
+<div class="line"><a name="l00111"></a><span class="lineno">  111</span>&#160;    <span class="keywordtype">int</span> len;</div>
+<div class="line"><a name="l00112"></a><span class="lineno">  112</span>&#160;    <span class="keywordtype">size_t</span> eleSize;</div>
+<div class="line"><a name="l00113"></a><span class="lineno">  113</span>&#160;    <span class="keywordtype">byte</span>* memory;</div>
+<div class="line"><a name="l00114"></a><span class="lineno">  114</span>&#160;    <span class="keywordtype">int</span> num_maxEle;</div>
+<div class="line"><a name="l00115"></a><span class="lineno"><a class="line" href="utils_8h.html#afa43d1c77d1ea818ac56829c343bee9d">  115</a></span>&#160;} <a class="code" href="utils_8h.html#afa43d1c77d1ea818ac56829c343bee9d">uArray</a>;</div>
 <div class="line"><a name="l00116"></a><span class="lineno">  116</span>&#160; </div>
 <div class="line"><a name="l00117"></a><span class="lineno">  117</span>&#160; </div>
-<div class="line"><a name="l00118"></a><span class="lineno">  118</span>&#160;<span class="keywordtype">void</span> init_uArray(<a class="code" href="structuArray.html">uArray</a>* arr, <span class="keywordtype">size_t</span> eleSize);</div>
-<div class="line"><a name="l00119"></a><span class="lineno">  119</span>&#160;<span class="keywordtype">int</span> len_uArray(<a class="code" href="structuArray.html">uArray</a>* arr);</div>
-<div class="line"><a name="l00120"></a><span class="lineno">  120</span>&#160;<span class="keywordtype">void</span> get_uArray(<a class="code" href="structuArray.html">uArray</a>* arr, <span class="keywordtype">int</span> i,<span class="keywordtype">void</span>* item);</div>
-<div class="line"><a name="l00121"></a><span class="lineno">  121</span>&#160;<span class="keywordtype">void</span> set_uArray(<a class="code" href="structuArray.html">uArray</a>* arr, <span class="keywordtype">int</span> i,<span class="keywordtype">void</span>* item);</div>
-<div class="line"><a name="l00122"></a><span class="lineno">  122</span>&#160;<span class="keywordtype">void</span> remove_uArray(<a class="code" href="structuArray.html">uArray</a>* arr, <span class="keywordtype">int</span> i);</div>
-<div class="line"><a name="l00123"></a><span class="lineno">  123</span>&#160;<span class="keywordtype">void</span> insert_uArray(<a class="code" href="structuArray.html">uArray</a>* arr, <span class="keywordtype">int</span> i,<span class="keywordtype">void</span>* item);</div>
-<div class="line"><a name="l00124"></a><span class="lineno">  124</span>&#160;<span class="keywordtype">void</span> append_uArray(<a class="code" href="structuArray.html">uArray</a>* arr, <span class="keywordtype">void</span>* item);</div>
-<div class="line"><a name="l00125"></a><span class="lineno">  125</span>&#160;<span class="keywordtype">void</span> update_size_uArray(<a class="code" href="structuArray.html">uArray</a>* arr, <span class="keywordtype">int</span> new_max_item);</div>
-<div class="line"><a name="l00126"></a><span class="lineno">  126</span>&#160;<span class="keywordtype">void</span> kill_uArray(<a class="code" href="structuArray.html">uArray</a>* arr);</div>
-<div class="line"><a name="l00127"></a><span class="lineno">  127</span>&#160; </div>
-<div class="line"><a name="l00128"></a><span class="lineno">  128</span>&#160;<span class="preprocessor">#endif</span></div>
+<div class="line"><a name="l00118"></a><span class="lineno">  118</span>&#160; </div>
+<div class="line"><a name="l00119"></a><span class="lineno">  119</span>&#160;<span class="keywordtype">void</span> init_uArray(<a class="code" href="structuArray.html">uArray</a>* arr, <span class="keywordtype">size_t</span> eleSize);</div>
+<div class="line"><a name="l00120"></a><span class="lineno">  120</span>&#160;<span class="keywordtype">int</span> len_uArray(<a class="code" href="structuArray.html">uArray</a>* arr);</div>
+<div class="line"><a name="l00121"></a><span class="lineno">  121</span>&#160;<span class="keywordtype">void</span> get_uArray(<a class="code" href="structuArray.html">uArray</a>* arr, <span class="keywordtype">int</span> i,<span class="keywordtype">void</span>* item);</div>
+<div class="line"><a name="l00122"></a><span class="lineno">  122</span>&#160;<span class="keywordtype">void</span> set_uArray(<a class="code" href="structuArray.html">uArray</a>* arr, <span class="keywordtype">int</span> i,<span class="keywordtype">void</span>* item);</div>
+<div class="line"><a name="l00123"></a><span class="lineno">  123</span>&#160;<span class="keywordtype">void</span> remove_uArray(<a class="code" href="structuArray.html">uArray</a>* arr, <span class="keywordtype">int</span> i);</div>
+<div class="line"><a name="l00124"></a><span class="lineno">  124</span>&#160;<span class="keywordtype">void</span> insert_uArray(<a class="code" href="structuArray.html">uArray</a>* arr, <span class="keywordtype">int</span> i,<span class="keywordtype">void</span>* item);</div>
+<div class="line"><a name="l00125"></a><span class="lineno">  125</span>&#160;<span class="keywordtype">void</span> append_uArray(<a class="code" href="structuArray.html">uArray</a>* arr, <span class="keywordtype">void</span>* item);</div>
+<div class="line"><a name="l00126"></a><span class="lineno">  126</span>&#160;<span class="keywordtype">void</span> update_size_uArray(<a class="code" href="structuArray.html">uArray</a>* arr, <span class="keywordtype">int</span> new_max_item);</div>
+<div class="line"><a name="l00127"></a><span class="lineno">  127</span>&#160;<span class="keywordtype">void</span> kill_uArray(<a class="code" href="structuArray.html">uArray</a>* arr);</div>
+<div class="line"><a name="l00128"></a><span class="lineno">  128</span>&#160; </div>
+<div class="line"><a name="l00129"></a><span class="lineno">  129</span>&#160;<span class="preprocessor">#endif</span></div>
 <div class="ttc" id="astructdymArr_html"><div class="ttname"><a href="structdymArr.html">dymArr</a></div><div class="ttdef"><b>Definition:</b> utils.h:67</div></div>
-<div class="ttc" id="astructque_html"><div class="ttname"><a href="structque.html">que</a></div><div class="ttdef"><b>Definition:</b> utils.h:91</div></div>
-<div class="ttc" id="astructuArray_html"><div class="ttname"><a href="structuArray.html">uArray</a></div><div class="ttdef"><b>Definition:</b> utils.h:109</div></div>
+<div class="ttc" id="astructque_html"><div class="ttname"><a href="structque.html">que</a></div><div class="ttdef"><b>Definition:</b> utils.h:92</div></div>
+<div class="ttc" id="astructuArray_html"><div class="ttname"><a href="structuArray.html">uArray</a></div><div class="ttdef"><b>Definition:</b> utils.h:110</div></div>
 <div class="ttc" id="autils_8h_html_a1fa7fd55f201216ebf7800abb1c427a8"><div class="ttname"><a href="utils_8h.html#a1fa7fd55f201216ebf7800abb1c427a8">argmax</a></div><div class="ttdeci">int argmax(int a, int b)</div><div class="ttdoc">Get arg max.</div><div class="ttdef"><b>Definition:</b> utils.c:6</div></div>
-<div class="ttc" id="autils_8h_html_a49e8d2cc8816925b320ba33f4dcea5e6"><div class="ttname"><a href="utils_8h.html#a49e8d2cc8816925b320ba33f4dcea5e6">pop_item</a></div><div class="ttdeci">int pop_item(dymArr *)</div><div class="ttdef"><b>Definition:</b> utils.c:134</div></div>
-<div class="ttc" id="autils_8h_html_a4ea2f7a53f848eab32c432864338205b"><div class="ttname"><a href="utils_8h.html#a4ea2f7a53f848eab32c432864338205b">append_dymArr</a></div><div class="ttdeci">void append_dymArr(dymArr *, int val)</div><div class="ttdef"><b>Definition:</b> utils.c:114</div></div>
-<div class="ttc" id="autils_8h_html_a58b04101d0fda8798fca583d882c6a58"><div class="ttname"><a href="utils_8h.html#a58b04101d0fda8798fca583d882c6a58">copy_item_array</a></div><div class="ttdeci">void copy_item_array(void *dstArr, int locDst, void *srcArr, int locSrc, size_t size)</div><div class="ttdef"><b>Definition:</b> utils.c:186</div></div>
+<div class="ttc" id="autils_8h_html_a49e8d2cc8816925b320ba33f4dcea5e6"><div class="ttname"><a href="utils_8h.html#a49e8d2cc8816925b320ba33f4dcea5e6">pop_item</a></div><div class="ttdeci">int pop_item(dymArr *)</div><div class="ttdef"><b>Definition:</b> utils.c:140</div></div>
+<div class="ttc" id="autils_8h_html_a4ea2f7a53f848eab32c432864338205b"><div class="ttname"><a href="utils_8h.html#a4ea2f7a53f848eab32c432864338205b">append_dymArr</a></div><div class="ttdeci">void append_dymArr(dymArr *, int val)</div><div class="ttdef"><b>Definition:</b> utils.c:119</div></div>
+<div class="ttc" id="autils_8h_html_a58b04101d0fda8798fca583d882c6a58"><div class="ttname"><a href="utils_8h.html#a58b04101d0fda8798fca583d882c6a58">copy_item_array</a></div><div class="ttdeci">void copy_item_array(void *dstArr, int locDst, void *srcArr, int locSrc, size_t size)</div><div class="ttdef"><b>Definition:</b> utils.c:193</div></div>
 <div class="ttc" id="autils_8h_html_a5ba940f06573ba87adcd6ee567673239"><div class="ttname"><a href="utils_8h.html#a5ba940f06573ba87adcd6ee567673239">isRegularExpr_ASCII</a></div><div class="ttdeci">bool isRegularExpr_ASCII(int)</div><div class="ttdoc">Judge a character belong to regular expression or not.</div><div class="ttdef"><b>Definition:</b> utils.c:63</div></div>
 <div class="ttc" id="autils_8h_html_a5e5de4bf768b83c8bb0f35e75cce4d84"><div class="ttname"><a href="utils_8h.html#a5e5de4bf768b83c8bb0f35e75cce4d84">inDomainInt</a></div><div class="ttdeci">bool inDomainInt(int val, int lower, int upper)</div><div class="ttdef"><b>Definition:</b> utils.c:16</div></div>
 <div class="ttc" id="autils_8h_html_a81f4883411916757a7c41b8a74f73c2b"><div class="ttname"><a href="utils_8h.html#a81f4883411916757a7c41b8a74f73c2b">popToken</a></div><div class="ttdeci">int popToken(char message[], char token[], int iStr)</div><div class="ttdoc">Pop token from message.</div><div class="ttdef"><b>Definition:</b> utils.c:25</div></div>
-<div class="ttc" id="autils_8h_html_ac1e5006c31331fa7105846623450a1ba"><div class="ttname"><a href="utils_8h.html#ac1e5006c31331fa7105846623450a1ba">get_item</a></div><div class="ttdeci">int get_item(dymArr, int i)</div><div class="ttdef"><b>Definition:</b> utils.c:130</div></div>
+<div class="ttc" id="autils_8h_html_ac1e5006c31331fa7105846623450a1ba"><div class="ttname"><a href="utils_8h.html#ac1e5006c31331fa7105846623450a1ba">get_item</a></div><div class="ttdeci">int get_item(dymArr, int i)</div><div class="ttdef"><b>Definition:</b> utils.c:136</div></div>
 <div class="ttc" id="autils_8h_html_afa43d1c77d1ea818ac56829c343bee9d"><div class="ttname"><a href="utils_8h.html#afa43d1c77d1ea818ac56829c343bee9d">uArray</a></div><div class="ttdeci">struct uArray uArray</div></div>
 </div><!-- fragment --></div><!-- contents -->
 <!-- start footer part -->

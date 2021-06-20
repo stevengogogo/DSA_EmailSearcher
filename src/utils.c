@@ -107,12 +107,19 @@ void kill_dymArr(dymArr* arr){
     free(arr->i);
 };
 
+void resize_dymArr(dymArr* arr, int new_max_size){
+    arr->size = new_max_size;
+    arr->i = realloc(arr->i, sizeof(int)*new_max_size);
+}
+
 void clear_Arr(dymArr* arr){
     arr->len = 0;
 }
 
 void append_dymArr(dymArr* arr, int val){
+    ++(arr->len);
     //Augement size
+
     if((arr->len+1) > arr->size){
       int new_size = (arr->size)*2 + 1;
       arr->i = realloc(arr->i, sizeof(int)*new_size);
@@ -123,19 +130,19 @@ void append_dymArr(dymArr* arr, int val){
        }
     }
 
-    arr->i[arr->len] = val;
-    ++(arr->len);
+    arr->i[arr->len - 1] = val;
 }
 
 int get_item(dymArr arr, int i){
     return arr.i[i];
 }
 
-int pop_item(dymArr* p){
-    if(p->len==0)
+int pop_item(dymArr* arr){
+    if(arr->len==0)
         return EMTY_QUE_SIG;
-    int val = p->i[p->len-1];
-    --p->len;
+    int val = arr->i[arr->len-1];
+    --arr->len;
+
     return val;
 }
 

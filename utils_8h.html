@@ -67,6 +67,7 @@ $(function() {
 <div class="header">
   <div class="summary">
 <a href="#nested-classes">Classes</a> &#124;
+<a href="#define-members">Macros</a> &#124;
 <a href="#typedef-members">Typedefs</a> &#124;
 <a href="#func-members">Functions</a>  </div>
   <div class="headertitle">
@@ -107,18 +108,23 @@ This graph shows which files directly or indirectly include this file:</div>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="nested-classes"></a>
 Classes</h2></td></tr>
-<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structStack.html">Stack</a></td></tr>
-<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Universal <a class="el" href="structStack.html" title="Universal Stack.">Stack</a>.  <a href="structStack.html#details">More...</a><br /></td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structuniStack.html">uniStack</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Universal Stack.  <a href="structuniStack.html#details">More...</a><br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="define-members"></a>
+Macros</h2></td></tr>
+<tr class="memitem:a788e079dd7dee5a5b21cf196a710b58b"><td class="memItemLeft" align="right" valign="top"><a id="a788e079dd7dee5a5b21cf196a710b58b"></a>
+#define&#160;</td><td class="memItemRight" valign="bottom"><b>INIT_NUM_STACK_ELEMENT</b>&#160;&#160;&#160;50</td></tr>
+<tr class="separator:a788e079dd7dee5a5b21cf196a710b58b"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="typedef-members"></a>
 Typedefs</h2></td></tr>
 <tr class="memitem:a0c8186d9b9b7880309c27230bbb5e69d"><td class="memItemLeft" align="right" valign="top">typedef unsigned char&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="utils_8h.html#a0c8186d9b9b7880309c27230bbb5e69d">byte</a></td></tr>
 <tr class="separator:a0c8186d9b9b7880309c27230bbb5e69d"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:acccdaeb94a63f3757825012007215c0d"><td class="memItemLeft" align="right" valign="top"><a id="acccdaeb94a63f3757825012007215c0d"></a>
-typedef struct <a class="el" href="structStack.html">Stack</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="utils_8h.html#acccdaeb94a63f3757825012007215c0d">Stack</a></td></tr>
-<tr class="memdesc:acccdaeb94a63f3757825012007215c0d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Universal <a class="el" href="structStack.html" title="Universal Stack.">Stack</a>. <br /></td></tr>
-<tr class="separator:acccdaeb94a63f3757825012007215c0d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:afe6c123fb47d2904fa09b80d9737b23c"><td class="memItemLeft" align="right" valign="top">typedef struct <a class="el" href="structuniStack.html">uniStack</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="utils_8h.html#afe6c123fb47d2904fa09b80d9737b23c">uniStack</a></td></tr>
+<tr class="memdesc:afe6c123fb47d2904fa09b80d9737b23c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Universal Stack.  <a href="utils_8h.html#afe6c123fb47d2904fa09b80d9737b23c">More...</a><br /></td></tr>
+<tr class="separator:afe6c123fb47d2904fa09b80d9737b23c"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="func-members"></a>
 Functions</h2></td></tr>
@@ -142,6 +148,9 @@ bool&#160;</td><td class="memItemRight" valign="bottom"><b>isUpperCase_ASCII</b>
 <tr class="memitem:a0ee1be0f3c96a6b89e5e1d0466213583"><td class="memItemLeft" align="right" valign="top"><a id="a0ee1be0f3c96a6b89e5e1d0466213583"></a>
 bool&#160;</td><td class="memItemRight" valign="bottom"><b>isLowerCase_ASCII</b> (int)</td></tr>
 <tr class="separator:a0ee1be0f3c96a6b89e5e1d0466213583"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a8987f90f09ee8f0e1e28794ddde2e62e"><td class="memItemLeft" align="right" valign="top"><a id="a8987f90f09ee8f0e1e28794ddde2e62e"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><b>init</b> (<a class="el" href="structuniStack.html">uniStack</a> *s, int elemSize)</td></tr>
+<tr class="separator:a8987f90f09ee8f0e1e28794ddde2e62e"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>General Utilities for C language. </p>
@@ -162,6 +171,32 @@ bool&#160;</td><td class="memItemRight" valign="bottom"><b>isLowerCase_ASCII</b>
       </table>
 </div><div class="memdoc">
 <p>Equivalent to one byte </p>
+
+</div>
+</div>
+<a id="afe6c123fb47d2904fa09b80d9737b23c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#afe6c123fb47d2904fa09b80d9737b23c">&#9670;&nbsp;</a></span>uniStack</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">typedef struct <a class="el" href="structuniStack.html">uniStack</a> <a class="el" href="structuniStack.html">uniStack</a></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Universal Stack. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">top</td><td>index of top element </td></tr>
+    <tr><td class="paramname">len</td><td>number of element stored </td></tr>
+    <tr><td class="paramname">memory</td><td>pointer to the allocated memory </td></tr>
+    <tr><td class="paramname">eleSize</td><td>size of single element. e.g. <code>sizeof(int)</code> </td></tr>
+    <tr><td class="paramname">num_maxEle</td><td>maximum number can be stored in the stack. Augemented when reaching the capacity. </td></tr>
+  </table>
+  </dd>
+</dl>
 
 </div>
 </div>

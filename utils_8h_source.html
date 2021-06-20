@@ -75,42 +75,50 @@ $(function() {
 <div class="line"><a name="l00013"></a><span class="lineno">   13</span>&#160; </div>
 <div class="line"><a name="l00014"></a><span class="lineno">   14</span>&#160;<span class="preprocessor">#include &lt;stdbool.h&gt;</span></div>
 <div class="line"><a name="l00015"></a><span class="lineno">   15</span>&#160;<span class="preprocessor">#include &lt;ctype.h&gt;</span> <span class="comment">// tolower</span></div>
-<div class="line"><a name="l00016"></a><span class="lineno">   16</span>&#160; </div>
-<div class="line"><a name="l00017"></a><span class="lineno">   17</span>&#160;<span class="comment">/************Math************/</span></div>
-<div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160; </div>
-<div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160;<span class="keywordtype">int</span> <a class="code" href="utils_8h.html#a1fa7fd55f201216ebf7800abb1c427a8">argmax</a>(<span class="keywordtype">int</span> a,<span class="keywordtype">int</span> b);</div>
-<div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160; </div>
-<div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160;<span class="keywordtype">bool</span> <a class="code" href="utils_8h.html#a5e5de4bf768b83c8bb0f35e75cce4d84">inDomainInt</a>(<span class="keywordtype">int</span> val, <span class="keywordtype">int</span> lower, <span class="keywordtype">int</span> upper);</div>
-<div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160; </div>
-<div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160;<span class="comment">/************Tokenize************/</span></div>
-<div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160; </div>
-<div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160;<span class="keywordtype">int</span> <a class="code" href="utils_8h.html#a81f4883411916757a7c41b8a74f73c2b">popToken</a>(<span class="keywordtype">char</span> message[], <span class="keywordtype">char</span> token[], <span class="keywordtype">int</span> iStr);</div>
-<div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160; </div>
-<div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160;<span class="keywordtype">bool</span> <a class="code" href="utils_8h.html#a5ba940f06573ba87adcd6ee567673239">isRegularExpr_ASCII</a>(<span class="keywordtype">int</span>);</div>
-<div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160;<span class="keywordtype">bool</span> isNumber_ASCII(<span class="keywordtype">int</span>);</div>
-<div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160;<span class="keywordtype">bool</span> isUpperCase_ASCII(<span class="keywordtype">int</span>);</div>
-<div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160;<span class="keywordtype">bool</span> isLowerCase_ASCII(<span class="keywordtype">int</span>);</div>
-<div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160; </div>
-<div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160;<span class="comment">/************Generic Stack************/</span></div>
-<div class="line"><a name="l00057"></a><span class="lineno">   57</span>&#160; </div>
-<div class="line"><a name="l00059"></a><span class="lineno"><a class="line" href="utils_8h.html#a0c8186d9b9b7880309c27230bbb5e69d">   59</a></span>&#160;<span class="keyword">typedef</span> <span class="keywordtype">unsigned</span>  <span class="keywordtype">char</span> <a class="code" href="utils_8h.html#a0c8186d9b9b7880309c27230bbb5e69d">byte</a>;</div>
-<div class="line"><a name="l00060"></a><span class="lineno">   60</span>&#160; </div>
-<div class="line"><a name="l00064"></a><span class="lineno"><a class="line" href="structStack.html">   64</a></span>&#160;<span class="keyword">typedef</span> <span class="keyword">struct </span><a class="code" href="structStack.html">Stack</a> {</div>
-<div class="line"><a name="l00065"></a><span class="lineno">   65</span>&#160;    <span class="keywordtype">int</span> top;</div>
-<div class="line"><a name="l00066"></a><span class="lineno">   66</span>&#160;    <span class="keywordtype">byte</span> *memory; <span class="comment">//allocated memory</span></div>
-<div class="line"><a name="l00067"></a><span class="lineno">   67</span>&#160;    <span class="keywordtype">int</span> EleSize; <span class="comment">// size of element</span></div>
-<div class="line"><a name="l00068"></a><span class="lineno">   68</span>&#160;    <span class="keywordtype">int</span> num_maxEle; <span class="comment">//</span></div>
-<div class="line"><a name="l00069"></a><span class="lineno"><a class="line" href="utils_8h.html#acccdaeb94a63f3757825012007215c0d">   69</a></span>&#160;} <a class="code" href="utils_8h.html#acccdaeb94a63f3757825012007215c0d">Stack</a>;</div>
-<div class="line"><a name="l00070"></a><span class="lineno">   70</span>&#160; </div>
-<div class="line"><a name="l00071"></a><span class="lineno">   71</span>&#160; </div>
-<div class="line"><a name="l00072"></a><span class="lineno">   72</span>&#160;<span class="preprocessor">#endif</span></div>
-<div class="ttc" id="astructStack_html"><div class="ttname"><a href="structStack.html">Stack</a></div><div class="ttdoc">Universal Stack.</div><div class="ttdef"><b>Definition:</b> utils.h:64</div></div>
-<div class="ttc" id="autils_8h_html_a0c8186d9b9b7880309c27230bbb5e69d"><div class="ttname"><a href="utils_8h.html#a0c8186d9b9b7880309c27230bbb5e69d">byte</a></div><div class="ttdeci">unsigned char byte</div><div class="ttdef"><b>Definition:</b> utils.h:59</div></div>
+<div class="line"><a name="l00016"></a><span class="lineno">   16</span>&#160;<span class="preprocessor">#define INIT_NUM_STACK_ELEMENT 50 </span></div>
+<div class="line"><a name="l00017"></a><span class="lineno">   17</span>&#160; </div>
+<div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160;<span class="comment">/************Math************/</span></div>
+<div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160; </div>
+<div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160;<span class="keywordtype">int</span> <a class="code" href="utils_8h.html#a1fa7fd55f201216ebf7800abb1c427a8">argmax</a>(<span class="keywordtype">int</span> a,<span class="keywordtype">int</span> b);</div>
+<div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160; </div>
+<div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160;<span class="keywordtype">bool</span> <a class="code" href="utils_8h.html#a5e5de4bf768b83c8bb0f35e75cce4d84">inDomainInt</a>(<span class="keywordtype">int</span> val, <span class="keywordtype">int</span> lower, <span class="keywordtype">int</span> upper);</div>
+<div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160; </div>
+<div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160;<span class="comment">/************Tokenize************/</span></div>
+<div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160; </div>
+<div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160;<span class="keywordtype">int</span> <a class="code" href="utils_8h.html#a81f4883411916757a7c41b8a74f73c2b">popToken</a>(<span class="keywordtype">char</span> message[], <span class="keywordtype">char</span> token[], <span class="keywordtype">int</span> iStr);</div>
+<div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160; </div>
+<div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160;<span class="keywordtype">bool</span> <a class="code" href="utils_8h.html#a5ba940f06573ba87adcd6ee567673239">isRegularExpr_ASCII</a>(<span class="keywordtype">int</span>);</div>
+<div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160;<span class="keywordtype">bool</span> isNumber_ASCII(<span class="keywordtype">int</span>);</div>
+<div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160;<span class="keywordtype">bool</span> isUpperCase_ASCII(<span class="keywordtype">int</span>);</div>
+<div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160;<span class="keywordtype">bool</span> isLowerCase_ASCII(<span class="keywordtype">int</span>);</div>
+<div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160; </div>
+<div class="line"><a name="l00057"></a><span class="lineno">   57</span>&#160;<span class="comment">/************Generic Stack************/</span></div>
+<div class="line"><a name="l00058"></a><span class="lineno">   58</span>&#160; </div>
+<div class="line"><a name="l00060"></a><span class="lineno"><a class="line" href="utils_8h.html#a0c8186d9b9b7880309c27230bbb5e69d">   60</a></span>&#160;<span class="keyword">typedef</span> <span class="keywordtype">unsigned</span> <span class="keywordtype">char</span> <a class="code" href="utils_8h.html#a0c8186d9b9b7880309c27230bbb5e69d">byte</a>;</div>
+<div class="line"><a name="l00061"></a><span class="lineno">   61</span>&#160; </div>
+<div class="line"><a name="l00070"></a><span class="lineno"><a class="line" href="structuniStack.html">   70</a></span>&#160;<span class="keyword">typedef</span> <span class="keyword">struct </span><a class="code" href="structuniStack.html">uniStack</a> {</div>
+<div class="line"><a name="l00071"></a><span class="lineno">   71</span>&#160;    <span class="keywordtype">int</span> top;</div>
+<div class="line"><a name="l00072"></a><span class="lineno">   72</span>&#160;    <span class="keywordtype">int</span> len;</div>
+<div class="line"><a name="l00073"></a><span class="lineno">   73</span>&#160;    <span class="keywordtype">byte</span> *memory; <span class="comment">//allocated memory</span></div>
+<div class="line"><a name="l00074"></a><span class="lineno">   74</span>&#160;    <span class="keywordtype">int</span> eleSize; <span class="comment">// size of element</span></div>
+<div class="line"><a name="l00075"></a><span class="lineno">   75</span>&#160;    <span class="keywordtype">int</span> num_maxEle; <span class="comment">// Number of max elements</span></div>
+<div class="line"><a name="l00076"></a><span class="lineno"><a class="line" href="utils_8h.html#afe6c123fb47d2904fa09b80d9737b23c">   76</a></span>&#160;} <a class="code" href="utils_8h.html#afe6c123fb47d2904fa09b80d9737b23c">uniStack</a>;</div>
+<div class="line"><a name="l00077"></a><span class="lineno">   77</span>&#160; </div>
+<div class="line"><a name="l00078"></a><span class="lineno">   78</span>&#160;<span class="keywordtype">void</span> init(<a class="code" href="structuniStack.html">uniStack</a> *s, <span class="keywordtype">int</span> elemSize){</div>
+<div class="line"><a name="l00079"></a><span class="lineno">   79</span>&#160;    <span class="keywordtype">byte</span> *storage;</div>
+<div class="line"><a name="l00080"></a><span class="lineno">   80</span>&#160;    storage = (<span class="keywordtype">byte</span>*)malloc(elemSize*INIT_NUM_STACK_ELEMENT);</div>
+<div class="line"><a name="l00081"></a><span class="lineno">   81</span>&#160;}</div>
+<div class="line"><a name="l00082"></a><span class="lineno">   82</span>&#160; </div>
+<div class="line"><a name="l00083"></a><span class="lineno">   83</span>&#160; </div>
+<div class="line"><a name="l00084"></a><span class="lineno">   84</span>&#160; </div>
+<div class="line"><a name="l00085"></a><span class="lineno">   85</span>&#160;<span class="preprocessor">#endif</span></div>
+<div class="ttc" id="astructuniStack_html"><div class="ttname"><a href="structuniStack.html">uniStack</a></div><div class="ttdoc">Universal Stack.</div><div class="ttdef"><b>Definition:</b> utils.h:70</div></div>
+<div class="ttc" id="autils_8h_html_a0c8186d9b9b7880309c27230bbb5e69d"><div class="ttname"><a href="utils_8h.html#a0c8186d9b9b7880309c27230bbb5e69d">byte</a></div><div class="ttdeci">unsigned char byte</div><div class="ttdef"><b>Definition:</b> utils.h:60</div></div>
 <div class="ttc" id="autils_8h_html_a1fa7fd55f201216ebf7800abb1c427a8"><div class="ttname"><a href="utils_8h.html#a1fa7fd55f201216ebf7800abb1c427a8">argmax</a></div><div class="ttdeci">int argmax(int a, int b)</div><div class="ttdoc">Get arg max.</div><div class="ttdef"><b>Definition:</b> utils.c:4</div></div>
 <div class="ttc" id="autils_8h_html_a5ba940f06573ba87adcd6ee567673239"><div class="ttname"><a href="utils_8h.html#a5ba940f06573ba87adcd6ee567673239">isRegularExpr_ASCII</a></div><div class="ttdeci">bool isRegularExpr_ASCII(int)</div><div class="ttdoc">Judge a character belong to regular expression or not.</div><div class="ttdef"><b>Definition:</b> utils.c:62</div></div>
 <div class="ttc" id="autils_8h_html_a5e5de4bf768b83c8bb0f35e75cce4d84"><div class="ttname"><a href="utils_8h.html#a5e5de4bf768b83c8bb0f35e75cce4d84">inDomainInt</a></div><div class="ttdeci">bool inDomainInt(int val, int lower, int upper)</div><div class="ttdef"><b>Definition:</b> utils.c:14</div></div>
 <div class="ttc" id="autils_8h_html_a81f4883411916757a7c41b8a74f73c2b"><div class="ttname"><a href="utils_8h.html#a81f4883411916757a7c41b8a74f73c2b">popToken</a></div><div class="ttdeci">int popToken(char message[], char token[], int iStr)</div><div class="ttdoc">Pop token from message.</div><div class="ttdef"><b>Definition:</b> utils.c:24</div></div>
-<div class="ttc" id="autils_8h_html_acccdaeb94a63f3757825012007215c0d"><div class="ttname"><a href="utils_8h.html#acccdaeb94a63f3757825012007215c0d">Stack</a></div><div class="ttdeci">struct Stack Stack</div><div class="ttdoc">Universal Stack.</div></div>
+<div class="ttc" id="autils_8h_html_afe6c123fb47d2904fa09b80d9737b23c"><div class="ttname"><a href="utils_8h.html#afe6c123fb47d2904fa09b80d9737b23c">uniStack</a></div><div class="ttdeci">struct uniStack uniStack</div><div class="ttdoc">Universal Stack.</div></div>
 </div><!-- fragment --></div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>

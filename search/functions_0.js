@@ -1,5 +1,5 @@
 var searchData=
 [
-  ['append_5fdymarr_29',['append_dymArr',['../utils_8h.html#a4ea2f7a53f848eab32c432864338205b',1,'utils.c']]],
-  ['argmax_30',['argmax',['../utils_8h.html#a1fa7fd55f201216ebf7800abb1c427a8',1,'utils.c']]]
+  ['append_5fdymarr_27',['append_dymArr',['../utils_8h.html#a4ea2f7a53f848eab32c432864338205b',1,'utils.c']]],
+  ['argmax_28',['argmax',['../utils_8h.html#a1fa7fd55f201216ebf7800abb1c427a8',1,'utils.c']]]
 ];

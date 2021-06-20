@@ -124,9 +124,6 @@ Classes</h2></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structuArray.html">uArray</a></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structuStack.html">uStack</a></td></tr>
-<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Universal Stack.  <a href="structuStack.html#details">More...</a><br /></td></tr>
-<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="define-members"></a>
 Macros</h2></td></tr>
@@ -144,9 +141,6 @@ typedef unsigned char&#160;</td><td class="memItemRight" valign="bottom"><b>byte
 <tr class="separator:a0c8186d9b9b7880309c27230bbb5e69d"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:afa43d1c77d1ea818ac56829c343bee9d"><td class="memItemLeft" align="right" valign="top">typedef struct <a class="el" href="structuArray.html">uArray</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="utils_8h.html#afa43d1c77d1ea818ac56829c343bee9d">uArray</a></td></tr>
 <tr class="separator:afa43d1c77d1ea818ac56829c343bee9d"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aee36121ca858713d8d9a257358daf734"><td class="memItemLeft" align="right" valign="top">typedef struct <a class="el" href="structuStack.html">uStack</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="utils_8h.html#aee36121ca858713d8d9a257358daf734">uStack</a></td></tr>
-<tr class="memdesc:aee36121ca858713d8d9a257358daf734"><td class="mdescLeft">&#160;</td><td class="mdescRight">Universal Stack.  <a href="utils_8h.html#aee36121ca858713d8d9a257358daf734">More...</a><br /></td></tr>
-<tr class="separator:aee36121ca858713d8d9a257358daf734"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="func-members"></a>
 Functions</h2></td></tr>
@@ -176,9 +170,6 @@ bool&#160;</td><td class="memItemRight" valign="bottom"><b>isLowerCase_ASCII</b>
 <tr class="memitem:a996b87f91f3f2468acef75e3e8c8f8fb"><td class="memItemLeft" align="right" valign="top"><a id="a996b87f91f3f2468acef75e3e8c8f8fb"></a>
 void&#160;</td><td class="memItemRight" valign="bottom"><b>kill_dymArr</b> (<a class="el" href="structdymArr.html">dymArr</a> *)</td></tr>
 <tr class="separator:a996b87f91f3f2468acef75e3e8c8f8fb"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ad30e069ddcf6365082568ad0d19a38ae"><td class="memItemLeft" align="right" valign="top"><a id="ad30e069ddcf6365082568ad0d19a38ae"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>resize_dymArr</b> (<a class="el" href="structdymArr.html">dymArr</a> *, int new_max_size)</td></tr>
-<tr class="separator:ad30e069ddcf6365082568ad0d19a38ae"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a147fe6c3178cfa0639a58b0b16c0a0ff"><td class="memItemLeft" align="right" valign="top"><a id="a147fe6c3178cfa0639a58b0b16c0a0ff"></a>
 void&#160;</td><td class="memItemRight" valign="bottom"><b>clear_Arr</b> (<a class="el" href="structdymArr.html">dymArr</a> *)</td></tr>
 <tr class="separator:a147fe6c3178cfa0639a58b0b16c0a0ff"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -232,30 +223,6 @@ void&#160;</td><td class="memItemRight" valign="bottom"><b>update_size_uArray</b
 <tr class="memitem:a213d288095ffd2ef8547e9292fc471bd"><td class="memItemLeft" align="right" valign="top"><a id="a213d288095ffd2ef8547e9292fc471bd"></a>
 void&#160;</td><td class="memItemRight" valign="bottom"><b>kill_uArray</b> (<a class="el" href="structuArray.html">uArray</a> *arr)</td></tr>
 <tr class="separator:a213d288095ffd2ef8547e9292fc471bd"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a5a7aac8330da6342223492c955c1fed5"><td class="memItemLeft" align="right" valign="top"><a id="a5a7aac8330da6342223492c955c1fed5"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>init_uStack</b> (<a class="el" href="structuStack.html">uStack</a> *s, size_t elemSize)</td></tr>
-<tr class="separator:a5a7aac8330da6342223492c955c1fed5"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a1c9df8cd1cf2bf89953b039b5bba27b2"><td class="memItemLeft" align="right" valign="top"><a id="a1c9df8cd1cf2bf89953b039b5bba27b2"></a>
-bool&#160;</td><td class="memItemRight" valign="bottom"><b>isEmpty_uStack</b> (<a class="el" href="structuStack.html">uStack</a> *s)</td></tr>
-<tr class="separator:a1c9df8cd1cf2bf89953b039b5bba27b2"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aebdc56c4d94284efd0cf1cfc342f2684"><td class="memItemLeft" align="right" valign="top"><a id="aebdc56c4d94284efd0cf1cfc342f2684"></a>
-int&#160;</td><td class="memItemRight" valign="bottom"><b>size_uStack</b> (<a class="el" href="structuStack.html">uStack</a> *s)</td></tr>
-<tr class="separator:aebdc56c4d94284efd0cf1cfc342f2684"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a00ce6bd2aa40afc658ab3ae14438d55e"><td class="memItemLeft" align="right" valign="top"><a id="a00ce6bd2aa40afc658ab3ae14438d55e"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>push_uStack</b> (<a class="el" href="structuStack.html">uStack</a> *s, void *item)</td></tr>
-<tr class="separator:a00ce6bd2aa40afc658ab3ae14438d55e"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a879454d28df221d1fb4b21123f83019f"><td class="memItemLeft" align="right" valign="top"><a id="a879454d28df221d1fb4b21123f83019f"></a>
-void *&#160;</td><td class="memItemRight" valign="bottom"><b>pop_uStack</b> (<a class="el" href="structuStack.html">uStack</a> *s)</td></tr>
-<tr class="separator:a879454d28df221d1fb4b21123f83019f"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a786730601362ee6761696287b34ad7fc"><td class="memItemLeft" align="right" valign="top"><a id="a786730601362ee6761696287b34ad7fc"></a>
-void *&#160;</td><td class="memItemRight" valign="bottom"><b>top_uStack</b> (<a class="el" href="structuStack.html">uStack</a> *s)</td></tr>
-<tr class="separator:a786730601362ee6761696287b34ad7fc"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a7f60bb19b5e9fd4e6ee57d65a964c2eb"><td class="memItemLeft" align="right" valign="top"><a id="a7f60bb19b5e9fd4e6ee57d65a964c2eb"></a>
-void *&#160;</td><td class="memItemRight" valign="bottom"><b>len_uStack</b> (<a class="el" href="structuStack.html">uStack</a> *s)</td></tr>
-<tr class="separator:a7f60bb19b5e9fd4e6ee57d65a964c2eb"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:af96423051f45d959d76042827d27e988"><td class="memItemLeft" align="right" valign="top"><a id="af96423051f45d959d76042827d27e988"></a>
-void *&#160;</td><td class="memItemRight" valign="bottom"><b>kill_uStack</b> (<a class="el" href="structuStack.html">uStack</a> *s)</td></tr>
-<tr class="separator:af96423051f45d959d76042827d27e988"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>General Utilities for C language. </p>
@@ -280,32 +247,6 @@ void *&#160;</td><td class="memItemRight" valign="bottom"><b>kill_uStack</b> (<a
       </table>
 </div><div class="memdoc">
 <p>Universal dynamic Array </p>
-
-</div>
-</div>
-<a id="aee36121ca858713d8d9a257358daf734"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#aee36121ca858713d8d9a257358daf734">&#9670;&nbsp;</a></span>uStack</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">typedef struct <a class="el" href="structuStack.html">uStack</a> <a class="el" href="structuStack.html">uStack</a></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p>Universal Stack. </p>
-<p>Equivalent to one byte </p><dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
-    <tr><td class="paramname">top</td><td>index of top element </td></tr>
-    <tr><td class="paramname">len</td><td>number of element stored </td></tr>
-    <tr><td class="paramname">memory</td><td>pointer to the allocated memory </td></tr>
-    <tr><td class="paramname">eleSize</td><td>size of single element. e.g. <code>sizeof(int)</code> </td></tr>
-    <tr><td class="paramname">num_maxEle</td><td>maximum number can be stored in the stack. Augemented when reaching the capacity. </td></tr>
-  </table>
-  </dd>
-</dl>
 
 </div>
 </div>
@@ -522,12 +463,12 @@ false </dd></dl>
           <td class="memname">int pop_item </td>
           <td>(</td>
           <td class="paramtype"><a class="el" href="structdymArr.html">dymArr</a> *&#160;</td>
-          <td class="paramname"><em>arr</em></td><td>)</td>
+          <td class="paramname"><em>p</em></td><td>)</td>
           <td></td>
         </tr>
       </table>
 </div><div class="memdoc">
-<p>Get the last item </p>
+<p>Get the last item </p><dl class="section return"><dt>Returns</dt><dd>last element. If no item left, return <code>EMTY_QUE_SIG</code> </dd></dl>
 
 </div>
 </div>

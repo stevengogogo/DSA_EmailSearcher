@@ -4,7 +4,9 @@
  * @brief General Utilities for C language
  * @version 0.1
  * @date 2021-03-08
- * 
+ * @note 
+ * Reference
+ * 1. Universal Stack is modified from: https://github.com/igniting/generic-stack
  * @copyright Copyright (c) 2021
  * 
  */
@@ -12,6 +14,8 @@
 #define UTILS_H
 
 #include <stdbool.h>
+#include <stdio.h>
+#include <stdlib.h>
 #include <ctype.h> // tolower
 #define INIT_NUM_STACK_ELEMENT 50 
 
@@ -78,6 +82,10 @@ typedef struct uniStack {
 void init(uniStack *s, int elemSize){
     byte *storage;
     storage = (byte*)malloc(elemSize*INIT_NUM_STACK_ELEMENT);
+    if(storage == NULL){
+        fprintf(stderr, "Stack Init Error: Insufficient Memory.\n");
+        exit(1);
+    }
 }
 
 

@@ -62,8 +62,7 @@ bool isNumber_ASCII(int);
 bool isUpperCase_ASCII(int);
 bool isLowerCase_ASCII(int);
 
-/*****Dynamic Array (Int)*****/
-
+/************Dynamic Array (Int) Stack**************/
 //dynamic array
 typedef struct{
     int len;
@@ -74,6 +73,7 @@ typedef struct{
 //init and kill
 dymArr init_Arr(int size);
 void kill_dymArr(dymArr*);
+void resize_dymArr(dymArr*, int new_max_size);
 
 //clear
 void clear_Arr(dymArr*);
@@ -83,10 +83,12 @@ void clear_Arr(dymArr*);
 void append_dymArr(dymArr*, int val);
 /** Get the item of arr[i]*/
 int get_item(dymArr, int i);
-/** Get the last item*/
+/** Get the last item
+ * @return last element. If no item left, return `EMTY_QUE_SIG`
+*/
 int pop_item(dymArr*);
 
-
+/*************Queue************/
 typedef struct{
     dymArr arr;
     int head;
@@ -122,45 +124,6 @@ void remove_uArray(uArray* arr, int i);
 void insert_uArray(uArray* arr, int i,void* item);
 void append_uArray(uArray* arr, void* item);
 void update_size_uArray(uArray* arr, int new_max_item);
-
 void kill_uArray(uArray* arr);
-
-/************Generic Stack************/
-
-/** Equivalent to one byte*/
-
-/**
- * @brief Universal Stack
- * @param top index of top element
- * @param len number of element stored
- * @param memory pointer to the allocated memory
- * @param eleSize size of single element. e.g. `sizeof(int)`
- * @param num_maxEle maximum number can be stored in the stack. Augemented when reaching the capacity.
-*/
-typedef struct uStack {
-    int top;
-    int len;
-    byte *memory; //allocated memory
-    int eleSize; // size of element
-    int num_maxEle; // Number of max elements
-} uStack;
-
-/** Initiate a generic stack
- * @param uStack uninitiate struct
- * @param eleSize size of each element
- * @example init(s, sizeof(int)); //For integer storage
-*/
-void init_uStack(uStack *s, size_t elemSize);
-
-bool isEmpty_uStack(uStack* s);
-int size_uStack(uStack* s);
-void push_uStack(uStack* s, void *item);
-void* pop_uStack(uStack* s);
-void* top_uStack(uStack* s);
-void* len_uStack(uStack* s);
-void* kill_uStack(uStack* s);
-
-
-
 
 #endif

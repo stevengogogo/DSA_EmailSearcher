@@ -83,7 +83,8 @@ bool isLowerCase_ASCII(int asc){
     return inDomainInt(asc, 97, 122);
 }
 
-/********Integer stack*********/
+/********Dynamic Array (Int) stack*********/
+
 dymArr init_Arr(int size){
     assert(size>=1);
     int* is = (int*)malloc(size*sizeof(int));
@@ -130,7 +131,7 @@ int pop_item(dymArr* p){
 }
 
 
-// Queue
+/*************Queue************/
 
 que init_que(int size){
     que q;
@@ -168,7 +169,6 @@ int peek_que(que* q){
     else 
         return q->arr.i[q->head];
 }
-
 
 
 
@@ -295,22 +295,5 @@ void kill_uArray(uArray* arr){
     arr->eleSize = 0;
     arr->len = 0;
     arr->num_maxEle = 0;
-}
-
-/************Generic Stack************/
-
-void init_uStack(uStack *s, size_t eleSize){
-    byte * memory = (byte*)malloc(eleSize*INIT_NUM_ARRAY_ELEMENT);
-    if(memory == NULL){
-        fprintf(stderr, "Stack Init Error: Insufficient Memory.\n");
-        exit(1);
-    }
-
-    /*Initialize*/
-    s->eleSize = eleSize;
-    s->top = 0; //index
-    s->len = -1;
-    s->memory = memory;
-    s->num_maxEle = INIT_NUM_ARRAY_ELEMENT;
 }
 

@@ -88,6 +88,11 @@ bool isLowerCase_ASCII(int asc){
 dymArr init_Arr(int size){
     assert(size>=1);
     int* is = (int*)malloc(size*sizeof(int));
+    if(is==NULL){
+        fprintf(stderr, "Init Error: Insufficient Memory.\n");
+        exit(1);
+    }
+
     dymArr arr = {
         .i = is,
         .len = 0,
@@ -112,6 +117,10 @@ void append_dymArr(dymArr* arr, int val){
       int new_size = (arr->size)*2 + 1;
       arr->i = realloc(arr->i, sizeof(int)*new_size);
       arr->size = new_size;
+      if(arr==NULL){
+        fprintf(stderr, "Append Error: Insufficient Memory.\n");
+        exit(1);
+       }
     }
 
     arr->i[arr->len] = val;

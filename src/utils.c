@@ -1,5 +1,7 @@
 #include "utils.h"
 
+/************Math************/
+
 //Choose the bigger one
 int argmax(int a, int b)
 {
@@ -18,8 +20,7 @@ bool inDomainInt(int val, int lower, int upper){
         return false;
 }
 
-
-// Tokenize
+/************Tokenize************/
 
 int popToken(char message[], char token[], int iStr){
     char c;
@@ -81,3 +82,22 @@ bool isUpperCase_ASCII(int asc){
 bool isLowerCase_ASCII(int asc){
     return inDomainInt(asc, 97, 122);
 }
+
+
+/************Generic Stack************/
+
+void init_uStack(uStack *s, int eleSize){
+    byte * memory = (byte*)malloc(eleSize*INIT_NUM_STACK_ELEMENT);
+    if(memory == NULL){
+        fprintf(stderr, "Stack Init Error: Insufficient Memory.\n");
+        exit(1);
+    }
+
+    /*Initialize*/
+    s->eleSize = eleSize;
+    s->top = 0; //index
+    s->len = 0;
+    s->memory = memory;
+    s->num_maxEle = INIT_NUM_STACK_ELEMENT;
+}
+

@@ -18,6 +18,7 @@
 #include <stdlib.h>
 #include <ctype.h> // tolower
 #define INIT_NUM_STACK_ELEMENT 50 
+typedef unsigned char byte;
 
 /************Math************/
 
@@ -58,10 +59,28 @@ bool isNumber_ASCII(int);
 bool isUpperCase_ASCII(int);
 bool isLowerCase_ASCII(int);
 
+/************Generic Dynamic Array************/
+
+/** Universal dynamic Array*/
+typedef struct uArray{
+    int len;
+    int eleSize;
+    byte* memory;
+    int num_maxEle;
+} uArray;
+
+void init_uArray(uArray*, int eleSize);
+int len_uArray(uArray*);
+void* get_uArray(uArray*, int i);
+void remove_uArray(uArray*, int i);
+void insert_uArray(uArray*, void* item);
+void append_uArray(uArray*, void* item);
+void kill_uArray(uArray*);
+
+
 /************Generic Stack************/
 
 /** Equivalent to one byte*/
-typedef unsigned char byte;
 
 /**
  * @brief Universal Stack
@@ -71,22 +90,29 @@ typedef unsigned char byte;
  * @param eleSize size of single element. e.g. `sizeof(int)`
  * @param num_maxEle maximum number can be stored in the stack. Augemented when reaching the capacity.
 */
-typedef struct uniStack {
+typedef struct uStack {
     int top;
     int len;
     byte *memory; //allocated memory
     int eleSize; // size of element
     int num_maxEle; // Number of max elements
-} uniStack;
+} uStack;
 
-void init(uniStack *s, int elemSize){
-    byte *storage;
-    storage = (byte*)malloc(elemSize*INIT_NUM_STACK_ELEMENT);
-    if(storage == NULL){
-        fprintf(stderr, "Stack Init Error: Insufficient Memory.\n");
-        exit(1);
-    }
-}
+/** Initiate a generic stack
+ * @param uStack uninitiate struct
+ * @param eleSize size of each element
+ * @example init(s, sizeof(int)); //For integer storage
+*/
+void init_uStack(uStack *s, int elemSize);
+
+bool isEmpty_uStack(uStack* s);
+int size_uStack(uStack* s);
+void push_uStack(uStack* s, void *item);
+void* pop_uStack(uStack* s);
+void* top_uStack(uStack* s);
+void* len_uStack(uStack* s);
+void* kill_uStack(uStack* s);
+
 
 
 

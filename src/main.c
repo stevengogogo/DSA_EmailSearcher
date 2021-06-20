@@ -10,28 +10,20 @@
 // and 2000 queries for you to debug.
 
 int main(void) {
-    int num = 100000;
-    int maxlen = INIT_NUM_ARRAY_ELEMENT;
-    int* arr = (int*)malloc(maxlen*sizeof(int));
-    int len = 0;
+        uArray arr;
+    init_uArray(&arr, sizeof(long));
+    int num = 15000;
+    int item;
+    long i;
+    clock_t str;
+    clock_t end;
 
-    clock_t str = clock();
-    for(int i=0;i<num;i++){
-        ++len;
-        if (len==maxlen){
-            maxlen = maxlen * 2 + 1;
-            arr = realloc(arr,(maxlen)*sizeof(int));
-        }
-
-        //Shift right
-        for(int j=0;j<len-1;j++){
-            arr[j+1] = arr[j];
-        }
-        //Insert at i
-        arr[0] = i;
+    str = clock();
+    for(i=0;i<num;i++){
+        append_uArray(&arr, &i); //[1...100000]
     }
-    clock_t end = clock();
-    //print_clock("\nArray Insert", str, end);
+    end = clock();
+    //print_clock("uArray Append",str, end);
 
   return 0;
 }

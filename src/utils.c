@@ -83,16 +83,114 @@ bool isLowerCase_ASCII(int asc){
     return inDomainInt(asc, 97, 122);
 }
 
+/********Integer stack*********/
+dymArr init_Arr(int size){
+    assert(size>=1);
+    int* is = (int*)malloc(size*sizeof(int));
+    dymArr arr = {
+        .i = is,
+        .len = 0,
+        .size = size
+    };
+    return arr;
+}
+
+void kill_dymArr(dymArr* arr){
+    arr->size=0;
+    arr->len=0;
+    free(arr->i);
+};
+
+void clear_Arr(dymArr* arr){
+    arr->len = 0;
+}
+
+void append_dymArr(dymArr* arr, int val){
+    //Augement size
+    if((arr->len+1) > arr->size){
+      int new_size = (arr->size)*2 + 1;
+      arr->i = realloc(arr->i, sizeof(int)*new_size);
+      arr->size = new_size;
+    }
+
+    arr->i[arr->len] = val;
+    ++(arr->len);
+}
+
+int get_item(dymArr arr, int i){
+    return arr.i[i];
+}
+
+int pop_item(dymArr* p){
+    if(p->len==0)
+        return EMTY_QUE_SIG;
+    int val = p->i[p->len-1];
+    --p->len;
+    return val;
+}
+
+
+// Queue
+
+que init_que(int size){
+    que q;
+    q.arr = init_Arr(size);
+    q.head = -1;
+    q.tail = -1;
+    return q;
+}
+
+void kill_que(que* q){
+    kill_dymArr(&q->arr);
+}
+
+void enque(que* q, int val){
+    append_dymArr(&q->arr, val);
+    if(q->head == -1){ //first element
+        ++(q->head);
+    }
+    q->tail = q->arr.len - 1;
+}
+
+int deque(que* q){
+    if(q->head > q->tail || q->head==-1){
+        return EMTY_QUE_SIG;
+    }
+
+    int val = get_item(q->arr, q->head);
+    ++(q->head);
+    return val;
+}
+
+int peek_que(que* q){
+    if(q->head > q->tail || q->arr.len==0)
+        return EMTY_QUE_SIG;
+    else 
+        return q->arr.i[q->head];
+}
+
+
+
+
 /************Generic Array************/
 
-void copy_item_array(void* srcArr, int locSrc,void* dstArr, int locDst,size_t size){
+void copy_item_array(void* dstArr, int locDst,void* srcArr, int locSrc, size_t size){
     //Start point
     int start_dst = locDst*size;
     int start_src = locSrc*size;
-    //Copy
-    memcpy((byte*)(srcArr+start_src), (byte*)(dstArr+start_dst), size);
+
+    if (size=sizeof(int)){
+        *(int*)(dstArr+start_dst) = *(int*)(srcArr+start_src);
+    }
+    else if (size=sizeof(long)){
+        //printf("f");
+        *(long*)(dstArr+start_dst) = *(long*)(srcArr+start_src);
+    }
+    else{
+        //Copy
+        memcpy((byte*)(dstArr+start_dst), (byte*)(srcArr+start_src), size);
         //*(byte*)(srcArr+j+start_src) = *(byte*)(dstArr+j+start_dst);
-    
+    }
 }
 
 void init_uArray(uArray* arr, size_t eleSize){
@@ -123,10 +221,7 @@ void get_uArray(uArray* arr, int i,void* item){
     }
 
     //Copy item
-    int start = (i-1)*arr->eleSize;
-    for(int j=0;j<arr->eleSize;j++){
-        *(byte*)(item+j) = *(arr->memory+start+j);
-    }
+    copy_item_array(item, 0, arr->memory, i, arr->eleSize);
 }
 
 void set_uArray(uArray* arr, int i,void* item){
@@ -177,14 +272,13 @@ void insert_uArray(uArray* arr, int I,void* item){
 }
 
 void append_uArray(uArray* arr, void* item){
+    ++arr->len;
     //Augment size
     if(arr->len == arr->num_maxEle){
         update_size_uArray(arr, arr->num_maxEle*2+1);
     }   
 
     copy_item_array(arr->memory, arr->len-1, item, 0, arr->eleSize);
-
-    ++arr->len;
 }
 
 void update_size_uArray(uArray* arr, int new_max_item){
@@ -215,7 +309,7 @@ void init_uStack(uStack *s, size_t eleSize){
     /*Initialize*/
     s->eleSize = eleSize;
     s->top = 0; //index
-    s->len = 0;
+    s->len = -1;
     s->memory = memory;
     s->num_maxEle = INIT_NUM_ARRAY_ELEMENT;
 }

@@ -2,6 +2,7 @@
     "files.associations": {
         "utils.h": "c",
         "system_error": "cpp",
-        "test_genericstack.h": "c"
+        "test_genericstack.h": "c",
+        "sstream": "c"
     }
 }

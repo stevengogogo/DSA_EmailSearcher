@@ -17,8 +17,10 @@
 #include <stdio.h>
 #include <string.h>
 #include <stdlib.h>
+#include <assert.h>
 #include <ctype.h> // tolower
 #define INIT_NUM_ARRAY_ELEMENT 10
+#define EMTY_QUE_SIG -121242
 typedef unsigned char byte;
 
 /************Math************/
@@ -60,10 +62,47 @@ bool isNumber_ASCII(int);
 bool isUpperCase_ASCII(int);
 bool isLowerCase_ASCII(int);
 
+/*****Integer stack*****/
+
+//dynamic array
+typedef struct{
+    int len;
+    int size;
+    int* i;
+} dymArr;
+
+//init and kill
+dymArr init_Arr(int size);
+void kill_dymArr(dymArr*);
+
+//clear
+void clear_Arr(dymArr*);
+
+//append
+/**Append at last*/
+void append_dymArr(dymArr*, int val);
+/** Get the item of arr[i]*/
+int get_item(dymArr, int i);
+/** Get the last item*/
+int pop_item(dymArr*);
+
+
+typedef struct{
+    dymArr arr;
+    int head;
+    int tail;
+} que;
+
+que init_que(int size);
+void kill_que(que*);
+void enque(que*, int val);
+int deque(que*);
+int peek_que(que*);
+
 /************Generic Dynamic Array************/
 
 /** Generic copy*/
-void copy_item_array(void* srcArr, int locSrc,void* dstArr, int locDst,size_t size);
+void copy_item_array(void* dstArr, int locDst,void* srcArr, int locSrc, size_t size);
 
 /** Universal dynamic Array*/
 typedef struct uArray{
@@ -72,6 +111,8 @@ typedef struct uArray{
     byte* memory;
     int num_maxEle;
 } uArray;
+
+
 
 void init_uArray(uArray* arr, size_t eleSize);
 int len_uArray(uArray* arr);

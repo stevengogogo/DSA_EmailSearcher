@@ -3,6 +3,7 @@
 
 #include "utils.h"
 #include "time.h"
+#define num 15000
 
 void print_clock(char* s,clock_t str, clock_t end){
     double total_t = (double)(end - str) / CLOCKS_PER_SEC;
@@ -12,7 +13,6 @@ void print_clock(char* s,clock_t str, clock_t end){
 void test_dynamic_universal_array(void){
     uArray arr;
     init_uArray(&arr, sizeof(int));
-    int num = 15000;
     int item;
     int i;
     clock_t str;
@@ -48,7 +48,7 @@ void test_dynamic_universal_array(void){
     //Insert item
     str = clock();
     for(i=0;i<num;i++){
-        insert_uArray(&arr, 0, &i); //[1...100000]
+       insert_uArray(&arr, 0, &i); //[1...100000]
     }
     end = clock();
     print_clock("\nuArray Insert",str, end);
@@ -57,7 +57,7 @@ void test_dynamic_universal_array(void){
 }
 
 void array_compare(void){
-    int num = 15000, i;
+    int  i;
     int maxlen = INIT_NUM_ARRAY_ELEMENT;
     int* arr = (int*)malloc(maxlen*sizeof(int));
     int len= 0;
@@ -80,11 +80,27 @@ void array_compare(void){
     }
     clock_t end = clock();
     print_clock("Array Insert", str, end);
+    free(arr);
+}
 
+void test_uarray_append_int(void){
+    uArray arr;
+    init_uArray(&arr, sizeof(long));
+    int item;
+    int i;
+    clock_t str;
+    clock_t end;
+
+    str = clock();
+    for(i=0;i<num;i++){
+        append_uArray(&arr, &i); //[1...100000]
+    }
+    end = clock();
+    print_clock("uArray Append",str, end);
 }
 
 void test_array_append_int(void){
-    int num = 15000, i;
+    int  i;
     int maxlen = INIT_NUM_ARRAY_ELEMENT;
     int* arr = (int*)malloc(maxlen*sizeof(int));
     int len= 0;
@@ -94,7 +110,7 @@ void test_array_append_int(void){
         ++len;
         if (len==maxlen){
             maxlen = maxlen * 2 + 1;
-            arr = realloc(arr,(maxlen)*sizeof(long));
+            arr = realloc(arr,(maxlen)*sizeof(int));
         }
         arr[len-1] = i;
     }
@@ -102,8 +118,23 @@ void test_array_append_int(void){
     print_clock("Array Append", str, end);
 }
 
+void test_uarray_append_long(void){
+    uArray arr;
+    init_uArray(&arr, sizeof(long));
+    int item;
+    long i;
+    clock_t str;
+    clock_t end;
+
+    str = clock();
+    for(i=0;i<num;i++){
+        append_uArray(&arr, &i); //[1...100000]
+    }
+    end = clock();
+    print_clock("uArray Append",str, end);
+}
+
 void test_array_append_long(void){
-    int num = 15000;
     long i;
     int maxlen = INIT_NUM_ARRAY_ELEMENT;
     long* arr = (long*)malloc(maxlen*sizeof(long));
@@ -120,6 +151,47 @@ void test_array_append_long(void){
     }
     clock_t end = clock();
     print_clock("Array Append", str, end);
+}
+
+
+typedef struct node{
+    int val[10];
+} tnode;
+
+void test_uarray_append_struct(void){
+    uArray arr;
+    init_uArray(&arr, sizeof(tnode));
+    int i;
+    tnode item;
+    clock_t str;
+    clock_t end;
+
+    str = clock();
+    for(i=0;i<num;i++){
+        append_uArray(&arr, &item); //[1...100000]
+    }
+    end = clock();
+    print_clock("uArray Struct",str, end);
+}
+
+void test_array_struct(void){
+    int i;
+    int maxlen = INIT_NUM_ARRAY_ELEMENT;
+    tnode* arr = (tnode*)malloc(maxlen * sizeof(tnode));
+    int len= 0;
+    tnode item;
+    //Append
+    clock_t str = clock();
+    for(i=0;i<num;i++){
+        ++len;
+        if (len==maxlen){
+            maxlen = maxlen * 2 + 1;
+            arr = realloc(arr, maxlen*sizeof(tnode));
+        }
+        arr[len-1] = item;
+    }
+    clock_t end = clock();
+    print_clock("Struct Append", str, end);
 }
 
 

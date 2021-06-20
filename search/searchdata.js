@@ -1,11 +1,12 @@
 var indexSectionsWithContent =
 {
-  0: "aeimpqu",
-  1: "mq",
+  0: "abeimpqsu",
+  1: "mqs",
   2: "m",
   3: "u",
   4: "aip",
-  5: "e"
+  5: "bs",
+  6: "e"
 };
 
 var indexSectionNames =
@@ -15,7 +16,8 @@ var indexSectionNames =
   2: "namespaces",
   3: "files",
   4: "functions",
-  5: "pages"
+  5: "typedefs",
+  6: "pages"
 };
 
 var indexSectionLabels =
@@ -25,6 +27,7 @@ var indexSectionLabels =
   2: "Namespaces",
   3: "Files",
   4: "Functions",
-  5: "Pages"
+  5: "Typedefs",
+  6: "Pages"
 };
 

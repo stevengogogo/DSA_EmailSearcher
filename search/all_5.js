@@ -1,5 +1,4 @@
 var searchData=
 [
-  ['query_7',['query',['../structquery.html',1,'']]],
-  ['query_5fdata_8',['query_data',['../unionquery_1_1query__data.html',1,'query']]]
+  ['poptoken_7',['popToken',['../utils_8h.html#a81f4883411916757a7c41b8a74f73c2b',1,'utils.c']]]
 ];

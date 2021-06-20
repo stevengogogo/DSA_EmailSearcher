@@ -13,6 +13,7 @@
 
 #include <stdbool.h>
 #include <ctype.h> // tolower
+#define INIT_NUM_STACK_ELEMENT 50 
 
 /************Math************/
 
@@ -56,17 +57,29 @@ bool isLowerCase_ASCII(int);
 /************Generic Stack************/
 
 /** Equivalent to one byte*/
-typedef unsigned  char byte;
+typedef unsigned char byte;
 
 /**
  * @brief Universal Stack
+ * @param top index of top element
+ * @param len number of element stored
+ * @param memory pointer to the allocated memory
+ * @param eleSize size of single element. e.g. `sizeof(int)`
+ * @param num_maxEle maximum number can be stored in the stack. Augemented when reaching the capacity.
 */
-typedef struct Stack {
+typedef struct uniStack {
     int top;
+    int len;
     byte *memory; //allocated memory
-    int EleSize; // size of element
-    int num_maxEle; //
-} Stack;
+    int eleSize; // size of element
+    int num_maxEle; // Number of max elements
+} uniStack;
+
+void init(uniStack *s, int elemSize){
+    byte *storage;
+    storage = (byte*)malloc(elemSize*INIT_NUM_STACK_ELEMENT);
+}
+
 
 
 #endif

@@ -83,11 +83,62 @@ bool isLowerCase_ASCII(int asc){
     return inDomainInt(asc, 97, 122);
 }
 
+/************Generic Array************/
+void init_uArray(uArray* arr, int eleSize){
+    byte* mem = (byte*)malloc(eleSize*INIT_NUM_ARRAY_ELEMENT);
+    
+    //Check memory is allocated
+    if(mem==NULL){
+        fprintf(stderr, "Stack Init Error: Insufficient Memory.\n");
+        exit(1);
+    }
+
+    //Initiation
+    arr->eleSize = eleSize;
+    arr->len = 0;
+    arr->memory = mem;
+    arr->num_maxEle=INIT_NUM_ARRAY_ELEMENT;
+}
+
+int len_uArray(uArray* arr){
+    return arr->len;
+}
+
+void get_uArray(uArray* arr, int i,void* item){
+    //Check i domain
+    if (i>=len_uArray(arr) || i<0){
+        fprintf(stderr, "Invalid index with array length $d. Got i=%d\n", arr->len, i);
+        exit(1);
+    }
+
+    //Copy item
+    
+    int start = (i-1)*arr->eleSize;
+    for(int j=0;j<arr->eleSize;j++){
+        *(byte*)(item+i) = *(arr->memory+start+i);
+    }
+}
+
+void remove_uArray(uArray* arr, int i){
+
+}
+
+void insert_uArray(uArray* arr, void* item){
+
+}
+
+void append_uArray(uArray* arr, void* item){
+
+}
+
+void kill_uArray(uArray* arr){
+
+}
 
 /************Generic Stack************/
 
 void init_uStack(uStack *s, int eleSize){
-    byte * memory = (byte*)malloc(eleSize*INIT_NUM_STACK_ELEMENT);
+    byte * memory = (byte*)malloc(eleSize*INIT_NUM_ARRAY_ELEMENT);
     if(memory == NULL){
         fprintf(stderr, "Stack Init Error: Insufficient Memory.\n");
         exit(1);
@@ -98,6 +149,6 @@ void init_uStack(uStack *s, int eleSize){
     s->top = 0; //index
     s->len = 0;
     s->memory = memory;
-    s->num_maxEle = INIT_NUM_STACK_ELEMENT;
+    s->num_maxEle = INIT_NUM_ARRAY_ELEMENT;
 }
 

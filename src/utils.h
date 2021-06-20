@@ -17,7 +17,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <ctype.h> // tolower
-#define INIT_NUM_STACK_ELEMENT 50 
+#define INIT_NUM_ARRAY_ELEMENT 50 
 typedef unsigned char byte;
 
 /************Math************/
@@ -69,13 +69,13 @@ typedef struct uArray{
     int num_maxEle;
 } uArray;
 
-void init_uArray(uArray*, int eleSize);
-int len_uArray(uArray*);
-void* get_uArray(uArray*, int i);
-void remove_uArray(uArray*, int i);
-void insert_uArray(uArray*, void* item);
-void append_uArray(uArray*, void* item);
-void kill_uArray(uArray*);
+void init_uArray(uArray* arr, int eleSize);
+int len_uArray(uArray* arr);
+void get_uArray(uArray* arr, int i,void* item);
+void remove_uArray(uArray* arr, int i);
+void insert_uArray(uArray* arr, void* item);
+void append_uArray(uArray* arr, void* item);
+void kill_uArray(uArray* arr);
 
 
 /************Generic Stack************/

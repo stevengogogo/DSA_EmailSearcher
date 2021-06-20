@@ -1,4 +1,5 @@
 var searchData=
 [
-  ['byte_22',['byte',['../utils_8h.html#a0c8186d9b9b7880309c27230bbb5e69d',1,'utils.h']]]
+  ['uarray_23',['uArray',['../utils_8h.html#afa43d1c77d1ea818ac56829c343bee9d',1,'utils.h']]],
+  ['ustack_24',['uStack',['../utils_8h.html#aee36121ca858713d8d9a257358daf734',1,'utils.h']]]
 ];

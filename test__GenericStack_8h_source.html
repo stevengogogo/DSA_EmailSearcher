@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
 <meta name="generator" content="Doxygen 1.9.1"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>C Project Template: test/test_utils.h Source File</title>
+<title>C Project Template: test/test_GenericStack.h Source File</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -66,28 +66,33 @@ $(function() {
 </div><!-- top -->
 <div class="header">
   <div class="headertitle">
-<div class="title">test_utils.h</div>  </div>
+<div class="title">test_GenericStack.h</div>  </div>
 </div><!--header-->
 <div class="contents">
-<div class="fragment"><div class="line"><a name="l00001"></a><span class="lineno">    1</span>&#160;<span class="preprocessor">#ifndef TEST_UTILS_H</span></div>
-<div class="line"><a name="l00002"></a><span class="lineno">    2</span>&#160;<span class="preprocessor">#define TEST_UTILS_H</span></div>
+<div class="fragment"><div class="line"><a name="l00001"></a><span class="lineno">    1</span>&#160;<span class="preprocessor">#ifndef TEST_GENERICSTACK_H</span></div>
+<div class="line"><a name="l00002"></a><span class="lineno">    2</span>&#160;<span class="preprocessor">#define TEST_GENERICSTACK_H</span></div>
 <div class="line"><a name="l00003"></a><span class="lineno">    3</span>&#160; </div>
-<div class="line"><a name="l00004"></a><span class="lineno">    4</span>&#160;<span class="preprocessor">#include &quot;acutest.h&quot;</span></div>
-<div class="line"><a name="l00005"></a><span class="lineno">    5</span>&#160;<span class="preprocessor">#include &quot;<a class="code" href="utils_8h.html">utils.h</a>&quot;</span></div>
-<div class="line"><a name="l00006"></a><span class="lineno">    6</span>&#160; </div>
-<div class="line"><a name="l00007"></a><span class="lineno">    7</span>&#160;<span class="keywordtype">void</span> test_utils(<span class="keywordtype">void</span>)</div>
-<div class="line"><a name="l00008"></a><span class="lineno">    8</span>&#160;{</div>
-<div class="line"><a name="l00009"></a><span class="lineno">    9</span>&#160;    <span class="keywordtype">int</span> a, b;</div>
-<div class="line"><a name="l00010"></a><span class="lineno">   10</span>&#160;    a = 1; b= 2;</div>
-<div class="line"><a name="l00011"></a><span class="lineno">   11</span>&#160;    TEST_CHECK(<a class="code" href="utils_8h.html#a1fa7fd55f201216ebf7800abb1c427a8">argmax</a>(a,b)  == 1 );</div>
-<div class="line"><a name="l00012"></a><span class="lineno">   12</span>&#160;    TEST_CHECK(<a class="code" href="utils_8h.html#a1fa7fd55f201216ebf7800abb1c427a8">argmax</a>(b,a) == 0);</div>
-<div class="line"><a name="l00013"></a><span class="lineno">   13</span>&#160;    TEST_CHECK(<a class="code" href="utils_8h.html#a1fa7fd55f201216ebf7800abb1c427a8">argmax</a>(1,1) == 1);</div>
-<div class="line"><a name="l00014"></a><span class="lineno">   14</span>&#160;}</div>
-<div class="line"><a name="l00015"></a><span class="lineno">   15</span>&#160; </div>
-<div class="line"><a name="l00016"></a><span class="lineno">   16</span>&#160; </div>
-<div class="line"><a name="l00017"></a><span class="lineno">   17</span>&#160;<span class="preprocessor">#endif</span></div>
+<div class="line"><a name="l00004"></a><span class="lineno">    4</span>&#160;<span class="preprocessor">#include &quot;<a class="code" href="utils_8h.html">utils.h</a>&quot;</span></div>
+<div class="line"><a name="l00005"></a><span class="lineno">    5</span>&#160; </div>
+<div class="line"><a name="l00006"></a><span class="lineno">    6</span>&#160;<span class="keywordtype">void</span> test_stack_INT(<span class="keywordtype">void</span>){</div>
+<div class="line"><a name="l00007"></a><span class="lineno">    7</span>&#160;    <a class="code" href="structuStack.html">uStack</a> s;</div>
+<div class="line"><a name="l00008"></a><span class="lineno">    8</span>&#160;    <span class="comment">//Initiate a stack with integer storage</span></div>
+<div class="line"><a name="l00009"></a><span class="lineno">    9</span>&#160;    init_uStack(&amp;s, <span class="keyword">sizeof</span>(<span class="keywordtype">int</span>));</div>
+<div class="line"><a name="l00010"></a><span class="lineno">   10</span>&#160; </div>
+<div class="line"><a name="l00011"></a><span class="lineno">   11</span>&#160;}</div>
+<div class="line"><a name="l00012"></a><span class="lineno">   12</span>&#160; </div>
+<div class="line"><a name="l00013"></a><span class="lineno">   13</span>&#160;<span class="keywordtype">void</span> test_stack_INT(<span class="keywordtype">void</span>){</div>
+<div class="line"><a name="l00014"></a><span class="lineno">   14</span>&#160;    <a class="code" href="structuStack.html">uStack</a> s;</div>
+<div class="line"><a name="l00015"></a><span class="lineno">   15</span>&#160;    <span class="comment">//Initiate a stack with integer storage</span></div>
+<div class="line"><a name="l00016"></a><span class="lineno">   16</span>&#160;    init_uStack(&amp;s, <span class="keyword">sizeof</span>(<span class="keywordtype">int</span>));</div>
+<div class="line"><a name="l00017"></a><span class="lineno">   17</span>&#160;    </div>
+<div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160;}</div>
+<div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160; </div>
+<div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160; </div>
+<div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160; </div>
+<div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160;<span class="preprocessor">#endif</span></div>
+<div class="ttc" id="astructuStack_html"><div class="ttname"><a href="structuStack.html">uStack</a></div><div class="ttdoc">Universal Stack.</div><div class="ttdef"><b>Definition:</b> utils.h:93</div></div>
 <div class="ttc" id="autils_8h_html"><div class="ttname"><a href="utils_8h.html">utils.h</a></div><div class="ttdoc">General Utilities for C language.</div></div>
-<div class="ttc" id="autils_8h_html_a1fa7fd55f201216ebf7800abb1c427a8"><div class="ttname"><a href="utils_8h.html#a1fa7fd55f201216ebf7800abb1c427a8">argmax</a></div><div class="ttdeci">int argmax(int a, int b)</div><div class="ttdoc">Get arg max.</div><div class="ttdef"><b>Definition:</b> utils.c:6</div></div>
 </div><!-- fragment --></div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>

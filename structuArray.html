@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
 <meta name="generator" content="Doxygen 1.9.1"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>C Project Template: uniStack Struct Reference</title>
+<title>C Project Template: uArray Struct Reference</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -63,47 +63,31 @@ $(function() {
 <div class="header">
   <div class="summary">
 <a href="#pub-attribs">Public Attributes</a> &#124;
-<a href="structuniStack-members.html">List of all members</a>  </div>
+<a href="structuArray-members.html">List of all members</a>  </div>
   <div class="headertitle">
-<div class="title">uniStack Struct Reference</div>  </div>
+<div class="title">uArray Struct Reference</div>  </div>
 </div><!--header-->
 <div class="contents">
-
-<p>Universal Stack.  
- <a href="structuniStack.html#details">More...</a></p>
 
 <p><code>#include &lt;<a class="el" href="utils_8h_source.html">utils.h</a>&gt;</code></p>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-attribs"></a>
 Public Attributes</h2></td></tr>
-<tr class="memitem:ab431fbbffcc22fe6c0de46e3e1045743"><td class="memItemLeft" align="right" valign="top"><a id="ab431fbbffcc22fe6c0de46e3e1045743"></a>
-int&#160;</td><td class="memItemRight" valign="bottom"><b>top</b></td></tr>
-<tr class="separator:ab431fbbffcc22fe6c0de46e3e1045743"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a1cfc840af556b39652dc52e4372b31fc"><td class="memItemLeft" align="right" valign="top"><a id="a1cfc840af556b39652dc52e4372b31fc"></a>
+<tr class="memitem:a7c216c943476c420bea3bb856262febd"><td class="memItemLeft" align="right" valign="top"><a id="a7c216c943476c420bea3bb856262febd"></a>
 int&#160;</td><td class="memItemRight" valign="bottom"><b>len</b></td></tr>
-<tr class="separator:a1cfc840af556b39652dc52e4372b31fc"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a8733df4fb48551987e515f6d79823a72"><td class="memItemLeft" align="right" valign="top"><a id="a8733df4fb48551987e515f6d79823a72"></a>
-<a class="el" href="utils_8h.html#a0c8186d9b9b7880309c27230bbb5e69d">byte</a> *&#160;</td><td class="memItemRight" valign="bottom"><b>memory</b></td></tr>
-<tr class="separator:a8733df4fb48551987e515f6d79823a72"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a6944ca781ccc93eb681f65cf782361e6"><td class="memItemLeft" align="right" valign="top"><a id="a6944ca781ccc93eb681f65cf782361e6"></a>
+<tr class="separator:a7c216c943476c420bea3bb856262febd"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad52a34447b2725e4eb85264520f4d8a8"><td class="memItemLeft" align="right" valign="top"><a id="ad52a34447b2725e4eb85264520f4d8a8"></a>
 int&#160;</td><td class="memItemRight" valign="bottom"><b>eleSize</b></td></tr>
-<tr class="separator:a6944ca781ccc93eb681f65cf782361e6"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:af00bbcc2468a12a0dffe8b29ae6a9f09"><td class="memItemLeft" align="right" valign="top"><a id="af00bbcc2468a12a0dffe8b29ae6a9f09"></a>
+<tr class="separator:ad52a34447b2725e4eb85264520f4d8a8"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a91c1f4a3f8b44e35f5a0ccbe5ff430dc"><td class="memItemLeft" align="right" valign="top"><a id="a91c1f4a3f8b44e35f5a0ccbe5ff430dc"></a>
+byte *&#160;</td><td class="memItemRight" valign="bottom"><b>memory</b></td></tr>
+<tr class="separator:a91c1f4a3f8b44e35f5a0ccbe5ff430dc"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aba8d7b5740d3cc6377b0108d2037970d"><td class="memItemLeft" align="right" valign="top"><a id="aba8d7b5740d3cc6377b0108d2037970d"></a>
 int&#160;</td><td class="memItemRight" valign="bottom"><b>num_maxEle</b></td></tr>
-<tr class="separator:af00bbcc2468a12a0dffe8b29ae6a9f09"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="separator:aba8d7b5740d3cc6377b0108d2037970d"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
-<div class="textblock"><p>Universal Stack. </p>
-<dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
-    <tr><td class="paramname">top</td><td>index of top element </td></tr>
-    <tr><td class="paramname">len</td><td>number of element stored </td></tr>
-    <tr><td class="paramname">memory</td><td>pointer to the allocated memory </td></tr>
-    <tr><td class="paramname">eleSize</td><td>size of single element. e.g. <code>sizeof(int)</code> </td></tr>
-    <tr><td class="paramname">num_maxEle</td><td>maximum number can be stored in the stack. Augemented when reaching the capacity. </td></tr>
-  </table>
-  </dd>
-</dl>
+<div class="textblock"><p>Universal dynamic Array </p>
 </div><hr/>The documentation for this struct was generated from the following file:<ul>
 <li>src/<a class="el" href="utils_8h_source.html">utils.h</a></li>
 </ul>

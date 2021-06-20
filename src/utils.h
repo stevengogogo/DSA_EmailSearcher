@@ -17,7 +17,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <ctype.h> // tolower
-#define INIT_NUM_ARRAY_ELEMENT 50 
+#define INIT_NUM_ARRAY_ELEMENT 10 
 typedef unsigned char byte;
 
 /************Math************/
@@ -61,17 +61,21 @@ bool isLowerCase_ASCII(int);
 
 /************Generic Dynamic Array************/
 
+/** Generic copy*/
+void copy_item_array(void* srcArr, int locSrc,void* dstArr, int locDst,size_t size);
+
 /** Universal dynamic Array*/
 typedef struct uArray{
     int len;
-    int eleSize;
+    size_t eleSize;
     byte* memory;
     int num_maxEle;
 } uArray;
 
-void init_uArray(uArray* arr, int eleSize);
+void init_uArray(uArray* arr, size_t eleSize);
 int len_uArray(uArray* arr);
 void get_uArray(uArray* arr, int i,void* item);
+void set_uArray(uArray* arr, int i,void* item);
 void remove_uArray(uArray* arr, int i);
 void insert_uArray(uArray* arr, void* item);
 void append_uArray(uArray* arr, void* item);
@@ -103,7 +107,7 @@ typedef struct uStack {
  * @param eleSize size of each element
  * @example init(s, sizeof(int)); //For integer storage
 */
-void init_uStack(uStack *s, int elemSize);
+void init_uStack(uStack *s, size_t elemSize);
 
 bool isEmpty_uStack(uStack* s);
 int size_uStack(uStack* s);

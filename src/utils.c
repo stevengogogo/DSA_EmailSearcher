@@ -84,7 +84,18 @@ bool isLowerCase_ASCII(int asc){
 }
 
 /************Generic Array************/
-void init_uArray(uArray* arr, int eleSize){
+
+void copy_item_array(void* srcArr, int locSrc,void* dstArr, int locDst,size_t size){
+    //Start point
+    int start_dst = locDst*size;
+    int start_src = locSrc*size;
+    //Copy
+    for(int j=0;j<size;j++){
+        *(byte*)(srcArr+j+start_src) = *(byte*)(dstArr+j+start_dst);
+    }
+}
+
+void init_uArray(uArray* arr, size_t eleSize){
     byte* mem = (byte*)malloc(eleSize*INIT_NUM_ARRAY_ELEMENT);
     
     //Check memory is allocated
@@ -107,15 +118,28 @@ int len_uArray(uArray* arr){
 void get_uArray(uArray* arr, int i,void* item){
     //Check i domain
     if (i>=len_uArray(arr) || i<0){
-        fprintf(stderr, "Invalid index with array length $d. Got i=%d\n", arr->len, i);
+        fprintf(stderr, "Invalid index with array length %d. Got i=%d\n", arr->len, i);
         exit(1);
     }
 
     //Copy item
-    
     int start = (i-1)*arr->eleSize;
     for(int j=0;j<arr->eleSize;j++){
-        *(byte*)(item+i) = *(arr->memory+start+i);
+        *(byte*)(item+j) = *(arr->memory+start+j);
+    }
+}
+
+void set_uArray(uArray* arr, int i,void* item){
+    //Check i domain
+    if (i>=len_uArray(arr) || i<0){
+        fprintf(stderr, "Invalid index with array length %d. Got i=%d\n", arr->len, i);
+        exit(1);
+    }
+
+    //Copy item
+    int start = (i-1)*arr->eleSize;
+    for(int j=0;j<arr->eleSize;j++){
+        *(arr->memory +start+j) = *(arr->memory+start+i);
     }
 }
 
@@ -128,16 +152,27 @@ void insert_uArray(uArray* arr, void* item){
 }
 
 void append_uArray(uArray* arr, void* item){
+    //Augment size
+    if(arr->len == arr->num_maxEle){
+        arr->num_maxEle = arr->num_maxEle*2+1;
+        arr->memory = realloc(arr->memory, arr->eleSize*(arr->num_maxEle));
+    }   
 
+    copy_item_array(arr->memory, arr->len-1, item, 0, arr->eleSize);
+
+    ++arr->len;
 }
 
 void kill_uArray(uArray* arr){
-
+    free(arr->memory);
+    arr->eleSize = 0;
+    arr->len = 0;
+    arr->num_maxEle = 0;
 }
 
 /************Generic Stack************/
 
-void init_uStack(uStack *s, int eleSize){
+void init_uStack(uStack *s, size_t eleSize){
     byte * memory = (byte*)malloc(eleSize*INIT_NUM_ARRAY_ELEMENT);
     if(memory == NULL){
         fprintf(stderr, "Stack Init Error: Insufficient Memory.\n");

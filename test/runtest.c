@@ -11,6 +11,7 @@ TEST_LIST = {
     {"Utility", test_utils},
     {"Tokenize", test_popToken},
     {"Tokenize2", test_token},
+    {"Generic Array (int)", test_dynamic_universal_array},
     {"Generic Stack (int)", test_stack_INT},
     {NULL, NULL} // Terminate the test
 };

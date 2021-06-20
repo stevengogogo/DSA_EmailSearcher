@@ -1,5 +1,4 @@
 var searchData=
 [
-  ['mail_5',['mail',['../structmail.html',1,'']]],
-  ['merge_6',['merge',['../namespacemerge.html',1,'']]]
+  ['get_5fitem_5',['get_item',['../utils_8h.html#ac1e5006c31331fa7105846623450a1ba',1,'utils.c']]]
 ];

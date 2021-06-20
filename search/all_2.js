@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['email_20searcher_2',['Email Searcher',['../index.html',1,'']]]
+  ['dymarr_3',['dymArr',['../structdymArr.html',1,'']]]
 ];

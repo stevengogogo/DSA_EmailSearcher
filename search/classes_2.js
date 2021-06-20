@@ -1,5 +1,5 @@
 var searchData=
 [
-  ['uarray_15',['uArray',['../structuArray.html',1,'']]],
-  ['ustack_16',['uStack',['../structuStack.html',1,'']]]
+  ['uarray_16',['uArray',['../structuArray.html',1,'']]],
+  ['ustack_17',['uStack',['../structuStack.html',1,'']]]
 ];

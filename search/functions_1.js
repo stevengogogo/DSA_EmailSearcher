@@ -1,5 +1,4 @@
 var searchData=
 [
-  ['indomainint_20',['inDomainInt',['../utils_8h.html#a5e5de4bf768b83c8bb0f35e75cce4d84',1,'utils.c']]],
-  ['isregularexpr_5fascii_21',['isRegularExpr_ASCII',['../utils_8h.html#a5ba940f06573ba87adcd6ee567673239',1,'utils.c']]]
+  ['copy_5fitem_5farray_21',['copy_item_array',['../utils_8h.html#a177f69bbdfa1b1ffeb16f9e101478f61',1,'utils.c']]]
 ];

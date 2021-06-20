@@ -1,4 +1,5 @@
 var searchData=
 [
-  ['poptoken_22',['popToken',['../utils_8h.html#a81f4883411916757a7c41b8a74f73c2b',1,'utils.c']]]
+  ['indomainint_22',['inDomainInt',['../utils_8h.html#a5e5de4bf768b83c8bb0f35e75cce4d84',1,'utils.c']]],
+  ['isregularexpr_5fascii_23',['isRegularExpr_ASCII',['../utils_8h.html#a5ba940f06573ba87adcd6ee567673239',1,'utils.c']]]
 ];

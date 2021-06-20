@@ -122,7 +122,7 @@ Classes</h2></td></tr>
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="define-members"></a>
 Macros</h2></td></tr>
 <tr class="memitem:ad945d5e88eeb1aa8b106733249e54dd4"><td class="memItemLeft" align="right" valign="top"><a id="ad945d5e88eeb1aa8b106733249e54dd4"></a>
-#define&#160;</td><td class="memItemRight" valign="bottom"><b>INIT_NUM_ARRAY_ELEMENT</b>&#160;&#160;&#160;50</td></tr>
+#define&#160;</td><td class="memItemRight" valign="bottom"><b>INIT_NUM_ARRAY_ELEMENT</b>&#160;&#160;&#160;10</td></tr>
 <tr class="separator:ad945d5e88eeb1aa8b106733249e54dd4"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="typedef-members"></a>
@@ -158,15 +158,20 @@ bool&#160;</td><td class="memItemRight" valign="bottom"><b>isUpperCase_ASCII</b>
 <tr class="memitem:a0ee1be0f3c96a6b89e5e1d0466213583"><td class="memItemLeft" align="right" valign="top"><a id="a0ee1be0f3c96a6b89e5e1d0466213583"></a>
 bool&#160;</td><td class="memItemRight" valign="bottom"><b>isLowerCase_ASCII</b> (int)</td></tr>
 <tr class="separator:a0ee1be0f3c96a6b89e5e1d0466213583"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a7df2c72a2910bc81519f69db2ad8fcf3"><td class="memItemLeft" align="right" valign="top"><a id="a7df2c72a2910bc81519f69db2ad8fcf3"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>init_uArray</b> (<a class="el" href="structuArray.html">uArray</a> *arr, int eleSize)</td></tr>
-<tr class="separator:a7df2c72a2910bc81519f69db2ad8fcf3"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a177f69bbdfa1b1ffeb16f9e101478f61"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="utils_8h.html#a177f69bbdfa1b1ffeb16f9e101478f61">copy_item_array</a> (void *srcArr, int locSrc, void *dstArr, int locDst, size_t size)</td></tr>
+<tr class="separator:a177f69bbdfa1b1ffeb16f9e101478f61"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a5ac5d33e89d06816af506861d165b546"><td class="memItemLeft" align="right" valign="top"><a id="a5ac5d33e89d06816af506861d165b546"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><b>init_uArray</b> (<a class="el" href="structuArray.html">uArray</a> *arr, size_t eleSize)</td></tr>
+<tr class="separator:a5ac5d33e89d06816af506861d165b546"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a42977d9008b33bebf57104293f568b8d"><td class="memItemLeft" align="right" valign="top"><a id="a42977d9008b33bebf57104293f568b8d"></a>
 int&#160;</td><td class="memItemRight" valign="bottom"><b>len_uArray</b> (<a class="el" href="structuArray.html">uArray</a> *arr)</td></tr>
 <tr class="separator:a42977d9008b33bebf57104293f568b8d"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ab640dc6c480d63ebba1b7c9ff7b51f29"><td class="memItemLeft" align="right" valign="top"><a id="ab640dc6c480d63ebba1b7c9ff7b51f29"></a>
 void&#160;</td><td class="memItemRight" valign="bottom"><b>get_uArray</b> (<a class="el" href="structuArray.html">uArray</a> *arr, int i, void *item)</td></tr>
 <tr class="separator:ab640dc6c480d63ebba1b7c9ff7b51f29"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:abef7538df0e38e0ac095a3625aa4fed3"><td class="memItemLeft" align="right" valign="top"><a id="abef7538df0e38e0ac095a3625aa4fed3"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><b>set_uArray</b> (<a class="el" href="structuArray.html">uArray</a> *arr, int i, void *item)</td></tr>
+<tr class="separator:abef7538df0e38e0ac095a3625aa4fed3"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a59f5b8c654502fd0c6cdd520fa895ee1"><td class="memItemLeft" align="right" valign="top"><a id="a59f5b8c654502fd0c6cdd520fa895ee1"></a>
 void&#160;</td><td class="memItemRight" valign="bottom"><b>remove_uArray</b> (<a class="el" href="structuArray.html">uArray</a> *arr, int i)</td></tr>
 <tr class="separator:a59f5b8c654502fd0c6cdd520fa895ee1"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -179,9 +184,9 @@ void&#160;</td><td class="memItemRight" valign="bottom"><b>append_uArray</b> (<a
 <tr class="memitem:a213d288095ffd2ef8547e9292fc471bd"><td class="memItemLeft" align="right" valign="top"><a id="a213d288095ffd2ef8547e9292fc471bd"></a>
 void&#160;</td><td class="memItemRight" valign="bottom"><b>kill_uArray</b> (<a class="el" href="structuArray.html">uArray</a> *arr)</td></tr>
 <tr class="separator:a213d288095ffd2ef8547e9292fc471bd"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a2a6be5f928f664d7514b0f1fdb205dda"><td class="memItemLeft" align="right" valign="top"><a id="a2a6be5f928f664d7514b0f1fdb205dda"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>init_uStack</b> (<a class="el" href="structuStack.html">uStack</a> *s, int elemSize)</td></tr>
-<tr class="separator:a2a6be5f928f664d7514b0f1fdb205dda"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a5a7aac8330da6342223492c955c1fed5"><td class="memItemLeft" align="right" valign="top"><a id="a5a7aac8330da6342223492c955c1fed5"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><b>init_uStack</b> (<a class="el" href="structuStack.html">uStack</a> *s, size_t elemSize)</td></tr>
+<tr class="separator:a5a7aac8330da6342223492c955c1fed5"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a1c9df8cd1cf2bf89953b039b5bba27b2"><td class="memItemLeft" align="right" valign="top"><a id="a1c9df8cd1cf2bf89953b039b5bba27b2"></a>
 bool&#160;</td><td class="memItemRight" valign="bottom"><b>isEmpty_uStack</b> (<a class="el" href="structuStack.html">uStack</a> *s)</td></tr>
 <tr class="separator:a1c9df8cd1cf2bf89953b039b5bba27b2"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -292,6 +297,53 @@ void *&#160;</td><td class="memItemRight" valign="bottom"><b>kill_uStack</b> (<a
   </dd>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>int </dd></dl>
+
+</div>
+</div>
+<a id="a177f69bbdfa1b1ffeb16f9e101478f61"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a177f69bbdfa1b1ffeb16f9e101478f61">&#9670;&nbsp;</a></span>copy_item_array()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void copy_item_array </td>
+          <td>(</td>
+          <td class="paramtype">void *&#160;</td>
+          <td class="paramname"><em>srcArr</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>locSrc</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">void *&#160;</td>
+          <td class="paramname"><em>dstArr</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>locDst</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">size_t&#160;</td>
+          <td class="paramname"><em>size</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>Generic copy </p>
 
 </div>
 </div>

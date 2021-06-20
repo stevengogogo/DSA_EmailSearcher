@@ -18,7 +18,7 @@
 #include <string.h>
 #include <stdlib.h>
 #include <ctype.h> // tolower
-#define INIT_NUM_ARRAY_ELEMENT 10 
+#define INIT_NUM_ARRAY_ELEMENT 10
 typedef unsigned char byte;
 
 /************Math************/

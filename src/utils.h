@@ -14,6 +14,8 @@
 #include <stdbool.h>
 #include <ctype.h> // tolower
 
+/************Math************/
+
 /**
  * @brief Get arg max
  * 
@@ -28,7 +30,7 @@ int argmax(int a,int b);
  */
 bool inDomainInt(int val, int lower, int upper);
 
-//Tokenize
+/************Tokenize************/
 
 /**
  * @brief Pop token from message. 
@@ -51,6 +53,20 @@ bool isNumber_ASCII(int);
 bool isUpperCase_ASCII(int);
 bool isLowerCase_ASCII(int);
 
+/************Generic Stack************/
+
+/** Equivalent to one byte*/
+typedef unsigned  char byte;
+
+/**
+ * @brief Universal Stack
+*/
+typedef struct Stack {
+    int top;
+    byte *memory; //allocated memory
+    int EleSize; // size of element
+    int num_maxEle; //
+} Stack;
 
 
 #endif

@@ -27,7 +27,7 @@ void init_TxtSmry(TxtSmry* smry){
     init_TokenInfo_arr(smry->token, Q_MODULO);
     init_dymArr(&smry->nonZero, INIT_NONZERO_SIZE);
     smry->nToken = 0;
-    smry->text = (char*)malloc(MAX_CONTENT_SIZE*sizeof(char));
+    smry->text = NULL;
     smry->synced = false;
 }
 

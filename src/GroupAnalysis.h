@@ -29,14 +29,14 @@
 /** Token Information*/
 typedef struct TokenInfo{
     int occur;
-    dymArr* loc;//locations
+    dymArr loc;//locations
 } TokenInfo;
 
 
 /** Text Summary*/
 typedef struct TxtSmry{
     TokenInfo token[Q_MODULO];
-    dymArr* nonZero; //Token start points
+    dymArr nonZero; //Token start points
     int nToken; // unique token number
     char* text; // Text
     bool synced; // Check the information is updated
@@ -51,7 +51,7 @@ void kill_TokenInfo_arr(TokenInfo* tkf, int len);
 /** Intiate text summary*/
 void init_TxtSmry(TxtSmry* smry);
 /** Initiate array of text summary*/
-void init_TxtSmry_arr(TxtSmry* smry, int len);
+void init_TxtSmry_arr(TxtSmry** smry, int len);
 /** Recycle TxtSmry*/
 void kill_TxtSmry(TxtSmry* smry);
 /** Kill array of TxtSmry.*/

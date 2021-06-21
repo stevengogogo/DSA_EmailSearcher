@@ -11,9 +11,9 @@ void test_init_GA(void){
     init_TxtSmry(&smry);
     kill_TxtSmry(&smry);
 
-    int N = 10000;
-    TxtSmry smryArr[N];
-    init_TxtSmry_arr(smryArr, N);
+    int N = 10;
+    TxtSmry* smryArr;
+    init_TxtSmry_arr(&smryArr, N);
     kill_TxtSmry_arr(smryArr, N);
 }
 void test_summary_GA(void){

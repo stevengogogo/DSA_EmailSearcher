@@ -113,7 +113,7 @@ $(function() {
 <div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160;        sscanf(idstr, <span class="stringliteral">&quot;%d&quot;</span>, &amp;<span class="keywordtype">id</span>);</div>
 <div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160;        <span class="comment">//Check content</span></div>
 <div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160;        <span class="comment">//Copy mail information</span></div>
-<div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160;        (*mails)-&gt;id = id;</div>
+<div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160;        (*mails)[i].id = id;</div>
 <div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160;        strcpy((*mails)[i].subject, subject);</div>
 <div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160;        strcpy((*mails)[i].content, content);</div>
 <div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160;        strcpy((*mails)[i].from, from);</div>

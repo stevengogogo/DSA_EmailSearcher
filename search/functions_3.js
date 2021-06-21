@@ -1,5 +1,8 @@
 var searchData=
 [
-  ['indomainint_35',['inDomainInt',['../utils_8h.html#a5e5de4bf768b83c8bb0f35e75cce4d84',1,'utils.c']]],
-  ['isregularexpr_5fascii_36',['isRegularExpr_ASCII',['../utils_8h.html#a5ba940f06573ba87adcd6ee567673239',1,'utils.c']]]
+  ['indomainint_45',['inDomainInt',['../utils_8h.html#a5e5de4bf768b83c8bb0f35e75cce4d84',1,'utils.c']]],
+  ['init_5ftxtsmry_46',['init_TxtSmry',['../GroupAnalysis_8h.html#a58da2a0cd1d40b4b50369e78b492a05c',1,'GroupAnalysis.h']]],
+  ['init_5ftxtsmry_5farr_47',['init_TxtSmry_arr',['../GroupAnalysis_8h.html#a9f4fe1a7a0656734d901b39506def9cd',1,'GroupAnalysis.h']]],
+  ['is_5fsimilar_48',['is_similar',['../GroupAnalysis_8h.html#adff9754312fc3f3b269ed99b9240a8a9',1,'GroupAnalysis.h']]],
+  ['isregularexpr_5fascii_49',['isRegularExpr_ASCII',['../utils_8h.html#a5ba940f06573ba87adcd6ee567673239',1,'utils.c']]]
 ];

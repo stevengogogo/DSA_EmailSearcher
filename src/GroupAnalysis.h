@@ -1,3 +1,14 @@
+/**
+ * @file GroupAnalysis.h
+ * @author Steven Shao-Ting Chiu (r07945001@ntu.edu.tw)
+ * @brief Group Analysis. Use Jaccob's similarity with hash table to identify similar strings.
+ * @version 0.1
+ * @date 2021-06-21
+ * 
+ * @copyright Copyright (c) 2021
+ * 
+ */
+
 #ifndef GROUPANALYSIS_H
 #define GROUPANALYSIS_H
 #include <stdio.h>

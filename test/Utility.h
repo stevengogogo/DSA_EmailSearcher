@@ -49,7 +49,7 @@ static void get_mails(char* filename, mail** mails, int* num_mail){
         sscanf(idstr, "%d", &id);
         //Check content
         //Copy mail information
-        (*mails)->id = id;
+        (*mails)[i].id = id;
         strcpy((*mails)[i].subject, subject);
         strcpy((*mails)[i].content, content);
         strcpy((*mails)[i].from, from);

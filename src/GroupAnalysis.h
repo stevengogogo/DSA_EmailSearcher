@@ -23,13 +23,12 @@
 #define Q_MODULO 100000
 #define D 252
 #define INIT_NONZERO_SIZE 100
-#define MAX_CONTENT_SIZE 1000000
 
 /******Token and Structure*******/
 /** Token Information*/
 typedef struct TokenInfo{
     int occur;
-    dymArr loc;//locations
+    int loc[1];//locations
 } TokenInfo;
 
 

@@ -2,7 +2,7 @@
 
 void init_TokenInfo(TokenInfo* tkf){
     tkf->occur = 0;
-    init_dymArr(&tkf->loc, 1);
+    //init_dymArr(&tkf->loc, 1);
 }
 
 void init_TokenInfo_arr(TokenInfo* tkf, int len){
@@ -11,7 +11,7 @@ void init_TokenInfo_arr(TokenInfo* tkf, int len){
 }
 
 void kill_TokenInfo(TokenInfo* tkf){
-    kill_dymArr(&tkf->loc);
+    //kill_dymArr(&tkf->loc);
     tkf->occur = 0;
 }
 

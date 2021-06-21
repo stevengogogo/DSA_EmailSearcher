@@ -3,6 +3,7 @@
         "utils.h": "c",
         "system_error": "cpp",
         "test_genericstack.h": "c",
-        "sstream": "c"
+        "sstream": "c",
+        "time.h": "c"
     }
 }

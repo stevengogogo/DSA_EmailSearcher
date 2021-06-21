@@ -5,6 +5,13 @@
 #include <string.h>
 #include "acutest.h"
 
+/**
+ * @brief Get the mails object
+ * 
+ * @param filename use `teat/data/test.in`
+ * @param mails email pointer.
+ * @param num_mail number of emails.
+ */
 static void get_mails(char* filename, mail** mails, int* num_mail){
     FILE* fp;
     size_t len;
@@ -13,10 +20,10 @@ static void get_mails(char* filename, mail** mails, int* num_mail){
     int id;
     int maxnum = 1000000;
     char* line = (char *) malloc(maxnum);
+    char* from= (char *) malloc(maxnum);
     char* subject= (char *) malloc(maxnum);
     char* idstr= (char *) malloc(maxnum);
     char* content= (char *) malloc(maxnum);
-    char* from= (char *) malloc(maxnum);
     char* to= (char *) malloc(maxnum);
     size_t buffer=32;
     size_t chr;
@@ -34,9 +41,9 @@ static void get_mails(char* filename, mail** mails, int* num_mail){
        
         chr = getline(&line,&buffer,fp);
         chr = getline(&idstr,&buffer,fp);
-        chr = getline(&subject,&buffer,fp);
-        chr = getline(&content,&buffer,fp);
         chr = getline(&from,&buffer,fp);
+        chr = getline(&content,&buffer,fp);
+        chr = getline(&subject,&buffer,fp);
         chr = getline(&to,&buffer,fp);
 
         sscanf(idstr, "%d", &id);

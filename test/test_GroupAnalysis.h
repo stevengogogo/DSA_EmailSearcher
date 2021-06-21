@@ -6,7 +6,21 @@
 #include "api.h"
 #include "Utility.h"
 
+void test_init_GA(void){
+    TxtSmry smry;
+    init_TxtSmry(&smry);
+    kill_TxtSmry(&smry);
 
+    int N = 10000;
+    TxtSmry smryArr[N];
+    init_TxtSmry_arr(smryArr, N);
+    kill_TxtSmry_arr(smryArr, N);
+}
+void test_summary_GA(void){
+    mail* mails;
+    int n_mail;
+    get_mails("test/data/test.in", &mails, &n_mail);
+}
 
 
 

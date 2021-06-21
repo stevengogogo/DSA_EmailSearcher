@@ -20,23 +20,33 @@
 #include "api.h"
 
 /**********Constant Variable***********/
-#define Q 100000
+#define Q_MODULO 100000
+#define D 252
+#define INIT_NONZERO_SIZE 100
+#define MAX_CONTENT_SIZE 1000000
 
 /******Token and Structure*******/
 /** Token Information*/
 typedef struct TokenInfo{
     int occur;
-    dymArr* loc;
+    dymArr* loc;//locations
 } TokenInfo;
+
 
 /** Text Summary*/
 typedef struct TxtSmry{
-    TokenInfo token[Q];
+    TokenInfo token[Q_MODULO];
     dymArr* nonZero; //Token start points
     int nToken; // unique token number
     char* text; // Text
     bool synced; // Check the information is updated
 } TxtSmry;
+
+
+void init_TokenInfo(TokenInfo* tkf);
+void init_TokenInfo_arr(TokenInfo* tkf, int len);
+void kill_TokenInfo(TokenInfo* tkf);
+void kill_TokenInfo_arr(TokenInfo* tkf, int len);
 
 /** Intiate text summary*/
 void init_TxtSmry(TxtSmry* smry);
@@ -47,6 +57,14 @@ void kill_TxtSmry(TxtSmry* smry);
 /** Kill array of TxtSmry.*/
 void kill_TxtSmry_arr(TxtSmry* smry, int len);
 
+/******Hash*******/
+/** Get token hash
+ * @param iStr Pin for reading the string
+ * @return iEnd. the end of the token
+*/
+int popTokenHash(char message[], char token[], int iStr, int* Hash);
+/** Update the hash value with new character.*/
+int updateHash(char c, int Hash_cur, int q_cur, int d);
 
 /**********Main API************/
 /** Preprocessing: Summarize the mails*/

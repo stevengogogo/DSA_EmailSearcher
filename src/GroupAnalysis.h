@@ -1,7 +1,17 @@
 #ifndef GROUPANALYSIS_H
 #define GROUPANALYSIS_H
+#include <stdio.h>
+#include <stdlib.h>
+#include <assert.h>
+#include <string.h>
+#include <stdbool.h>
 #include "utils.h"
+#include "api.h"
+
+/**********Constant Variable***********/
 #define Q 100000
+
+/******Token and Structure*******/
 /** Token Information*/
 typedef struct TokenInfo{
     int occur;
@@ -11,9 +21,51 @@ typedef struct TokenInfo{
 /** Text Summary*/
 typedef struct TxtSmry{
     TokenInfo token[Q];
-    dymArr* nonZero; //Token locations
-    int nToken;
+    dymArr* nonZero; //Token start points
+    int nToken; // unique token number
+    char* text; // Text
+    bool synced; // Check the information is updated
 } TxtSmry;
+
+/** Intiate text summary*/
+void init_TxtSmry(TxtSmry* smry);
+/** Initiate array of text summary*/
+void init_TxtSmry_arr(TxtSmry* smry, int len);
+/** Recycle TxtSmry*/
+void kill_TxtSmry(TxtSmry* smry);
+/** Kill array of TxtSmry.*/
+void kill_TxtSmry_arr(TxtSmry* smry, int len);
+
+
+/**********Main API************/
+/** Preprocessing: Summarize the mails*/
+TxtSmry* Preprocess_GroupAnalysis(mail*  mails, int n_mails);
+
+/**
+ * @brief Check the similarity of two messages is exceeding threshold.
+ * 
+ * @param smry1 Message 1.
+ * @param smry2 Message 2.
+ * @param threshold the threshold of similarity `[0,1]`
+ * @note swich `smry1` and `smry2` will not affect the result.
+ * @return true The jaccob's similarity of `smry1` and `smry2` is beyond the threshold
+ * @return false otherwise
+ */
+bool is_similar(TxtSmry* smry1, TxtSmry* smry2, int threshold);
+
+/************Helper Functions*****************/
+/**
+ * @brief Get Jaccob's similarity from two summaries ( @ref TxtSmry). with `O(min(num_token))`
+ * 
+ * @note The inputs can be switched and get the same result. See https://github.com/stevengogogo/DSA_EmailSearcher/discussions/42 for Jaccob similarity 
+ * @return int The jaccob similarity `[0,1]`
+ */
+int similarity_val(TxtSmry* smry1, TxtSmry* smry2);
+
+/** Maximum Jaccob's similarity with `O(1)` speed.
+ * @note This function uses:  MaxSimlarity = min(nToken1, nToken2) / (nToken1 + nToken2 - min(nToken1, nToken2) ). To accquire the maximum similarity.
+*/
+int max_similarity_val(TxtSmry* smry1, TxtSmry* smry2);
 
 
 #endif

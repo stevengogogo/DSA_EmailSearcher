@@ -5,7 +5,6 @@
 #include <string.h>
 #include "acutest.h"
 
-
 static void get_mails(char* filename, mail** mails, int* num_mail){
     FILE* fp;
     size_t len;
@@ -13,12 +12,12 @@ static void get_mails(char* filename, mail** mails, int* num_mail){
     //Mail info
     int id;
     int maxnum = 1000000;
-    char line[maxnum];
-    char subject[maxnum];
-    char idstr[maxnum];
-    char content[maxnum];
-    char from[maxnum];
-    char to[maxnum];
+    char* line = (char *) malloc(maxnum);
+    char* subject= (char *) malloc(maxnum);
+    char* idstr= (char *) malloc(maxnum);
+    char* content= (char *) malloc(maxnum);
+    char* from= (char *) malloc(maxnum);
+    char* to= (char *) malloc(maxnum);
     size_t buffer=32;
     size_t chr;
     
@@ -27,29 +26,12 @@ static void get_mails(char* filename, mail** mails, int* num_mail){
     if (fp == NULL)
         printf("File not found");
 
-    fscanf(fp, "%d", num_mail);
+    chr = getline(&idstr,&buffer,fp);
+    sscanf(idstr, "%d", num_mail);
     *mails = (mail*)malloc(*num_mail*sizeof(mail));
     
     for(int i=0;i<*num_mail;i++){
-        //Read file
-        /*
-        fscanf(fp, "%[^\n]\n", line);
-        fscanf(fp, "%d", &id);
-        fscanf(fp, "%s[^\n]\n", subject);
-        fscanf(fp, "%s[^\n]\n", content);
-        fscanf(fp, "%s[^\n]\n", from);
-        fscanf(fp, "%s[^\n]\n", to);
-        */
-
-        /*
-        fgets(line,maxnum,fp);
-        fgets(idstr, maxnum, fp);
-        fgets(subject,maxnum,fp);
-        fgets(content,maxnum,fp);
-        fgets(from,maxnum,fp);
-        fgets(to,maxnum,fp);
-        */
-
+       
         chr = getline(&line,&buffer,fp);
         chr = getline(&idstr,&buffer,fp);
         chr = getline(&subject,&buffer,fp);
@@ -65,7 +47,16 @@ static void get_mails(char* filename, mail** mails, int* num_mail){
         strcpy((*mails)[i].content, content);
         strcpy((*mails)[i].from, from);
         strcpy((*mails)[i].to, to);
+
+        TEST_CHECK(i==id);
     }
+
+    free(line);
+    free(idstr);
+    free(content);
+    free(subject);
+    free(from);
+    free(to);
 }
 
 

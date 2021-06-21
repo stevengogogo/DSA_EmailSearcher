@@ -6,6 +6,7 @@
 #include "test_tokenize.h"
 #include "test_GenericStack.h"
 #include "test_dymarr.h"
+#include "test_GroupAnalysis.h"
 
 // Run TESTs 
 TEST_LIST = {
@@ -25,5 +26,6 @@ TEST_LIST = {
     //Dynamic Array,
     {"Dyanmic Array", test_array},
     {"Queue",test_queue},
+    {"Read email", readmail},
     {NULL, NULL} // Terminate the test
 };

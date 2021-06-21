@@ -76,28 +76,36 @@ $(function() {
 <div class="line"><a name="l00005"></a><span class="lineno">    5</span>&#160;<span class="preprocessor">#include &quot;<a class="code" href="GroupAnalysis_8h.html">GroupAnalysis.h</a>&quot;</span></div>
 <div class="line"><a name="l00006"></a><span class="lineno">    6</span>&#160;<span class="preprocessor">#include &quot;api.h&quot;</span></div>
 <div class="line"><a name="l00007"></a><span class="lineno">    7</span>&#160;<span class="preprocessor">#include &quot;Utility.h&quot;</span></div>
-<div class="line"><a name="l00008"></a><span class="lineno">    8</span>&#160; </div>
-<div class="line"><a name="l00009"></a><span class="lineno">    9</span>&#160;<span class="keywordtype">void</span> test_init_GA(<span class="keywordtype">void</span>){</div>
-<div class="line"><a name="l00010"></a><span class="lineno">   10</span>&#160;    <a class="code" href="structTxtSmry.html">TxtSmry</a> smry;</div>
-<div class="line"><a name="l00011"></a><span class="lineno">   11</span>&#160;    <a class="code" href="GroupAnalysis_8h.html#a58da2a0cd1d40b4b50369e78b492a05c">init_TxtSmry</a>(&amp;smry);</div>
-<div class="line"><a name="l00012"></a><span class="lineno">   12</span>&#160;    <a class="code" href="GroupAnalysis_8h.html#aba872e47f4b4bacf4165a77185e7677d">kill_TxtSmry</a>(&amp;smry);</div>
-<div class="line"><a name="l00013"></a><span class="lineno">   13</span>&#160; </div>
-<div class="line"><a name="l00014"></a><span class="lineno">   14</span>&#160;    <span class="keywordtype">int</span> N = 10;</div>
-<div class="line"><a name="l00015"></a><span class="lineno">   15</span>&#160;    <a class="code" href="structTxtSmry.html">TxtSmry</a>* smryArr;</div>
-<div class="line"><a name="l00016"></a><span class="lineno">   16</span>&#160;    <a class="code" href="GroupAnalysis_8h.html#ade8aa02b9409a00fb7dfad2617f484f8">init_TxtSmry_arr</a>(&amp;smryArr, N);</div>
-<div class="line"><a name="l00017"></a><span class="lineno">   17</span>&#160;    <a class="code" href="GroupAnalysis_8h.html#a59b118272255ea41350b6fc60bff4ecd">kill_TxtSmry_arr</a>(smryArr, N);</div>
-<div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160;}</div>
-<div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160;<span class="keywordtype">void</span> test_summary_GA(<span class="keywordtype">void</span>){</div>
-<div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160;    <a class="code" href="structmail.html">mail</a>* mails;</div>
-<div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160;    <span class="keywordtype">int</span> n_mail;</div>
-<div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160;    get_mails(<span class="stringliteral">&quot;test/data/test.in&quot;</span>, &amp;mails, &amp;n_mail);</div>
-<div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160;}</div>
+<div class="line"><a name="l00008"></a><span class="lineno">    8</span>&#160;<span class="preprocessor">#include &lt;time.h&gt;</span></div>
+<div class="line"><a name="l00009"></a><span class="lineno">    9</span>&#160; </div>
+<div class="line"><a name="l00010"></a><span class="lineno">   10</span>&#160;<span class="keywordtype">void</span> test_init_GA(<span class="keywordtype">void</span>){</div>
+<div class="line"><a name="l00011"></a><span class="lineno">   11</span>&#160;    <a class="code" href="structTxtSmry.html">TxtSmry</a> smry;</div>
+<div class="line"><a name="l00012"></a><span class="lineno">   12</span>&#160;    <a class="code" href="GroupAnalysis_8h.html#a58da2a0cd1d40b4b50369e78b492a05c">init_TxtSmry</a>(&amp;smry);</div>
+<div class="line"><a name="l00013"></a><span class="lineno">   13</span>&#160;    <a class="code" href="GroupAnalysis_8h.html#aba872e47f4b4bacf4165a77185e7677d">kill_TxtSmry</a>(&amp;smry);</div>
+<div class="line"><a name="l00014"></a><span class="lineno">   14</span>&#160;    clock_t str;</div>
+<div class="line"><a name="l00015"></a><span class="lineno">   15</span>&#160;    clock_t end;</div>
+<div class="line"><a name="l00016"></a><span class="lineno">   16</span>&#160; </div>
+<div class="line"><a name="l00017"></a><span class="lineno">   17</span>&#160;    <span class="keywordtype">int</span> N = 1000;</div>
+<div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160;    <a class="code" href="structTxtSmry.html">TxtSmry</a>* smryArr;</div>
+<div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160; </div>
+<div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160;    str = clock();</div>
+<div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160;    <a class="code" href="GroupAnalysis_8h.html#ade8aa02b9409a00fb7dfad2617f484f8">init_TxtSmry_arr</a>(&amp;smryArr, N);</div>
+<div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160;    end = clock();</div>
+<div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160;    print_clock(<span class="stringliteral">&quot;Initiation: &quot;</span>,str, end);</div>
 <div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160; </div>
-<div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160; </div>
-<div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160; </div>
-<div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160; </div>
-<div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160; </div>
-<div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160;<span class="preprocessor">#endif</span></div>
+<div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160;    <a class="code" href="GroupAnalysis_8h.html#a59b118272255ea41350b6fc60bff4ecd">kill_TxtSmry_arr</a>(smryArr, N);</div>
+<div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160;}</div>
+<div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160;<span class="keywordtype">void</span> test_summary_GA(<span class="keywordtype">void</span>){</div>
+<div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160;    <a class="code" href="structmail.html">mail</a>* mails;</div>
+<div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160;    <span class="keywordtype">int</span> n_mail;</div>
+<div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160;    get_mails(<span class="stringliteral">&quot;test/data/test.in&quot;</span>, &amp;mails, &amp;n_mail);</div>
+<div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160;}</div>
+<div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160; </div>
+<div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160; </div>
+<div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160; </div>
+<div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160; </div>
+<div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160; </div>
+<div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160;<span class="preprocessor">#endif</span></div>
 <div class="ttc" id="aGroupAnalysis_8h_html"><div class="ttname"><a href="GroupAnalysis_8h.html">GroupAnalysis.h</a></div><div class="ttdoc">Group Analysis. Use Jaccob's similarity with hash table to identify similar strings.</div></div>
 <div class="ttc" id="aGroupAnalysis_8h_html_a58da2a0cd1d40b4b50369e78b492a05c"><div class="ttname"><a href="GroupAnalysis_8h.html#a58da2a0cd1d40b4b50369e78b492a05c">init_TxtSmry</a></div><div class="ttdeci">void init_TxtSmry(TxtSmry *smry)</div><div class="ttdef"><b>Definition:</b> GroupAnalysis.c:25</div></div>
 <div class="ttc" id="aGroupAnalysis_8h_html_a59b118272255ea41350b6fc60bff4ecd"><div class="ttname"><a href="GroupAnalysis_8h.html#a59b118272255ea41350b6fc60bff4ecd">kill_TxtSmry_arr</a></div><div class="ttdeci">void kill_TxtSmry_arr(TxtSmry *smry, int len)</div><div class="ttdef"><b>Definition:</b> GroupAnalysis.c:55</div></div>

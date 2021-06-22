@@ -40,7 +40,7 @@ typedef struct MEMORY {
     ULONG LEN;
 } MEMORY;
 
-static struct MEMORY loc_mem;
+static struct MEMORY token_hashmaps;
 static struct MEMORY existTokens_mem;
 
 
@@ -57,16 +57,11 @@ void kill_MEM(struct MEMORY* mem);
 
 
 /******Token and Structure*******/
-/** Token Information*/
-typedef struct TokenInfo{
-    int occur;
-    int* loc;//locations in string
-    bool isRealloc;
-} TokenInfo;
+
 
 /** Text Summary*/
 typedef struct TxtSmry{
-    TokenInfo* token; //len = Q_MODULE
+    int* token; //len = Q_MODULE
     int* existTokens; //Exist Token
     int nToken; // unique token number
     char* text; // Text
@@ -75,14 +70,10 @@ typedef struct TxtSmry{
 } TxtSmry;
 
 
-void init_TokenInfo(TokenInfo* tkf);
-void init_TokenInfo_arr(TokenInfo** tkf, ULONG len);
-void kill_TokenInfo_arr(TokenInfo* tkf);
-
 /** Intiate text summary*/
-void init_TxtSmry(TxtSmry* smry, TokenInfo* memToken, int* pin_memToken,int hashMapsize);
+void init_TxtSmry(TxtSmry* smry, int hashMapsize);
 /** Initiate array of text summary*/
-void init_TxtSmry_arr(TxtSmry** smry, int len, TokenInfo* memToken, int len_token_in_smry);
+void init_TxtSmry_arr(TxtSmry** smry, int len, int hashmapSize);
 /** Kill array of TxtSmry.*/
 void kill_TxtSmry_arr(TxtSmry* smry, int len);
 

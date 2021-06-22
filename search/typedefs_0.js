@@ -1,5 +1,4 @@
 var searchData=
 [
-  ['tokeninfo_61',['TokenInfo',['../GroupAnalysis_8h.html#af03aff428243e5b8c69cdc2f7eb1aa4f',1,'GroupAnalysis.h']]],
-  ['txtsmry_62',['TxtSmry',['../GroupAnalysis_8h.html#ad58311979581ac4e2545af1d5d6067e7',1,'GroupAnalysis.h']]]
+  ['uarray_41',['uArray',['../utils_8h.html#afa43d1c77d1ea818ac56829c343bee9d',1,'utils.h']]]
 ];

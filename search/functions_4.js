@@ -1,5 +1,5 @@
 var searchData=
 [
-  ['kill_5ftxtsmry_52',['kill_TxtSmry',['../GroupAnalysis_8h.html#aba872e47f4b4bacf4165a77185e7677d',1,'GroupAnalysis.c']]],
-  ['kill_5ftxtsmry_5farr_53',['kill_TxtSmry_arr',['../GroupAnalysis_8h.html#a59b118272255ea41350b6fc60bff4ecd',1,'GroupAnalysis.c']]]
+  ['pop_5fitem_39',['pop_item',['../utils_8h.html#a49e8d2cc8816925b320ba33f4dcea5e6',1,'utils.c']]],
+  ['poptoken_40',['popToken',['../utils_8h.html#a81f4883411916757a7c41b8a74f73c2b',1,'utils.c']]]
 ];

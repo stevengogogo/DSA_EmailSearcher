@@ -23,21 +23,18 @@ void memory_allocation(void){
 }
 
 void test_init_GA(void){
-    TxtSmry smry;
-    init_TxtSmry(&smry);
-    kill_TxtSmry(&smry);
+    TxtSmry* smrys;
+    int n_mails=100;
     clock_t str;
     clock_t end;
 
-    int N = 1000;
-    TxtSmry* smryArr;
 
     str = clock();
-    init_TxtSmry_arr(&smryArr, N);
+    Init_MEM_GroupAnalysis(&smrys, n_mails);
     end = clock();
     print_clock("Initiation: ",str, end);
 
-    kill_TxtSmry_arr(smryArr, N);
+    kill_MEM_GroupAnalysis(smrys);
 }
 void test_summary_GA(void){
     mail* mails;

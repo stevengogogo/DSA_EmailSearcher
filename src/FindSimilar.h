@@ -55,9 +55,6 @@ void init_MEM(struct MEMORY* mem, int len);
 /** Recycle the memory of @ref LOC_MEM*/
 void kill_MEM(struct MEMORY* mem);
 
-void Init_MEM_GroupAnalysis(TxtSmry**, int n_mails);
-void kill_MEM_GroupAnalysis(TxtSmry*);
-
 
 /******Token and Structure*******/
 /** Token Information*/
@@ -78,18 +75,20 @@ typedef struct TxtSmry{
 } TxtSmry;
 
 
-void init_TokenInfo(TokenInfo* tkf, int* loc_mem);
+void init_TokenInfo(TokenInfo* tkf);
 void init_TokenInfo_arr(TokenInfo** tkf, int len);
 void kill_TokenInfo_arr(TokenInfo* tkf);
 
 /** Intiate text summary*/
-void init_TxtSmry(TxtSmry* smry, TokenInfo* memToken, int pin_Token, int* memExistToken, int pin_ExistToken);
+void init_TxtSmry(TxtSmry* smry, TokenInfo* memToken, int* pin_memToken,int hashMapsize);
 /** Initiate array of text summary*/
-void init_TxtSmry_arr(TxtSmry** smry, int len, TokenInfo* memToken, MEMORY* memExistToken);
-/** Recycle TxtSmry*/
-void kill_TxtSmry(TxtSmry* smry);
+void init_TxtSmry_arr(TxtSmry** smry, int len, TokenInfo* memToken, int len_token_in_smry);
 /** Kill array of TxtSmry.*/
 void kill_TxtSmry_arr(TxtSmry* smry, int len);
+
+/**MAIN FUNCTION*/
+void Init_MEM_GroupAnalysis(TxtSmry**, int n_mails);
+void kill_MEM_GroupAnalysis(TxtSmry*);
 
 /******Hash*******/
 /** Get token hash

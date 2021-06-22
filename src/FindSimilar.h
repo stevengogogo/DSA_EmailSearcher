@@ -24,7 +24,7 @@
 #define D 252
 #define INIT_SPURIOUS_COUNT 10
 #define INIT_UNIQUE_TOKEN_SIZE 100
-
+#define ULONG unsigned long long
 
 
 /**
@@ -35,9 +35,9 @@
  * @param LEN capacity of the memory
  */
 typedef struct MEMORY {
-    int top_unused;
+    ULONG top_unused;
     int* ARRAY;
-    int LEN;
+    ULONG LEN;
 } MEMORY;
 
 static struct MEMORY loc_mem;
@@ -50,7 +50,7 @@ static struct MEMORY existTokens_mem;
  * @param loc_mem global struct for memory storage
  * @param num_mail number of email
  */
-void init_MEM(struct MEMORY* mem, int len);
+void init_MEM(struct MEMORY* mem, ULONG len);
 
 /** Recycle the memory of @ref LOC_MEM*/
 void kill_MEM(struct MEMORY* mem);
@@ -76,7 +76,7 @@ typedef struct TxtSmry{
 
 
 void init_TokenInfo(TokenInfo* tkf);
-void init_TokenInfo_arr(TokenInfo** tkf, int len);
+void init_TokenInfo_arr(TokenInfo** tkf, ULONG len);
 void kill_TokenInfo_arr(TokenInfo* tkf);
 
 /** Intiate text summary*/

@@ -11,15 +11,14 @@
 
 
 int main(void) {
-    int n_mails, n_queries;
-    mail *mails;
-    query *queries;
+    TxtSmry* smrys;
+    int n_mails=100000;
 
-	api.init(&n_mails, &n_queries, &mails, &queries);
 
-	for(int i = 0; i < n_queries; i++)
-		if(queries[i].type == expression_match)
-		  api.answer(queries[i].id, NULL, 0);
+
+    Init_MEM_GroupAnalysis(&smrys, n_mails);
+
+    kill_MEM_GroupAnalysis(smrys);
 
   return 0;
 }

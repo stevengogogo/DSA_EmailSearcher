@@ -1,7 +1,7 @@
 #include "FindSimilar.h"
 
 
-void init_MEM(struct MEMORY* mem, int len){
+void init_MEM(struct MEMORY* mem, ULONG len){
     mem->LEN = len;
     mem->ARRAY = (int*)malloc(mem->LEN*sizeof(int));
     assert(mem->ARRAY != NULL);
@@ -17,12 +17,13 @@ void kill_MEM(struct MEMORY* mem){
 
 void Init_MEM_GroupAnalysis(TxtSmry** smrys, int n_mails){
     TokenInfo* tkf = NULL;
+    ULONG nmail = (ULONG)n_mails;
     //Location of hashes
-    init_MEM(&loc_mem, n_mails*Q_MODULO*INIT_SPURIOUS_COUNT);
+    init_MEM(&loc_mem, nmail * Q_MODULO* INIT_SPURIOUS_COUNT);
     //Occupied hash index
-    init_MEM(&existTokens_mem, n_mails*INIT_UNIQUE_TOKEN_SIZE);
-    init_TokenInfo_arr(&tkf, n_mails*Q_MODULO);
-    init_TxtSmry_arr(smrys, n_mails, tkf, Q_MODULO);
+    init_MEM(&existTokens_mem, nmail*INIT_UNIQUE_TOKEN_SIZE);
+    init_TokenInfo_arr(&tkf, nmail*Q_MODULO);
+    init_TxtSmry_arr(smrys, nmail, tkf, Q_MODULO);
 
 }
 
@@ -43,7 +44,7 @@ void init_TokenInfo(TokenInfo* tkf){
     assert(tkf->loc != NULL);
 }
 
-void init_TokenInfo_arr(TokenInfo** tkf, int len){ 
+void init_TokenInfo_arr(TokenInfo** tkf, ULONG len){ 
     *tkf = (TokenInfo*)malloc(len*sizeof(TokenInfo));
     for(int i=0;i<len;i++){
         init_TokenInfo(&(*tkf)[i]);

@@ -1,5 +1,5 @@
 var searchData=
 [
-  ['pop_5fitem_39',['pop_item',['../utils_8h.html#a49e8d2cc8816925b320ba33f4dcea5e6',1,'utils.c']]],
-  ['poptoken_40',['popToken',['../utils_8h.html#a81f4883411916757a7c41b8a74f73c2b',1,'utils.c']]]
+  ['kill_5fmem_56',['kill_MEM',['../FindSimilar_8h.html#a15b8a2f318252df8a0b617b918baa88f',1,'FindSimilar.c']]],
+  ['kill_5ftxtsmry_5farr_57',['kill_TxtSmry_arr',['../FindSimilar_8h.html#a59b118272255ea41350b6fc60bff4ecd',1,'FindSimilar.c']]]
 ];

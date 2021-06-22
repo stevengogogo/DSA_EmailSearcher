@@ -1,5 +1,7 @@
 var searchData=
 [
-  ['pop_5fitem_13',['pop_item',['../utils_8h.html#a49e8d2cc8816925b320ba33f4dcea5e6',1,'utils.c']]],
-  ['poptoken_14',['popToken',['../utils_8h.html#a81f4883411916757a7c41b8a74f73c2b',1,'utils.c']]]
+  ['mail_16',['mail',['../structmail.html',1,'']]],
+  ['max_5fsimilarity_5fval_17',['max_similarity_val',['../FindSimilar_8h.html#a61fe077f7d3542ce71eebb229949e97f',1,'FindSimilar.h']]],
+  ['memory_18',['MEMORY',['../structMEMORY.html',1,'MEMORY'],['../FindSimilar_8h.html#aef6a384a91e0c150ed06d02763fb318a',1,'MEMORY():&#160;FindSimilar.h']]],
+  ['merge_19',['merge',['../namespacemerge.html',1,'']]]
 ];

@@ -1,7 +1,7 @@
 <map id="src/utils.h" name="src/utils.h">
 <area shape="rect" id="node1" title="General Utilities for C language." alt="" coords="497,5,576,32"/>
 <area shape="rect" id="node2" href="$ExpressionMatch_8h_source.html" title=" " alt="" coords="5,80,159,107"/>
-<area shape="rect" id="node3" href="$FindSimilar_8h_source.html" title=" " alt="" coords="183,80,301,107"/>
+<area shape="rect" id="node3" href="$FindSimilar_8h.html" title="Group Analysis. Use Jaccob&#39;s similarity with hash table to identify similar strings." alt="" coords="183,80,301,107"/>
 <area shape="rect" id="node5" href="$src_2test__dymarr_8h_source.html" title=" " alt="" coords="326,80,449,107"/>
 <area shape="rect" id="node6" href="$test_2test__dymarr_8h_source.html" title=" " alt="" coords="473,80,600,107"/>
 <area shape="rect" id="node7" href="$test__GenericStack_8h_source.html" title=" " alt="" coords="624,80,791,107"/>

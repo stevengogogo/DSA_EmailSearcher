@@ -11,13 +11,13 @@ void memory_allocation(void){
     int num_mail = 10;
     
     //Initiation
-    init_LOC_MEM(&loc_mem, num_mail);
+    init_MEM(&loc_mem, num_mail);
 
     TEST_CHECK(loc_mem.LEN == num_mail*Q_MODULO);
     TEST_CHECK(loc_mem.top_unused == 0);
     
     //Garbage Collection
-    kill_LOC_MEM(&loc_mem);
+    kill_MEM(&loc_mem);
     TEST_CHECK(loc_mem.ARRAY == NULL);
     TEST_CHECK(loc_mem.LEN == 0);
 }

@@ -28,18 +28,20 @@
 
 
 /**
- * @brief Information for location storage.
+ * @brief Information for global memory storage.
  * @note This structure is to provide public memory, and minimize the use of @ref malloc
  * @param LOC_top_unused index of unused memory
  * @param LOC_ARRAY array for store location data
  * @param LEN capacity of the memory
  */
-static struct LOC_MEM {
+static struct MEMORY {
     int top_unused;
     int* ARRAY;
     int LEN;
-} LOC_MEM;
-static struct LOC_MEM loc_mem;
+} MEMORY;
+
+static struct MEMORY loc_mem;
+static struct MEMORY nonZero_mem;
 
 /**
  * @brief 
@@ -47,10 +49,10 @@ static struct LOC_MEM loc_mem;
  * @param loc_mem global struct for memory storage
  * @param num_mail number of email
  */
-void init_LOC_MEM(struct LOC_MEM* loc_mem, int num_mail);
+void init_MEM(struct MEMORY* mem, int num_mail);
 
 /** Recycle the memory of @ref LOC_MEM*/
-void kill_LOC_MEM(struct LOC_MEM* loc_mem);
+void kill_MEM(struct MEMORY* mem);
 
 
 /******Token and Structure*******/

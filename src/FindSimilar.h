@@ -22,7 +22,36 @@
 /**********Constant Variable***********/
 #define Q_MODULO 100000
 #define D 252
+#define INIT_SPURIOUS_COUNT 10
 #define INIT_NONZERO_SIZE 100
+
+
+
+/**
+ * @brief Information for location storage.
+ * @note This structure is to provide public memory, and minimize the use of @ref malloc
+ * @param LOC_top_unused index of unused memory
+ * @param LOC_ARRAY array for store location data
+ * @param LEN capacity of the memory
+ */
+static struct LOC_MEM {
+    int top_unused;
+    int* ARRAY;
+    int LEN;
+} LOC_MEM;
+static struct LOC_MEM loc_mem;
+
+/**
+ * @brief 
+ * @note Each email is using the hash map with @ref Q_MODULO size, and each slot has @ref INIT_SPURIOUS_COUNT location data.
+ * @param loc_mem global struct for memory storage
+ * @param num_mail number of email
+ */
+void init_LOC_MEM(struct LOC_MEM* loc_mem, int num_mail);
+
+/** Recycle the memory of @ref LOC_MEM*/
+void kill_LOC_MEM(struct LOC_MEM* loc_mem);
+
 
 /******Token and Structure*******/
 /** Token Information*/

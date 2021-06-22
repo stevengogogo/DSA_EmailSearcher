@@ -1,5 +1,19 @@
 #include "FindSimilar.h"
 
+void init_LOC_MEM(struct LOC_MEM* loc_mem, int num_mail){
+    loc_mem->LEN = num_mail * Q_MODULO;
+    loc_mem->ARRAY = (int*)malloc(loc_mem->LEN*sizeof(int));
+    loc_mem->top_unused = 0;
+}
+
+void kill_LOC_MEM(struct LOC_MEM* loc_mem){
+    free(loc_mem->ARRAY);
+    loc_mem->ARRAY = NULL;
+    loc_mem->LEN = 0;
+    loc_mem->top_unused = EMTY_QUE_SIG;
+}
+
+
 void init_TokenInfo(TokenInfo* tkf){
     tkf->occur = 0;
     //init_dymArr(&tkf->loc, 1);

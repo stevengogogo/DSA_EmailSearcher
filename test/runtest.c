@@ -28,6 +28,7 @@ TEST_LIST = {
     {"Dyanmic Array", test_array},
     {"Queue",test_queue},
     {"Read email", readmail},
+    {"GA: Memory", memory_allocation},
     {"GA: init", test_init_GA},
     {"GA: summary", test_summary_GA},
     {NULL, NULL} // Terminate the test

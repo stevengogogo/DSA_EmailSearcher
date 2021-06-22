@@ -58,6 +58,7 @@ static void get_mails(char* filename, mail** mails, int* num_mail){
         TEST_CHECK(i==id);
     }
 
+    fclose(fp);
     free(line);
     free(idstr);
     free(content);
@@ -69,7 +70,7 @@ static void get_mails(char* filename, mail** mails, int* num_mail){
 /** Print time*/
 void print_clock(char* s,clock_t str, clock_t end){
     double total_t = (double)(end - str) / CLOCKS_PER_SEC;
-    printf("%s Elapsed %f", s,total_t);
+    printf("%s Time %f", s,total_t);
 }
 
 #endif

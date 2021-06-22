@@ -10,7 +10,7 @@ void init_MEM_ULONG(struct MEMORY_ULONG* mem, ULONG len){
 void init_MEM_SHORT(struct MEMORY_SHORT* mem, ULONG len){
     mem->LEN = len;
     //mem->ARRAY = (int*)malloc(mem->LEN*sizeof(int));
-    mem->ARRAY = (short*)calloc( mem->LEN, sizeof(short));
+    mem->ARRAY = (USHORT*)calloc( mem->LEN, sizeof(USHORT));
     assert(mem->ARRAY != NULL);
     mem->top_unused = 0;
 }

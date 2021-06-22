@@ -25,7 +25,7 @@
 #define INIT_SPURIOUS_COUNT 10
 #define INIT_UNIQUE_TOKEN_SIZE 100
 #define ULONG unsigned long long
-
+#define USHORT unsigned short
 
 /**
  * @brief Information for global memory storage.
@@ -36,7 +36,7 @@
  */
 typedef struct MEMORY_SHORT {
     ULONG top_unused;
-    short* ARRAY;
+    USHORT* ARRAY;
     ULONG LEN;
 } MEMORY_SHORT;
 
@@ -70,7 +70,7 @@ void kill_MEM_SHORT(struct MEMORY_SHORT* mem);
 /** Text Summary*/
 typedef struct TxtSmry{
     int id;
-    short* token; //len = Q_MODULE
+    USHORT* token; //len = Q_MODULE
     ULONG* existTokens; //Exist Token
     int nToken; // unique token number
     char* text; // Text

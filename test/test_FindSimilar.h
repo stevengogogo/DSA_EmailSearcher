@@ -32,9 +32,12 @@ void test_init_FS(void){
     str = clock();
     Init_MEM_GroupAnalysis(&smrys, n_mails);
     end = clock();
-    print_clock("Initiation: ",str, end);
-
+    print_clock("Init: ",str, end);
+    
+    str = clock();
     kill_MEM_GroupAnalysis(smrys);
+    end = clock();
+    print_clock(" GC: ",str, end);
 }
 void test_summary_FS(void){
     mail* mails;

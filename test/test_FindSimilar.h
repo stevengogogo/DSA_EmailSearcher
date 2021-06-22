@@ -11,13 +11,13 @@ void memory_allocation_FS(void){
     int num_mail = 10;
     
     //Initiation
-    init_MEM(&token_hashmaps, num_mail*INIT_SPURIOUS_COUNT);
+    init_MEM_SHORT(&token_hashmaps, num_mail*INIT_SPURIOUS_COUNT);
 
     TEST_CHECK(token_hashmaps.LEN == num_mail*INIT_SPURIOUS_COUNT);
     TEST_CHECK(token_hashmaps.top_unused == 0);
     
     //Garbage Collection
-    kill_MEM(&token_hashmaps);
+    kill_MEM_SHORT(&token_hashmaps);
     TEST_CHECK(token_hashmaps.ARRAY == NULL);
     TEST_CHECK(token_hashmaps.LEN == 0);
 }
@@ -43,13 +43,11 @@ void test_init_FS(void){
 
 void test_init_content_FS(void){
     TxtSmry* smrys;
-    int n_mails=1000;
-
-
+    int n_mails=10000;
 
     Init_MEM_FindSimilar(&smrys, n_mails);
 
-
+    //Initial values
     for(int i=0;i<n_mails;i++){
         TEST_CHECK(smrys[i].nToken == 0);
         TEST_CHECK(smrys[i].isRealloc_existTokens == false);
@@ -59,12 +57,14 @@ void test_init_content_FS(void){
         TEST_CHECK(smrys[i].token[230] == 0);
     }
     
+    //The token array is 0 in default
     for(int i=0;i<Q_MODULO;i++){
         TEST_CHECK(smrys[n_mails-1].token[i]==0);
+        TEST_CHECK(smrys[234].token[i]==0);
+        TEST_CHECK(smrys[0].token[i]==0);
     }
 
     kill_MEM_FindSimilar(smrys);
-
 }
 
 

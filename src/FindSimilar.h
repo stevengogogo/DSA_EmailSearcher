@@ -25,7 +25,7 @@
 #define INIT_SPURIOUS_COUNT 10
 #define INIT_UNIQUE_TOKEN_SIZE 100
 #define ULONG unsigned long long
-
+#define USHORT unsigned short
 
 /**
  * @brief Information for global memory storage.
@@ -34,14 +34,20 @@
  * @param LOC_ARRAY array for store location data
  * @param LEN capacity of the memory
  */
-typedef struct MEMORY {
+typedef struct MEMORY_SHORT {
     ULONG top_unused;
-    int* ARRAY;
+    USHORT* ARRAY;
     ULONG LEN;
-} MEMORY;
+} MEMORY_SHORT;
 
-static struct MEMORY token_hashmaps;
-static struct MEMORY existTokens_mem;
+typedef struct MEMORY_ULONG {
+    ULONG top_unused;
+    ULONG* ARRAY;
+    ULONG LEN;
+} MEMORY_ULONG;
+
+static struct MEMORY_SHORT token_hashmaps;
+static struct MEMORY_ULONG existTokens_mem;
 
 
 /**
@@ -50,10 +56,12 @@ static struct MEMORY existTokens_mem;
  * @param loc_mem global struct for memory storage
  * @param num_mail number of email
  */
-void init_MEM(struct MEMORY* mem, ULONG len);
+void init_MEM_ULONG(struct MEMORY_ULONG* mem, ULONG len);
+void init_MEM_SHORT(struct MEMORY_SHORT* mem, ULONG len);
 
 /** Recycle the memory of @ref LOC_MEM*/
-void kill_MEM(struct MEMORY* mem);
+void kill_MEM_ULONG(struct MEMORY_ULONG* mem);
+void kill_MEM_SHORT(struct MEMORY_SHORT* mem);
 
 
 /******Token and Structure*******/
@@ -61,8 +69,9 @@ void kill_MEM(struct MEMORY* mem);
 
 /** Text Summary*/
 typedef struct TxtSmry{
-    int* token; //len = Q_MODULE
-    int* existTokens; //Exist Token
+    int id;
+    USHORT* token; //len = Q_MODULE
+    ULONG* existTokens; //Exist Token
     int nToken; // unique token number
     char* text; // Text
     bool synced; // Check the information is updated
@@ -77,10 +86,6 @@ void init_TxtSmry_arr(TxtSmry** smry, int len, int hashmapSize);
 /** Kill array of TxtSmry.*/
 void kill_TxtSmry_arr(TxtSmry* smry, int len);
 
-/**MAIN FUNCTION*/
-/**Initialte Memory for FindSimilar*/
-void Init_MEM_FindSimilar(TxtSmry**, int n_mails);
-void kill_MEM_FindSimilar(TxtSmry*);
 
 /******Hash*******/
 /** Get token hash
@@ -92,9 +97,28 @@ int popTokenHash(char message[], char token[], int iStr, int* Hash);
 int updateHash(char c, int Hash_cur, int q_cur, int d);
 
 /**********Main API************/
+
+/**Initialte Memory for FindSimilar*/
+void Init_MEM_FindSimilar(TxtSmry**, int n_mails);
+
 /** Preprocessing: Summarize the mails*/
 TxtSmry* Preprocess_FindSimilar(mail*  mails, int n_mails);
+
+/*GC for FindSimilar problem*/
 void kill_FindSimilar(TxtSmry* smrys);
+void kill_MEM_FindSimilar(TxtSmry*);
+
+/******************************/
+
+
+
+/*********Hash*********/
+void summarize_content(TxtSmry* smry, mail* m);
+void summarize_hash(TxtSmry* smry, char* text);
+
+
+
+/******Jaccob Similarity*****/
 
 /**
  * @brief Check the similarity of two messages is exceeding threshold.

@@ -1,15 +1,28 @@
 #include "FindSimilar.h"
 
-
-void init_MEM(struct MEMORY* mem, ULONG len){
+void init_MEM_ULONG(struct MEMORY_ULONG* mem, ULONG len){
     mem->LEN = len;
     //mem->ARRAY = (int*)malloc(mem->LEN*sizeof(int));
-    mem->ARRAY = (int*)calloc( mem->LEN, sizeof(int));
+    mem->ARRAY = (ULONG*)calloc( mem->LEN, sizeof(ULONG));
+    assert(mem->ARRAY != NULL);
+    mem->top_unused = 0;
+}
+void init_MEM_SHORT(struct MEMORY_SHORT* mem, ULONG len){
+    mem->LEN = len;
+    //mem->ARRAY = (int*)malloc(mem->LEN*sizeof(int));
+    mem->ARRAY = (short*)calloc( mem->LEN, sizeof(short));
     assert(mem->ARRAY != NULL);
     mem->top_unused = 0;
 }
 
-void kill_MEM(struct MEMORY* mem){
+void kill_MEM_ULONG(struct MEMORY_ULONG* mem){
+    free(mem->ARRAY);
+    mem->ARRAY = NULL;
+    mem->LEN = 0;
+    mem->top_unused = EMTY_QUE_SIG;
+}
+
+void kill_MEM_SHORT(struct MEMORY_SHORT* mem){
     free(mem->ARRAY);
     mem->ARRAY = NULL;
     mem->LEN = 0;
@@ -19,16 +32,16 @@ void kill_MEM(struct MEMORY* mem){
 void Init_MEM_FindSimilar(TxtSmry** smrys, int n_mails){
     ULONG nmail = (ULONG)n_mails;
     //Location of hashes
-    init_MEM(&token_hashmaps, nmail * Q_MODULO);
+    init_MEM_SHORT(&token_hashmaps, nmail * Q_MODULO);
     //Occupied hash index
-    init_MEM(&existTokens_mem, nmail*INIT_UNIQUE_TOKEN_SIZE);
+    init_MEM_ULONG(&existTokens_mem, nmail*INIT_UNIQUE_TOKEN_SIZE);
     init_TxtSmry_arr(smrys, nmail, Q_MODULO);
 
 }
 
 void kill_MEM_FindSimilar(TxtSmry* smrys){
-    kill_MEM(&token_hashmaps);
-    kill_MEM(&existTokens_mem);
+    kill_MEM_SHORT(&token_hashmaps);
+    kill_MEM_ULONG(&existTokens_mem);
     free(smrys);
 }
 
@@ -68,10 +81,25 @@ void kill_TxtSmry_arr(TxtSmry* smry, int len){
 TxtSmry* Preprocess_FindSimilar(mail*  mails, int n_mails){
     TxtSmry* smrys;
     Init_MEM_FindSimilar(&smrys, n_mails);
+
+    for(int i=0;i<n_mails;i++){
+        summarize_content(&mails[i], &smrys[i]);
+    }
+
     return smrys;
 }
 
 
 void kill_FindSimilar(TxtSmry* smrys){
     kill_MEM_FindSimilar(smrys);
+}
+
+void summarize_content(TxtSmry* smry, mail* m){
+    summarize_hash(smry->text, smry);
+    smry->id = m->id;
+    smry->synced = true;
+}
+
+void summarize_hash(TxtSmry* smry, char* text){
+    smry->text = text;
 }

@@ -16,7 +16,7 @@ void kill_MEM(struct MEMORY* mem){
     mem->top_unused = EMTY_QUE_SIG;
 }
 
-void Init_MEM_GroupAnalysis(TxtSmry** smrys, int n_mails){
+void Init_MEM_FindSimilar(TxtSmry** smrys, int n_mails){
     ULONG nmail = (ULONG)n_mails;
     //Location of hashes
     init_MEM(&token_hashmaps, nmail * Q_MODULO);
@@ -26,7 +26,7 @@ void Init_MEM_GroupAnalysis(TxtSmry** smrys, int n_mails){
 
 }
 
-void kill_MEM_GroupAnalysis(TxtSmry* smrys){
+void kill_MEM_FindSimilar(TxtSmry* smrys){
     kill_MEM(&token_hashmaps);
     kill_MEM(&existTokens_mem);
     free(smrys);
@@ -65,13 +65,13 @@ void kill_TxtSmry_arr(TxtSmry* smry, int len){
     free(smry);
 }
 
-TxtSmry* Preprocess_GroupAnalysis(mail*  mails, int n_mails){
+TxtSmry* Preprocess_FindSimilar(mail*  mails, int n_mails){
     TxtSmry* smrys;
-    Init_MEM_GroupAnalysis(&smrys, n_mails);
+    Init_MEM_FindSimilar(&smrys, n_mails);
     return smrys;
 }
 
 
-void kill_GroupAnalysis(TxtSmry* smrys){
-    kill_MEM_GroupAnalysis(smrys);
+void kill_FindSimilar(TxtSmry* smrys){
+    kill_MEM_FindSimilar(smrys);
 }

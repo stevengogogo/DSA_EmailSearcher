@@ -86,11 +86,11 @@ $(function() {
 <div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160;<span class="preprocessor">#define INIT_SPURIOUS_COUNT 10</span></div>
 <div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160;<span class="preprocessor">#define INIT_UNIQUE_TOKEN_SIZE 100</span></div>
 <div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160;<span class="preprocessor">#define ULONG unsigned long long</span></div>
-<div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160; </div>
+<div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160;<span class="preprocessor">#define USHORT unsigned short</span></div>
 <div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160; </div>
 <div class="line"><a name="l00037"></a><span class="lineno"><a class="line" href="structMEMORY__SHORT.html">   37</a></span>&#160;<span class="keyword">typedef</span> <span class="keyword">struct </span><a class="code" href="structMEMORY__SHORT.html">MEMORY_SHORT</a> {</div>
 <div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160;    ULONG top_unused;</div>
-<div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160;    <span class="keywordtype">short</span>* ARRAY;</div>
+<div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160;    USHORT* ARRAY;</div>
 <div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160;    ULONG LEN;</div>
 <div class="line"><a name="l00041"></a><span class="lineno"><a class="line" href="FindSimilar_8h.html#ab733bdf458b5ea7c5ee9f4f5c46f5062">   41</a></span>&#160;} <a class="code" href="FindSimilar_8h.html#ab733bdf458b5ea7c5ee9f4f5c46f5062">MEMORY_SHORT</a>;</div>
 <div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160; </div>
@@ -116,7 +116,7 @@ $(function() {
 <div class="line"><a name="l00069"></a><span class="lineno">   69</span>&#160; </div>
 <div class="line"><a name="l00071"></a><span class="lineno"><a class="line" href="structTxtSmry.html">   71</a></span>&#160;<span class="keyword">typedef</span> <span class="keyword">struct </span><a class="code" href="structTxtSmry.html">TxtSmry</a>{</div>
 <div class="line"><a name="l00072"></a><span class="lineno">   72</span>&#160;    <span class="keywordtype">int</span> id;</div>
-<div class="line"><a name="l00073"></a><span class="lineno">   73</span>&#160;    <span class="keywordtype">short</span>* token; <span class="comment">//len = Q_MODULE</span></div>
+<div class="line"><a name="l00073"></a><span class="lineno">   73</span>&#160;    USHORT* token; <span class="comment">//len = Q_MODULE</span></div>
 <div class="line"><a name="l00074"></a><span class="lineno">   74</span>&#160;    ULONG* existTokens; <span class="comment">//Exist Token</span></div>
 <div class="line"><a name="l00075"></a><span class="lineno">   75</span>&#160;    <span class="keywordtype">int</span> nToken; <span class="comment">// unique token number</span></div>
 <div class="line"><a name="l00076"></a><span class="lineno">   76</span>&#160;    <span class="keywordtype">char</span>* text; <span class="comment">// Text</span></div>

@@ -30,7 +30,7 @@ void test_init_FS(void){
 
 
     str = clock();
-    Init_MEM_FindSimilar(&smrys, n_mails);
+    Init_FindSimilar(&smrys, n_mails);
     end = clock();
     print_clock("Init: ",str, end);
 
@@ -45,7 +45,7 @@ void test_init_content_FS(void){
     TxtSmry* smrys;
     int n_mails=10000;
 
-    Init_MEM_FindSimilar(&smrys, n_mails);
+    Init_FindSimilar(&smrys, n_mails);
 
     //Initial values
     for(int i=0;i<n_mails;i++){
@@ -67,6 +67,14 @@ void test_init_content_FS(void){
     kill_FindSimilar(smrys, n_mails);
 }
 
+void test_append_hash(void){
+     TxtSmry* smrys;
+    int n_mails=10000;
+
+    Init_FindSimilar(&smrys, n_mails);
+    
+    kill_FindSimilar(smrys, n_mails);
+}
 
 void test_summary_FS(void){
     mail* mails;

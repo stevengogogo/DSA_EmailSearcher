@@ -29,7 +29,7 @@ void kill_MEM_SHORT(struct MEMORY_SHORT* mem){
     mem->top_unused = EMTY_QUE_SIG;
 }
 
-void Init_MEM_FindSimilar(TxtSmry** smrys, int n_mails){
+void Init_FindSimilar(TxtSmry** smrys, int n_mails){
     ULONG nmail = (ULONG)n_mails;
     //Location of hashes
     init_MEM_SHORT(&token_hashmaps, nmail * Q_MODULO);
@@ -111,7 +111,7 @@ void kill_TxtSmry_arr(TxtSmry* smry, int len){
 
 TxtSmry* Preprocess_FindSimilar(mail*  mails, int n_mails){
     TxtSmry* smrys;
-    Init_MEM_FindSimilar(&smrys, n_mails);
+    Init_FindSimilar(&smrys, n_mails);
 
     for(int i=0;i<n_mails;i++){
         summarize_content(&smrys[i], &mails[i]);

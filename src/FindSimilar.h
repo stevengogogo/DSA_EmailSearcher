@@ -130,7 +130,7 @@ int updateHash(char c, int Hash_cur, int q_cur, int d);
 /**********Main API************/
 
 /**Initialte Memory for FindSimilar*/
-void Init_MEM_FindSimilar(TxtSmry**, int n_mails);
+void Init_FindSimilar(TxtSmry**, int n_mails);
 
 /** Preprocessing: Summarize the mails*/
 TxtSmry* Preprocess_FindSimilar(mail*  mails, int n_mails);

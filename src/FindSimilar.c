@@ -97,6 +97,19 @@ void add_unique_hashlist(TxtSmry* smry, ULONG hash){
     ++smry->nToken;
 }
 
+ULONG get_unique_hashlist(TxtSmry* smry, int i){
+    ULONG uniHash;
+    if (i<INIT_UNIQUE_TOKEN_SIZE){
+        uniHash = smry->existTokens[i];
+    }
+    else{
+        int len = smry->existTokens_DymArr->len;
+        assert(i-INIT_UNIQUE_TOKEN_SIZE < len);
+        uniHash = smry->existTokens_DymArr->i[i-INIT_UNIQUE_TOKEN_SIZE];
+    }
+    return uniHash;
+}
+
 void kill_TxtSmry_arr(TxtSmry* smry, int len){
     for(int i=0;i<len;i++){
         if(smry[i].existTokens_DymArr != NULL){

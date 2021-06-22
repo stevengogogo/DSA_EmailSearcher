@@ -114,6 +114,7 @@ void init_TxtSmry(TxtSmry* smry, int hashMapsize);
 void init_TxtSmry_arr(TxtSmry** smry, int len, int hashmapSize);
 void append_hash_TxtSmry(TxtSmry* smry, ULONG hash);
 void add_unique_hashlist(TxtSmry* smry, ULONG hash);
+ULONG get_unique_hashlist(TxtSmry* smry, int i);
 /** Kill array of TxtSmry.*/
 void kill_TxtSmry_arr(TxtSmry* smry, int len);
 

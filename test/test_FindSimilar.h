@@ -7,7 +7,7 @@
 #include "Utility.h"
 #include <time.h>
 
-void memory_allocation(void){
+void memory_allocation_FS(void){
     int num_mail = 10;
     
     //Initiation
@@ -22,7 +22,7 @@ void memory_allocation(void){
     TEST_CHECK(loc_mem.LEN == 0);
 }
 
-void test_init_GA(void){
+void test_init_FS(void){
     TxtSmry* smrys;
     int n_mails=100;
     clock_t str;
@@ -36,7 +36,7 @@ void test_init_GA(void){
 
     kill_MEM_GroupAnalysis(smrys);
 }
-void test_summary_GA(void){
+void test_summary_FS(void){
     mail* mails;
     int n_mail;
     get_mails("test/data/test.in", &mails, &n_mail);

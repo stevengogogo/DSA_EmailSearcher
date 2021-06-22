@@ -80,7 +80,8 @@ merge_standalone:
 leak: build
 	valgrind  $(outfile) < test/data/test.in
 	
-
+leaktest: test 
+	valgrind test/build/test.out
 
 # From DSA Template
 test/validator/validator: test/validator/validator.cpp

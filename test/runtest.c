@@ -28,8 +28,8 @@ TEST_LIST = {
     {"Dyanmic Array", test_array},
     {"Queue",test_queue},
     {"Read email", readmail},
-    {"GA: Memory", memory_allocation},
-    {"GA: init", test_init_GA},
-    {"GA: summary", test_summary_GA},
+    {"Find Similar: Memory", memory_allocation_FS},
+    {"Find Similar: init", test_init_FS},
+    {"Find Similar: summary", test_summary_FS},
     {NULL, NULL} // Terminate the test
 };

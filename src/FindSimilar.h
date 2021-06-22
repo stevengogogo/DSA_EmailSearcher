@@ -27,6 +27,34 @@
 #define ULONG unsigned long long
 #define USHORT unsigned short
 
+/**Helper function**/
+/************Dynamic Array (Int) Stack**************/
+//dynamic array
+typedef struct{
+    int len;
+    int size;
+    ULONG* i;
+} dymArr_ULONG;
+
+//init and kill
+void init_dymArr_ULONG(dymArr_ULONG*, ULONG size);
+void kill_dymArr_ULONG(dymArr_ULONG*);
+void resize_dymArr_ULONG(dymArr_ULONG*, ULONG new_max_size);
+
+//clear
+void clear_Arr_ULONG(dymArr_ULONG*);
+
+//append
+/**Append at last*/
+void append_dymArr_ULONG(dymArr_ULONG*, ULONG val);
+/** Get the item of arr[i]*/
+int get_item_ULONG(dymArr_ULONG, ULONG i);
+/** Get the last item
+ * @return last element. If no item left, return `EMTY_QUE_SIG`
+*/
+int pop_item_ULONG(dymArr_ULONG*);
+
+
 /**
  * @brief Information for global memory storage.
  * @note This structure is to provide public memory, and minimize the use of @ref malloc
@@ -72,10 +100,11 @@ typedef struct TxtSmry{
     int id;
     USHORT* token; //len = Q_MODULE
     ULONG* existTokens; //Exist Token
+    dymArr_ULONG* existTokens_DymArr;
     int nToken; // unique token number
     char* text; // Text
     bool synced; // Check the information is updated
-    bool isRealloc_existTokens;
+    bool isExistTokens_DymArr;
 } TxtSmry;
 
 
@@ -83,6 +112,8 @@ typedef struct TxtSmry{
 void init_TxtSmry(TxtSmry* smry, int hashMapsize);
 /** Initiate array of text summary*/
 void init_TxtSmry_arr(TxtSmry** smry, int len, int hashmapSize);
+void append_hash_TxtSmry(TxtSmry* smry, ULONG hash);
+void add_unique_hashlist(TxtSmry* smry, ULONG hash);
 /** Kill array of TxtSmry.*/
 void kill_TxtSmry_arr(TxtSmry* smry, int len);
 
@@ -105,8 +136,8 @@ void Init_MEM_FindSimilar(TxtSmry**, int n_mails);
 TxtSmry* Preprocess_FindSimilar(mail*  mails, int n_mails);
 
 /*GC for FindSimilar problem*/
-void kill_FindSimilar(TxtSmry* smrys);
-void kill_MEM_FindSimilar(TxtSmry*);
+void kill_FindSimilar(TxtSmry* smrys, int n_mails);
+
 
 /******************************/
 
@@ -145,6 +176,7 @@ int similarity_val(TxtSmry* smry1, TxtSmry* smry2);
  * @note This function uses:  MaxSimlarity = min(nToken1, nToken2) / (nToken1 + nToken2 - min(nToken1, nToken2) ). To accquire the maximum similarity.
 */
 int max_similarity_val(TxtSmry* smry1, TxtSmry* smry2);
+
 
 
 #endif

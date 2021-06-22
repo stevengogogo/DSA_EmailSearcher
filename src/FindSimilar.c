@@ -29,6 +29,7 @@ void Init_MEM_GroupAnalysis(TxtSmry** smrys, int n_mails){
 void kill_MEM_GroupAnalysis(TxtSmry* smrys){
     kill_MEM(&token_hashmaps);
     kill_MEM(&existTokens_mem);
+    free(smrys);
 }
 
 

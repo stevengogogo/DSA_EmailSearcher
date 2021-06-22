@@ -1,5 +1,5 @@
 /**
- * @file GroupAnalysis.h
+ * @file FindSimilar.h
  * @author Steven Shao-Ting Chiu (r07945001@ntu.edu.tw)
  * @brief Group Analysis. Use Jaccob's similarity with hash table to identify similar strings.
  * @version 0.1
@@ -78,8 +78,9 @@ void init_TxtSmry_arr(TxtSmry** smry, int len, int hashmapSize);
 void kill_TxtSmry_arr(TxtSmry* smry, int len);
 
 /**MAIN FUNCTION*/
-void Init_MEM_GroupAnalysis(TxtSmry**, int n_mails);
-void kill_MEM_GroupAnalysis(TxtSmry*);
+/**Initialte Memory for FindSimilar*/
+void Init_MEM_FindSimilar(TxtSmry**, int n_mails);
+void kill_MEM_FindSimilar(TxtSmry*);
 
 /******Hash*******/
 /** Get token hash
@@ -92,8 +93,8 @@ int updateHash(char c, int Hash_cur, int q_cur, int d);
 
 /**********Main API************/
 /** Preprocessing: Summarize the mails*/
-TxtSmry* Preprocess_GroupAnalysis(mail*  mails, int n_mails);
-void kill_GroupAnalysis(TxtSmry* smrys);
+TxtSmry* Preprocess_FindSimilar(mail*  mails, int n_mails);
+void kill_FindSimilar(TxtSmry* smrys);
 
 /**
  * @brief Check the similarity of two messages is exceeding threshold.

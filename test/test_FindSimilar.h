@@ -30,13 +30,13 @@ void test_init_FS(void){
 
 
     str = clock();
-    Init_MEM_GroupAnalysis(&smrys, n_mails);
+    Init_MEM_FindSimilar(&smrys, n_mails);
     end = clock();
     print_clock("Init: ",str, end);
 
     
     str = clock();
-    kill_MEM_GroupAnalysis(smrys);
+    kill_MEM_FindSimilar(smrys);
     end = clock();
     print_clock(" GC: ",str, end);
 }
@@ -47,7 +47,7 @@ void test_init_content_FS(void){
 
 
 
-    Init_MEM_GroupAnalysis(&smrys, n_mails);
+    Init_MEM_FindSimilar(&smrys, n_mails);
 
 
     for(int i=0;i<n_mails;i++){
@@ -63,7 +63,7 @@ void test_init_content_FS(void){
         TEST_CHECK(smrys[n_mails-1].token[i]==0);
     }
 
-    kill_MEM_GroupAnalysis(smrys);
+    kill_MEM_FindSimilar(smrys);
 
 }
 

@@ -82,19 +82,16 @@ void add_unique_hashlist(TxtSmry* smry, ULONG hash){
         smry->existTokens_DymArr = (dymArr_ULONG*)malloc(sizeof(dymArr_ULONG));
         init_dymArr_ULONG(smry->existTokens_DymArr, 2*INIT_UNIQUE_TOKEN_SIZE);
 
-        //Copy Content
-        memcpy(smry->existTokens_DymArr->i, smry->existTokens, sizeof(ULONG)*INIT_UNIQUE_TOKEN_SIZE);
-        smry->existTokens_DymArr->len = INIT_UNIQUE_TOKEN_SIZE;
-
         //Set flag    
         assert(smry->isExistTokens_DymArr == false); //only do this once
         smry->isExistTokens_DymArr = true;
     }
 
+    //Data [INIT...]
     if(smry->isExistTokens_DymArr){
         append_dymArr_ULONG(smry->existTokens_DymArr, hash);
     }
-    else{
+    else{//Data [0,..INIT-1]
         smry->existTokens[smry->nToken] = hash;
     }
     ++smry->nToken;

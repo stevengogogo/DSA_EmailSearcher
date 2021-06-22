@@ -83,7 +83,7 @@ TxtSmry* Preprocess_FindSimilar(mail*  mails, int n_mails){
     Init_MEM_FindSimilar(&smrys, n_mails);
 
     for(int i=0;i<n_mails;i++){
-        summarize_content(&mails[i], &smrys[i]);
+        summarize_content(&smrys[i], &mails[i]);
     }
 
     return smrys;
@@ -95,7 +95,7 @@ void kill_FindSimilar(TxtSmry* smrys){
 }
 
 void summarize_content(TxtSmry* smry, mail* m){
-    summarize_hash(smry->text, smry);
+    summarize_hash(smry, smry->text);
     smry->id = m->id;
     smry->synced = true;
 }

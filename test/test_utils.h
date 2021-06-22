@@ -30,6 +30,8 @@ void readmail(void){
     TEST_MSG("Got %s\n", mails[0].subject);
     TEST_CHECK(strncmp(mails[0].to, "Tony", strlen(mails[0].to)-1)==0); 
     TEST_MSG("Got %s\n", mails[0].to);
+
+    free(mails);
 }
 
 

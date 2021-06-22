@@ -72,6 +72,7 @@ void test_summary_FS(void){
     mail* mails;
     int n_mail;
     get_mails("test/data/test.in", &mails, &n_mail);
+    free(mails);
 }
 
 

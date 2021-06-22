@@ -58,6 +58,7 @@ static void get_mails(char* filename, mail** mails, int* num_mail){
         TEST_CHECK(i==id);
     }
 
+    fclose(fp);
     free(line);
     free(idstr);
     free(content);

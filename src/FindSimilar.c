@@ -3,7 +3,8 @@
 
 void init_MEM(struct MEMORY* mem, ULONG len){
     mem->LEN = len;
-    mem->ARRAY = (int*)malloc(mem->LEN*sizeof(int));
+    //mem->ARRAY = (int*)malloc(mem->LEN*sizeof(int));
+    mem->ARRAY = (int*)calloc( mem->LEN, sizeof(int));
     assert(mem->ARRAY != NULL);
     mem->top_unused = 0;
 }

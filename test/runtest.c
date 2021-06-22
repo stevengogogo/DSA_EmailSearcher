@@ -30,6 +30,7 @@ TEST_LIST = {
     {"Read email", readmail},
     {"Find Similar: Memory", memory_allocation_FS},
     {"Find Similar: init", test_init_FS},
+    {"Find Similar: init content", test_init_content_FS},
     {"Find Similar: summary", test_summary_FS},
     {NULL, NULL} // Terminate the test
 };

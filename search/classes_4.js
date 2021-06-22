@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['txtsmry_42',['TxtSmry',['../structTxtSmry.html',1,'']]]
+  ['txtsmry_48',['TxtSmry',['../structTxtSmry.html',1,'']]]
 ];

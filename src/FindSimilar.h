@@ -49,7 +49,7 @@ static struct MEMORY nonZero_mem;
  * @param loc_mem global struct for memory storage
  * @param num_mail number of email
  */
-void init_MEM(struct MEMORY* mem, int num_mail);
+void init_MEM(struct MEMORY* mem, int len);
 
 /** Recycle the memory of @ref LOC_MEM*/
 void kill_MEM(struct MEMORY* mem);

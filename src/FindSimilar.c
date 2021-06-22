@@ -1,7 +1,7 @@
 #include "FindSimilar.h"
 
-void init_MEM(struct MEMORY* mem, int num_mail){
-    mem->LEN = num_mail * Q_MODULO;
+void init_MEM(struct MEMORY* mem, int len){
+    mem->LEN = len;
     mem->ARRAY = (int*)malloc(mem->LEN*sizeof(int));
     mem->top_unused = 0;
 }

@@ -82,13 +82,13 @@ $(function() {
 <div class="line"><a name="l00011"></a><span class="lineno">   11</span>&#160;    <span class="keywordtype">int</span> num_mail = 10;</div>
 <div class="line"><a name="l00012"></a><span class="lineno">   12</span>&#160;    </div>
 <div class="line"><a name="l00013"></a><span class="lineno">   13</span>&#160;    <span class="comment">//Initiation</span></div>
-<div class="line"><a name="l00014"></a><span class="lineno">   14</span>&#160;    <a class="code" href="FindSimilar_8h.html#a20a4ad24046a3fe5e35f5b27aedabcc7">init_MEM</a>(&amp;token_hashmaps, num_mail*INIT_SPURIOUS_COUNT);</div>
+<div class="line"><a name="l00014"></a><span class="lineno">   14</span>&#160;    init_MEM_SHORT(&amp;token_hashmaps, num_mail*INIT_SPURIOUS_COUNT);</div>
 <div class="line"><a name="l00015"></a><span class="lineno">   15</span>&#160; </div>
 <div class="line"><a name="l00016"></a><span class="lineno">   16</span>&#160;    TEST_CHECK(token_hashmaps.LEN == num_mail*INIT_SPURIOUS_COUNT);</div>
 <div class="line"><a name="l00017"></a><span class="lineno">   17</span>&#160;    TEST_CHECK(token_hashmaps.top_unused == 0);</div>
 <div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160;    </div>
 <div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160;    <span class="comment">//Garbage Collection</span></div>
-<div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160;    <a class="code" href="FindSimilar_8h.html#a15b8a2f318252df8a0b617b918baa88f">kill_MEM</a>(&amp;token_hashmaps);</div>
+<div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160;    kill_MEM_SHORT(&amp;token_hashmaps);</div>
 <div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160;    TEST_CHECK(token_hashmaps.ARRAY == NULL);</div>
 <div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160;    TEST_CHECK(token_hashmaps.LEN == 0);</div>
 <div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160;}</div>
@@ -114,28 +114,28 @@ $(function() {
 <div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160; </div>
 <div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160;<span class="keywordtype">void</span> test_init_content_FS(<span class="keywordtype">void</span>){</div>
 <div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160;    <a class="code" href="structTxtSmry.html">TxtSmry</a>* smrys;</div>
-<div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160;    <span class="keywordtype">int</span> n_mails=1000;</div>
+<div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160;    <span class="keywordtype">int</span> n_mails=10000;</div>
 <div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160; </div>
-<div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160; </div>
+<div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160;    <a class="code" href="FindSimilar_8h.html#aefd6fa50a25517ace3eda16981f303e4">Init_MEM_FindSimilar</a>(&amp;smrys, n_mails);</div>
 <div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160; </div>
-<div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160;    <a class="code" href="FindSimilar_8h.html#aefd6fa50a25517ace3eda16981f303e4">Init_MEM_FindSimilar</a>(&amp;smrys, n_mails);</div>
-<div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160; </div>
-<div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160; </div>
-<div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160;    <span class="keywordflow">for</span>(<span class="keywordtype">int</span> i=0;i&lt;n_mails;i++){</div>
-<div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160;        TEST_CHECK(smrys[i].nToken == 0);</div>
-<div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160;        TEST_CHECK(smrys[i].isRealloc_existTokens == <span class="keyword">false</span>);</div>
-<div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160;        TEST_CHECK(smrys[i].synced == <span class="keyword">false</span>);</div>
-<div class="line"><a name="l00057"></a><span class="lineno">   57</span>&#160;        TEST_CHECK(smrys[i].text == NULL);</div>
-<div class="line"><a name="l00058"></a><span class="lineno">   58</span>&#160;        TEST_CHECK(smrys[i].token[0] == 0);</div>
-<div class="line"><a name="l00059"></a><span class="lineno">   59</span>&#160;        TEST_CHECK(smrys[i].token[230] == 0);</div>
-<div class="line"><a name="l00060"></a><span class="lineno">   60</span>&#160;    }</div>
-<div class="line"><a name="l00061"></a><span class="lineno">   61</span>&#160;    </div>
-<div class="line"><a name="l00062"></a><span class="lineno">   62</span>&#160;    <span class="keywordflow">for</span>(<span class="keywordtype">int</span> i=0;i&lt;Q_MODULO;i++){</div>
-<div class="line"><a name="l00063"></a><span class="lineno">   63</span>&#160;        TEST_CHECK(smrys[n_mails-1].token[i]==0);</div>
-<div class="line"><a name="l00064"></a><span class="lineno">   64</span>&#160;    }</div>
-<div class="line"><a name="l00065"></a><span class="lineno">   65</span>&#160; </div>
-<div class="line"><a name="l00066"></a><span class="lineno">   66</span>&#160;    kill_MEM_FindSimilar(smrys);</div>
-<div class="line"><a name="l00067"></a><span class="lineno">   67</span>&#160; </div>
+<div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160;    <span class="comment">//Initial values</span></div>
+<div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160;    <span class="keywordflow">for</span>(<span class="keywordtype">int</span> i=0;i&lt;n_mails;i++){</div>
+<div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160;        TEST_CHECK(smrys[i].nToken == 0);</div>
+<div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160;        TEST_CHECK(smrys[i].isRealloc_existTokens == <span class="keyword">false</span>);</div>
+<div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160;        TEST_CHECK(smrys[i].synced == <span class="keyword">false</span>);</div>
+<div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160;        TEST_CHECK(smrys[i].text == NULL);</div>
+<div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160;        TEST_CHECK(smrys[i].token[0] == 0);</div>
+<div class="line"><a name="l00057"></a><span class="lineno">   57</span>&#160;        TEST_CHECK(smrys[i].token[230] == 0);</div>
+<div class="line"><a name="l00058"></a><span class="lineno">   58</span>&#160;    }</div>
+<div class="line"><a name="l00059"></a><span class="lineno">   59</span>&#160;    </div>
+<div class="line"><a name="l00060"></a><span class="lineno">   60</span>&#160;    <span class="comment">//The token array is 0 in default</span></div>
+<div class="line"><a name="l00061"></a><span class="lineno">   61</span>&#160;    <span class="keywordflow">for</span>(<span class="keywordtype">int</span> i=0;i&lt;Q_MODULO;i++){</div>
+<div class="line"><a name="l00062"></a><span class="lineno">   62</span>&#160;        TEST_CHECK(smrys[n_mails-1].token[i]==0);</div>
+<div class="line"><a name="l00063"></a><span class="lineno">   63</span>&#160;        TEST_CHECK(smrys[234].token[i]==0);</div>
+<div class="line"><a name="l00064"></a><span class="lineno">   64</span>&#160;        TEST_CHECK(smrys[0].token[i]==0);</div>
+<div class="line"><a name="l00065"></a><span class="lineno">   65</span>&#160;    }</div>
+<div class="line"><a name="l00066"></a><span class="lineno">   66</span>&#160; </div>
+<div class="line"><a name="l00067"></a><span class="lineno">   67</span>&#160;    kill_MEM_FindSimilar(smrys);</div>
 <div class="line"><a name="l00068"></a><span class="lineno">   68</span>&#160;}</div>
 <div class="line"><a name="l00069"></a><span class="lineno">   69</span>&#160; </div>
 <div class="line"><a name="l00070"></a><span class="lineno">   70</span>&#160; </div>
@@ -152,10 +152,8 @@ $(function() {
 <div class="line"><a name="l00081"></a><span class="lineno">   81</span>&#160; </div>
 <div class="line"><a name="l00082"></a><span class="lineno">   82</span>&#160;<span class="preprocessor">#endif</span></div>
 <div class="ttc" id="aFindSimilar_8h_html"><div class="ttname"><a href="FindSimilar_8h.html">FindSimilar.h</a></div><div class="ttdoc">Group Analysis. Use Jaccob's similarity with hash table to identify similar strings.</div></div>
-<div class="ttc" id="aFindSimilar_8h_html_a15b8a2f318252df8a0b617b918baa88f"><div class="ttname"><a href="FindSimilar_8h.html#a15b8a2f318252df8a0b617b918baa88f">kill_MEM</a></div><div class="ttdeci">void kill_MEM(struct MEMORY *mem)</div><div class="ttdef"><b>Definition:</b> FindSimilar.c:12</div></div>
-<div class="ttc" id="aFindSimilar_8h_html_a20a4ad24046a3fe5e35f5b27aedabcc7"><div class="ttname"><a href="FindSimilar_8h.html#a20a4ad24046a3fe5e35f5b27aedabcc7">init_MEM</a></div><div class="ttdeci">void init_MEM(struct MEMORY *mem, ULONG len)</div><div class="ttdef"><b>Definition:</b> FindSimilar.c:4</div></div>
-<div class="ttc" id="aFindSimilar_8h_html_aefd6fa50a25517ace3eda16981f303e4"><div class="ttname"><a href="FindSimilar_8h.html#aefd6fa50a25517ace3eda16981f303e4">Init_MEM_FindSimilar</a></div><div class="ttdeci">void Init_MEM_FindSimilar(TxtSmry **, int n_mails)</div><div class="ttdef"><b>Definition:</b> FindSimilar.c:19</div></div>
-<div class="ttc" id="astructTxtSmry_html"><div class="ttname"><a href="structTxtSmry.html">TxtSmry</a></div><div class="ttdef"><b>Definition:</b> FindSimilar.h:63</div></div>
+<div class="ttc" id="aFindSimilar_8h_html_aefd6fa50a25517ace3eda16981f303e4"><div class="ttname"><a href="FindSimilar_8h.html#aefd6fa50a25517ace3eda16981f303e4">Init_MEM_FindSimilar</a></div><div class="ttdeci">void Init_MEM_FindSimilar(TxtSmry **, int n_mails)</div><div class="ttdef"><b>Definition:</b> FindSimilar.c:32</div></div>
+<div class="ttc" id="astructTxtSmry_html"><div class="ttname"><a href="structTxtSmry.html">TxtSmry</a></div><div class="ttdef"><b>Definition:</b> FindSimilar.h:71</div></div>
 <div class="ttc" id="astructmail_html"><div class="ttname"><a href="structmail.html">mail</a></div><div class="ttdef"><b>Definition:</b> api.h:16</div></div>
 </div><!-- fragment --></div><!-- contents -->
 <!-- start footer part -->

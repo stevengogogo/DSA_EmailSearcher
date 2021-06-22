@@ -11,20 +11,20 @@ void memory_allocation_FS(void){
     int num_mail = 10;
     
     //Initiation
-    init_MEM(&loc_mem, num_mail*INIT_SPURIOUS_COUNT);
+    init_MEM(&token_hashmaps, num_mail*INIT_SPURIOUS_COUNT);
 
-    TEST_CHECK(loc_mem.LEN == num_mail*INIT_SPURIOUS_COUNT);
-    TEST_CHECK(loc_mem.top_unused == 0);
+    TEST_CHECK(token_hashmaps.LEN == num_mail*INIT_SPURIOUS_COUNT);
+    TEST_CHECK(token_hashmaps.top_unused == 0);
     
     //Garbage Collection
-    kill_MEM(&loc_mem);
-    TEST_CHECK(loc_mem.ARRAY == NULL);
-    TEST_CHECK(loc_mem.LEN == 0);
+    kill_MEM(&token_hashmaps);
+    TEST_CHECK(token_hashmaps.ARRAY == NULL);
+    TEST_CHECK(token_hashmaps.LEN == 0);
 }
 
 void test_init_FS(void){
     TxtSmry* smrys;
-    int n_mails=10000;
+    int n_mails=1000;
     clock_t str;
     clock_t end;
 

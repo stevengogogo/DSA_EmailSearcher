@@ -21,7 +21,6 @@ bool inDomainInt(int val, int lower, int upper){
 }
 
 /************Tokenize************/
-
 int popToken(char message[], char token[], int iStr){
     char c;
     int asc; //ascii number
@@ -85,7 +84,7 @@ bool isLowerCase_ASCII(int asc){
 
 /********Dynamic Array (Int) stack*********/
 
-dymArr init_Arr(int size){
+void init_dymArr(dymArr* arr, int size){
     assert(size>=1);
     int* is = (int*)malloc(size*sizeof(int));
     if(is==NULL){
@@ -93,12 +92,9 @@ dymArr init_Arr(int size){
         exit(1);
     }
 
-    dymArr arr = {
-        .i = is,
-        .len = 0,
-        .size = size
-    };
-    return arr;
+    arr->i = is;
+    arr->len = 0;
+    arr->size = size;
 }
 
 void kill_dymArr(dymArr* arr){
@@ -151,7 +147,7 @@ int pop_item(dymArr* arr){
 
 que init_que(int size){
     que q;
-    q.arr = init_Arr(size);
+    init_dymArr(&q.arr,size);
     q.head = -1;
     q.tail = -1;
     return q;

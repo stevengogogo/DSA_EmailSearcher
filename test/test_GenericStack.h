@@ -2,13 +2,11 @@
 #define TEST_GENERICSTACK_H
 
 #include "utils.h"
+#include "Utility.h"
 #include "time.h"
 #define num 15000
 
-void print_clock(char* s,clock_t str, clock_t end){
-    double total_t = (double)(end - str) / CLOCKS_PER_SEC;
-    printf("%s Elapsed %f", s,total_t);
-}
+
 
 void test_dynamic_universal_array(void){
     uArray arr;

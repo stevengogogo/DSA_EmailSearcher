@@ -71,7 +71,7 @@ typedef struct{
 } dymArr;
 
 //init and kill
-dymArr init_Arr(int size);
+void init_dymArr(dymArr*, int size);
 void kill_dymArr(dymArr*);
 void resize_dymArr(dymArr*, int new_max_size);
 

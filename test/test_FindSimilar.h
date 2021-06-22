@@ -24,7 +24,7 @@ void memory_allocation_FS(void){
 
 void test_init_FS(void){
     TxtSmry* smrys;
-    int n_mails=100000;
+    int n_mails=1000;
     clock_t str;
     clock_t end;
 

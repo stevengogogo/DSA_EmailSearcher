@@ -68,10 +68,24 @@ void test_init_content_FS(void){
 }
 
 void test_append_hash(void){
-     TxtSmry* smrys;
+    TxtSmry* smrys;
     int n_mails=10000;
 
     Init_FindSimilar(&smrys, n_mails);
+
+    for(int i=0;i<INIT_UNIQUE_TOKEN_SIZE-1;i++){
+        add_unique_hashlist(&smrys[0], i);
+    }
+
+    TEST_CHECK(smrys[0].isExistTokens_DymArr == false);
+    TEST_CHECK(smrys[0].existTokens_DymArr == NULL);
+
+    add_unique_hashlist(&smrys[0], INIT_UNIQUE_TOKEN_SIZE-1);
+    add_unique_hashlist(&smrys[0], INIT_UNIQUE_TOKEN_SIZE-1);
+    TEST_CHECK(smrys[0].isExistTokens_DymArr == true);
+    TEST_CHECK(smrys[0].existTokens_DymArr != NULL);
+
+
     
     kill_FindSimilar(smrys, n_mails);
 }

@@ -34,17 +34,19 @@ void kill_MEM_GroupAnalysis(TxtSmry* smrys){
 
 
 void init_TokenInfo(TokenInfo* tkf){
-    assert(loc_mem.top_unused < loc_mem.LEN);
+    assert(loc_mem.top_unused+INIT_SPURIOUS_COUNT <= loc_mem.LEN);
     tkf->occur = 0;
     tkf->loc = &loc_mem.ARRAY[loc_mem.top_unused];
     tkf->isRealloc = false;
     loc_mem.top_unused+= INIT_SPURIOUS_COUNT;
+
+    assert(tkf->loc != NULL);
 }
 
 void init_TokenInfo_arr(TokenInfo** tkf, int len){ 
     *tkf = (TokenInfo*)malloc(len*sizeof(TokenInfo));
     for(int i=0;i<len;i++){
-        init_TokenInfo(*tkf);
+        init_TokenInfo(&(*tkf)[i]);
     }
 }
 
@@ -59,7 +61,7 @@ void init_TxtSmry(TxtSmry* smry, TokenInfo* memToken, int* pin_memToken,int hash
     smry->token = &memToken[*pin_memToken];
     smry->existTokens = &existTokens_mem.ARRAY[existTokens_mem.top_unused];
 
-    *pin_memToken += Q_MODULO;
+    *pin_memToken += hashMapsize;
     existTokens_mem.top_unused += INIT_UNIQUE_TOKEN_SIZE;
 
     smry->nToken = 0;
@@ -73,7 +75,7 @@ void init_TxtSmry_arr(TxtSmry** smry, int len, TokenInfo* memToken, int hashMaps
     *smry = (TxtSmry*)malloc(sizeof(TxtSmry)*len);
     assert(*smry !=NULL);
     for(int i=0;i<len;i++){
-        init_TxtSmry(smry[i], memToken, &pin_memToken, hashMapsize);
+        init_TxtSmry(&(*smry)[i], memToken, &pin_memToken, hashMapsize);
     }
 }
 

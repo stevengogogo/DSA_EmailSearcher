@@ -23,7 +23,7 @@
 #define Q_MODULO 100000
 #define D 252
 #define INIT_SPURIOUS_COUNT 10
-#define INIT_NONZERO_SIZE 100
+#define INIT_UNIQUE_TOKEN_SIZE 100
 
 
 
@@ -34,14 +34,15 @@
  * @param LOC_ARRAY array for store location data
  * @param LEN capacity of the memory
  */
-static struct MEMORY {
+typedef struct MEMORY {
     int top_unused;
     int* ARRAY;
     int LEN;
 } MEMORY;
 
 static struct MEMORY loc_mem;
-static struct MEMORY nonZero_mem;
+static struct MEMORY existTokens_mem;
+
 
 /**
  * @brief 
@@ -54,33 +55,37 @@ void init_MEM(struct MEMORY* mem, int len);
 /** Recycle the memory of @ref LOC_MEM*/
 void kill_MEM(struct MEMORY* mem);
 
+void Init_MEM_GroupAnalysis(TxtSmry**, int n_mails);
+void kill_MEM_GroupAnalysis(TxtSmry*);
+
 
 /******Token and Structure*******/
 /** Token Information*/
 typedef struct TokenInfo{
     int occur;
-    int loc[1];//locations
+    int* loc;//locations in string
+    bool isRealloc;
 } TokenInfo;
 
 /** Text Summary*/
 typedef struct TxtSmry{
-    TokenInfo token[Q_MODULO];
-    dymArr nonZero; //Token start points
+    TokenInfo* token; //len = Q_MODULE
+    int* existTokens; //Exist Token
     int nToken; // unique token number
     char* text; // Text
     bool synced; // Check the information is updated
+    bool isRealloc_existTokens;
 } TxtSmry;
 
 
-void init_TokenInfo(TokenInfo* tkf);
-void init_TokenInfo_arr(TokenInfo* tkf, int len);
-void kill_TokenInfo(TokenInfo* tkf);
-void kill_TokenInfo_arr(TokenInfo* tkf, int len);
+void init_TokenInfo(TokenInfo* tkf, int* loc_mem);
+void init_TokenInfo_arr(TokenInfo** tkf, int len);
+void kill_TokenInfo_arr(TokenInfo* tkf);
 
 /** Intiate text summary*/
-void init_TxtSmry(TxtSmry* smry);
+void init_TxtSmry(TxtSmry* smry, TokenInfo* memToken, int pin_Token, int* memExistToken, int pin_ExistToken);
 /** Initiate array of text summary*/
-void init_TxtSmry_arr(TxtSmry** smry, int len);
+void init_TxtSmry_arr(TxtSmry** smry, int len, TokenInfo* memToken, MEMORY* memExistToken);
 /** Recycle TxtSmry*/
 void kill_TxtSmry(TxtSmry* smry);
 /** Kill array of TxtSmry.*/
@@ -98,6 +103,7 @@ int updateHash(char c, int Hash_cur, int q_cur, int d);
 /**********Main API************/
 /** Preprocessing: Summarize the mails*/
 TxtSmry* Preprocess_GroupAnalysis(mail*  mails, int n_mails);
+void kill_GroupAnalysis(TxtSmry* smrys);
 
 /**
  * @brief Check the similarity of two messages is exceeding threshold.

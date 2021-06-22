@@ -6,6 +6,7 @@
 #include "test_tokenize.h"
 #include "test_GenericStack.h"
 #include "test_dymarr.h"
+#include "test_FindSimilar.h"
 #include "test_GroupAnalysis.h"
 
 // Run TESTs 

@@ -1,4 +1,4 @@
-#include "GroupAnalysis.h"
+#include "FindSimilar.h"
 
 void init_TokenInfo(TokenInfo* tkf){
     tkf->occur = 0;

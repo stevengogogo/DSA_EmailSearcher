@@ -76,7 +76,7 @@ typedef struct MEMORY_ULONG {
 
 typedef struct TokenInfo {
     USHORT count;
-    USHORT loc[INIT_SPURIOUS_COUNT];
+    USHORT loc[INIT_SPURIOUS_COUNT];//location of the hash
 } TokenInfo;
 
 static struct MEMORY_SHORT token_hashmaps;

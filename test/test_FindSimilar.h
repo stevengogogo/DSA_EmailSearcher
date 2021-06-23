@@ -53,15 +53,19 @@ void test_init_content_FS(void){
         TEST_CHECK(smrys[i].isExistTokens_DymArr == false);
         TEST_CHECK(smrys[i].synced == false);
         TEST_CHECK(smrys[i].text == NULL);
-        TEST_CHECK(smrys[i].token[0] == 0);
-        TEST_CHECK(smrys[i].token[230] == 0);
+        TEST_CHECK(smrys[i].token[0].count == 0);
+        TEST_CHECK(smrys[i].token[230].count == 0);
     }
     
     //The token array is 0 in default
     for(int i=0;i<Q_MODULO;i++){
-        TEST_CHECK(smrys[n_mails-1].token[i]==0);
-        TEST_CHECK(smrys[234].token[i]==0);
-        TEST_CHECK(smrys[0].token[i]==0);
+        TEST_CHECK(smrys[n_mails-1].token[i].count==0);
+        TEST_CHECK(smrys[234].token[i].count==0);
+        TEST_CHECK(smrys[0].token[i].count==0);
+    }
+
+    for(int i=0;i<INIT_SPURIOUS_COUNT;i++){
+        TEST_CHECK(smrys[n_mails-1].token[0].loc[i]==0);
     }
 
     kill_FindSimilar(smrys, n_mails);

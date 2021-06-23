@@ -32,7 +32,7 @@ void kill_MEM_SHORT(struct MEMORY_SHORT* mem){
 void Init_FindSimilar(TxtSmry** smrys, int n_mails){
     ULONG nmail = (ULONG)n_mails;
     //Location of hashes
-    init_MEM_SHORT(&token_hashmaps, nmail * Q_MODULO);
+    //init_MEM_SHORT(&token_hashmaps, nmail * Q_MODULO);
     //Occupied hash index
     init_MEM_ULONG(&existTokens_mem, nmail*INIT_UNIQUE_TOKEN_SIZE);
     init_TxtSmry_arr(smrys, nmail, Q_MODULO);
@@ -43,13 +43,13 @@ void Init_FindSimilar(TxtSmry** smrys, int n_mails){
 
 void init_TxtSmry(TxtSmry* smry, int hashMapsize){
     //Check memory is enough
-    assert(token_hashmaps.top_unused+hashMapsize <= token_hashmaps.LEN);
+    //assert(token_hashmaps.top_unused+hashMapsize <= token_hashmaps.LEN);
     assert(existTokens_mem.top_unused+INIT_UNIQUE_TOKEN_SIZE <= existTokens_mem.LEN);
 
-    smry->token = &token_hashmaps.ARRAY[token_hashmaps.top_unused];
+    //smry->token = &token_hashmaps.ARRAY[token_hashmaps.top_unused];
     smry->existTokens = &existTokens_mem.ARRAY[existTokens_mem.top_unused];
 
-    token_hashmaps.top_unused += hashMapsize;
+    //token_hashmaps.top_unused += hashMapsize;
     existTokens_mem.top_unused += INIT_UNIQUE_TOKEN_SIZE;
 
     smry->nToken = 0;
@@ -61,7 +61,7 @@ void init_TxtSmry(TxtSmry* smry, int hashMapsize){
 
 void init_TxtSmry_arr(TxtSmry** smry, int len, int hashmapSize){
     int pin_memToken = 0;
-    *smry = (TxtSmry*)malloc(sizeof(TxtSmry)*len);
+    *smry = (TxtSmry*)calloc(len, sizeof(TxtSmry));
     assert(*smry !=NULL);
     for(int i=0;i<len;i++){
         init_TxtSmry(&(*smry)[i], hashmapSize);
@@ -69,11 +69,11 @@ void init_TxtSmry_arr(TxtSmry** smry, int len, int hashmapSize){
 }
 
 void append_hash_TxtSmry(TxtSmry* smry, ULONG hash){
-    if(smry->token[hash]==0){
+    if(smry->token[hash].count==0){
         add_unique_hashlist(smry, hash);
         ++smry->nToken;
     }
-    ++smry->token[hash];
+    ++smry->token[hash].count;
 }
 
 void add_unique_hashlist(TxtSmry* smry, ULONG hash){
@@ -133,7 +133,7 @@ TxtSmry* Preprocess_FindSimilar(mail*  mails, int n_mails){
 
 void kill_FindSimilar(TxtSmry* smrys, int len){
     kill_TxtSmry_arr(smrys, len);
-    kill_MEM_SHORT(&token_hashmaps);
+    //kill_MEM_SHORT(&token_hashmaps);
     kill_MEM_ULONG(&existTokens_mem);
 }
 

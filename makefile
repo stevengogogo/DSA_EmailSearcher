@@ -81,7 +81,7 @@ leak: build
 	valgrind  $(outfile) < test/data/test.in
 	
 leaktest: test 
-	valgrind test/build/test.out
+	valgrind --leak-check=full test/build/test.out
 
 # From DSA Template
 test/validator/validator: test/validator/validator.cpp

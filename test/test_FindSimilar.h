@@ -11,15 +11,15 @@ void memory_allocation_FS(void){
     int num_mail = 10;
     
     //Initiation
-    init_MEM_SHORT(&token_hashmaps, num_mail*INIT_SPURIOUS_COUNT);
+    init_MEM_ULONG(&existTokens_mem, num_mail*INIT_UNIQUE_TOKEN_SIZE);
 
-    TEST_CHECK(token_hashmaps.LEN == num_mail*INIT_SPURIOUS_COUNT);
-    TEST_CHECK(token_hashmaps.top_unused == 0);
+    TEST_CHECK(existTokens_mem.LEN == num_mail*INIT_UNIQUE_TOKEN_SIZE);
+    TEST_CHECK(existTokens_mem.top_unused == 0);
     
     //Garbage Collection
-    kill_MEM_SHORT(&token_hashmaps);
-    TEST_CHECK(token_hashmaps.ARRAY == NULL);
-    TEST_CHECK(token_hashmaps.LEN == 0);
+    kill_MEM_ULONG(&existTokens_mem);
+    TEST_CHECK(existTokens_mem.ARRAY == NULL);
+    TEST_CHECK(existTokens_mem.LEN == 0);
 }
 
 void test_init_FS(void){
@@ -97,10 +97,6 @@ void test_append_hash(void){
         TEST_CHECK(get_unique_hashlist(&smrys[0], (int)i) == i );
         TEST_MSG("Expected %lld; Got %lld", get_unique_hashlist(&smrys[0], (int)i),i);;
     }
-
-
-
-
 
     
     kill_FindSimilar(smrys, n_mails);

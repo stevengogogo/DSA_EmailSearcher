@@ -11,15 +11,15 @@ void memory_allocation_FS(void){
     int num_mail = 10;
     
     //Initiation
-    init_MEM_SHORT(&token_hashmaps, num_mail*INIT_SPURIOUS_COUNT);
+    init_MEM_ULONG(&existTokens_mem, num_mail*INIT_UNIQUE_TOKEN_SIZE);
 
-    TEST_CHECK(token_hashmaps.LEN == num_mail*INIT_SPURIOUS_COUNT);
-    TEST_CHECK(token_hashmaps.top_unused == 0);
+    TEST_CHECK(existTokens_mem.LEN == num_mail*INIT_UNIQUE_TOKEN_SIZE);
+    TEST_CHECK(existTokens_mem.top_unused == 0);
     
     //Garbage Collection
-    kill_MEM_SHORT(&token_hashmaps);
-    TEST_CHECK(token_hashmaps.ARRAY == NULL);
-    TEST_CHECK(token_hashmaps.LEN == 0);
+    kill_MEM_ULONG(&existTokens_mem);
+    TEST_CHECK(existTokens_mem.ARRAY == NULL);
+    TEST_CHECK(existTokens_mem.LEN == 0);
 }
 
 void test_init_FS(void){
@@ -53,15 +53,19 @@ void test_init_content_FS(void){
         TEST_CHECK(smrys[i].isExistTokens_DymArr == false);
         TEST_CHECK(smrys[i].synced == false);
         TEST_CHECK(smrys[i].text == NULL);
-        TEST_CHECK(smrys[i].token[0] == 0);
-        TEST_CHECK(smrys[i].token[230] == 0);
+        TEST_CHECK(smrys[i].token[0].count == 0);
+        TEST_CHECK(smrys[i].token[230].count == 0);
     }
     
     //The token array is 0 in default
     for(int i=0;i<Q_MODULO;i++){
-        TEST_CHECK(smrys[n_mails-1].token[i]==0);
-        TEST_CHECK(smrys[234].token[i]==0);
-        TEST_CHECK(smrys[0].token[i]==0);
+        TEST_CHECK(smrys[n_mails-1].token[i].count==0);
+        TEST_CHECK(smrys[234].token[i].count==0);
+        TEST_CHECK(smrys[0].token[i].count==0);
+    }
+
+    for(int i=0;i<INIT_SPURIOUS_COUNT;i++){
+        TEST_CHECK(smrys[n_mails-1].token[0].loc[i]==0);
     }
 
     kill_FindSimilar(smrys, n_mails);
@@ -93,10 +97,6 @@ void test_append_hash(void){
         TEST_CHECK(get_unique_hashlist(&smrys[0], (int)i) == i );
         TEST_MSG("Expected %lld; Got %lld", get_unique_hashlist(&smrys[0], (int)i),i);;
     }
-
-
-
-
 
     
     kill_FindSimilar(smrys, n_mails);

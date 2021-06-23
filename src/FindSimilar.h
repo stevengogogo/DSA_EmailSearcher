@@ -22,7 +22,7 @@
 /**********Constant Variable***********/
 #define Q_MODULO 100000
 #define D 252
-#define INIT_SPURIOUS_COUNT 10
+#define INIT_SPURIOUS_COUNT 3
 #define INIT_UNIQUE_TOKEN_SIZE 100
 #define ULONG unsigned long long
 #define USHORT unsigned short
@@ -74,7 +74,12 @@ typedef struct MEMORY_ULONG {
     ULONG LEN;
 } MEMORY_ULONG;
 
-static struct MEMORY_SHORT token_hashmaps;
+typedef struct TokenInfo {
+    USHORT count;
+    USHORT loc[INIT_SPURIOUS_COUNT];//location of the hash
+} TokenInfo;
+
+
 static struct MEMORY_ULONG existTokens_mem;
 
 
@@ -98,7 +103,7 @@ void kill_MEM_SHORT(struct MEMORY_SHORT* mem);
 /** Text Summary*/
 typedef struct TxtSmry{
     int id;
-    USHORT* token; //len = Q_MODULE
+    TokenInfo token[Q_MODULO]; //len = Q_MODULE
     ULONG* existTokens; //Exist Token
     dymArr_ULONG* existTokens_DymArr;
     int nToken; // unique token number

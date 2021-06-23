@@ -5,6 +5,7 @@
 #include "utils.h"
 #include "Utility.h"
 #include <string.h>
+#include <time.h>
 
 void test_utils(void)
 {
@@ -18,7 +19,13 @@ void test_utils(void)
 void readmail(void){
     int num_mail;
     mail* mails;
+    clock_t str;
+    clock_t end;
+
+    str = clock();
     get_mails("test/data/test.in", &mails, &num_mail);
+    end = clock();
+    print_clock("Read Email:", str, end);
 
     TEST_CHECK(mails[0].id == 0); 
     TEST_MSG("Got %d\n", mails[0].id);

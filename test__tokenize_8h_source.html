@@ -98,32 +98,37 @@ $(function() {
 <div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160;        TEST_MSG(<span class="stringliteral">&quot;Expected: %s ; Got: %s (%d)\n&quot;</span>,tokenStr[i], token, iStr);</div>
 <div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160;    }</div>
 <div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160; </div>
-<div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160;}</div>
-<div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160; </div>
-<div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160;<span class="keywordtype">void</span> test_token(){</div>
-<div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160;    <span class="keywordtype">char</span> message[] = <span class="stringliteral">&quot;Dsa Final p-+ro%ject {} \&quot; poopoo&quot;</span>;</div>
-<div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160;    <span class="keywordtype">int</span> n_token = 6;</div>
-<div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160;    <span class="keywordtype">char</span> tokenStr[6][300] ={ </div>
-<div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160;        <span class="stringliteral">&quot;dsa&quot;</span>,</div>
-<div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160;        <span class="stringliteral">&quot;final&quot;</span>,</div>
-<div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160;        <span class="stringliteral">&quot;p&quot;</span>,</div>
-<div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160;        <span class="stringliteral">&quot;ro&quot;</span>,</div>
-<div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160;        <span class="stringliteral">&quot;ject&quot;</span>,</div>
-<div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160;        <span class="stringliteral">&quot;poopoo&quot;</span></div>
-<div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160;    };</div>
-<div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160;    <span class="keywordtype">char</span> token[2048];</div>
-<div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160;    <span class="keywordtype">int</span> iStr = 0;</div>
-<div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160; </div>
-<div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160;    <span class="keywordflow">for</span> (<span class="keywordtype">int</span> i=0;i&lt;n_token;i++){</div>
-<div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160;        iStr = <a class="code" href="utils_8h.html#a81f4883411916757a7c41b8a74f73c2b">popToken</a>(message, token, iStr);</div>
-<div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160;        TEST_CHECK(strcmp(token, tokenStr[i]) == 0);</div>
-<div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160;        TEST_MSG(<span class="stringliteral">&quot;Expected: %s ; Got: %s (%d)\n&quot;</span>,tokenStr[i], token, iStr);</div>
-<div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160;    }</div>
-<div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160;}</div>
-<div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160; </div>
-<div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160; </div>
-<div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160; </div>
-<div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160;<span class="preprocessor">#endif</span></div>
+<div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160;    <span class="comment">//When no more token left</span></div>
+<div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160;    <span class="keywordtype">int</span> iend = 0;</div>
+<div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160;    iend = <a class="code" href="utils_8h.html#a81f4883411916757a7c41b8a74f73c2b">popToken</a>(message, token, iStr);</div>
+<div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160;    TEST_CHECK(iend == iStr);</div>
+<div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160;    TEST_CHECK( strncmp(token, <span class="stringliteral">&quot;\0&quot;</span>, strlen(token)) == 0 );</div>
+<div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160;}</div>
+<div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160; </div>
+<div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160;<span class="keywordtype">void</span> test_token(){</div>
+<div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160;    <span class="keywordtype">char</span> message[] = <span class="stringliteral">&quot;Dsa Final p-+ro%ject {} \&quot; poopoo&quot;</span>;</div>
+<div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160;    <span class="keywordtype">int</span> n_token = 6;</div>
+<div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160;    <span class="keywordtype">char</span> tokenStr[6][300] ={ </div>
+<div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160;        <span class="stringliteral">&quot;dsa&quot;</span>,</div>
+<div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160;        <span class="stringliteral">&quot;final&quot;</span>,</div>
+<div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160;        <span class="stringliteral">&quot;p&quot;</span>,</div>
+<div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160;        <span class="stringliteral">&quot;ro&quot;</span>,</div>
+<div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160;        <span class="stringliteral">&quot;ject&quot;</span>,</div>
+<div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160;        <span class="stringliteral">&quot;poopoo&quot;</span></div>
+<div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160;    };</div>
+<div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160;    <span class="keywordtype">char</span> token[2048];</div>
+<div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160;    <span class="keywordtype">int</span> iStr = 0;</div>
+<div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160; </div>
+<div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160;    <span class="keywordflow">for</span> (<span class="keywordtype">int</span> i=0;i&lt;n_token;i++){</div>
+<div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160;        iStr = <a class="code" href="utils_8h.html#a81f4883411916757a7c41b8a74f73c2b">popToken</a>(message, token, iStr);</div>
+<div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160;        TEST_CHECK(strcmp(token, tokenStr[i]) == 0);</div>
+<div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160;        TEST_MSG(<span class="stringliteral">&quot;Expected: %s ; Got: %s (%d)\n&quot;</span>,tokenStr[i], token, iStr);</div>
+<div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160;    }</div>
+<div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160;}</div>
+<div class="line"><a name="l00057"></a><span class="lineno">   57</span>&#160; </div>
+<div class="line"><a name="l00058"></a><span class="lineno">   58</span>&#160; </div>
+<div class="line"><a name="l00059"></a><span class="lineno">   59</span>&#160; </div>
+<div class="line"><a name="l00060"></a><span class="lineno">   60</span>&#160;<span class="preprocessor">#endif</span></div>
 <div class="ttc" id="autils_8h_html"><div class="ttname"><a href="utils_8h.html">utils.h</a></div><div class="ttdoc">General Utilities for C language.</div></div>
 <div class="ttc" id="autils_8h_html_a81f4883411916757a7c41b8a74f73c2b"><div class="ttname"><a href="utils_8h.html#a81f4883411916757a7c41b8a74f73c2b">popToken</a></div><div class="ttdeci">int popToken(char message[], char token[], int iStr)</div><div class="ttdoc">Pop token from message.</div><div class="ttdef"><b>Definition:</b> utils.c:24</div></div>
 </div><!-- fragment --></div><!-- contents -->

@@ -1,6 +1,6 @@
 var searchData=
 [
-  ['uarray_37',['uArray',['../structuArray.html',1,'uArray'],['../utils_8h.html#afa43d1c77d1ea818ac56829c343bee9d',1,'uArray():&#160;utils.h']]],
-  ['updatehash_38',['updateHash',['../FindSimilar_8h.html#a24a100dcb22dc162f43e192ca2f674d9',1,'FindSimilar.h']]],
-  ['utils_2eh_39',['utils.h',['../utils_8h.html',1,'']]]
+  ['uarray_39',['uArray',['../structuArray.html',1,'uArray'],['../utils_8h.html#afa43d1c77d1ea818ac56829c343bee9d',1,'uArray():&#160;utils.h']]],
+  ['updatehash_40',['updateHash',['../FindSimilar_8h.html#ad9d7751fde0fc4fd3b4a05e3b702754d',1,'FindSimilar.c']]],
+  ['utils_2eh_41',['utils.h',['../utils_8h.html',1,'']]]
 ];

@@ -73,4 +73,24 @@ void print_clock(char* s,clock_t str, clock_t end){
     printf("%s Time %f", s,total_t);
 }
 
+static int power_int(int x, int n){
+    int p = 1;
+    for(int i=0;i<n;i++){
+        p *= x;
+    }
+    return p;
+};
+
+
+
+static int HashString(char s[], int D, int Q){
+    int len = strlen(s);
+    int hash = 0;
+    int j = 0;
+    for(int i=len-1;i>=0;i--){
+        hash += power_int(D, j)*(int)s[i];
+    }
+    return hash;
+};
+
 #endif

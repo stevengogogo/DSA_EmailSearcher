@@ -124,6 +124,7 @@ void test_RabinKarp_hashing(void){
     int iStr=0;
     int iEnd;
     int hash;
+    int hashExp;
 
     /*Expected iteration*/
     int iEndExp[5] =  {4,8,19,25, -1};//expected stop site
@@ -134,12 +135,18 @@ void test_RabinKarp_hashing(void){
     }
 
     int i = 0;
+    int j = 0;
     while(1){
         iEnd = popTokenHash(text, token, iStr, &hash);
         if(token[0]!='\0' ){
             TEST_CHECK(iEnd == iEndExp[i]);
             TEST_MSG("iEnd=%d(%c); Expected=%d(%c); Token: %s", iEnd, text[iEnd],iEndExp[i], text[iEndExp[i]], token);
             TEST_CHECK(i<= strlen(text));
+
+            //Hash
+            hashExp = HashString(tokenStr[j], D_RABIN, Q_RABIN);
+            TEST_CHECK(hashExp == hash);
+            ++j;
         }
 
 
@@ -154,7 +161,6 @@ void test_RabinKarp_hashing(void){
 
     TEST_CHECK(i ==5-1 );
     TEST_MSG("i=%d", i);
-
 
 }
 

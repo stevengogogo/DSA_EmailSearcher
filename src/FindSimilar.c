@@ -34,7 +34,7 @@ int popTokenHash(char message[], char token[], int iStr, int* Hash){
     char c;
     int asc; //ascii number
     *Hash = 0; //reset hash value
-    int Dn_cur = 0;
+    int Dn_cur = 1;
     //No string left
     if (iStr < 0){
         token[0] = '\0';
@@ -45,7 +45,7 @@ int popTokenHash(char message[], char token[], int iStr, int* Hash){
     while(message[iStr] != '\0' ){
         c = message[iStr];
         asc = (int)c; //ascii number
-        Dn_cur = 0;
+        Dn_cur = 1;
 
         if (isRegularExpr_ASCII(asc)){
             if (isUpperCase_ASCII(c))
@@ -186,8 +186,8 @@ void kill_FindSimilar(TxtSmry* smrys, int len){
 }
 
 void summarize_content(TxtSmry* smry, mail* m){
-    summarize_hash(smry, m->content);
     smry->id = m->id;
+    summarize_hash(smry, m->content);
     smry->synced = true;
 }
 
@@ -209,16 +209,20 @@ void summarize_hash(TxtSmry* smry, char* text){
             break;
         }
         //Check new token is duplicate
-        /*
+
         for(int i=0;i<smry->token[hash].count;i++){
             iStrH = smry->token[hash].loc[i];
             iStrH = popToken(text, tkH, iStrH);
-            if(strncmp(tkH, token, strlen(token))==0){
+            if(strncmp(tkH, token, strlen(token))!=0){
+                if(smry->id==0){
+                    printf("%s ", token);
+                    printf("%s \n", tkH);
+                }
                 iStr = iNxt;
-                continue;
+                //continue;
             }
         }
-        */
+
 
         //Append unique hash 
         if(smry->token[hash].count==0){//unique token

@@ -20,8 +20,8 @@
 #include "api.h"
 
 /**********Constant Variable***********/
-#define Q_RABIN 100000
-#define D_RABIN 252
+#define Q_RABIN 100001
+#define D_RABIN 25
 #define INIT_SPURIOUS_COUNT 3
 #define INIT_UNIQUE_TOKEN_SIZE 10000
 #define TOKEN_STRING_LENGTH 10000

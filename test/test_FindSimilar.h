@@ -219,7 +219,7 @@ void test_summarize_benchmark(void){
 
 
 void test_tokenhash(void){
-    char text[10000] = "1+---23I faead we t+ga";
+    char text[10000] = "aefarqt4qq5b342344f fwe++--~~~huhfa1+---23I faead we t+ga\0";
     char token1[1000];
     char token2[1000];
     int i1 = 0;
@@ -233,7 +233,8 @@ void test_tokenhash(void){
         
         TEST_CHECK(strcmp(token1,token2)==0);
         TEST_CHECK(i1==i2);
-        if(i1==-1){
+        //TEST_CHECK(i1==i2);
+        if(i2==-1){
             break;
         }
     }

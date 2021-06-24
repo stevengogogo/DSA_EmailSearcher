@@ -108,6 +108,7 @@ void init_TxtSmry(TxtSmry* smry, int hashMapsize){
     smry->text = NULL;
     smry->synced = false;
     smry->isExistTokens_DymArr = false;
+    smry->SpuriousOverflow = false;
 }
 
 void init_TxtSmry_arr(TxtSmry** smry, int len, int hashmapSize){
@@ -121,13 +122,13 @@ void init_TxtSmry_arr(TxtSmry** smry, int len, int hashmapSize){
 
 void append_hash_TxtSmry(TxtSmry* smry, int hash){
     if(smry->token[hash].count==0){
-        add_unique_hashlist(smry, hash);
+        _add_unique_hashlist(smry, hash);
         ++smry->nToken;
     }
     ++smry->token[hash].count;
 }
 
-void add_unique_hashlist(TxtSmry* smry, int hash){
+void _add_unique_hashlist(TxtSmry* smry, int hash){
     //Augment array
     if(smry->nToken==INIT_UNIQUE_TOKEN_SIZE){
         smry->existTokens_DymArr = (dymArr*)malloc(sizeof(dymArr));
@@ -210,18 +211,22 @@ void summarize_hash(TxtSmry* smry, char* text){
             break;
         }
 
-                //Append unique hash
+        //Append unique hash 
         if(smry->token[hash].count==0){//unique token
             append_hash_TxtSmry(smry, hash);
             ++smry->nToken;
         }
 
-        //Append New Hash
-        iloc = smry->token[hash].count;
-        smry->token[hash].loc[iloc] = iStr;
+        //Append New Hash Until FULL
+        if(iloc<INIT_SPURIOUS_COUNT){
+            iloc = smry->token[hash].count;
+            smry->token[hash].loc[iloc] = iStr;
+        }
+        else{
+            smry->SpuriousOverflow = true;
+        }
         ++smry->token[hash].count;
 
-        
         //Next token
         iStr = iNxt;
     }

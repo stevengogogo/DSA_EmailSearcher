@@ -88,6 +88,7 @@ typedef struct TxtSmry{
     char* text; // Text
     bool synced; // Check the information is updated
     bool isExistTokens_DymArr;
+    bool SpuriousOverflow;
 } TxtSmry;
 
 
@@ -96,7 +97,7 @@ void init_TxtSmry(TxtSmry* smry, int hashMapsize);
 /** Initiate array of text summary*/
 void init_TxtSmry_arr(TxtSmry** smry, int len, int hashmapSize);
 void append_hash_TxtSmry(TxtSmry* smry, int hash);
-void add_unique_hashlist(TxtSmry* smry, int hash);
+void _add_unique_hashlist(TxtSmry* smry, int hash);
 ULONG get_unique_hashlist(TxtSmry* smry, int i);
 /** Kill array of TxtSmry.*/
 void kill_TxtSmry_arr(TxtSmry* smry, int len);

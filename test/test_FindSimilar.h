@@ -78,19 +78,19 @@ void test_append_hash(void){
     Init_FindSimilar(&smrys, n_mails);
 
     for(int i=0;i<INIT_UNIQUE_TOKEN_SIZE-1;i++){
-        add_unique_hashlist(&smrys[0], i);
+        _add_unique_hashlist(&smrys[0], i);
     }
 
     TEST_CHECK(smrys[0].isExistTokens_DymArr == false);
     TEST_CHECK(smrys[0].existTokens_DymArr == NULL);
 
-    add_unique_hashlist(&smrys[0], INIT_UNIQUE_TOKEN_SIZE-1);
-    add_unique_hashlist(&smrys[0], INIT_UNIQUE_TOKEN_SIZE);
+    _add_unique_hashlist(&smrys[0], INIT_UNIQUE_TOKEN_SIZE-1);
+    _add_unique_hashlist(&smrys[0], INIT_UNIQUE_TOKEN_SIZE);
     TEST_CHECK(smrys[0].isExistTokens_DymArr == true);
     TEST_CHECK(smrys[0].existTokens_DymArr != NULL);
 
     for(int i=INIT_UNIQUE_TOKEN_SIZE+1;i<30*INIT_UNIQUE_TOKEN_SIZE;i++){
-        add_unique_hashlist(&smrys[0], i);
+        _add_unique_hashlist(&smrys[0], i);
     }    
 
     for(ULONG i=0;i<30*INIT_UNIQUE_TOKEN_SIZE;i++){

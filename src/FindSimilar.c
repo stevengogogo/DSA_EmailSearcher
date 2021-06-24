@@ -119,7 +119,7 @@ void init_TxtSmry_arr(TxtSmry** smry, int len, int hashmapSize){
     }
 }
 
-void append_hash_TxtSmry(TxtSmry* smry, ULONG hash){
+void append_hash_TxtSmry(TxtSmry* smry, int hash){
     if(smry->token[hash].count==0){
         add_unique_hashlist(smry, hash);
         ++smry->nToken;
@@ -127,11 +127,11 @@ void append_hash_TxtSmry(TxtSmry* smry, ULONG hash){
     ++smry->token[hash].count;
 }
 
-void add_unique_hashlist(TxtSmry* smry, ULONG hash){
+void add_unique_hashlist(TxtSmry* smry, int hash){
     //Augment array
     if(smry->nToken==INIT_UNIQUE_TOKEN_SIZE){
-        smry->existTokens_DymArr = (dymArr_ULONG*)malloc(sizeof(dymArr_ULONG));
-        init_dymArr_ULONG(smry->existTokens_DymArr, 2*INIT_UNIQUE_TOKEN_SIZE);
+        smry->existTokens_DymArr = (dymArr*)malloc(sizeof(dymArr));
+        init_dymArr(smry->existTokens_DymArr, 2*INIT_UNIQUE_TOKEN_SIZE);
 
         //Set flag    
         assert(smry->isExistTokens_DymArr == false); //only do this once
@@ -140,7 +140,7 @@ void add_unique_hashlist(TxtSmry* smry, ULONG hash){
 
     //Data [INIT...]
     if(smry->isExistTokens_DymArr){
-        append_dymArr_ULONG(smry->existTokens_DymArr, hash);
+        append_dymArr(smry->existTokens_DymArr, hash);
     }
     else{//Data [0,..INIT-1]
         smry->existTokens[smry->nToken] = hash;
@@ -164,7 +164,7 @@ ULONG get_unique_hashlist(TxtSmry* smry, int i){
 void kill_TxtSmry_arr(TxtSmry* smry, int len){
     for(int i=0;i<len;i++){
         if(smry[i].isExistTokens_DymArr){
-            kill_dymArr_ULONG(smry[i].existTokens_DymArr);
+            kill_dymArr(smry[i].existTokens_DymArr);
             free(smry->existTokens_DymArr);
         }
     }
@@ -199,6 +199,7 @@ void summarize_hash(TxtSmry* smry, char* text){
     smry->text = text;
     //Retrieving Tokens
     char token[TOKEN_STRING_LENGTH];
+    int iloc;
     int iStr = 0; //Current pin
     int iNxt; //Next pin
     int hash;
@@ -209,71 +210,22 @@ void summarize_hash(TxtSmry* smry, char* text){
             break;
         }
 
-        //TODO
+                //Append unique hash
+        if(smry->token[hash].count==0){//unique token
+            append_hash_TxtSmry(smry, hash);
+            ++smry->nToken;
+        }
 
+        //Append New Hash
+        iloc = smry->token[hash].count;
+        smry->token[hash].loc[iloc] = iStr;
+        ++smry->token[hash].count;
 
         
+        //Next token
+        iStr = iNxt;
     }
 
 
-}
-
-/**Helper function*/
-void init_dymArr_ULONG(dymArr_ULONG* arr, ULONG size){
-    assert(size>=1);
-    ULONG* is = (ULONG*)malloc(size*sizeof(ULONG));
-    if(is==NULL){
-        fprintf(stderr, "Init Error: Insufficient Memory.\n");
-        exit(1);
-    }
-
-    arr->i = is;
-    arr->len = 0;
-    arr->size = size;
-}
-
-void kill_dymArr_ULONG(dymArr_ULONG* arr){
-    arr->size=0;
-    arr->len=0;
-    free(arr->i);
-};
-
-void resize_dymArr_ULONG(dymArr_ULONG* arr, ULONG new_max_size){
-    arr->size = new_max_size;
-    arr->i = realloc(arr->i, sizeof(ULONG)*new_max_size);
-}
-
-void clear_Arr_ULONG(dymArr_ULONG* arr){
-    arr->len = 0;
-}
-
-void append_dymArr_ULONG(dymArr_ULONG* arr, ULONG val){
-    ++(arr->len);
-    //Augement size
-
-    if((arr->len+1) > arr->size){
-      int new_size = (arr->size)*2 + 1;
-      arr->i = realloc(arr->i, sizeof(ULONG)*new_size);
-      arr->size = new_size;
-      if(arr==NULL){
-        fprintf(stderr, "Append Error: Insufficient Memory.\n");
-        exit(1);
-       }
-    }
-
-    arr->i[arr->len - 1] = val;
-}
-
-int get_item_ULONG(dymArr_ULONG arr, ULONG i){
-    return arr.i[i];
-}
-
-int pop_item_ULONG(dymArr_ULONG* arr){
-    if(arr->len==0)
-        return EMTY_QUE_SIG;
-    int val = arr->i[arr->len-1];
-    --arr->len;
-
-    return val;
 }
 

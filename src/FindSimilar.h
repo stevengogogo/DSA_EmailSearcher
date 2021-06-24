@@ -31,30 +31,6 @@
 
 /**Helper function**/
 /************Dynamic Array (Int) Stack**************/
-//dynamic array
-typedef struct{
-    int len;
-    int size;
-    ULONG* i;
-} dymArr_ULONG;
-
-//init and kill
-void init_dymArr_ULONG(dymArr_ULONG*, ULONG size);
-void kill_dymArr_ULONG(dymArr_ULONG*);
-void resize_dymArr_ULONG(dymArr_ULONG*, ULONG new_max_size);
-
-//clear
-void clear_Arr_ULONG(dymArr_ULONG*);
-
-//append
-/**Append at last*/
-void append_dymArr_ULONG(dymArr_ULONG*, ULONG val);
-/** Get the item of arr[i]*/
-int get_item_ULONG(dymArr_ULONG, ULONG i);
-/** Get the last item
- * @return last element. If no item left, return `EMTY_QUE_SIG`
-*/
-int pop_item_ULONG(dymArr_ULONG*);
 
 
 /**
@@ -106,8 +82,8 @@ void kill_MEM_SHORT(struct MEMORY_SHORT* mem);
 typedef struct TxtSmry{
     int id;
     TokenInfo token[Q_RABIN]; //len = Q_MODULE
-    UINT* existTokens; //Exist Token
-    dymArr_ULONG* existTokens_DymArr;
+    int* existTokens; //Exist Token
+    dymArr* existTokens_DymArr;
     int nToken; // unique token number
     char* text; // Text
     bool synced; // Check the information is updated
@@ -119,8 +95,8 @@ typedef struct TxtSmry{
 void init_TxtSmry(TxtSmry* smry, int hashMapsize);
 /** Initiate array of text summary*/
 void init_TxtSmry_arr(TxtSmry** smry, int len, int hashmapSize);
-void append_hash_TxtSmry(TxtSmry* smry, ULONG hash);
-void add_unique_hashlist(TxtSmry* smry, ULONG hash);
+void append_hash_TxtSmry(TxtSmry* smry, int hash);
+void add_unique_hashlist(TxtSmry* smry, int hash);
 ULONG get_unique_hashlist(TxtSmry* smry, int i);
 /** Kill array of TxtSmry.*/
 void kill_TxtSmry_arr(TxtSmry* smry, int len);

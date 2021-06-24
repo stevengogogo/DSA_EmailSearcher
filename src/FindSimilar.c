@@ -45,7 +45,6 @@ int popTokenHash(char message[], char token[], int iStr, int* Hash){
     while(message[iStr] != '\0' ){
         c = message[iStr];
         asc = (int)c; //ascii number
-        ++iStr;
         Dn_cur = 0;
 
         if (isRegularExpr_ASCII(asc)){
@@ -54,13 +53,17 @@ int popTokenHash(char message[], char token[], int iStr, int* Hash){
             token[i] = c;
             *Hash += updateHash(c, *Hash, &Dn_cur);
             ++i;
+            ++iStr;
         }
         else{
-            if (i==0)
+            if (i==0){
+                ++iStr;
                 continue;
+            }
             else 
                 break;
         }
+
     }
 
     if (message[iStr] == '\0'){ // EOF

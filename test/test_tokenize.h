@@ -55,6 +55,34 @@ void test_token(){
     }
 }
 
+void test_Regex(void){
+    TEST_CHECK(isRegularExpr_ASCII('+')==0 );
+    TEST_CHECK(isRegularExpr_ASCII('-')==0 );
+    TEST_CHECK(isRegularExpr_ASCII('&')==0 );
+    TEST_CHECK(isRegularExpr_ASCII('^')==0 );
+    TEST_CHECK(isRegularExpr_ASCII('>')==0 );
+    TEST_CHECK(isRegularExpr_ASCII('\'')==0 );
+    TEST_CHECK(isRegularExpr_ASCII('\0')==0 );
+    TEST_CHECK(isRegularExpr_ASCII('`')==0 );
+    TEST_CHECK(isRegularExpr_ASCII('&')==0 );
+    TEST_CHECK(isRegularExpr_ASCII('$')==0 );
+    TEST_CHECK(isRegularExpr_ASCII('_')==0 );
+    TEST_CHECK(isRegularExpr_ASCII('#')==0 );
+    TEST_CHECK(isRegularExpr_ASCII('?')==0 );
+    TEST_CHECK(isRegularExpr_ASCII('@')==0 );
+    TEST_CHECK(isRegularExpr_ASCII(')')==0 );
+    TEST_CHECK(isRegularExpr_ASCII('*')==0 );
+    TEST_CHECK(isRegularExpr_ASCII('!')==0 );
+    TEST_CHECK(isRegularExpr_ASCII('~')==0 );
+    TEST_CHECK(isRegularExpr_ASCII(';')==0 );
+    TEST_CHECK(isRegularExpr_ASCII(' ')==0 );
+
+    TEST_CHECK(isRegularExpr_ASCII('a')==1 );
+    TEST_CHECK(isRegularExpr_ASCII('A')==1 );
+    TEST_CHECK(isRegularExpr_ASCII('4')==1 );
+    TEST_CHECK(isRegularExpr_ASCII('0')==1 );
+    TEST_CHECK(isRegularExpr_ASCII('E')==1 );
+}
 
 
 #endif

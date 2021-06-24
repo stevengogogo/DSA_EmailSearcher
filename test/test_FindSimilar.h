@@ -126,13 +126,34 @@ void test_RabinKarp_hashing(void){
     int hash;
 
     /*Expected iteration*/
-    int iEndExp[5+1] = {4,8,17,19,25,29};
-    char iEndExpSr[5+1] = {' ','+','i',' ','?','\0'};
-    for(int i=0;i<(5+1);i++){
+    int iEndExp[5] =  {4,8,19,25, -1};//expected stop site
+    char iEndExpSr[4] = {' ','+',' ','?'};
+    for(int i=0;i<4;i++){
         TEST_CHECK(text[iEndExp[i]]==iEndExpSr[i]);
         TEST_MSG("Got %c at site %d (C: %c)", iEndExpSr[i], iEndExp[i], text[iEndExp[i]]);
     }
 
+    int i = 0;
+    while(1){
+        iEnd = popTokenHash(text, token, iStr, &hash);
+        if(token[0]!='\0' ){
+            TEST_CHECK(iEnd == iEndExp[i]);
+            TEST_MSG("iEnd=%d(%c); Expected=%d(%c); Token: %s", iEnd, text[iEnd],iEndExp[i], text[iEndExp[i]], token);
+            TEST_CHECK(i<= strlen(text));
+        }
+
+
+        if(iEnd==-1){
+            break;
+        }
+        else{
+            iStr = iEnd;
+            ++i;
+        }
+    }
+
+    TEST_CHECK(i ==5-1 );
+    TEST_MSG("i=%d", i);
 
 
 }

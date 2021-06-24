@@ -11,15 +11,42 @@
 
 
 int main(void) {
-    int n_mails, n_queries;
-    mail *mails;
-    query *queries;
+    char text[10000] = "What day+--@#4231is today??87\0";
+    char tokenStr[5][300] = {
+        "what",
+        "day",
+        "4231is",
+        "today",
+        "87"
+    };
 
-	api.init(&n_mails, &n_queries, &mails, &queries);
+    char token[10000];
+    int iStr=0;
+    int iEnd;
+    int hash;
 
-	for(int i = 0; i < n_queries; i++)
-		if(queries[i].type == expression_match)
-		  api.answer(queries[i].id, NULL, 0);
+    /*Expected iteration*/
+    int iEndExp[5] =  {4,8,17,19,-1};//expected stop site
+    char iEndExpSr[4] = {' ','+',' ','?'};
+
+    int i = 0;
+    while(1){
+        iEnd = popTokenHash(text, token, iStr, &hash);
+        if(token[0]!='\0' ){
+            
+        }
+
+        if(iEnd==-1){
+            break;
+        }
+        else{
+            iStr = iEnd;
+            ++i;
+        }
+    }
+
+
+
 
   return 0;
 }

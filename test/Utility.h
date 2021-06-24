@@ -5,6 +5,7 @@
 #include <string.h>
 #include <math.h>
 #include "acutest.h"
+#include "utils.h"
 
 /**
  * @brief Get the mails object
@@ -89,7 +90,7 @@ static int HashString(char s[], int D, int Q){
     long hash = 0;
     
     for(long i=0;i<len;i++){
-        hash += (s[i]*power_int(D, len-i-1)) ;
+        hash += (char2num(s[i])*power_int(D, len-i-1)) ;
     }
     return (int)(hash % Q);
 };

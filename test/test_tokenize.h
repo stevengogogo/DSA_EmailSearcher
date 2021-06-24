@@ -30,7 +30,8 @@ void test_popToken(void){
     //When no more token left
     int iend = 0;
     iend = popToken(message, token, iStr);
-    TEST_CHECK(iend == iStr);
+    TEST_CHECK(iend == -1);
+    TEST_CHECK(iStr = strlen(message)+1);
     TEST_CHECK( strncmp(token, "\0", strlen(token)) == 0 );
 }
 

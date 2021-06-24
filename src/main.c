@@ -61,20 +61,28 @@ static void get_mails(char* filename, mail** mails, int* num_mail){
     free(subject);
     free(from);
     free(to);
-}
-
-static int power_int(int x, int n){
-    int p = 1;
-    for(int i=0;i<n;i++){
-        p *= x;
-    }
-    return p;
 };
 
 
 
-int main(void) {
 
+
+
+
+int main(void) {
+    int num_mail;
+    mail* mails;
+    TxtSmry* smrys;
+    
+
+    get_mails("test/data/test.in", &mails, &num_mail);
+
+    Init_FindSimilar(&smrys, num_mail);
+
+    Preprocess_FindSimilar(smrys, mails, 30);
+
+    kill_FindSimilar(smrys, num_mail);
+    free(mails);
 
   return 0;
 }

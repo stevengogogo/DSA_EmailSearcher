@@ -75,7 +75,7 @@ int popTokenHash(char message[], char token[], int iStr, int* Hash){
 
 int updateHash(char c, int Hash_cur){
     int HashUPD;
-    HashUPD = Hash_cur * D_RABIN + (int)c;
+    HashUPD = Hash_cur * D_RABIN + char2num(c);
     HashUPD = HashUPD % Q_RABIN;
     return HashUPD;
 }

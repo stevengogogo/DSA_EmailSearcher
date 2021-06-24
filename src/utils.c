@@ -34,17 +34,19 @@ int popToken(char message[], char token[], int iStr){
     while(message[iStr] != '\0' ){
         c = message[iStr];
         asc = (int)c; //ascii number
-        ++iStr;
 
         if (isRegularExpr_ASCII(asc)){
             if (isUpperCase_ASCII(c))
                 c = tolower(c);
             token[i] = c;
             ++i;
+            ++iStr;
         }
         else{
-            if (i==0)
+            if (i==0){
+                ++iStr;
                 continue;
+            }
             else 
                 break;
         }

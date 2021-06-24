@@ -132,7 +132,7 @@ Macros</h2></td></tr>
 #define&#160;</td><td class="memItemRight" valign="bottom"><b>Q_RABIN</b>&#160;&#160;&#160;100001</td></tr>
 <tr class="separator:a35711bcac45cf1d1a72c3ebf2f3f6b07"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a7cab064e819abdeec12b4c0cd6e6817c"><td class="memItemLeft" align="right" valign="top"><a id="a7cab064e819abdeec12b4c0cd6e6817c"></a>
-#define&#160;</td><td class="memItemRight" valign="bottom"><b>D_RABIN</b>&#160;&#160;&#160;25</td></tr>
+#define&#160;</td><td class="memItemRight" valign="bottom"><b>D_RABIN</b>&#160;&#160;&#160;36</td></tr>
 <tr class="separator:a7cab064e819abdeec12b4c0cd6e6817c"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ab3d3582184b6aa885b986b2c3ec1b6c3"><td class="memItemLeft" align="right" valign="top"><a id="ab3d3582184b6aa885b986b2c3ec1b6c3"></a>
 #define&#160;</td><td class="memItemRight" valign="bottom"><b>INIT_SPURIOUS_COUNT</b>&#160;&#160;&#160;3</td></tr>
@@ -196,9 +196,9 @@ ULONG&#160;</td><td class="memItemRight" valign="bottom"><b>get_unique_hashlist<
 <tr class="separator:a59b118272255ea41350b6fc60bff4ecd"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a5d1c13d719525d926512bacf0d5e154c"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="FindSimilar_8h.html#a5d1c13d719525d926512bacf0d5e154c">popTokenHash</a> (char message[], char token[], int iStr, int *Hash)</td></tr>
 <tr class="separator:a5d1c13d719525d926512bacf0d5e154c"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ad9d7751fde0fc4fd3b4a05e3b702754d"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="FindSimilar_8h.html#ad9d7751fde0fc4fd3b4a05e3b702754d">updateHash</a> (char c, int Hash_cur, int *Dn_cur)</td></tr>
-<tr class="memdesc:ad9d7751fde0fc4fd3b4a05e3b702754d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Update the hash value with new character.  <a href="FindSimilar_8h.html#ad9d7751fde0fc4fd3b4a05e3b702754d">More...</a><br /></td></tr>
-<tr class="separator:ad9d7751fde0fc4fd3b4a05e3b702754d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a06642823ef32a4056a29c76dba683d33"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="FindSimilar_8h.html#a06642823ef32a4056a29c76dba683d33">updateHash</a> (char c, int Hash_cur)</td></tr>
+<tr class="memdesc:a06642823ef32a4056a29c76dba683d33"><td class="mdescLeft">&#160;</td><td class="mdescRight">Update the hash value with new character.  <a href="FindSimilar_8h.html#a06642823ef32a4056a29c76dba683d33">More...</a><br /></td></tr>
+<tr class="separator:a06642823ef32a4056a29c76dba683d33"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:abcef5cbf6a37e7160503d572705094cc"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="FindSimilar_8h.html#abcef5cbf6a37e7160503d572705094cc">Init_FindSimilar</a> (<a class="el" href="structTxtSmry.html">TxtSmry</a> **, int n_mails)</td></tr>
 <tr class="separator:abcef5cbf6a37e7160503d572705094cc"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:abff53c80583525a6cf8f0c4ea926afec"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="FindSimilar_8h.html#abff53c80583525a6cf8f0c4ea926afec">Preprocess_FindSimilar</a> (<a class="el" href="structTxtSmry.html">TxtSmry</a> *, <a class="el" href="structmail.html">mail</a> *mails, int n_mails)</td></tr>
@@ -694,8 +694,8 @@ false otherwise </dd></dl>
 
 </div>
 </div>
-<a id="ad9d7751fde0fc4fd3b4a05e3b702754d"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ad9d7751fde0fc4fd3b4a05e3b702754d">&#9670;&nbsp;</a></span>updateHash()</h2>
+<a id="a06642823ef32a4056a29c76dba683d33"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a06642823ef32a4056a29c76dba683d33">&#9670;&nbsp;</a></span>updateHash()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -710,13 +710,7 @@ false otherwise </dd></dl>
           <td class="paramkey"></td>
           <td></td>
           <td class="paramtype">int&#160;</td>
-          <td class="paramname"><em>Hash_cur</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">int *&#160;</td>
-          <td class="paramname"><em>Dn_cur</em>&#160;</td>
+          <td class="paramname"><em>Hash_cur</em>&#160;</td>
         </tr>
         <tr>
           <td></td>
@@ -731,7 +725,6 @@ false otherwise </dd></dl>
   <table class="params">
     <tr><td class="paramname">c</td><td>character to append </td></tr>
     <tr><td class="paramname">Hash_cur</td><td>current hash value </td></tr>
-    <tr><td class="paramname">Dn_cur</td><td>current accumulated D of Rabin Karp </td></tr>
   </table>
   </dd>
 </dl>

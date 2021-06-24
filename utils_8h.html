@@ -163,6 +163,9 @@ bool&#160;</td><td class="memItemRight" valign="bottom"><b>isUpperCase_ASCII</b>
 <tr class="memitem:a0ee1be0f3c96a6b89e5e1d0466213583"><td class="memItemLeft" align="right" valign="top"><a id="a0ee1be0f3c96a6b89e5e1d0466213583"></a>
 bool&#160;</td><td class="memItemRight" valign="bottom"><b>isLowerCase_ASCII</b> (int)</td></tr>
 <tr class="separator:a0ee1be0f3c96a6b89e5e1d0466213583"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a387eeb3f2467f64a219ddedefa71edfb"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="utils_8h.html#a387eeb3f2467f64a219ddedefa71edfb">char2num</a> (char c)</td></tr>
+<tr class="memdesc:a387eeb3f2467f64a219ddedefa71edfb"><td class="mdescLeft">&#160;</td><td class="mdescRight">[0-9] -&gt; [0-9]; [a-z] -&gt; [10-35]; otherwise: ASCII  <a href="utils_8h.html#a387eeb3f2467f64a219ddedefa71edfb">More...</a><br /></td></tr>
+<tr class="separator:a387eeb3f2467f64a219ddedefa71edfb"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a180f4369153ad0bc311123850a0aab42"><td class="memItemLeft" align="right" valign="top"><a id="a180f4369153ad0bc311123850a0aab42"></a>
 void&#160;</td><td class="memItemRight" valign="bottom"><b>init_dymArr</b> (<a class="el" href="structdymArr.html">dymArr</a> *, int size)</td></tr>
 <tr class="separator:a180f4369153ad0bc311123850a0aab42"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -313,6 +316,33 @@ void&#160;</td><td class="memItemRight" valign="bottom"><b>kill_uArray</b> (<a c
   <table class="params">
     <tr><td class="paramname">a</td><td></td></tr>
     <tr><td class="paramname">b</td><td></td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>int </dd></dl>
+
+</div>
+</div>
+<a id="a387eeb3f2467f64a219ddedefa71edfb"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a387eeb3f2467f64a219ddedefa71edfb">&#9670;&nbsp;</a></span>char2num()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">int char2num </td>
+          <td>(</td>
+          <td class="paramtype">char&#160;</td>
+          <td class="paramname"><em>c</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>[0-9] -&gt; [0-9]; [a-z] -&gt; [10-35]; otherwise: ASCII </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">c</td><td></td></tr>
   </table>
   </dd>
 </dl>

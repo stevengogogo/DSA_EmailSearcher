@@ -35,5 +35,7 @@ TEST_LIST = {
     {"Find Similar: append hash",test_append_hash},
     {"Find Similar: summary", test_summary_FS},
     {"Find Similar: Rabin Karp", test_RabinKarp_hashing},
+    {"Find Similar: Preprocessing", test_summarize},
+    {"Find Similar: Preprocessing (Benchmark)", test_summarize_benchmark},
     {NULL, NULL} // Terminate the test
 };

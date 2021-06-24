@@ -48,7 +48,7 @@ typedef struct MEMORY_SHORT {
 
 typedef struct MEMORY_ULONG {
     ULONG top_unused;
-    UINT* ARRAY;
+    int* ARRAY;
     ULONG LEN;
 } MEMORY_ULONG;
 
@@ -125,7 +125,7 @@ int updateHash(char c, int Hash_cur, int* Dn_cur);
 void Init_FindSimilar(TxtSmry**, int n_mails);
 
 /** Preprocessing: Summarize the mails*/
-TxtSmry* Preprocess_FindSimilar(mail*  mails, int n_mails);
+void Preprocess_FindSimilar(TxtSmry*, mail*  mails, int n_mails);
 
 /*GC for FindSimilar problem*/
 void kill_FindSimilar(TxtSmry* smrys, int n_mails);

@@ -3,7 +3,7 @@
 void init_MEM_ULONG(struct MEMORY_ULONG* mem, ULONG len){
     mem->LEN = len;
     //mem->ARRAY = (int*)malloc(mem->LEN*sizeof(int));
-    mem->ARRAY = (UINT*)calloc( mem->LEN, sizeof(ULONG));
+    mem->ARRAY = (int*)calloc( mem->LEN, sizeof(int));
     assert(mem->ARRAY != NULL);
     mem->top_unused = 0;
 }
@@ -166,21 +166,18 @@ void kill_TxtSmry_arr(TxtSmry* smry, int len){
     for(int i=0;i<len;i++){
         if(smry[i].isExistTokens_DymArr){
             kill_dymArr(smry[i].existTokens_DymArr);
-            free(smry->existTokens_DymArr);
+            free(smry[i].existTokens_DymArr);
         }
     }
     free(smry);
 }
 
-TxtSmry* Preprocess_FindSimilar(mail*  mails, int n_mails){
-    TxtSmry* smrys;
+void Preprocess_FindSimilar(TxtSmry* smrys, mail*  mails, int n_mails){
     Init_FindSimilar(&smrys, n_mails);
 
     for(int i=0;i<n_mails;i++){
         summarize_content(&smrys[i], &mails[i]);
     }
-
-    return smrys;
 }
 
 
@@ -190,7 +187,7 @@ void kill_FindSimilar(TxtSmry* smrys, int len){
 }
 
 void summarize_content(TxtSmry* smry, mail* m){
-    summarize_hash(smry, smry->text);
+    summarize_hash(smry, m->content);
     smry->id = m->id;
     smry->synced = true;
 }
@@ -218,7 +215,7 @@ void summarize_hash(TxtSmry* smry, char* text){
         }
 
         //Append New Hash Until FULL
-        if(iloc<INIT_SPURIOUS_COUNT){
+        if(smry->token[hash].count<INIT_SPURIOUS_COUNT){
             iloc = smry->token[hash].count;
             smry->token[hash].loc[iloc] = iStr;
         }

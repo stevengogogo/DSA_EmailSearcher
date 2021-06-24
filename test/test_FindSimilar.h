@@ -165,5 +165,41 @@ void test_RabinKarp_hashing(void){
 
 }
 
+void test_summarize(void){
+    int num_mail;
+    mail* mails;
+    TxtSmry* smrys;
+    clock_t str;
+    clock_t end;
+
+    get_mails("test/data/test.in", &mails, &num_mail);
+
+    Init_FindSimilar(&smrys, num_mail);
+
+    Preprocess_FindSimilar(smrys, mails, 30);
+
+    kill_FindSimilar(smrys, num_mail);
+    free(mails);
+}
+
+void test_summarize_benchmark(void){
+    int num_mail;
+    mail* mails;
+    TxtSmry* smrys;
+    clock_t str;
+    clock_t end;
+
+    get_mails("test/data/test.in", &mails, &num_mail);
+
+    Init_FindSimilar(&smrys, num_mail);
+    
+    str = clock();
+    Preprocess_FindSimilar(smrys, mails, num_mail);
+    end = clock();
+    print_clock("(10000 email)Time: ", str, end);
+
+    kill_FindSimilar(smrys, num_mail);
+    free(mails);
+}
 
 #endif

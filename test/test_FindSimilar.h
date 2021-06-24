@@ -142,6 +142,7 @@ void test_RabinKarp_hashing(void){
             TEST_CHECK(iEnd == iEndExp[i]);
             TEST_MSG("iEnd=%d(%c); Expected=%d(%c); Token: %s", iEnd, text[iEnd],iEndExp[i], text[iEndExp[i]], token);
             TEST_CHECK(i<= strlen(text));
+            TEST_CHECK(strncmp(tokenStr[j],token,strlen(token))==0);
 
             //Hash
             hashExp = HashString(tokenStr[j], D_RABIN, Q_RABIN);

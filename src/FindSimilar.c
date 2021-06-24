@@ -204,10 +204,14 @@ void summarize_hash(TxtSmry* smry, char* text){
     int hash;
 
     while(1){
-        iNxt = popToken(text, token, iStr);
-        if(iNxt == iStr){//no token left
+        iNxt = popTokenHash(text, token, iStr, &hash);
+        if(iNxt == -1){//no token left
             break;
         }
+
+        //TODO
+
+
         
     }
 

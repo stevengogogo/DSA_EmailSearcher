@@ -126,10 +126,39 @@ $(function() {
 <div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160;    }</div>
 <div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160;}</div>
 <div class="line"><a name="l00057"></a><span class="lineno">   57</span>&#160; </div>
-<div class="line"><a name="l00058"></a><span class="lineno">   58</span>&#160; </div>
-<div class="line"><a name="l00059"></a><span class="lineno">   59</span>&#160; </div>
-<div class="line"><a name="l00060"></a><span class="lineno">   60</span>&#160;<span class="preprocessor">#endif</span></div>
+<div class="line"><a name="l00058"></a><span class="lineno">   58</span>&#160;<span class="keywordtype">void</span> test_Regex(<span class="keywordtype">void</span>){</div>
+<div class="line"><a name="l00059"></a><span class="lineno">   59</span>&#160;    TEST_CHECK(<a class="code" href="utils_8h.html#a5ba940f06573ba87adcd6ee567673239">isRegularExpr_ASCII</a>(<span class="charliteral">&#39;+&#39;</span>)==0 );</div>
+<div class="line"><a name="l00060"></a><span class="lineno">   60</span>&#160;    TEST_CHECK(<a class="code" href="utils_8h.html#a5ba940f06573ba87adcd6ee567673239">isRegularExpr_ASCII</a>(<span class="charliteral">&#39;-&#39;</span>)==0 );</div>
+<div class="line"><a name="l00061"></a><span class="lineno">   61</span>&#160;    TEST_CHECK(<a class="code" href="utils_8h.html#a5ba940f06573ba87adcd6ee567673239">isRegularExpr_ASCII</a>(<span class="charliteral">&#39;&amp;&#39;</span>)==0 );</div>
+<div class="line"><a name="l00062"></a><span class="lineno">   62</span>&#160;    TEST_CHECK(<a class="code" href="utils_8h.html#a5ba940f06573ba87adcd6ee567673239">isRegularExpr_ASCII</a>(<span class="charliteral">&#39;^&#39;</span>)==0 );</div>
+<div class="line"><a name="l00063"></a><span class="lineno">   63</span>&#160;    TEST_CHECK(<a class="code" href="utils_8h.html#a5ba940f06573ba87adcd6ee567673239">isRegularExpr_ASCII</a>(<span class="charliteral">&#39;&gt;&#39;</span>)==0 );</div>
+<div class="line"><a name="l00064"></a><span class="lineno">   64</span>&#160;    TEST_CHECK(<a class="code" href="utils_8h.html#a5ba940f06573ba87adcd6ee567673239">isRegularExpr_ASCII</a>(<span class="charliteral">&#39;\&#39;&#39;</span>)==0 );</div>
+<div class="line"><a name="l00065"></a><span class="lineno">   65</span>&#160;    TEST_CHECK(<a class="code" href="utils_8h.html#a5ba940f06573ba87adcd6ee567673239">isRegularExpr_ASCII</a>(<span class="charliteral">&#39;\0&#39;</span>)==0 );</div>
+<div class="line"><a name="l00066"></a><span class="lineno">   66</span>&#160;    TEST_CHECK(<a class="code" href="utils_8h.html#a5ba940f06573ba87adcd6ee567673239">isRegularExpr_ASCII</a>(<span class="charliteral">&#39;`&#39;</span>)==0 );</div>
+<div class="line"><a name="l00067"></a><span class="lineno">   67</span>&#160;    TEST_CHECK(<a class="code" href="utils_8h.html#a5ba940f06573ba87adcd6ee567673239">isRegularExpr_ASCII</a>(<span class="charliteral">&#39;&amp;&#39;</span>)==0 );</div>
+<div class="line"><a name="l00068"></a><span class="lineno">   68</span>&#160;    TEST_CHECK(<a class="code" href="utils_8h.html#a5ba940f06573ba87adcd6ee567673239">isRegularExpr_ASCII</a>(<span class="charliteral">&#39;$&#39;</span>)==0 );</div>
+<div class="line"><a name="l00069"></a><span class="lineno">   69</span>&#160;    TEST_CHECK(<a class="code" href="utils_8h.html#a5ba940f06573ba87adcd6ee567673239">isRegularExpr_ASCII</a>(<span class="charliteral">&#39;_&#39;</span>)==0 );</div>
+<div class="line"><a name="l00070"></a><span class="lineno">   70</span>&#160;    TEST_CHECK(<a class="code" href="utils_8h.html#a5ba940f06573ba87adcd6ee567673239">isRegularExpr_ASCII</a>(<span class="charliteral">&#39;#&#39;</span>)==0 );</div>
+<div class="line"><a name="l00071"></a><span class="lineno">   71</span>&#160;    TEST_CHECK(<a class="code" href="utils_8h.html#a5ba940f06573ba87adcd6ee567673239">isRegularExpr_ASCII</a>(<span class="charliteral">&#39;?&#39;</span>)==0 );</div>
+<div class="line"><a name="l00072"></a><span class="lineno">   72</span>&#160;    TEST_CHECK(<a class="code" href="utils_8h.html#a5ba940f06573ba87adcd6ee567673239">isRegularExpr_ASCII</a>(<span class="charliteral">&#39;@&#39;</span>)==0 );</div>
+<div class="line"><a name="l00073"></a><span class="lineno">   73</span>&#160;    TEST_CHECK(<a class="code" href="utils_8h.html#a5ba940f06573ba87adcd6ee567673239">isRegularExpr_ASCII</a>(<span class="charliteral">&#39;)&#39;</span>)==0 );</div>
+<div class="line"><a name="l00074"></a><span class="lineno">   74</span>&#160;    TEST_CHECK(<a class="code" href="utils_8h.html#a5ba940f06573ba87adcd6ee567673239">isRegularExpr_ASCII</a>(<span class="charliteral">&#39;*&#39;</span>)==0 );</div>
+<div class="line"><a name="l00075"></a><span class="lineno">   75</span>&#160;    TEST_CHECK(<a class="code" href="utils_8h.html#a5ba940f06573ba87adcd6ee567673239">isRegularExpr_ASCII</a>(<span class="charliteral">&#39;!&#39;</span>)==0 );</div>
+<div class="line"><a name="l00076"></a><span class="lineno">   76</span>&#160;    TEST_CHECK(<a class="code" href="utils_8h.html#a5ba940f06573ba87adcd6ee567673239">isRegularExpr_ASCII</a>(<span class="charliteral">&#39;~&#39;</span>)==0 );</div>
+<div class="line"><a name="l00077"></a><span class="lineno">   77</span>&#160;    TEST_CHECK(<a class="code" href="utils_8h.html#a5ba940f06573ba87adcd6ee567673239">isRegularExpr_ASCII</a>(<span class="charliteral">&#39;;&#39;</span>)==0 );</div>
+<div class="line"><a name="l00078"></a><span class="lineno">   78</span>&#160;    TEST_CHECK(<a class="code" href="utils_8h.html#a5ba940f06573ba87adcd6ee567673239">isRegularExpr_ASCII</a>(<span class="charliteral">&#39; &#39;</span>)==0 );</div>
+<div class="line"><a name="l00079"></a><span class="lineno">   79</span>&#160; </div>
+<div class="line"><a name="l00080"></a><span class="lineno">   80</span>&#160;    TEST_CHECK(<a class="code" href="utils_8h.html#a5ba940f06573ba87adcd6ee567673239">isRegularExpr_ASCII</a>(<span class="charliteral">&#39;a&#39;</span>)==1 );</div>
+<div class="line"><a name="l00081"></a><span class="lineno">   81</span>&#160;    TEST_CHECK(<a class="code" href="utils_8h.html#a5ba940f06573ba87adcd6ee567673239">isRegularExpr_ASCII</a>(<span class="charliteral">&#39;A&#39;</span>)==1 );</div>
+<div class="line"><a name="l00082"></a><span class="lineno">   82</span>&#160;    TEST_CHECK(<a class="code" href="utils_8h.html#a5ba940f06573ba87adcd6ee567673239">isRegularExpr_ASCII</a>(<span class="charliteral">&#39;4&#39;</span>)==1 );</div>
+<div class="line"><a name="l00083"></a><span class="lineno">   83</span>&#160;    TEST_CHECK(<a class="code" href="utils_8h.html#a5ba940f06573ba87adcd6ee567673239">isRegularExpr_ASCII</a>(<span class="charliteral">&#39;0&#39;</span>)==1 );</div>
+<div class="line"><a name="l00084"></a><span class="lineno">   84</span>&#160;    TEST_CHECK(<a class="code" href="utils_8h.html#a5ba940f06573ba87adcd6ee567673239">isRegularExpr_ASCII</a>(<span class="charliteral">&#39;E&#39;</span>)==1 );</div>
+<div class="line"><a name="l00085"></a><span class="lineno">   85</span>&#160;}</div>
+<div class="line"><a name="l00086"></a><span class="lineno">   86</span>&#160; </div>
+<div class="line"><a name="l00087"></a><span class="lineno">   87</span>&#160; </div>
+<div class="line"><a name="l00088"></a><span class="lineno">   88</span>&#160;<span class="preprocessor">#endif</span></div>
 <div class="ttc" id="autils_8h_html"><div class="ttname"><a href="utils_8h.html">utils.h</a></div><div class="ttdoc">General Utilities for C language.</div></div>
+<div class="ttc" id="autils_8h_html_a5ba940f06573ba87adcd6ee567673239"><div class="ttname"><a href="utils_8h.html#a5ba940f06573ba87adcd6ee567673239">isRegularExpr_ASCII</a></div><div class="ttdeci">bool isRegularExpr_ASCII(int)</div><div class="ttdoc">Judge a character belong to regular expression or not.</div><div class="ttdef"><b>Definition:</b> utils.c:62</div></div>
 <div class="ttc" id="autils_8h_html_a81f4883411916757a7c41b8a74f73c2b"><div class="ttname"><a href="utils_8h.html#a81f4883411916757a7c41b8a74f73c2b">popToken</a></div><div class="ttdeci">int popToken(char message[], char token[], int iStr)</div><div class="ttdoc">Pop token from message.</div><div class="ttdef"><b>Definition:</b> utils.c:24</div></div>
 </div><!-- fragment --></div><!-- contents -->
 <!-- start footer part -->

@@ -88,7 +88,7 @@ typedef struct TxtSmry{
     char* text; // Text
     bool synced; // Check the information is updated
     bool isExistTokens_DymArr;
-    bool SpuriousOverflow;
+    int maxSpurious;
 } TxtSmry;
 
 

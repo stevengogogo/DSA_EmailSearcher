@@ -108,7 +108,7 @@ void init_TxtSmry(TxtSmry* smry, int hashMapsize){
     smry->text = NULL;
     smry->synced = false;
     smry->isExistTokens_DymArr = false;
-    smry->SpuriousOverflow = false;
+    smry->maxSpurious = 0;
 }
 
 void init_TxtSmry_arr(TxtSmry** smry, int len, int hashmapSize){
@@ -196,7 +196,9 @@ void summarize_hash(TxtSmry* smry, char* text){
     smry->text = text;
     //Retrieving Tokens
     char token[TOKEN_STRING_LENGTH];
+    char tkH[TOKEN_STRING_LENGTH]; //history token
     int iloc;
+    int iStrH = 0;
     int iStr = 0; //Current pin
     int iNxt; //Next pin
     int hash;
@@ -206,6 +208,17 @@ void summarize_hash(TxtSmry* smry, char* text){
         if(iNxt == -1){//no token left
             break;
         }
+        //Check new token is duplicate
+        /*
+        for(int i=0;i<smry->token[hash].count;i++){
+            iStrH = smry->token[hash].loc[i];
+            iStrH = popToken(text, tkH, iStrH);
+            if(strncmp(tkH, token, strlen(token))==0){
+                iStr = iNxt;
+                continue;
+            }
+        }
+        */
 
         //Append unique hash 
         if(smry->token[hash].count==0){//unique token
@@ -218,13 +231,13 @@ void summarize_hash(TxtSmry* smry, char* text){
             iloc = smry->token[hash].count;
             smry->token[hash].loc[iloc] = iStr;
         }
-        else{
-            smry->SpuriousOverflow = true;
-        }
         ++smry->token[hash].count;
 
         //Next token
         iStr = iNxt;
+
+        if(smry->maxSpurious<smry->token[hash].count)
+            smry->maxSpurious = smry->token[hash].count;
     }
 
 

@@ -185,6 +185,7 @@ void test_summarize(void){
 void test_summarize_benchmark(void){
     int num_mail;
     mail* mails;
+    int countOver=0;
     TxtSmry* smrys;
     clock_t str;
     clock_t end;
@@ -197,6 +198,19 @@ void test_summarize_benchmark(void){
     Preprocess_FindSimilar(smrys, mails, num_mail);
     end = clock();
     print_clock("(10000 email)Time: ", str, end);
+
+    for(int i=0;i<num_mail;i++){
+        if(smrys->maxSpurious>INIT_SPURIOUS_COUNT){
+            ++countOver;
+        }
+    }
+    printf(" Spurious Overflow: %d/%d", countOver, num_mail);
+
+    for(int i=0;i<num_mail;i++){
+        if( smrys[i].maxSpurious > INIT_SPURIOUS_COUNT){
+        printf(" Max Spurious: %d (out of %d unique hash)\n",smrys[i].maxSpurious, smrys[i].nToken);
+        }
+    }
 
     kill_FindSimilar(smrys, num_mail);
     free(mails);

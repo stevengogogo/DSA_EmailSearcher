@@ -110,7 +110,32 @@ void test_summary_FS(void){
 }
 
 
+void test_RabinKarp_hashing(void){
+    char text[10000] = "What day+--@#4231is today??87\0";
+    char tokenStr[5][300] = {
+        "what",
+        "day",
+        "4231is",
+        "today",
+        "87"
+    };
 
+    char token[10000];
+    int iStr=0;
+    int iEnd;
+    int hash;
+
+    /*Expected iteration*/
+    int iEndExp[5+1] = {4,8,17,19,25,29};
+    char iEndExpSr[5+1] = {' ','+','i',' ','?','\0'};
+    for(int i=0;i<(5+1);i++){
+        TEST_CHECK(text[iEndExp[i]]==iEndExpSr[i]);
+        TEST_MSG("Got %c at site %d (C: %c)", iEndExpSr[i], iEndExp[i], text[iEndExp[i]]);
+    }
+
+
+
+}
 
 
 #endif

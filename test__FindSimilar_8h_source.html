@@ -288,7 +288,30 @@ $(function() {
 <div class="line"><a name="l00217"></a><span class="lineno">  217</span>&#160;    free(mails);</div>
 <div class="line"><a name="l00218"></a><span class="lineno">  218</span>&#160;}</div>
 <div class="line"><a name="l00219"></a><span class="lineno">  219</span>&#160; </div>
-<div class="line"><a name="l00220"></a><span class="lineno">  220</span>&#160;<span class="preprocessor">#endif</span></div>
+<div class="line"><a name="l00220"></a><span class="lineno">  220</span>&#160; </div>
+<div class="line"><a name="l00221"></a><span class="lineno">  221</span>&#160;<span class="keywordtype">void</span> test_tokenhash(<span class="keywordtype">void</span>){</div>
+<div class="line"><a name="l00222"></a><span class="lineno">  222</span>&#160;    <span class="keywordtype">char</span> text[10000] = <span class="stringliteral">&quot;1+---23I faead we t+ga&quot;</span>;</div>
+<div class="line"><a name="l00223"></a><span class="lineno">  223</span>&#160;    <span class="keywordtype">char</span> token1[1000];</div>
+<div class="line"><a name="l00224"></a><span class="lineno">  224</span>&#160;    <span class="keywordtype">char</span> token2[1000];</div>
+<div class="line"><a name="l00225"></a><span class="lineno">  225</span>&#160;    <span class="keywordtype">int</span> i1 = 0;</div>
+<div class="line"><a name="l00226"></a><span class="lineno">  226</span>&#160;    <span class="keywordtype">int</span> i2 = 0;</div>
+<div class="line"><a name="l00227"></a><span class="lineno">  227</span>&#160;    <span class="keywordtype">int</span> h;</div>
+<div class="line"><a name="l00228"></a><span class="lineno">  228</span>&#160; </div>
+<div class="line"><a name="l00229"></a><span class="lineno">  229</span>&#160;    <span class="keywordflow">while</span>(1){</div>
+<div class="line"><a name="l00230"></a><span class="lineno">  230</span>&#160;        i1 = <a class="code" href="FindSimilar_8h.html#a5d1c13d719525d926512bacf0d5e154c">popTokenHash</a>(text, token1, i1, &amp;h);</div>
+<div class="line"><a name="l00231"></a><span class="lineno">  231</span>&#160;        i2 = <a class="code" href="utils_8h.html#a81f4883411916757a7c41b8a74f73c2b">popToken</a>(text, token2, i2);</div>
+<div class="line"><a name="l00232"></a><span class="lineno">  232</span>&#160; </div>
+<div class="line"><a name="l00233"></a><span class="lineno">  233</span>&#160;        </div>
+<div class="line"><a name="l00234"></a><span class="lineno">  234</span>&#160;        TEST_CHECK(strcmp(token1,token2)==0);</div>
+<div class="line"><a name="l00235"></a><span class="lineno">  235</span>&#160;        TEST_CHECK(i1==i2);</div>
+<div class="line"><a name="l00236"></a><span class="lineno">  236</span>&#160;        <span class="keywordflow">if</span>(i1==-1){</div>
+<div class="line"><a name="l00237"></a><span class="lineno">  237</span>&#160;            <span class="keywordflow">break</span>;</div>
+<div class="line"><a name="l00238"></a><span class="lineno">  238</span>&#160;        }</div>
+<div class="line"><a name="l00239"></a><span class="lineno">  239</span>&#160;    }</div>
+<div class="line"><a name="l00240"></a><span class="lineno">  240</span>&#160;    </div>
+<div class="line"><a name="l00241"></a><span class="lineno">  241</span>&#160;}</div>
+<div class="line"><a name="l00242"></a><span class="lineno">  242</span>&#160; </div>
+<div class="line"><a name="l00243"></a><span class="lineno">  243</span>&#160;<span class="preprocessor">#endif</span></div>
 <div class="ttc" id="aFindSimilar_8h_html"><div class="ttname"><a href="FindSimilar_8h.html">FindSimilar.h</a></div><div class="ttdoc">Group Analysis. Use Jaccob's similarity with hash table to identify similar strings.</div></div>
 <div class="ttc" id="aFindSimilar_8h_html_a5d1c13d719525d926512bacf0d5e154c"><div class="ttname"><a href="FindSimilar_8h.html#a5d1c13d719525d926512bacf0d5e154c">popTokenHash</a></div><div class="ttdeci">int popTokenHash(char message[], char token[], int iStr, int *Hash)</div><div class="ttdef"><b>Definition:</b> FindSimilar.c:33</div></div>
 <div class="ttc" id="aFindSimilar_8h_html_a6e2dd2f8a6e68dd5aaca7c76a32ddc05"><div class="ttname"><a href="FindSimilar_8h.html#a6e2dd2f8a6e68dd5aaca7c76a32ddc05">kill_MEM_ULONG</a></div><div class="ttdeci">void kill_MEM_ULONG(struct MEMORY_ULONG *mem)</div><div class="ttdef"><b>Definition:</b> FindSimilar.c:18</div></div>
@@ -297,6 +320,7 @@ $(function() {
 <div class="ttc" id="aFindSimilar_8h_html_abff53c80583525a6cf8f0c4ea926afec"><div class="ttname"><a href="FindSimilar_8h.html#abff53c80583525a6cf8f0c4ea926afec">Preprocess_FindSimilar</a></div><div class="ttdeci">void Preprocess_FindSimilar(TxtSmry *, mail *mails, int n_mails)</div><div class="ttdef"><b>Definition:</b> FindSimilar.c:172</div></div>
 <div class="ttc" id="astructTxtSmry_html"><div class="ttname"><a href="structTxtSmry.html">TxtSmry</a></div><div class="ttdef"><b>Definition:</b> FindSimilar.h:82</div></div>
 <div class="ttc" id="astructmail_html"><div class="ttname"><a href="structmail.html">mail</a></div><div class="ttdef"><b>Definition:</b> api.h:16</div></div>
+<div class="ttc" id="autils_8h_html_a81f4883411916757a7c41b8a74f73c2b"><div class="ttname"><a href="utils_8h.html#a81f4883411916757a7c41b8a74f73c2b">popToken</a></div><div class="ttdeci">int popToken(char message[], char token[], int iStr)</div><div class="ttdoc">Pop token from message.</div><div class="ttdef"><b>Definition:</b> utils.c:24</div></div>
 </div><!-- fragment --></div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>

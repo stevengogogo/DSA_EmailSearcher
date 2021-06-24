@@ -173,7 +173,6 @@ void kill_TxtSmry_arr(TxtSmry* smry, int len){
 }
 
 void Preprocess_FindSimilar(TxtSmry* smrys, mail*  mails, int n_mails){
-    Init_FindSimilar(&smrys, n_mails);
 
     for(int i=0;i<n_mails;i++){
         summarize_content(&smrys[i], &mails[i]);

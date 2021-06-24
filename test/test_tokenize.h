@@ -27,6 +27,11 @@ void test_popToken(void){
         TEST_MSG("Expected: %s ; Got: %s (%d)\n",tokenStr[i], token, iStr);
     }
 
+    //When no more token left
+    int iend = 0;
+    iend = popToken(message, token, iStr);
+    TEST_CHECK(iend == iStr);
+    TEST_CHECK( strncmp(token, "\0", strlen(token)) == 0 );
 }
 
 void test_token(){

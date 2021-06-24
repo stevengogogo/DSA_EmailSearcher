@@ -29,11 +29,64 @@ void kill_MEM_SHORT(struct MEMORY_SHORT* mem){
     mem->top_unused = EMTY_QUE_SIG;
 }
 
+/*******HASH*******/
+int popTokenHash(char message[], char token[], int iStr, int* Hash){
+    char c;
+    int asc; //ascii number
+    *Hash = 0; //reset hash value
+    int Dn_cur = 0;
+    //No string left
+    if (iStr < 0){
+        token[0] = '\0';
+        return -1;
+    }
+
+    int i = 0; //token[i]
+    while(message[iStr] != '\0' ){
+        c = message[iStr];
+        asc = (int)c; //ascii number
+        ++iStr;
+        Dn_cur = 0;
+
+        if (isRegularExpr_ASCII(asc)){
+            if (isUpperCase_ASCII(c))
+                c = tolower(c);
+            token[i] = c;
+            *Hash += updateHash(c, *Hash, &Dn_cur);
+            ++i;
+        }
+        else{
+            if (i==0)
+                continue;
+            else 
+                break;
+        }
+    }
+
+    if (message[iStr] == '\0'){ // EOF
+        iStr= -1;
+    }
+
+    token[i] = '\0'; //end of token
+
+    return iStr;
+}
+
+int updateHash(char c, int Hash_cur, int* Dn_cur){
+    int HashUPD;
+    *Dn_cur = (*Dn_cur * D_RABIN) % Q_RABIN;
+    HashUPD = Hash_cur * (*Dn_cur) + (int)c;
+    HashUPD = HashUPD % Q_RABIN;
+    return HashUPD;
+}
+
+
+/*******Main API****/
 void Init_FindSimilar(TxtSmry** smrys, int n_mails){
     ULONG nmail = (ULONG)n_mails;
     //Occupied hash index
     init_MEM_ULONG(&existTokens_mem, nmail*INIT_UNIQUE_TOKEN_SIZE);
-    init_TxtSmry_arr(smrys, nmail, Q_MODULO);
+    init_TxtSmry_arr(smrys, nmail, Q_RABIN);
 
 }
 
@@ -139,7 +192,23 @@ void summarize_content(TxtSmry* smry, mail* m){
 }
 
 void summarize_hash(TxtSmry* smry, char* text){
+    //Record original text
     smry->text = text;
+    //Retrieving Tokens
+    char token[TOKEN_STRING_LENGTH];
+    int iStr = 0; //Current pin
+    int iNxt; //Next pin
+    int hash;
+
+    while(1){
+        iNxt = popToken(text, token, iStr);
+        if(iNxt == iStr){//no token left
+            break;
+        }
+        
+    }
+
+
 }
 
 /**Helper function*/

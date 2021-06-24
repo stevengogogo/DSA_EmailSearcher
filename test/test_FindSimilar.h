@@ -58,7 +58,7 @@ void test_init_content_FS(void){
     }
     
     //The token array is 0 in default
-    for(int i=0;i<Q_MODULO;i++){
+    for(int i=0;i<Q_RABIN;i++){
         TEST_CHECK(smrys[n_mails-1].token[i].count==0);
         TEST_CHECK(smrys[234].token[i].count==0);
         TEST_CHECK(smrys[0].token[i].count==0);

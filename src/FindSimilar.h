@@ -20,10 +20,11 @@
 #include "api.h"
 
 /**********Constant Variable***********/
-#define Q_MODULO 100000
-#define D 252
+#define Q_RABIN 100000
+#define D_RABIN 252
 #define INIT_SPURIOUS_COUNT 3
 #define INIT_UNIQUE_TOKEN_SIZE 10000
+#define TOKEN_STRING_LENGTH 10000
 #define ULONG  long
 #define UINT  int
 #define USHORT unsigned short
@@ -86,7 +87,7 @@ static struct MEMORY_ULONG existTokens_mem;
 
 /**
  * @brief 
- * @note Each email is using the hash map with @ref Q_MODULO size, and each slot has @ref INIT_SPURIOUS_COUNT location data.
+ * @note Each email is using the hash map with @ref Q_RABIN size, and each slot has @ref INIT_SPURIOUS_COUNT location data.
  * @param loc_mem global struct for memory storage
  * @param num_mail number of email
  */
@@ -104,7 +105,7 @@ void kill_MEM_SHORT(struct MEMORY_SHORT* mem);
 /** Text Summary*/
 typedef struct TxtSmry{
     int id;
-    TokenInfo token[Q_MODULO]; //len = Q_MODULE
+    TokenInfo token[Q_RABIN]; //len = Q_MODULE
     UINT* existTokens; //Exist Token
     dymArr_ULONG* existTokens_DymArr;
     int nToken; // unique token number
@@ -128,11 +129,18 @@ void kill_TxtSmry_arr(TxtSmry* smry, int len);
 /******Hash*******/
 /** Get token hash
  * @param iStr Pin for reading the string
+ * @note Modified from @ref popToken.
  * @return iEnd. the end of the token
 */
 int popTokenHash(char message[], char token[], int iStr, int* Hash);
-/** Update the hash value with new character.*/
-int updateHash(char c, int Hash_cur, int q_cur, int d);
+/**
+ * @brief Update the hash value with new character.
+ * @param c character to append
+ * @param Hash_cur current hash value
+ * @param Dn_cur current accumulated D of Rabin Karp
+ * @return int updated hash value.
+ */
+int updateHash(char c, int Hash_cur, int* Dn_cur);
 
 /**********Main API************/
 
@@ -151,7 +159,9 @@ void kill_FindSimilar(TxtSmry* smrys, int n_mails);
 
 
 /*********Hash*********/
+/** Summarize a mail*/
 void summarize_content(TxtSmry* smry, mail* m);
+/** Add text and hashing*/
 void summarize_hash(TxtSmry* smry, char* text);
 
 

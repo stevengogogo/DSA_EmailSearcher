@@ -3,6 +3,7 @@
 
 #include "api.h"
 #include <string.h>
+#include <math.h>
 #include "acutest.h"
 
 /**
@@ -86,11 +87,11 @@ static int power_int(int x, int n){
 static int HashString(char s[], int D, int Q){
     int len = strlen(s);
     int hash = 0;
-    int j = 0;
-    for(int i=len-1;i>=0;i--){
-        hash += power_int(D, j)*(int)s[i];
+    
+    for(int i=0;i<len;i++){
+        hash += s[i]*power_int(D, len-i-1);
     }
-    return hash;
+    return hash% Q;
 };
 
 #endif

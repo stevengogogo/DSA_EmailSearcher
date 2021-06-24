@@ -145,8 +145,9 @@ void test_RabinKarp_hashing(void){
             TEST_CHECK(strncmp(tokenStr[j],token,strlen(token))==0);
 
             //Hash
-            hashExp = HashString(tokenStr[j], D_RABIN, Q_RABIN);
+            hashExp = HashString(token, D_RABIN, Q_RABIN);
             TEST_CHECK(hashExp == hash);
+            TEST_MSG("Got %d; Exp: %d; token: %s", hash, hashExp, token);
             ++j;
         }
 

@@ -63,22 +63,27 @@ static void get_mails(char* filename, mail** mails, int* num_mail){
     free(to);
 }
 
+static int power_int(int x, int n){
+    int p = 1;
+    for(int i=0;i<n;i++){
+        p *= x;
+    }
+    return p;
+};
+
+static int HashString(char s[], int D, int Q){
+    int len = strlen(s);
+    int hash = 0;
+    
+    for(int i=0;i<len;i++){
+        hash += c*power_int(D, len-i-1);
+    }
+    return hash% Q;
+};
+
 
 int main(void) {
-    int num_mail;
-    mail* mails;
-    TxtSmry* smrys;
-    clock_t str;
-    clock_t end;
-
-    get_mails("test/data/test.in", &mails, &num_mail);
-
-    Init_FindSimilar(&smrys, num_mail);
-    
-    Preprocess_FindSimilar(smrys, mails, num_mail);
-
-    kill_FindSimilar(smrys, num_mail);
-
+int h = HashString("87\0", D_RABIN, Q_RABIN);
 
   return 0;
 }

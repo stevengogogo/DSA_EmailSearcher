@@ -41,5 +41,12 @@ void readmail(void){
     free(mails);
 }
 
+void test_power(void){
+    TEST_CHECK(power_int(4,0)==1);
+    TEST_CHECK(power_int(4,1)==4);
+    TEST_CHECK(power_int(4,2)==16);
+    TEST_CHECK(power_int(4,3)==64);
+}
+
 
 #endif

@@ -29,6 +29,7 @@ TEST_LIST = {
     {"Dyanmic Array", test_array},
     {"Queue",test_queue},
     {"Read email", readmail},
+    {"Power", test_power},
     {"Find Similar: Memory", memory_allocation_FS},
     {"Find Similar: init", test_init_FS},
     {"Find Similar: init content", test_init_content_FS},

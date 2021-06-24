@@ -114,10 +114,9 @@ int popTokenHash(char message[], char token[], int iStr, int* Hash);
  * @brief Update the hash value with new character.
  * @param c character to append
  * @param Hash_cur current hash value
- * @param Dn_cur current accumulated D of Rabin Karp
  * @return int updated hash value.
  */
-int updateHash(char c, int Hash_cur, int* Dn_cur);
+int updateHash(char c, int Hash_cur);
 
 /**********Main API************/
 

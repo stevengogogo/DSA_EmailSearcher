@@ -34,7 +34,6 @@ int popTokenHash(char message[], char token[], int iStr, int* Hash){
     char c;
     int asc; //ascii number
     *Hash = 0; //reset hash value
-    int Dn_cur = 1;
     //No string left
     if (iStr < 0){
         token[0] = '\0';
@@ -45,13 +44,12 @@ int popTokenHash(char message[], char token[], int iStr, int* Hash){
     while(message[iStr] != '\0' ){
         c = message[iStr];
         asc = (int)c; //ascii number
-        Dn_cur = 1;
 
         if (isRegularExpr_ASCII(asc)){
             if (isUpperCase_ASCII(c))
                 c = tolower(c);
             token[i] = c;
-            *Hash += updateHash(c, *Hash, &Dn_cur);
+            *Hash = updateHash(c, *Hash);
             ++i;
             ++iStr;
         }
@@ -75,10 +73,9 @@ int popTokenHash(char message[], char token[], int iStr, int* Hash){
     return iStr;
 }
 
-int updateHash(char c, int Hash_cur, int* Dn_cur){
+int updateHash(char c, int Hash_cur){
     int HashUPD;
-    *Dn_cur = (*Dn_cur * D_RABIN) % Q_RABIN;
-    HashUPD = Hash_cur * (*Dn_cur) + (int)c;
+    HashUPD = Hash_cur * D_RABIN + (int)c;
     HashUPD = HashUPD % Q_RABIN;
     return HashUPD;
 }

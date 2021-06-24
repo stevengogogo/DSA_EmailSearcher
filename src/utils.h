@@ -61,6 +61,12 @@ bool isRegularExpr_ASCII(int);
 bool isNumber_ASCII(int);
 bool isUpperCase_ASCII(int);
 bool isLowerCase_ASCII(int);
+/**
+ * @brief [0-9] -> [0-9]; [a-z] -> [10-35]; otherwise: ASCII
+ * @param c 
+ * @return int 
+ */
+int char2num(char c);
 
 /************Dynamic Array (Int) Stack**************/
 //dynamic array

@@ -71,19 +71,10 @@ static int power_int(int x, int n){
     return p;
 };
 
-static int HashString(char s[], int D, int Q){
-    int len = strlen(s);
-    int hash = 0;
-    
-    for(int i=0;i<len;i++){
-        hash += c*power_int(D, len-i-1);
-    }
-    return hash% Q;
-};
 
 
 int main(void) {
-int h = HashString("87\0", D_RABIN, Q_RABIN);
+
 
   return 0;
 }

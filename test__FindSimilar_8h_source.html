@@ -236,13 +236,50 @@ $(function() {
 <div class="line"><a name="l00165"></a><span class="lineno">  165</span>&#160; </div>
 <div class="line"><a name="l00166"></a><span class="lineno">  166</span>&#160;}</div>
 <div class="line"><a name="l00167"></a><span class="lineno">  167</span>&#160; </div>
-<div class="line"><a name="l00168"></a><span class="lineno">  168</span>&#160; </div>
-<div class="line"><a name="l00169"></a><span class="lineno">  169</span>&#160;<span class="preprocessor">#endif</span></div>
+<div class="line"><a name="l00168"></a><span class="lineno">  168</span>&#160;<span class="keywordtype">void</span> test_summarize(<span class="keywordtype">void</span>){</div>
+<div class="line"><a name="l00169"></a><span class="lineno">  169</span>&#160;    <span class="keywordtype">int</span> num_mail;</div>
+<div class="line"><a name="l00170"></a><span class="lineno">  170</span>&#160;    <a class="code" href="structmail.html">mail</a>* mails;</div>
+<div class="line"><a name="l00171"></a><span class="lineno">  171</span>&#160;    <a class="code" href="structTxtSmry.html">TxtSmry</a>* smrys;</div>
+<div class="line"><a name="l00172"></a><span class="lineno">  172</span>&#160;    clock_t str;</div>
+<div class="line"><a name="l00173"></a><span class="lineno">  173</span>&#160;    clock_t end;</div>
+<div class="line"><a name="l00174"></a><span class="lineno">  174</span>&#160; </div>
+<div class="line"><a name="l00175"></a><span class="lineno">  175</span>&#160;    get_mails(<span class="stringliteral">&quot;test/data/test.in&quot;</span>, &amp;mails, &amp;num_mail);</div>
+<div class="line"><a name="l00176"></a><span class="lineno">  176</span>&#160; </div>
+<div class="line"><a name="l00177"></a><span class="lineno">  177</span>&#160;    <a class="code" href="FindSimilar_8h.html#abcef5cbf6a37e7160503d572705094cc">Init_FindSimilar</a>(&amp;smrys, num_mail);</div>
+<div class="line"><a name="l00178"></a><span class="lineno">  178</span>&#160; </div>
+<div class="line"><a name="l00179"></a><span class="lineno">  179</span>&#160;    <a class="code" href="FindSimilar_8h.html#abff53c80583525a6cf8f0c4ea926afec">Preprocess_FindSimilar</a>(smrys, mails, 30);</div>
+<div class="line"><a name="l00180"></a><span class="lineno">  180</span>&#160; </div>
+<div class="line"><a name="l00181"></a><span class="lineno">  181</span>&#160;    kill_FindSimilar(smrys, num_mail);</div>
+<div class="line"><a name="l00182"></a><span class="lineno">  182</span>&#160;    free(mails);</div>
+<div class="line"><a name="l00183"></a><span class="lineno">  183</span>&#160;}</div>
+<div class="line"><a name="l00184"></a><span class="lineno">  184</span>&#160; </div>
+<div class="line"><a name="l00185"></a><span class="lineno">  185</span>&#160;<span class="keywordtype">void</span> test_summarize_benchmark(<span class="keywordtype">void</span>){</div>
+<div class="line"><a name="l00186"></a><span class="lineno">  186</span>&#160;    <span class="keywordtype">int</span> num_mail;</div>
+<div class="line"><a name="l00187"></a><span class="lineno">  187</span>&#160;    <a class="code" href="structmail.html">mail</a>* mails;</div>
+<div class="line"><a name="l00188"></a><span class="lineno">  188</span>&#160;    <a class="code" href="structTxtSmry.html">TxtSmry</a>* smrys;</div>
+<div class="line"><a name="l00189"></a><span class="lineno">  189</span>&#160;    clock_t str;</div>
+<div class="line"><a name="l00190"></a><span class="lineno">  190</span>&#160;    clock_t end;</div>
+<div class="line"><a name="l00191"></a><span class="lineno">  191</span>&#160; </div>
+<div class="line"><a name="l00192"></a><span class="lineno">  192</span>&#160;    get_mails(<span class="stringliteral">&quot;test/data/test.in&quot;</span>, &amp;mails, &amp;num_mail);</div>
+<div class="line"><a name="l00193"></a><span class="lineno">  193</span>&#160; </div>
+<div class="line"><a name="l00194"></a><span class="lineno">  194</span>&#160;    <a class="code" href="FindSimilar_8h.html#abcef5cbf6a37e7160503d572705094cc">Init_FindSimilar</a>(&amp;smrys, num_mail);</div>
+<div class="line"><a name="l00195"></a><span class="lineno">  195</span>&#160;    </div>
+<div class="line"><a name="l00196"></a><span class="lineno">  196</span>&#160;    str = clock();</div>
+<div class="line"><a name="l00197"></a><span class="lineno">  197</span>&#160;    <a class="code" href="FindSimilar_8h.html#abff53c80583525a6cf8f0c4ea926afec">Preprocess_FindSimilar</a>(smrys, mails, num_mail);</div>
+<div class="line"><a name="l00198"></a><span class="lineno">  198</span>&#160;    end = clock();</div>
+<div class="line"><a name="l00199"></a><span class="lineno">  199</span>&#160;    print_clock(<span class="stringliteral">&quot;(10000 email)Time: &quot;</span>, str, end);</div>
+<div class="line"><a name="l00200"></a><span class="lineno">  200</span>&#160; </div>
+<div class="line"><a name="l00201"></a><span class="lineno">  201</span>&#160;    kill_FindSimilar(smrys, num_mail);</div>
+<div class="line"><a name="l00202"></a><span class="lineno">  202</span>&#160;    free(mails);</div>
+<div class="line"><a name="l00203"></a><span class="lineno">  203</span>&#160;}</div>
+<div class="line"><a name="l00204"></a><span class="lineno">  204</span>&#160; </div>
+<div class="line"><a name="l00205"></a><span class="lineno">  205</span>&#160;<span class="preprocessor">#endif</span></div>
 <div class="ttc" id="aFindSimilar_8h_html"><div class="ttname"><a href="FindSimilar_8h.html">FindSimilar.h</a></div><div class="ttdoc">Group Analysis. Use Jaccob's similarity with hash table to identify similar strings.</div></div>
 <div class="ttc" id="aFindSimilar_8h_html_a5d1c13d719525d926512bacf0d5e154c"><div class="ttname"><a href="FindSimilar_8h.html#a5d1c13d719525d926512bacf0d5e154c">popTokenHash</a></div><div class="ttdeci">int popTokenHash(char message[], char token[], int iStr, int *Hash)</div><div class="ttdef"><b>Definition:</b> FindSimilar.c:33</div></div>
 <div class="ttc" id="aFindSimilar_8h_html_a6e2dd2f8a6e68dd5aaca7c76a32ddc05"><div class="ttname"><a href="FindSimilar_8h.html#a6e2dd2f8a6e68dd5aaca7c76a32ddc05">kill_MEM_ULONG</a></div><div class="ttdeci">void kill_MEM_ULONG(struct MEMORY_ULONG *mem)</div><div class="ttdef"><b>Definition:</b> FindSimilar.c:18</div></div>
 <div class="ttc" id="aFindSimilar_8h_html_a788083b928d53aaefab439f02b2b3133"><div class="ttname"><a href="FindSimilar_8h.html#a788083b928d53aaefab439f02b2b3133">init_MEM_ULONG</a></div><div class="ttdeci">void init_MEM_ULONG(struct MEMORY_ULONG *mem, ULONG len)</div><div class="ttdef"><b>Definition:</b> FindSimilar.c:3</div></div>
 <div class="ttc" id="aFindSimilar_8h_html_abcef5cbf6a37e7160503d572705094cc"><div class="ttname"><a href="FindSimilar_8h.html#abcef5cbf6a37e7160503d572705094cc">Init_FindSimilar</a></div><div class="ttdeci">void Init_FindSimilar(TxtSmry **, int n_mails)</div><div class="ttdef"><b>Definition:</b> FindSimilar.c:88</div></div>
+<div class="ttc" id="aFindSimilar_8h_html_abff53c80583525a6cf8f0c4ea926afec"><div class="ttname"><a href="FindSimilar_8h.html#abff53c80583525a6cf8f0c4ea926afec">Preprocess_FindSimilar</a></div><div class="ttdeci">void Preprocess_FindSimilar(TxtSmry *, mail *mails, int n_mails)</div><div class="ttdef"><b>Definition:</b> FindSimilar.c:175</div></div>
 <div class="ttc" id="astructTxtSmry_html"><div class="ttname"><a href="structTxtSmry.html">TxtSmry</a></div><div class="ttdef"><b>Definition:</b> FindSimilar.h:82</div></div>
 <div class="ttc" id="astructmail_html"><div class="ttname"><a href="structmail.html">mail</a></div><div class="ttdef"><b>Definition:</b> api.h:16</div></div>
 </div><!-- fragment --></div><!-- contents -->

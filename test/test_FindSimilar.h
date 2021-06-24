@@ -95,7 +95,7 @@ void test_append_hash(void){
 
     for(ULONG i=0;i<30*INIT_UNIQUE_TOKEN_SIZE;i++){
         TEST_CHECK(get_unique_hashlist(&smrys[0], (int)i) == i );
-        TEST_MSG("Expected %lld; Got %lld", get_unique_hashlist(&smrys[0], (int)i),i);;
+        TEST_MSG("Expected %ld; Got %ld", get_unique_hashlist(&smrys[0], (int)i),i);;
     }
 
     

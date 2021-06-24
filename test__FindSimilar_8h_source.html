@@ -149,19 +149,19 @@ $(function() {
 <div class="line"><a name="l00078"></a><span class="lineno">   78</span>&#160;    <a class="code" href="FindSimilar_8h.html#abcef5cbf6a37e7160503d572705094cc">Init_FindSimilar</a>(&amp;smrys, n_mails);</div>
 <div class="line"><a name="l00079"></a><span class="lineno">   79</span>&#160; </div>
 <div class="line"><a name="l00080"></a><span class="lineno">   80</span>&#160;    <span class="keywordflow">for</span>(<span class="keywordtype">int</span> i=0;i&lt;INIT_UNIQUE_TOKEN_SIZE-1;i++){</div>
-<div class="line"><a name="l00081"></a><span class="lineno">   81</span>&#160;        add_unique_hashlist(&amp;smrys[0], i);</div>
+<div class="line"><a name="l00081"></a><span class="lineno">   81</span>&#160;        _add_unique_hashlist(&amp;smrys[0], i);</div>
 <div class="line"><a name="l00082"></a><span class="lineno">   82</span>&#160;    }</div>
 <div class="line"><a name="l00083"></a><span class="lineno">   83</span>&#160; </div>
 <div class="line"><a name="l00084"></a><span class="lineno">   84</span>&#160;    TEST_CHECK(smrys[0].isExistTokens_DymArr == <span class="keyword">false</span>);</div>
 <div class="line"><a name="l00085"></a><span class="lineno">   85</span>&#160;    TEST_CHECK(smrys[0].existTokens_DymArr == NULL);</div>
 <div class="line"><a name="l00086"></a><span class="lineno">   86</span>&#160; </div>
-<div class="line"><a name="l00087"></a><span class="lineno">   87</span>&#160;    add_unique_hashlist(&amp;smrys[0], INIT_UNIQUE_TOKEN_SIZE-1);</div>
-<div class="line"><a name="l00088"></a><span class="lineno">   88</span>&#160;    add_unique_hashlist(&amp;smrys[0], INIT_UNIQUE_TOKEN_SIZE);</div>
+<div class="line"><a name="l00087"></a><span class="lineno">   87</span>&#160;    _add_unique_hashlist(&amp;smrys[0], INIT_UNIQUE_TOKEN_SIZE-1);</div>
+<div class="line"><a name="l00088"></a><span class="lineno">   88</span>&#160;    _add_unique_hashlist(&amp;smrys[0], INIT_UNIQUE_TOKEN_SIZE);</div>
 <div class="line"><a name="l00089"></a><span class="lineno">   89</span>&#160;    TEST_CHECK(smrys[0].isExistTokens_DymArr == <span class="keyword">true</span>);</div>
 <div class="line"><a name="l00090"></a><span class="lineno">   90</span>&#160;    TEST_CHECK(smrys[0].existTokens_DymArr != NULL);</div>
 <div class="line"><a name="l00091"></a><span class="lineno">   91</span>&#160; </div>
 <div class="line"><a name="l00092"></a><span class="lineno">   92</span>&#160;    <span class="keywordflow">for</span>(<span class="keywordtype">int</span> i=INIT_UNIQUE_TOKEN_SIZE+1;i&lt;30*INIT_UNIQUE_TOKEN_SIZE;i++){</div>
-<div class="line"><a name="l00093"></a><span class="lineno">   93</span>&#160;        add_unique_hashlist(&amp;smrys[0], i);</div>
+<div class="line"><a name="l00093"></a><span class="lineno">   93</span>&#160;        _add_unique_hashlist(&amp;smrys[0], i);</div>
 <div class="line"><a name="l00094"></a><span class="lineno">   94</span>&#160;    }    </div>
 <div class="line"><a name="l00095"></a><span class="lineno">   95</span>&#160; </div>
 <div class="line"><a name="l00096"></a><span class="lineno">   96</span>&#160;    <span class="keywordflow">for</span>(ULONG i=0;i&lt;30*INIT_UNIQUE_TOKEN_SIZE;i++){</div>

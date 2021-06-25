@@ -64,11 +64,23 @@ merge_main: merge_standalone
 	mkdir -p  $(build_folder)
 	mkdir -p merge_temp
 	cp -R src/* merge_temp
-	python3 merge.py ./merge_temp/main.c remove_api
-	$(CCm) merge_temp/main.c  build/main.c
-	python3 merge.py ./build/main.c add_api
+	python3 merge.py ./merge_temp/ remove_api
+	$(CCm) ./merge_temp/main.c  ./merge_temp/main_merged.c
+	python3 merge.py ./merge_temp/main_merged.c add_api
+
+	gcc -o ./build/merge_main.o ./merge_temp/main_merged.c ./src/api.c
+	echo "Compile Merged Main";
+	echo "$(green)[Pass]$(reset)";
+
+	echo "Run merged main";
+	./build/merge_main.o < ./test/data/test.in
+	echo "$(green)[Pass]$(reset)"
+	
+	cp ./merge_temp/main_merged.c ./build/main.c
+	echo "Deployed at $(mag)./build/main.c$(reset)"
+
 	rm -r merge_temp
-	echo "[Merge success]"
+	echo "$(green)[Merge success]$(reset)"
 
 # For testing compilation: Standalone (STD)
 merge_standalone:

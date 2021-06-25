@@ -74,5 +74,28 @@ void test_char2num(void){
     TEST_CHECK(char2num('A') == (int)('A'));
 }
 
+void test_sort(void){
+    int len = 11;
+    int* arrSorted =(int*)malloc(len*sizeof(int));
+    int* arrOrg =(int*)malloc(len*sizeof(int));
+    //Increasing order
+    int ArrSorted[11] = {0,1,2,3,4,5,6,7,8,9,10};
+    int ArrOrg[11] = {2,3,1,4,7,5,6,8,10,9,0};
+
+    for(int i=0;i<len;i++){
+        arrSorted[i] = ArrSorted[i];
+        arrOrg[i] = ArrOrg[i];
+    }
+    
+    quicksort(arrOrg, 0, len-1);
+
+    for(int i =0; i<len;i++){
+        TEST_CHECK(arrSorted[i] == arrOrg[i]);
+        TEST_MSG("Got %d, Expedted %d", arrSorted[i],arrOrg[i]);
+    }
+
+    free(arrSorted);
+    free(arrOrg);
+}
 
 #endif

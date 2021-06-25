@@ -21,6 +21,7 @@
 #include <ctype.h> // tolower
 #define INIT_NUM_ARRAY_ELEMENT 10
 #define EMTY_QUE_SIG -121242
+#define MAX_N_MAIL 11000
 typedef unsigned char byte;
 
 /************Math************/
@@ -131,5 +132,18 @@ void insert_uArray(uArray* arr, int i,void* item);
 void append_uArray(uArray* arr, void* item);
 void update_size_uArray(uArray* arr, int new_max_item);
 void kill_uArray(uArray* arr);
+
+
+/*Sorting*/
+/** * QuickSort to increasing order. Reference: This function is modified from https://openhome.cc/Gossip/AlgorithmGossip/QuickSort3.htm#C */
+void quicksort(int arr[], int left, int right);
+
+/** * Combine fragments. This function is modifed from: https://openhome.cc/Gossip/AlgorithmGossip/QuickSort3.htm#C */
+int partition(int number[], int left, int right);
+
+/** * Switch the value store in `x` and `y`. */
+void swap(int* x, int* y);
+
+
 
 #endif

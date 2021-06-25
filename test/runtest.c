@@ -31,6 +31,7 @@ TEST_LIST = {
     {"Read email", readmail},
     {"Power", test_power},
     {"Char 2 number", test_char2num},
+    {"Quick sort", test_sort},
     {"Find Similar: Memory", memory_allocation_FS},
     {"Find Similar: init", test_init_FS},
     {"Find Similar: init content", test_init_content_FS},

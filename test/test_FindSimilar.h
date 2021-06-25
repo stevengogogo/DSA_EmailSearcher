@@ -209,7 +209,7 @@ void test_summarize_benchmark(void){
 
     for(int i=0;i<num_mail;i++){
         if( smrys[i].maxSpurious > 0){
-        printf(" Max Spurious: %d (out of %d unique hash)\n",smrys[i].maxSpurious, smrys[i].nToken);
+        //printf(" Max Spurious: %d (out of %d unique hash)\n",smrys[i].maxSpurious, smrys[i].nToken);
         }
     }
 

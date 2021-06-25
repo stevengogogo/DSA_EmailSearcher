@@ -215,10 +215,8 @@ void summarize_hash(TxtSmry* smry, char* text){
                 iStrH = smry->token[hash].loc[i];
                 iStrH = popToken(text, tkH, iStrH);
                 if(strncmp(tkH, token, strlen(token))==0){
-                    //printf("%s ",tkH);
-                    //printf("%s \n", token);
-                    //next = true;
-                    //break;
+                    next = true;
+                    break;
                 }
             }
             else{

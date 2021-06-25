@@ -66,7 +66,9 @@ $(function() {
 </div><!-- top -->
 <div class="header">
   <div class="summary">
+<a href="#nested-classes">Classes</a> &#124;
 <a href="#define-members">Macros</a> &#124;
+<a href="#typedef-members">Typedefs</a> &#124;
 <a href="#func-members">Functions</a>  </div>
   <div class="headertitle">
 <div class="title">FindSimilar.h File Reference</div>  </div>
@@ -112,6 +114,11 @@ This graph shows which files directly or indirectly include this file:</div>
 </div>
 <p><a href="FindSimilar_8h_source.html">Go to the source code of this file.</a></p>
 <table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="nested-classes"></a>
+Classes</h2></td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structTxtSmry.html">TxtSmry</a></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="define-members"></a>
 Macros</h2></td></tr>
 <tr class="memitem:a35711bcac45cf1d1a72c3ebf2f3f6b07"><td class="memItemLeft" align="right" valign="top"><a id="a35711bcac45cf1d1a72c3ebf2f3f6b07"></a>
@@ -123,15 +130,38 @@ Macros</h2></td></tr>
 <tr class="memitem:a3f6d16dfdf7920e1e5f1dad5db5347f2"><td class="memItemLeft" align="right" valign="top"><a id="a3f6d16dfdf7920e1e5f1dad5db5347f2"></a>
 #define&#160;</td><td class="memItemRight" valign="bottom"><b>MAX_TOKEN_LEN</b>&#160;&#160;&#160;1000</td></tr>
 <tr class="separator:a3f6d16dfdf7920e1e5f1dad5db5347f2"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a8345476f548fcf06bfe8ff1651366130"><td class="memItemLeft" align="right" valign="top"><a id="a8345476f548fcf06bfe8ff1651366130"></a>
+#define&#160;</td><td class="memItemRight" valign="bottom"><b>T_MINIHASH_PERM</b>&#160;&#160;&#160;100</td></tr>
+<tr class="separator:a8345476f548fcf06bfe8ff1651366130"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="typedef-members"></a>
+Typedefs</h2></td></tr>
+<tr class="memitem:ad58311979581ac4e2545af1d5d6067e7"><td class="memItemLeft" align="right" valign="top"><a id="ad58311979581ac4e2545af1d5d6067e7"></a>
+typedef struct <a class="el" href="structTxtSmry.html">TxtSmry</a>&#160;</td><td class="memItemRight" valign="bottom"><b>TxtSmry</b></td></tr>
+<tr class="separator:ad58311979581ac4e2545af1d5d6067e7"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="func-members"></a>
 Functions</h2></td></tr>
-<tr class="memitem:a57bec0bd897db06a566cc2596716dd3c"><td class="memItemLeft" align="right" valign="top"><a id="a57bec0bd897db06a566cc2596716dd3c"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>powerArray</b> (long *arr, int len, long base, long mod)</td></tr>
-<tr class="separator:a57bec0bd897db06a566cc2596716dd3c"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a0534b508167cea928234e978755092ca"><td class="memItemLeft" align="right" valign="top"><a id="a0534b508167cea928234e978755092ca"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>_updateHash</b> (long hash, char c)</td></tr>
-<tr class="separator:a0534b508167cea928234e978755092ca"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aba7feb624a06bb8060dccf564676d5f0"><td class="memItemLeft" align="right" valign="top"><a id="aba7feb624a06bb8060dccf564676d5f0"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><b>init_PowerArray</b> (long *arr, int len, long base, long mod)</td></tr>
+<tr class="separator:aba7feb624a06bb8060dccf564676d5f0"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a41f3a26ed77d29b9690478b2beba5559"><td class="memItemLeft" align="right" valign="top"><a id="a41f3a26ed77d29b9690478b2beba5559"></a>
+long&#160;</td><td class="memItemRight" valign="bottom"><b>Hash_RK</b> (char *tokenStr)</td></tr>
+<tr class="separator:a41f3a26ed77d29b9690478b2beba5559"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a52ebcc2eaaff851f437f674fed362980"><td class="memItemLeft" align="right" valign="top">long&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="FindSimilar_8h.html#a52ebcc2eaaff851f437f674fed362980">hash_tabu</a> (long x, long a, long b)</td></tr>
+<tr class="separator:a52ebcc2eaaff851f437f674fed362980"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a824e7aa2a38b2e927aa9c9ff79edd5d7"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="FindSimilar_8h.html#a824e7aa2a38b2e927aa9c9ff79edd5d7">popTokenHash</a> (char message[], char token[], int iStr, long *Hash)</td></tr>
+<tr class="separator:a824e7aa2a38b2e927aa9c9ff79edd5d7"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a00515fdd32e854599fa4fca6a7c8f40a"><td class="memItemLeft" align="right" valign="top"><a id="a00515fdd32e854599fa4fca6a7c8f40a"></a>
+long&#160;</td><td class="memItemRight" valign="bottom"><b>power_long</b> (long x, int n)</td></tr>
+<tr class="separator:a00515fdd32e854599fa4fca6a7c8f40a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aafdf81016f5a87e6a6287c27e28ed703"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="FindSimilar_8h.html#aafdf81016f5a87e6a6287c27e28ed703">Init_FindSimilar</a> (<a class="el" href="structTxtSmry.html">TxtSmry</a> *smry, int n_mails)</td></tr>
+<tr class="separator:aafdf81016f5a87e6a6287c27e28ed703"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a68c60ab71d943dce32ea2b63ceb4cc00"><td class="memItemLeft" align="right" valign="top"><a id="a68c60ab71d943dce32ea2b63ceb4cc00"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><b>kill_FindSimilar</b> (<a class="el" href="structTxtSmry.html">TxtSmry</a> *smry)</td></tr>
+<tr class="separator:a68c60ab71d943dce32ea2b63ceb4cc00"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad6ee6e1548fe2f7a4e3d0a711b8e5846"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="FindSimilar_8h.html#ad6ee6e1548fe2f7a4e3d0a711b8e5846">Preprocess_FindSimilar</a> (<a class="el" href="structTxtSmry.html">TxtSmry</a> *smry, <a class="el" href="structmail.html">mail</a> *mails, int n_mails)</td></tr>
+<tr class="separator:ad6ee6e1548fe2f7a4e3d0a711b8e5846"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>Group Analysis. Use Jaccob's similarity with hash table to identify similar strings. </p>
@@ -139,7 +169,148 @@ void&#160;</td><td class="memItemRight" valign="bottom"><b>_updateHash</b> (long
 <dl class="section version"><dt>Version</dt><dd>0.1 </dd></dl>
 <dl class="section date"><dt>Date</dt><dd>2021-06-21</dd></dl>
 <dl class="section copyright"><dt>Copyright</dt><dd>Copyright (c) 2021 </dd></dl>
-</div></div><!-- contents -->
+</div><h2 class="groupheader">Function Documentation</h2>
+<a id="a52ebcc2eaaff851f437f674fed362980"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a52ebcc2eaaff851f437f674fed362980">&#9670;&nbsp;</a></span>hash_tabu()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">long hash_tabu </td>
+          <td>(</td>
+          <td class="paramtype">long&#160;</td>
+          <td class="paramname"><em>x</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">long&#160;</td>
+          <td class="paramname"><em>a</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">long&#160;</td>
+          <td class="paramname"><em>b</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>Tabulation hashing </p>
+
+</div>
+</div>
+<a id="aafdf81016f5a87e6a6287c27e28ed703"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aafdf81016f5a87e6a6287c27e28ed703">&#9670;&nbsp;</a></span>Init_FindSimilar()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void Init_FindSimilar </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="structTxtSmry.html">TxtSmry</a> *&#160;</td>
+          <td class="paramname"><em>smry</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>n_mails</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>Main API </p>
+
+</div>
+</div>
+<a id="a824e7aa2a38b2e927aa9c9ff79edd5d7"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a824e7aa2a38b2e927aa9c9ff79edd5d7">&#9670;&nbsp;</a></span>popTokenHash()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">int popTokenHash </td>
+          <td>(</td>
+          <td class="paramtype">char&#160;</td>
+          <td class="paramname"><em>message</em>[], </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">char&#160;</td>
+          <td class="paramname"><em>token</em>[], </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>iStr</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">long *&#160;</td>
+          <td class="paramname"><em>Hash</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>Return location </p>
+
+</div>
+</div>
+<a id="ad6ee6e1548fe2f7a4e3d0a711b8e5846"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ad6ee6e1548fe2f7a4e3d0a711b8e5846">&#9670;&nbsp;</a></span>Preprocess_FindSimilar()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void Preprocess_FindSimilar </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="structTxtSmry.html">TxtSmry</a> *&#160;</td>
+          <td class="paramname"><em>smrys</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="structmail.html">mail</a> *&#160;</td>
+          <td class="paramname"><em>mails</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>n_mails</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>Preprocessing: Summarize the mails </p>
+
+</div>
+</div>
+</div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
 Generated by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.1

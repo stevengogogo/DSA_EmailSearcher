@@ -1,12 +1,11 @@
 <map id="src/utils.h" name="src/utils.h">
-<area shape="rect" id="node1" title="General Utilities for C language." alt="" coords="524,5,603,32"/>
-<area shape="rect" id="node2" href="$__FindSimilar_8h_source.html" title=" " alt="" coords="5,80,132,107"/>
-<area shape="rect" id="node3" href="$ExpressionMatch_8h_source.html" title=" " alt="" coords="156,80,309,107"/>
-<area shape="rect" id="node4" href="$FindSimilar_8h.html" title="Group Analysis. Use Jaccob&#39;s similarity with hash table to identify similar strings." alt="" coords="333,80,452,107"/>
-<area shape="rect" id="node6" href="$test__dymarr_8h_source.html" title=" " alt="" coords="693,80,820,107"/>
-<area shape="rect" id="node7" href="$test__GenericStack_8h_source.html" title=" " alt="" coords="465,155,632,181"/>
-<area shape="rect" id="node8" href="$test__tokenize_8h_source.html" title=" " alt="" coords="844,80,979,107"/>
-<area shape="rect" id="node9" href="$test__utils_8h_source.html" title=" " alt="" coords="656,155,767,181"/>
-<area shape="rect" id="node10" href="$Utility_8h_source.html" title=" " alt="" coords="477,80,567,107"/>
-<area shape="rect" id="node5" href="$test__FindSimilar_8h_source.html" title=" " alt="" coords="289,155,441,181"/>
+<area shape="rect" id="node1" title="General Utilities for C language." alt="" coords="383,5,461,32"/>
+<area shape="rect" id="node2" href="$ExpressionMatch_8h_source.html" title=" " alt="" coords="5,80,159,107"/>
+<area shape="rect" id="node3" href="$FindSimilar_8h.html" title="Group Analysis. Use Jaccob&#39;s similarity with hash table to identify similar strings." alt="" coords="183,80,301,107"/>
+<area shape="rect" id="node5" href="$test__dymarr_8h_source.html" title=" " alt="" coords="543,80,669,107"/>
+<area shape="rect" id="node6" href="$test__GenericStack_8h_source.html" title=" " alt="" coords="299,155,465,181"/>
+<area shape="rect" id="node7" href="$test__tokenize_8h_source.html" title=" " alt="" coords="693,80,828,107"/>
+<area shape="rect" id="node8" href="$test__utils_8h_source.html" title=" " alt="" coords="489,155,600,181"/>
+<area shape="rect" id="node9" href="$Utility_8h_source.html" title=" " alt="" coords="377,80,467,107"/>
+<area shape="rect" id="node4" href="$test__FindSimilar_8h_source.html" title=" " alt="" coords="122,155,274,181"/>
 </map>

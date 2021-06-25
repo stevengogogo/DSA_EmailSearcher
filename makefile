@@ -1,13 +1,14 @@
 CFLAGS = -I.
 MAKEFLAGS += --silent
-CC=gcc -g -std=c11
+CCg=gcc -g -std=c11
+CC= gcc  -std=c11
 CCgf= gcc -pg -std=c11
 CCm = quom
 
 .PHONY: build test run_main  build_run  # Main piplines
 .PHONY: runtest  mergetest cleantest clean
 
-
+testenv = test/testEnv
 build_folder = build
 testbuild =  test/build
 src_folder = src
@@ -21,6 +22,11 @@ reset=`tput sgr0`
 
 # Build
 build: 
+	mkdir -p  $(build_folder)
+	$(CCg) -o $(build_folder)/main.out $(src_folder)/*.c
+	echo "$(green)Built and deploy at $(mag) $(outfile)$(reset)";
+
+buildc:
 	mkdir -p  $(build_folder)
 	$(CC) -o $(build_folder)/main.out $(src_folder)/*.c
 	echo "$(green)Built and deploy at $(mag) $(outfile)$(reset)";
@@ -97,13 +103,11 @@ leaktest: test
 	valgrind --leak-check=full test/build/test.out
 
 # From DSA Template
-test/validator/validator: test/validator/validator.cpp
-	g++ test/validator/validator.cpp -o test/validator/validator -O3
-
-
-score: build test/validator/validator
-	$(outfile) < test/data/test.in | test/validator/validator 
-	$(outfile) < test/data/test.in | test/validator/validator > test/validator/score.txt
+score: merge_main 
+	cp ./build/main.c $(testenv)/main.c
+	gcc $(testenv)/main.c -o main -O3 -std=c11 -w
+	g++ $(testenv)/validator/validator.cpp -o $(testenv)/validator/validator -O3
+	./main < $(testenv)/testdata/test.in | $(testenv)/validator/validator
 
 
 buildgf: 

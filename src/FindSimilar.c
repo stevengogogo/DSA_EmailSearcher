@@ -277,7 +277,7 @@ int answer_FindSimilar(TxtSmry* smrys, int ID, double threshold, int n_mails, in
         }
     }
 
-    quicksort(SimList, 0, (*lenSim)-1);
+    //quicksort(SimList, 0, (*lenSim)-1);
 }
 
 

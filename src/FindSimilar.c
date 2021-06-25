@@ -120,7 +120,6 @@ void init_TxtSmry_arr(TxtSmry** smry, int len, int hashmapSize){
 void append_hash_TxtSmry(TxtSmry* smry, int hash){
     if(smry->token[hash].count==0){
         _add_unique_hashlist(smry, hash);
-        ++smry->nToken;
     }
     //Count is update here
     ++smry->token[hash].count;
@@ -218,8 +217,8 @@ void summarize_hash(TxtSmry* smry, char* text){
                 if(strncmp(tkH, token, strlen(token))==0){
                     //printf("%s ",tkH);
                     //printf("%s \n", token);
-                    next = true;
-                    break;
+                    //next = true;
+                    //break;
                 }
             }
             else{
@@ -244,7 +243,6 @@ void summarize_hash(TxtSmry* smry, char* text){
         //Append unique hash 
         if(smry->token[hash].count==0){//unique token
             append_hash_TxtSmry(smry, hash);
-            ++smry->nToken;
         }
 
 
@@ -252,8 +250,8 @@ void summarize_hash(TxtSmry* smry, char* text){
         iStr = iNxt;
 
         //Check spurious overflow
-        if(smry->maxSpurious<smry->token[hash].count){
-            smry->maxSpurious = smry->token[hash].count;
+        if(smry->maxSpurious<smry->token[hash].count && smry->token[hash].count>1){
+            smry->maxSpurious = smry->token[hash].count - 1;
         }
     }
 

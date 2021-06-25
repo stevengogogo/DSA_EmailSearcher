@@ -201,14 +201,14 @@ void test_summarize_benchmark(void){
     print_clock("(10000 email)Time: ", str, end);
 
     for(int i=0;i<num_mail;i++){
-        if(smrys->maxSpurious>INIT_SPURIOUS_COUNT){
+        if(smrys[i].maxSpurious>0){
             ++countOver;
         }
     }
     printf(" Spurious Overflow: %d/%d", countOver, num_mail);
 
     for(int i=0;i<num_mail;i++){
-        if( smrys[i].maxSpurious > INIT_SPURIOUS_COUNT){
+        if( smrys[i].maxSpurious > 0){
         printf(" Max Spurious: %d (out of %d unique hash)\n",smrys[i].maxSpurious, smrys[i].nToken);
         }
     }

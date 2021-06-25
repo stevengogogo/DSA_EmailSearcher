@@ -209,18 +209,20 @@ void summarize_hash(TxtSmry* smry, char* text){
         }
 
         //Check new token is duplicate
+        /*
         for(int i=0;i<INIT_SPURIOUS_COUNT;i++){
             if(i<smry->token[hash].count){
                 iStrH = smry->token[hash].loc[i];
                 iStrH = popToken(text, tkH, iStrH);
-                if(strncmp(tkH, token, strlen(token))!=0){
-                    if(smry->id==0){
-                        printf("%s ", token);
-                        printf("%s \n", tkH);
-                    }
+                if(strncmp(tkH, token, strlen(token))==0){
+                    continue;
                 }
             }
+            else{
+                break;
+            }
         }
+        */
 
         //Append New Hash Until FULL
         if(smry->token[hash].count<INIT_SPURIOUS_COUNT){
@@ -239,8 +241,10 @@ void summarize_hash(TxtSmry* smry, char* text){
         //Next token
         iStr = iNxt;
 
-        if(smry->maxSpurious<smry->token[hash].count)
+        //Check spurious overflow
+        if(smry->maxSpurious<smry->token[hash].count){
             smry->maxSpurious = smry->token[hash].count;
+        }
     }
 
 

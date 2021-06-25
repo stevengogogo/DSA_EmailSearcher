@@ -69,7 +69,7 @@ void _answer(int qid, int answers[], int len){
 		return;
 	}
 
-	if(_get_process_cputime() - 5000 > _begin)
+	if(_get_process_cputime() - 9000 > _begin)
 		exit(0);
 
 	unsigned long long digest = 0x76efa04b78375b4b;

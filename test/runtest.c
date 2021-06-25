@@ -32,6 +32,7 @@ TEST_LIST = {
     {"Power", test_power},
     {"Char 2 number", test_char2num},
     {"Quick sort", test_sort},
+    {"Matrix", test_matrix},
     /*
     {"Find Similar: Memory", memory_allocation_FS},
     {"Find Similar: init", test_init_FS},

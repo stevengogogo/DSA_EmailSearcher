@@ -353,3 +353,27 @@ void swap(int* x, int* y){
     *x = *y;
     *y = tmp;
 }
+
+/*matrix*/
+void init_Matrix(Matrix* M, int nrow, int ncol){
+    int* m = (int*)calloc(ncol*nrow, sizeof(int));
+    M->m = m;
+    M->ncol = ncol;
+    M->nrow = nrow;
+}
+
+void kill_Matrix(Matrix* M){
+    free(M->m);
+    M->ncol = 0;
+    M->nrow = 0;
+}
+
+void set_Matrix(Matrix* M, int r, int c, int val){
+    int offset = r*M->ncol + c;
+    M->m[offset] = val;
+}
+
+int get_Matrix(Matrix*M, int r, int c){
+    int offset = r*M->ncol + c;
+    return M->m[offset];
+}

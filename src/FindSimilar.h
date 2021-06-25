@@ -11,13 +11,13 @@
 
 #ifndef FINDSIMILAR_H
 #define FINDSIMILAR_H
+#include "api.h"
 #include <stdio.h>
 #include <stdlib.h>
 #include <assert.h>
 #include <string.h>
 #include <stdbool.h>
 #include "utils.h"
-#include "api.h"
 
 /**********Constant Variable***********/
 #define Q_RABIN 100001

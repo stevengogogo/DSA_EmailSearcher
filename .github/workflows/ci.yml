@@ -52,9 +52,7 @@ jobs:
     - name: Scoring
       run: |
         make score
-    - name: Speed profile
-      run: |
-        make gprof
+
     - name: Leak test [main]
       run: |
         make -i leak

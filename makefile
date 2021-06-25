@@ -78,9 +78,6 @@ merge_main: merge_standalone
 	echo "Compile Merged Main";
 	echo "$(green)[Pass]$(reset)";
 
-	echo "Run merged main";
-	./build/merge_main.o < ./test/data/test.in
-	echo "$(green)[Pass]$(reset)"
 	
 	cp ./merge_temp/main_merged.c ./build/main.c
 	echo "Deployed at $(mag)./build/main.c$(reset)"

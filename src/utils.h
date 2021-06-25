@@ -145,6 +145,17 @@ int partition(int number[], int left, int right);
 void swap(int* x, int* y);
 
 /*Matrix*/
+typedef struct Matrix{
+    int* m;
+    int nrow;
+    int ncol;
+} Matrix;
+
+void init_Matrix(Matrix* M, int nrow, int ncol);
+void kill_Matrix(Matrix* M);
+void set_Matrix(Matrix* M, int r, int c, int val);
+int get_Matrix(Matrix*M, int r, int c);
+
 
 
 #endif

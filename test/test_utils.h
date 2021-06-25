@@ -98,4 +98,16 @@ void test_sort(void){
     free(arrOrg);
 }
 
+void test_matrix(void){
+    Matrix M;
+    init_Matrix(&M, 2, 2);
+    set_Matrix(&M, 0,0,1);
+    TEST_CHECK(get_Matrix(&M, 0, 0) == 1);
+    TEST_CHECK(get_Matrix(&M, 0, 1) == 0);
+    TEST_CHECK(get_Matrix(&M, 1, 0) == 0);
+    TEST_CHECK(get_Matrix(&M, 1, 1) == 0);
+
+}
+
+
 #endif

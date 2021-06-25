@@ -98,7 +98,7 @@ void init_TxtSmry(TxtSmry* smry, int hashMapsize);
 void init_TxtSmry_arr(TxtSmry** smry, int len, int hashmapSize);
 void append_hash_TxtSmry(TxtSmry* smry, int hash);
 void _add_unique_hashlist(TxtSmry* smry, int hash);
-ULONG get_unique_hashlist(TxtSmry* smry, int i);
+int get_unique_hashlist(TxtSmry* smry, int i);
 /** Kill array of TxtSmry.*/
 void kill_TxtSmry_arr(TxtSmry* smry, int len);
 
@@ -154,7 +154,8 @@ void summarize_hash(TxtSmry* smry, char* text);
  * @return true The jaccob's similarity of `smry1` and `smry2` is beyond the threshold
  * @return false otherwise
  */
-bool is_similar(TxtSmry* smry1, TxtSmry* smry2, int threshold);
+int answer_FindSimilar(TxtSmry* smrys, int ID, double threshold, int n_mails, int* SimList, int* lenSim);
+
 
 /************Helper Functions*****************/
 /**
@@ -163,7 +164,7 @@ bool is_similar(TxtSmry* smry1, TxtSmry* smry2, int threshold);
  * @note The inputs can be switched and get the same result. See https://github.com/stevengogogo/DSA_EmailSearcher/discussions/42 for Jaccob similarity 
  * @return int The jaccob similarity `[0,1]`
  */
-int similarity_val(TxtSmry* smry1, TxtSmry* smry2);
+double similarity_val(TxtSmry* smry1, TxtSmry* smry2);
 
 /** Maximum Jaccob's similarity with `O(1)` speed.
  * @note This function uses:  MaxSimlarity = min(nToken1, nToken2) / (nToken1 + nToken2 - min(nToken1, nToken2) ). To accquire the maximum similarity.

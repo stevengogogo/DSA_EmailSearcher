@@ -146,8 +146,8 @@ void _add_unique_hashlist(TxtSmry* smry, int hash){
     ++smry->nToken;
 }
 
-ULONG get_unique_hashlist(TxtSmry* smry, int i){
-    ULONG uniHash;
+int get_unique_hashlist(TxtSmry* smry, int i){
+    int uniHash;
     if (i<INIT_UNIQUE_TOKEN_SIZE){
         uniHash = smry->existTokens[i];
     }
@@ -256,3 +256,45 @@ void summarize_hash(TxtSmry* smry, char* text){
 
 }
 
+
+//Similarity
+int answer_FindSimilar(TxtSmry* smrys, int ID, double threshold, int n_mails, int* SimList, int* lenSim){
+    double sim;
+    *lenSim = 0;
+
+    //Retrieve Base Summary 
+    TxtSmry* SmryBase = &smrys[ID];
+    assert(SmryBase->id == ID);
+
+    for(int i=0;i<n_mails;i++){
+        if(i==ID){continue;}
+
+        sim = similarity_val(SmryBase, &smrys[i]);
+
+        if(sim>=threshold){
+            SimList[*lenSim] = i;
+            ++(*lenSim);
+        }
+    }
+
+    quicksort(SimList, 0, (*lenSim)-1);
+}
+
+
+double similarity_val(TxtSmry* smry1, TxtSmry* smry2){
+    double inter = 0;
+    int hash;
+    double sim;
+
+    for(int i=0;i<smry1->nToken;i++){
+        hash = get_unique_hashlist(smry1, i);
+        if(smry2->token[hash].count>0){
+            inter+=1;
+        }
+    }
+
+        //Jaccob Similarity
+        sim = inter / ((double)smry1->nToken + (double)smry2->nToken - inter);
+
+        return sim;
+}

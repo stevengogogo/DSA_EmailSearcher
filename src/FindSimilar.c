@@ -266,18 +266,18 @@ void answer_FindSimilar(TxtSmry* smrys, int ID, double threshold, int n_mails, i
     TxtSmry* SmryBase = &smrys[ID];
     assert(SmryBase->id == ID);
 
+    // Increasing order
     for(int i=0;i<n_mails;i++){
         if(i==ID){continue;}
 
         sim = similarity_val(SmryBase, &smrys[i]);
 
-        if(sim>=threshold){
+        if(sim>threshold){
             SimList[*lenSim] = i;
             ++(*lenSim);
         }
     }
 
-    //quicksort(SimList, 0, (*lenSim)-1);
 }
 
 

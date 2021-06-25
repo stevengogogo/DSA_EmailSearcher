@@ -987,7 +987,7 @@ void answer_FindSimilar(TxtSmry* smrys, int ID, double threshold, int n_mails, i
 
         sim = similarity_val(SmryBase, &smrys[i]);
 
-        if(sim>=threshold){
+        if(sim>threshold){
             SimList[*lenSim] = i;
             ++(*lenSim);
         }

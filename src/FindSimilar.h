@@ -25,16 +25,18 @@
 #define MAX_TOKEN_LEN 1000
 #define T_MINIHASH_PERM 100
 
-static long PowerArray[MAX_TOKEN_LEN];
+long PowerArray[MAX_TOKEN_LEN];
+
 
 typedef struct TxtSmry{
     Matrix SglM; //Shingle Matrix
 } TxtSmry;
 
 
+
 /*Rabin Karp Hashing*/
 void init_PowerArray(long* arr, int len, long base, long mod);
-long Hash_RK(char* tokenStr);
+long Hash_RK(char tokenStr[]);
 
 /*Permuation*/
 /** Tabulation hashing*/

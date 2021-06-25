@@ -10,7 +10,7 @@ void init_PowerArray(long* arr, int len, long base, long mod){
     }
 }
 
-long Hash_RK(char* tokenStr){
+long Hash_RK(char tokenStr[]){
     int i=0;
     long hash = 0;
     long Dn;
@@ -39,7 +39,7 @@ long power_long(long x, int n){
 /*Permuation*/
 /** Tabulation hashing*/
 long hash_tabu(long x, long a, long b){
-    
+    return (x*a + b) % Q_RABIN;
 }
 
 /** Return location*/
@@ -98,5 +98,6 @@ void kill_FindSimilar(TxtSmry* smry){
 }
 
 void Preprocess_FindSimilar(TxtSmry* smry, mail* mails, int n_mails){
-    
+    int a[T_MINIHASH_PERM];
+    int b[T_MINIHASH_PERM];
 }

@@ -20,7 +20,12 @@ void test_powerArray(void){
     TEST_CHECK(power_long(10,2) == 100);
 
     //Rabin Karp
-    TEST_CHECK(Hash_RK("1") == 1);
+    TEST_CHECK(Hash_RK("000000\0") == 0);
+    TEST_CHECK(Hash_RK("1\0") == 1);
+    TEST_CHECK(Hash_RK("2\0") == 2);
+    TEST_CHECK(Hash_RK("01\0") == D_RABIN);
+    TEST_CHECK(Hash_RK("11\0") == D_RABIN+1);
+    TEST_MSG("God %ld",Hash_RK("11"));
 }
 
 #endif

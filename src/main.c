@@ -6,6 +6,17 @@
 #include <stdio.h>
 #include <time.h>
 
+int main(void){
+        init_PowerArray(PowerArray, MAX_TOKEN_LEN, D_RABIN, Q_RABIN);
+
+
+
+    //Rabin Karp
+    Hash_RK("1\0");
+
+}
+
+/*
 int main(void) {
     // Var: Api
     int n_mails, n_queries;
@@ -62,3 +73,4 @@ int main(void) {
 
     return 0;
 }
+*/

@@ -189,9 +189,9 @@ void&#160;</td><td class="memItemRight" valign="bottom"><b>append_hash_TxtSmry</
 <tr class="memitem:a6e6d80613b8dded57b1ef670ab0183e5"><td class="memItemLeft" align="right" valign="top"><a id="a6e6d80613b8dded57b1ef670ab0183e5"></a>
 void&#160;</td><td class="memItemRight" valign="bottom"><b>_add_unique_hashlist</b> (<a class="el" href="structTxtSmry.html">TxtSmry</a> *smry, int hash)</td></tr>
 <tr class="separator:a6e6d80613b8dded57b1ef670ab0183e5"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:afe192a7c343a1c2e0333b5adb04413ba"><td class="memItemLeft" align="right" valign="top"><a id="afe192a7c343a1c2e0333b5adb04413ba"></a>
-ULONG&#160;</td><td class="memItemRight" valign="bottom"><b>get_unique_hashlist</b> (<a class="el" href="structTxtSmry.html">TxtSmry</a> *smry, int i)</td></tr>
-<tr class="separator:afe192a7c343a1c2e0333b5adb04413ba"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a26f3282131ad824219e6536c9006b2c7"><td class="memItemLeft" align="right" valign="top"><a id="a26f3282131ad824219e6536c9006b2c7"></a>
+int&#160;</td><td class="memItemRight" valign="bottom"><b>get_unique_hashlist</b> (<a class="el" href="structTxtSmry.html">TxtSmry</a> *smry, int i)</td></tr>
+<tr class="separator:a26f3282131ad824219e6536c9006b2c7"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a59b118272255ea41350b6fc60bff4ecd"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="FindSimilar_8h.html#a59b118272255ea41350b6fc60bff4ecd">kill_TxtSmry_arr</a> (<a class="el" href="structTxtSmry.html">TxtSmry</a> *smry, int len)</td></tr>
 <tr class="separator:a59b118272255ea41350b6fc60bff4ecd"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a5d1c13d719525d926512bacf0d5e154c"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="FindSimilar_8h.html#a5d1c13d719525d926512bacf0d5e154c">popTokenHash</a> (char message[], char token[], int iStr, int *Hash)</td></tr>
@@ -210,12 +210,12 @@ void&#160;</td><td class="memItemRight" valign="bottom"><b>kill_FindSimilar</b> 
 <tr class="separator:a064b545bf35f24202ee1f17bacea0005"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:abd6c52480b4cbdbcd4f364853961734e"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="FindSimilar_8h.html#abd6c52480b4cbdbcd4f364853961734e">summarize_hash</a> (<a class="el" href="structTxtSmry.html">TxtSmry</a> *smry, char *text)</td></tr>
 <tr class="separator:abd6c52480b4cbdbcd4f364853961734e"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:adff9754312fc3f3b269ed99b9240a8a9"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="FindSimilar_8h.html#adff9754312fc3f3b269ed99b9240a8a9">is_similar</a> (<a class="el" href="structTxtSmry.html">TxtSmry</a> *smry1, <a class="el" href="structTxtSmry.html">TxtSmry</a> *smry2, int threshold)</td></tr>
-<tr class="memdesc:adff9754312fc3f3b269ed99b9240a8a9"><td class="mdescLeft">&#160;</td><td class="mdescRight">Check the similarity of two messages is exceeding threshold.  <a href="FindSimilar_8h.html#adff9754312fc3f3b269ed99b9240a8a9">More...</a><br /></td></tr>
-<tr class="separator:adff9754312fc3f3b269ed99b9240a8a9"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a51d3115831a7cb14f3cafc2e63885beb"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="FindSimilar_8h.html#a51d3115831a7cb14f3cafc2e63885beb">similarity_val</a> (<a class="el" href="structTxtSmry.html">TxtSmry</a> *smry1, <a class="el" href="structTxtSmry.html">TxtSmry</a> *smry2)</td></tr>
-<tr class="memdesc:a51d3115831a7cb14f3cafc2e63885beb"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get Jaccob's similarity from two summaries ( <a class="el" href="structTxtSmry.html">TxtSmry</a>). with <code>O(min(num_token))</code>  <a href="FindSimilar_8h.html#a51d3115831a7cb14f3cafc2e63885beb">More...</a><br /></td></tr>
-<tr class="separator:a51d3115831a7cb14f3cafc2e63885beb"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a04c3ccc9f548ccf15a6978026a27247a"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="FindSimilar_8h.html#a04c3ccc9f548ccf15a6978026a27247a">answer_FindSimilar</a> (<a class="el" href="structTxtSmry.html">TxtSmry</a> *smrys, int ID, double threshold, int n_mails, int *SimList, int *lenSim)</td></tr>
+<tr class="memdesc:a04c3ccc9f548ccf15a6978026a27247a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Check the similarity of two messages is exceeding threshold.  <a href="FindSimilar_8h.html#a04c3ccc9f548ccf15a6978026a27247a">More...</a><br /></td></tr>
+<tr class="separator:a04c3ccc9f548ccf15a6978026a27247a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa90c4e9bbbbf76dbcd3ea2ffa3a2b297"><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="FindSimilar_8h.html#aa90c4e9bbbbf76dbcd3ea2ffa3a2b297">similarity_val</a> (<a class="el" href="structTxtSmry.html">TxtSmry</a> *smry1, <a class="el" href="structTxtSmry.html">TxtSmry</a> *smry2)</td></tr>
+<tr class="memdesc:aa90c4e9bbbbf76dbcd3ea2ffa3a2b297"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get Jaccob's similarity from two summaries ( <a class="el" href="structTxtSmry.html">TxtSmry</a>). with <code>O(min(num_token))</code>  <a href="FindSimilar_8h.html#aa90c4e9bbbbf76dbcd3ea2ffa3a2b297">More...</a><br /></td></tr>
+<tr class="separator:aa90c4e9bbbbf76dbcd3ea2ffa3a2b297"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a61fe077f7d3542ce71eebb229949e97f"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="FindSimilar_8h.html#a61fe077f7d3542ce71eebb229949e97f">max_similarity_val</a> (<a class="el" href="structTxtSmry.html">TxtSmry</a> *smry1, <a class="el" href="structTxtSmry.html">TxtSmry</a> *smry2)</td></tr>
 <tr class="separator:a61fe077f7d3542ce71eebb229949e97f"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
@@ -267,6 +267,72 @@ void&#160;</td><td class="memItemRight" valign="bottom"><b>kill_FindSimilar</b> 
 </div>
 </div>
 <h2 class="groupheader">Function Documentation</h2>
+<a id="a04c3ccc9f548ccf15a6978026a27247a"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a04c3ccc9f548ccf15a6978026a27247a">&#9670;&nbsp;</a></span>answer_FindSimilar()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">int answer_FindSimilar </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="structTxtSmry.html">TxtSmry</a> *&#160;</td>
+          <td class="paramname"><em>smrys</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>ID</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">double&#160;</td>
+          <td class="paramname"><em>threshold</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>n_mails</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int *&#160;</td>
+          <td class="paramname"><em>SimList</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int *&#160;</td>
+          <td class="paramname"><em>lenSim</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Check the similarity of two messages is exceeding threshold. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">smry1</td><td>Message 1. </td></tr>
+    <tr><td class="paramname">smry2</td><td>Message 2. </td></tr>
+    <tr><td class="paramname">threshold</td><td>the threshold of similarity <code>[0,1]</code> </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section note"><dt>Note</dt><dd>swich <code>smry1</code> and <code>smry2</code> will not affect the result. </dd></dl>
+<dl class="section return"><dt>Returns</dt><dd>true The jaccob's similarity of <code>smry1</code> and <code>smry2</code> is beyond the threshold </dd>
+<dd>
+false otherwise </dd></dl>
+
+</div>
+</div>
 <a id="abcef5cbf6a37e7160503d572705094cc"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#abcef5cbf6a37e7160503d572705094cc">&#9670;&nbsp;</a></span>Init_FindSimilar()</h2>
 
@@ -393,54 +459,6 @@ void&#160;</td><td class="memItemRight" valign="bottom"><b>kill_FindSimilar</b> 
       </table>
 </div><div class="memdoc">
 <p>Initiate array of text summary </p>
-
-</div>
-</div>
-<a id="adff9754312fc3f3b269ed99b9240a8a9"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#adff9754312fc3f3b269ed99b9240a8a9">&#9670;&nbsp;</a></span>is_similar()</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">bool is_similar </td>
-          <td>(</td>
-          <td class="paramtype"><a class="el" href="structTxtSmry.html">TxtSmry</a> *&#160;</td>
-          <td class="paramname"><em>smry1</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype"><a class="el" href="structTxtSmry.html">TxtSmry</a> *&#160;</td>
-          <td class="paramname"><em>smry2</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">int&#160;</td>
-          <td class="paramname"><em>threshold</em>&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p>Check the similarity of two messages is exceeding threshold. </p>
-<dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
-    <tr><td class="paramname">smry1</td><td>Message 1. </td></tr>
-    <tr><td class="paramname">smry2</td><td>Message 2. </td></tr>
-    <tr><td class="paramname">threshold</td><td>the threshold of similarity <code>[0,1]</code> </td></tr>
-  </table>
-  </dd>
-</dl>
-<dl class="section note"><dt>Note</dt><dd>swich <code>smry1</code> and <code>smry2</code> will not affect the result. </dd></dl>
-<dl class="section return"><dt>Returns</dt><dd>true The jaccob's similarity of <code>smry1</code> and <code>smry2</code> is beyond the threshold </dd>
-<dd>
-false otherwise </dd></dl>
 
 </div>
 </div>
@@ -604,14 +622,14 @@ false otherwise </dd></dl>
 
 </div>
 </div>
-<a id="a51d3115831a7cb14f3cafc2e63885beb"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a51d3115831a7cb14f3cafc2e63885beb">&#9670;&nbsp;</a></span>similarity_val()</h2>
+<a id="aa90c4e9bbbbf76dbcd3ea2ffa3a2b297"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aa90c4e9bbbbf76dbcd3ea2ffa3a2b297">&#9670;&nbsp;</a></span>similarity_val()</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">int similarity_val </td>
+          <td class="memname">double similarity_val </td>
           <td>(</td>
           <td class="paramtype"><a class="el" href="structTxtSmry.html">TxtSmry</a> *&#160;</td>
           <td class="paramname"><em>smry1</em>, </td>

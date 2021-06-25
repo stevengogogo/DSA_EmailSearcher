@@ -1,6 +1,4 @@
 var searchData=
 [
-  ['similarity_5fval_71',['similarity_val',['../FindSimilar_8h.html#a51d3115831a7cb14f3cafc2e63885beb',1,'FindSimilar.h']]],
-  ['summarize_5fcontent_72',['summarize_content',['../FindSimilar_8h.html#a064b545bf35f24202ee1f17bacea0005',1,'FindSimilar.c']]],
-  ['summarize_5fhash_73',['summarize_hash',['../FindSimilar_8h.html#abd6c52480b4cbdbcd4f364853961734e',1,'FindSimilar.c']]]
+  ['quicksort_75',['quicksort',['../utils_8h.html#a7f9501e3da8bed7be1eed5abe1b2c035',1,'utils.c']]]
 ];

@@ -133,6 +133,9 @@ Macros</h2></td></tr>
 <tr class="memitem:a72aba4c24081d136220e62ae659061ce"><td class="memItemLeft" align="right" valign="top"><a id="a72aba4c24081d136220e62ae659061ce"></a>
 #define&#160;</td><td class="memItemRight" valign="bottom"><b>EMTY_QUE_SIG</b>&#160;&#160;&#160;-121242</td></tr>
 <tr class="separator:a72aba4c24081d136220e62ae659061ce"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a4e8cf262125dbd76f2c2185b6e63ac08"><td class="memItemLeft" align="right" valign="top"><a id="a4e8cf262125dbd76f2c2185b6e63ac08"></a>
+#define&#160;</td><td class="memItemRight" valign="bottom"><b>MAX_N_MAIL</b>&#160;&#160;&#160;11000</td></tr>
+<tr class="separator:a4e8cf262125dbd76f2c2185b6e63ac08"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="typedef-members"></a>
 Typedefs</h2></td></tr>
@@ -229,6 +232,12 @@ void&#160;</td><td class="memItemRight" valign="bottom"><b>update_size_uArray</b
 <tr class="memitem:a213d288095ffd2ef8547e9292fc471bd"><td class="memItemLeft" align="right" valign="top"><a id="a213d288095ffd2ef8547e9292fc471bd"></a>
 void&#160;</td><td class="memItemRight" valign="bottom"><b>kill_uArray</b> (<a class="el" href="structuArray.html">uArray</a> *arr)</td></tr>
 <tr class="separator:a213d288095ffd2ef8547e9292fc471bd"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a7f9501e3da8bed7be1eed5abe1b2c035"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="utils_8h.html#a7f9501e3da8bed7be1eed5abe1b2c035">quicksort</a> (int arr[], int left, int right)</td></tr>
+<tr class="separator:a7f9501e3da8bed7be1eed5abe1b2c035"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a63802919fc588a396c2037346d2ea072"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="utils_8h.html#a63802919fc588a396c2037346d2ea072">partition</a> (int number[], int left, int right)</td></tr>
+<tr class="separator:a63802919fc588a396c2037346d2ea072"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:acd3415eef442ced2b5e064f95f04b624"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="utils_8h.html#acd3415eef442ced2b5e064f95f04b624">swap</a> (int *x, int *y)</td></tr>
+<tr class="separator:acd3415eef442ced2b5e064f95f04b624"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>General Utilities for C language. </p>
@@ -486,6 +495,43 @@ false </dd></dl>
 
 </div>
 </div>
+<a id="a63802919fc588a396c2037346d2ea072"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a63802919fc588a396c2037346d2ea072">&#9670;&nbsp;</a></span>partition()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">int partition </td>
+          <td>(</td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>number</em>[], </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>left</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>right</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<ul>
+<li>Combine fragments. This function is modifed from: <a href="https://openhome.cc/Gossip/AlgorithmGossip/QuickSort3.htm#C">https://openhome.cc/Gossip/AlgorithmGossip/QuickSort3.htm#C</a> </li>
+</ul>
+
+</div>
+</div>
 <a id="a49e8d2cc8816925b320ba33f4dcea5e6"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a49e8d2cc8816925b320ba33f4dcea5e6">&#9670;&nbsp;</a></span>pop_item()</h2>
 
@@ -547,6 +593,75 @@ false </dd></dl>
   </dd>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>int updated reading head <code>iStr</code>. -1: end of string </dd></dl>
+
+</div>
+</div>
+<a id="a7f9501e3da8bed7be1eed5abe1b2c035"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a7f9501e3da8bed7be1eed5abe1b2c035">&#9670;&nbsp;</a></span>quicksort()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void quicksort </td>
+          <td>(</td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>arr</em>[], </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>left</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>right</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<ul>
+<li>QuickSort to increasing order. Reference: This function is modified from <a href="https://openhome.cc/Gossip/AlgorithmGossip/QuickSort3.htm#C">https://openhome.cc/Gossip/AlgorithmGossip/QuickSort3.htm#C</a></li>
+</ul>
+<p>Sorting </p>
+
+</div>
+</div>
+<a id="acd3415eef442ced2b5e064f95f04b624"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#acd3415eef442ced2b5e064f95f04b624">&#9670;&nbsp;</a></span>swap()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void swap </td>
+          <td>(</td>
+          <td class="paramtype">int *&#160;</td>
+          <td class="paramname"><em>x</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int *&#160;</td>
+          <td class="paramname"><em>y</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<ul>
+<li>Switch the value store in <code>x</code> and <code>y</code>. </li>
+</ul>
 
 </div>
 </div>

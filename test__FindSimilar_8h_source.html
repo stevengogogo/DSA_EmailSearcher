@@ -91,10 +91,15 @@ $(function() {
 <div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160;    TEST_CHECK(power_long(10,2) == 100);</div>
 <div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160; </div>
 <div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160;    <span class="comment">//Rabin Karp</span></div>
-<div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160;    TEST_CHECK(Hash_RK(<span class="stringliteral">&quot;1&quot;</span>) == 1);</div>
-<div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160;}</div>
-<div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160; </div>
-<div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160;<span class="preprocessor">#endif</span></div>
+<div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160;    TEST_CHECK(Hash_RK(<span class="stringliteral">&quot;000000\0&quot;</span>) == 0);</div>
+<div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160;    TEST_CHECK(Hash_RK(<span class="stringliteral">&quot;1\0&quot;</span>) == 1);</div>
+<div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160;    TEST_CHECK(Hash_RK(<span class="stringliteral">&quot;2\0&quot;</span>) == 2);</div>
+<div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160;    TEST_CHECK(Hash_RK(<span class="stringliteral">&quot;01\0&quot;</span>) == D_RABIN);</div>
+<div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160;    TEST_CHECK(Hash_RK(<span class="stringliteral">&quot;11\0&quot;</span>) == D_RABIN+1);</div>
+<div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160;    TEST_MSG(<span class="stringliteral">&quot;God %ld&quot;</span>,Hash_RK(<span class="stringliteral">&quot;11&quot;</span>));</div>
+<div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160;}</div>
+<div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160; </div>
+<div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160;<span class="preprocessor">#endif</span></div>
 <div class="ttc" id="aFindSimilar_8h_html"><div class="ttname"><a href="FindSimilar_8h.html">FindSimilar.h</a></div><div class="ttdoc">Group Analysis. Use Jaccob's similarity with hash table to identify similar strings.</div></div>
 </div><!-- fragment --></div><!-- contents -->
 <!-- start footer part -->

@@ -69,7 +69,8 @@ $(function() {
 <a href="#nested-classes">Classes</a> &#124;
 <a href="#define-members">Macros</a> &#124;
 <a href="#typedef-members">Typedefs</a> &#124;
-<a href="#func-members">Functions</a>  </div>
+<a href="#func-members">Functions</a> &#124;
+<a href="#var-members">Variables</a>  </div>
   <div class="headertitle">
 <div class="title">FindSimilar.h File Reference</div>  </div>
 </div><!--header-->
@@ -145,9 +146,9 @@ Functions</h2></td></tr>
 <tr class="memitem:aba7feb624a06bb8060dccf564676d5f0"><td class="memItemLeft" align="right" valign="top"><a id="aba7feb624a06bb8060dccf564676d5f0"></a>
 void&#160;</td><td class="memItemRight" valign="bottom"><b>init_PowerArray</b> (long *arr, int len, long base, long mod)</td></tr>
 <tr class="separator:aba7feb624a06bb8060dccf564676d5f0"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a41f3a26ed77d29b9690478b2beba5559"><td class="memItemLeft" align="right" valign="top"><a id="a41f3a26ed77d29b9690478b2beba5559"></a>
-long&#160;</td><td class="memItemRight" valign="bottom"><b>Hash_RK</b> (char *tokenStr)</td></tr>
-<tr class="separator:a41f3a26ed77d29b9690478b2beba5559"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab8d41195d9a007f4454ba9976fa1b4a1"><td class="memItemLeft" align="right" valign="top"><a id="ab8d41195d9a007f4454ba9976fa1b4a1"></a>
+long&#160;</td><td class="memItemRight" valign="bottom"><b>Hash_RK</b> (char tokenStr[])</td></tr>
+<tr class="separator:ab8d41195d9a007f4454ba9976fa1b4a1"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a52ebcc2eaaff851f437f674fed362980"><td class="memItemLeft" align="right" valign="top">long&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="FindSimilar_8h.html#a52ebcc2eaaff851f437f674fed362980">hash_tabu</a> (long x, long a, long b)</td></tr>
 <tr class="separator:a52ebcc2eaaff851f437f674fed362980"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a824e7aa2a38b2e927aa9c9ff79edd5d7"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="FindSimilar_8h.html#a824e7aa2a38b2e927aa9c9ff79edd5d7">popTokenHash</a> (char message[], char token[], int iStr, long *Hash)</td></tr>
@@ -162,6 +163,12 @@ void&#160;</td><td class="memItemRight" valign="bottom"><b>kill_FindSimilar</b> 
 <tr class="separator:a68c60ab71d943dce32ea2b63ceb4cc00"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ad6ee6e1548fe2f7a4e3d0a711b8e5846"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="FindSimilar_8h.html#ad6ee6e1548fe2f7a4e3d0a711b8e5846">Preprocess_FindSimilar</a> (<a class="el" href="structTxtSmry.html">TxtSmry</a> *smry, <a class="el" href="structmail.html">mail</a> *mails, int n_mails)</td></tr>
 <tr class="separator:ad6ee6e1548fe2f7a4e3d0a711b8e5846"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="var-members"></a>
+Variables</h2></td></tr>
+<tr class="memitem:a91879b9f40ae55d7ec909140cc06147e"><td class="memItemLeft" align="right" valign="top"><a id="a91879b9f40ae55d7ec909140cc06147e"></a>
+long&#160;</td><td class="memItemRight" valign="bottom"><b>PowerArray</b> [MAX_TOKEN_LEN]</td></tr>
+<tr class="separator:a91879b9f40ae55d7ec909140cc06147e"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>Group Analysis. Use Jaccob's similarity with hash table to identify similar strings. </p>

@@ -13,7 +13,6 @@ int main(void) {
     query *queries;
 
     //Var: Find Similar
-    TxtSmry* smrys;
     int* list_FS = (int*)malloc(MAX_N_MAIL*sizeof(int));
     int len_FS;
     int threshold;
@@ -21,16 +20,10 @@ int main(void) {
 
     //Initiation
 	api.init(&n_mails, &n_queries, &mails, &queries);   
-    Init_FindSimilar(&smrys, n_mails);
-
-    for(int i=0;i<n_queries;i++){
-        if(queries[i].type==find_similar){
-            printf("%f \n", queries[i].data.find_similar_data.threshold);
-        }
-    }
+    //Init_FindSimilar(&smrys, n_mails);
 
     //Preprocessing
-    Preprocess_FindSimilar(smrys, mails, n_mails);
+    //Preprocess_FindSimilar(smrys, mails, n_mails);
 
     //Answer
 	for(int i = 0; i < n_queries; i++){
@@ -42,7 +35,7 @@ int main(void) {
             threshold = queries[i].data.find_similar_data.threshold;
 
             //process
-            answer_FindSimilar(smrys, mid, threshold, n_mails, list_FS, &len_FS);
+            //answer_FindSimilar(smrys, mid, threshold, n_mails, list_FS, &len_FS);
 
             //answer
             if(len_FS>0){
@@ -63,7 +56,6 @@ int main(void) {
     }
 
     //Garbage Collection
-    kill_FindSimilar(smrys, n_mails);
     free(mails);
     free(queries);
     free(list_FS);

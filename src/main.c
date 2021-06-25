@@ -23,6 +23,13 @@ int main(void) {
 	api.init(&n_mails, &n_queries, &mails, &queries);   
     Init_FindSimilar(&smrys, n_mails);
 
+     printf("FindSimilar\n");
+    for(int i=0;i<n_queries;i++){  
+        if(queries[i].type == find_similar){
+            printf("QID: %d ; mid: %d ; threshold: %f\n",queries[i].id, queries[i].data.find_similar_data.mid, queries[i].data.find_similar_data.threshold );
+        }
+    }
+
     //Preprocessing
     Preprocess_FindSimilar(smrys, mails, n_mails);
 

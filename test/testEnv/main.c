@@ -982,6 +982,7 @@ void answer_FindSimilar(TxtSmry* smrys, int ID, double threshold, int n_mails, i
     TxtSmry* SmryBase = &smrys[ID];
     assert(SmryBase->id == ID);
 
+    // Increasing order
     for(int i=0;i<n_mails;i++){
         if(i==ID){continue;}
 
@@ -993,7 +994,6 @@ void answer_FindSimilar(TxtSmry* smrys, int ID, double threshold, int n_mails, i
         }
     }
 
-    //quicksort(SimList, 0, (*lenSim)-1);
 }
 
 double similarity_val(TxtSmry* smry1, TxtSmry* smry2){

@@ -169,9 +169,9 @@ void swap(int* x, int* y);
 #include <stdbool.h>
 
 /**********Constant Variable***********/
-#define Q_RABIN 100001
+#define Q_RABIN 170003
 #define D_RABIN 36
-#define INIT_SPURIOUS_COUNT 3
+#define INIT_SPURIOUS_COUNT 1
 #define INIT_UNIQUE_TOKEN_SIZE 10000
 #define TOKEN_STRING_LENGTH 1000
 #define ULONG  long
@@ -357,7 +357,7 @@ int main(void) {
         
         //Expression Match
         else if(queries[i].type == expression_match){
-		  api.answer(queries[i].id, NULL, 0);
+		    api.answer(queries[i].id, NULL, 0);
         }
 
         //Group Analysis

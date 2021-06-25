@@ -40,7 +40,7 @@ TEST_LIST = {
     {"Find Similar: Rabin Karp", test_RabinKarp_hashing},
     {"Find Similar: Preprocessing", test_summarize},
     {"Find Similar: data", test_FS_data},
-    //{"Find Similar: Preprocessing (Benchmark)", test_summarize_benchmark},
+    {"Find Similar: Preprocessing (Benchmark)", test_summarize_benchmark},
     {"Find Similar: Token history", test_tokenhash},
     {NULL, NULL} // Terminate the test
 };

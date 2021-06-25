@@ -1,6 +1,6 @@
 build/*
 !build/merge.py
-
+test/testEnv/main
 .DS_Store
 test/build/
 test_TEMP/

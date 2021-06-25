@@ -4,6 +4,7 @@
         "system_error": "cpp",
         "test_genericstack.h": "c",
         "sstream": "c",
-        "time.h": "c"
+        "time.h": "c",
+        "api.h": "c"
     }
 }

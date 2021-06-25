@@ -102,10 +102,7 @@ leaktest: test
 # From DSA Template
 score: merge_main 
 	cp ./build/main.c $(testenv)/main.c
-	gcc $(testenv)/main.c -o main -O3 -std=c11 -w
-	g++ $(testenv)/validator/validator.cpp -o $(testenv)/validator/validator -O3
-	./main < $(testenv)/testdata/test.in | $(testenv)/validator/validator
-
+	make -C test/testEnv run 
 
 buildgf: 
 	mkdir -p  $(build_folder)

@@ -154,7 +154,7 @@ void summarize_hash(TxtSmry* smry, char* text);
  * @return true The jaccob's similarity of `smry1` and `smry2` is beyond the threshold
  * @return false otherwise
  */
-int answer_FindSimilar(TxtSmry* smrys, int ID, double threshold, int n_mails, int* SimList, int* lenSim);
+void answer_FindSimilar(TxtSmry* smrys, int ID, double threshold, int n_mails, int* SimList, int* lenSim);
 
 
 /************Helper Functions*****************/

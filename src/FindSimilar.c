@@ -258,7 +258,7 @@ void summarize_hash(TxtSmry* smry, char* text){
 
 
 //Similarity
-int answer_FindSimilar(TxtSmry* smrys, int ID, double threshold, int n_mails, int* SimList, int* lenSim){
+void answer_FindSimilar(TxtSmry* smrys, int ID, double threshold, int n_mails, int* SimList, int* lenSim){
     double sim;
     *lenSim = 0;
 

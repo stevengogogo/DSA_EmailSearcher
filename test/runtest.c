@@ -32,6 +32,7 @@ TEST_LIST = {
     {"Power", test_power},
     {"Char 2 number", test_char2num},
     {"Quick sort", test_sort},
+    /*
     {"Find Similar: Memory", memory_allocation_FS},
     {"Find Similar: init", test_init_FS},
     {"Find Similar: init content", test_init_content_FS},
@@ -42,5 +43,6 @@ TEST_LIST = {
     {"Find Similar: data", test_FS_data},
     {"Find Similar: Preprocessing (Benchmark)", test_summarize_benchmark},
     {"Find Similar: Token history", test_tokenhash},
+    */
     {NULL, NULL} // Terminate the test
 };

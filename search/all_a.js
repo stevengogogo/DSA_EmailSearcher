@@ -1,8 +1,7 @@
 var searchData=
 [
-  ['partition_24',['partition',['../utils_8h.html#a63802919fc588a396c2037346d2ea072',1,'utils.c']]],
-  ['pop_5fitem_25',['pop_item',['../utils_8h.html#a49e8d2cc8816925b320ba33f4dcea5e6',1,'utils.c']]],
-  ['poptoken_26',['popToken',['../utils_8h.html#a81f4883411916757a7c41b8a74f73c2b',1,'utils.c']]],
-  ['poptokenhash_27',['popTokenHash',['../FindSimilar_8h.html#a5d1c13d719525d926512bacf0d5e154c',1,'FindSimilar.c']]],
-  ['preprocess_5ffindsimilar_28',['Preprocess_FindSimilar',['../FindSimilar_8h.html#abff53c80583525a6cf8f0c4ea926afec',1,'FindSimilar.c']]]
+  ['que_19',['que',['../structque.html',1,'']]],
+  ['query_20',['query',['../structquery.html',1,'']]],
+  ['query_5fdata_21',['query_data',['../unionquery_1_1query__data.html',1,'query']]],
+  ['quicksort_22',['quicksort',['../utils_8h.html#a7f9501e3da8bed7be1eed5abe1b2c035',1,'utils.c']]]
 ];

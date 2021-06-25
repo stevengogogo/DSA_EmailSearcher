@@ -1,5 +1,8 @@
 var searchData=
 [
-  ['kill_5fmem_5fulong_15',['kill_MEM_ULONG',['../FindSimilar_8h.html#a6e2dd2f8a6e68dd5aaca7c76a32ddc05',1,'FindSimilar.c']]],
-  ['kill_5ftxtsmry_5farr_16',['kill_TxtSmry_arr',['../FindSimilar_8h.html#a59b118272255ea41350b6fc60bff4ecd',1,'FindSimilar.c']]]
+  ['mail_10',['mail',['../structmail.html',1,'']]],
+  ['matrix_11',['Matrix',['../structMatrix.html',1,'']]],
+  ['memory_5fshort_12',['MEMORY_SHORT',['../structMEMORY__SHORT.html',1,'']]],
+  ['memory_5fulong_13',['MEMORY_ULONG',['../structMEMORY__ULONG.html',1,'']]],
+  ['merge_14',['merge',['../namespacemerge.html',1,'']]]
 ];

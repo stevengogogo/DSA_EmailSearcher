@@ -1,5 +1,5 @@
 var searchData=
 [
-  ['tokeninfo_37',['TokenInfo',['../structTokenInfo.html',1,'']]],
-  ['txtsmry_38',['TxtSmry',['../structTxtSmry.html',1,'TxtSmry'],['../FindSimilar_8h.html#ad58311979581ac4e2545af1d5d6067e7',1,'TxtSmry():&#160;FindSimilar.h']]]
+  ['uarray_26',['uArray',['../structuArray.html',1,'uArray'],['../utils_8h.html#afa43d1c77d1ea818ac56829c343bee9d',1,'uArray():&#160;utils.h']]],
+  ['utils_2eh_27',['utils.h',['../utils_8h.html',1,'']]]
 ];

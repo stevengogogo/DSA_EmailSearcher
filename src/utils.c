@@ -84,15 +84,15 @@ bool isLowerCase_ASCII(int asc){
     return inDomainInt(asc, 97, 122);
 }
 
-int char2num(char c){
+long char2num(char c){
     if(isNumber_ASCII(c)){
-        return (int)c - '0';
+        return (long)c - '0';
     }
     else if(isLowerCase_ASCII(c)){
-        return (int)c - 'a' + 10;
+        return (long)c - 'a' + 10;
     }
     else{
-        return (int)c;
+        return (long)c;
     }
 }
 

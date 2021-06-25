@@ -18,17 +18,38 @@
 #include <stdbool.h>
 #include "utils.h"
 
+
 /**********Constant Variable***********/
 #define Q_RABIN 170001
 #define D_RABIN 36
 #define MAX_TOKEN_LEN 1000
+#define T_MINIHASH_PERM 100
 
-static long PowArr[MAX_TOKEN_LEN];
+static long PowerArray[MAX_TOKEN_LEN];
+
+typedef struct TxtSmry{
+    Matrix SglM; //Shingle Matrix
+} TxtSmry;
 
 
 /*Rabin Karp Hashing*/
-void powerArray(long* arr, int len, long base, long mod);
-void _updateHash(long hash, char c);
+void init_PowerArray(long* arr, int len, long base, long mod);
+long Hash_RK(char* tokenStr);
+
+/*Permuation*/
+/** Tabulation hashing*/
+long hash_tabu(long x, long a, long b);
+
+/** Return location*/
+int popTokenHash(char message[], char token[], int iStr, long* Hash);
+/* x power n*/
+long power_long(long x, int n);
+
+
+/**Main API*/
+void Init_FindSimilar(TxtSmry* smry, int n_mails);
+void kill_FindSimilar(TxtSmry* smry);
+void Preprocess_FindSimilar(TxtSmry* smry, mail*  mails, int n_mails);
 
 
 

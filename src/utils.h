@@ -67,7 +67,7 @@ bool isLowerCase_ASCII(int);
  * @param c 
  * @return int 
  */
-int char2num(char c);
+long char2num(char c);
 
 /************Dynamic Array (Int) Stack**************/
 //dynamic array

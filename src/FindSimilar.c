@@ -241,9 +241,9 @@ void summarize_hash(TxtSmry* smry, char* text){
 
 
         //Append unique hash 
-        if(smry->token[hash].count==0){//unique token
-            append_hash_TxtSmry(smry, hash);
-        }
+        //if(smry->token[hash].count==0){//unique token
+        append_hash_TxtSmry(smry, hash);
+        //}
 
 
         //Next token

@@ -67,7 +67,7 @@ void print_clock(char* s,clock_t str, clock_t end){
     printf("%s Time %f", s,total_t);
 }
 
-/*
+
 int main(void) {
     int num_mail;
     mail* mails;
@@ -85,9 +85,9 @@ int main(void) {
 
   return 0;
 }
-*/
 
 
+/*
 int main(void) {
     int n_mails, n_queries;
     mail *mails;
@@ -107,3 +107,4 @@ int main(void) {
     free(mails);
   return 0;
 }
+*/

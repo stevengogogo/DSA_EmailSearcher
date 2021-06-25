@@ -200,29 +200,39 @@ void summarize_hash(TxtSmry* smry, char* text){
     int iStr = 0; //Current pin
     int iNxt; //Next pin
     int hash;
+    bool next = false;
 
 
     while(1){
+        next = false;
         iNxt = popTokenHash(text, token, iStr, &hash);
         if(iNxt == -1){//no token left
             break;
         }
 
         //Check new token is duplicate
-        /*
         for(int i=0;i<INIT_SPURIOUS_COUNT;i++){
             if(i<smry->token[hash].count){
                 iStrH = smry->token[hash].loc[i];
                 iStrH = popToken(text, tkH, iStrH);
                 if(strncmp(tkH, token, strlen(token))==0){
-                    continue;
+                    //printf("%s ",tkH);
+                    //printf("%s \n", token);
+                    next = true;
+                    break;
                 }
             }
             else{
                 break;
             }
         }
-        */
+
+        if (next){
+            //Next token
+            iStr = iNxt;
+            continue;
+        }
+   
 
         //Append New Hash Until FULL
         if(smry->token[hash].count<INIT_SPURIOUS_COUNT){

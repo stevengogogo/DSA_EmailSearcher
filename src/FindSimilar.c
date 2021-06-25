@@ -122,6 +122,7 @@ void append_hash_TxtSmry(TxtSmry* smry, int hash){
         _add_unique_hashlist(smry, hash);
         ++smry->nToken;
     }
+    //Count is update here
     ++smry->token[hash].count;
 }
 
@@ -221,6 +222,12 @@ void summarize_hash(TxtSmry* smry, char* text){
             }
         }
 
+        //Append New Hash Until FULL
+        if(smry->token[hash].count<INIT_SPURIOUS_COUNT){
+            iloc = smry->token[hash].count;
+            smry->token[hash].loc[iloc] = iStr;
+        }
+
 
         //Append unique hash 
         if(smry->token[hash].count==0){//unique token
@@ -228,12 +235,6 @@ void summarize_hash(TxtSmry* smry, char* text){
             ++smry->nToken;
         }
 
-        //Append New Hash Until FULL
-        if(smry->token[hash].count<INIT_SPURIOUS_COUNT){
-            iloc = smry->token[hash].count;
-            smry->token[hash].loc[iloc] = iStr;
-        }
-        ++smry->token[hash].count;
 
         //Next token
         iStr = iNxt;

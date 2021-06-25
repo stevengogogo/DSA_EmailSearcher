@@ -20,40 +20,17 @@
 #include "api.h"
 
 /**********Constant Variable***********/
-#define Q_MODULO 100000
-#define D 252
+#define Q_RABIN 100001
+#define D_RABIN 36
 #define INIT_SPURIOUS_COUNT 3
 #define INIT_UNIQUE_TOKEN_SIZE 10000
+#define TOKEN_STRING_LENGTH 1000
 #define ULONG  long
 #define UINT  int
 #define USHORT unsigned short
 
 /**Helper function**/
 /************Dynamic Array (Int) Stack**************/
-//dynamic array
-typedef struct{
-    int len;
-    int size;
-    ULONG* i;
-} dymArr_ULONG;
-
-//init and kill
-void init_dymArr_ULONG(dymArr_ULONG*, ULONG size);
-void kill_dymArr_ULONG(dymArr_ULONG*);
-void resize_dymArr_ULONG(dymArr_ULONG*, ULONG new_max_size);
-
-//clear
-void clear_Arr_ULONG(dymArr_ULONG*);
-
-//append
-/**Append at last*/
-void append_dymArr_ULONG(dymArr_ULONG*, ULONG val);
-/** Get the item of arr[i]*/
-int get_item_ULONG(dymArr_ULONG, ULONG i);
-/** Get the last item
- * @return last element. If no item left, return `EMTY_QUE_SIG`
-*/
-int pop_item_ULONG(dymArr_ULONG*);
 
 
 /**
@@ -71,7 +48,7 @@ typedef struct MEMORY_SHORT {
 
 typedef struct MEMORY_ULONG {
     ULONG top_unused;
-    UINT* ARRAY;
+    int* ARRAY;
     ULONG LEN;
 } MEMORY_ULONG;
 
@@ -86,7 +63,7 @@ static struct MEMORY_ULONG existTokens_mem;
 
 /**
  * @brief 
- * @note Each email is using the hash map with @ref Q_MODULO size, and each slot has @ref INIT_SPURIOUS_COUNT location data.
+ * @note Each email is using the hash map with @ref Q_RABIN size, and each slot has @ref INIT_SPURIOUS_COUNT location data.
  * @param loc_mem global struct for memory storage
  * @param num_mail number of email
  */
@@ -104,13 +81,14 @@ void kill_MEM_SHORT(struct MEMORY_SHORT* mem);
 /** Text Summary*/
 typedef struct TxtSmry{
     int id;
-    TokenInfo token[Q_MODULO]; //len = Q_MODULE
-    UINT* existTokens; //Exist Token
-    dymArr_ULONG* existTokens_DymArr;
+    TokenInfo token[Q_RABIN]; //len = Q_MODULE
+    int* existTokens; //Exist Token
+    dymArr* existTokens_DymArr;
     int nToken; // unique token number
     char* text; // Text
     bool synced; // Check the information is updated
     bool isExistTokens_DymArr;
+    int maxSpurious;
 } TxtSmry;
 
 
@@ -118,8 +96,8 @@ typedef struct TxtSmry{
 void init_TxtSmry(TxtSmry* smry, int hashMapsize);
 /** Initiate array of text summary*/
 void init_TxtSmry_arr(TxtSmry** smry, int len, int hashmapSize);
-void append_hash_TxtSmry(TxtSmry* smry, ULONG hash);
-void add_unique_hashlist(TxtSmry* smry, ULONG hash);
+void append_hash_TxtSmry(TxtSmry* smry, int hash);
+void _add_unique_hashlist(TxtSmry* smry, int hash);
 ULONG get_unique_hashlist(TxtSmry* smry, int i);
 /** Kill array of TxtSmry.*/
 void kill_TxtSmry_arr(TxtSmry* smry, int len);
@@ -128,11 +106,17 @@ void kill_TxtSmry_arr(TxtSmry* smry, int len);
 /******Hash*******/
 /** Get token hash
  * @param iStr Pin for reading the string
+ * @note Modified from @ref popToken.
  * @return iEnd. the end of the token
 */
 int popTokenHash(char message[], char token[], int iStr, int* Hash);
-/** Update the hash value with new character.*/
-int updateHash(char c, int Hash_cur, int q_cur, int d);
+/**
+ * @brief Update the hash value with new character.
+ * @param c character to append
+ * @param Hash_cur current hash value
+ * @return int updated hash value.
+ */
+int updateHash(char c, int Hash_cur);
 
 /**********Main API************/
 
@@ -140,7 +124,7 @@ int updateHash(char c, int Hash_cur, int q_cur, int d);
 void Init_FindSimilar(TxtSmry**, int n_mails);
 
 /** Preprocessing: Summarize the mails*/
-TxtSmry* Preprocess_FindSimilar(mail*  mails, int n_mails);
+void Preprocess_FindSimilar(TxtSmry*, mail*  mails, int n_mails);
 
 /*GC for FindSimilar problem*/
 void kill_FindSimilar(TxtSmry* smrys, int n_mails);
@@ -151,7 +135,9 @@ void kill_FindSimilar(TxtSmry* smrys, int n_mails);
 
 
 /*********Hash*********/
+/** Summarize a mail*/
 void summarize_content(TxtSmry* smry, mail* m);
+/** Add text and hashing*/
 void summarize_hash(TxtSmry* smry, char* text);
 
 

@@ -27,6 +27,12 @@ void test_popToken(void){
         TEST_MSG("Expected: %s ; Got: %s (%d)\n",tokenStr[i], token, iStr);
     }
 
+    //When no more token left
+    int iend = 0;
+    iend = popToken(message, token, iStr);
+    TEST_CHECK(iend == -1);
+    TEST_CHECK(iStr = strlen(message)+1);
+    TEST_CHECK( strncmp(token, "\0", strlen(token)) == 0 );
 }
 
 void test_token(){
@@ -50,6 +56,34 @@ void test_token(){
     }
 }
 
+void test_Regex(void){
+    TEST_CHECK(isRegularExpr_ASCII('+')==0 );
+    TEST_CHECK(isRegularExpr_ASCII('-')==0 );
+    TEST_CHECK(isRegularExpr_ASCII('&')==0 );
+    TEST_CHECK(isRegularExpr_ASCII('^')==0 );
+    TEST_CHECK(isRegularExpr_ASCII('>')==0 );
+    TEST_CHECK(isRegularExpr_ASCII('\'')==0 );
+    TEST_CHECK(isRegularExpr_ASCII('\0')==0 );
+    TEST_CHECK(isRegularExpr_ASCII('`')==0 );
+    TEST_CHECK(isRegularExpr_ASCII('&')==0 );
+    TEST_CHECK(isRegularExpr_ASCII('$')==0 );
+    TEST_CHECK(isRegularExpr_ASCII('_')==0 );
+    TEST_CHECK(isRegularExpr_ASCII('#')==0 );
+    TEST_CHECK(isRegularExpr_ASCII('?')==0 );
+    TEST_CHECK(isRegularExpr_ASCII('@')==0 );
+    TEST_CHECK(isRegularExpr_ASCII(')')==0 );
+    TEST_CHECK(isRegularExpr_ASCII('*')==0 );
+    TEST_CHECK(isRegularExpr_ASCII('!')==0 );
+    TEST_CHECK(isRegularExpr_ASCII('~')==0 );
+    TEST_CHECK(isRegularExpr_ASCII(';')==0 );
+    TEST_CHECK(isRegularExpr_ASCII(' ')==0 );
+
+    TEST_CHECK(isRegularExpr_ASCII('a')==1 );
+    TEST_CHECK(isRegularExpr_ASCII('A')==1 );
+    TEST_CHECK(isRegularExpr_ASCII('4')==1 );
+    TEST_CHECK(isRegularExpr_ASCII('0')==1 );
+    TEST_CHECK(isRegularExpr_ASCII('E')==1 );
+}
 
 
 #endif

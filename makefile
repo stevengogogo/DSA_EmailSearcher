@@ -1,6 +1,7 @@
 CFLAGS = -I.
 MAKEFLAGS += --silent
 CC=gcc -g -std=c11
+CCgf= gcc -pg -std=c11
 CCm = quom
 
 .PHONY: build test run_main  build_run  # Main piplines
@@ -22,7 +23,7 @@ reset=`tput sgr0`
 build: 
 	mkdir -p  $(build_folder)
 	$(CC) -o $(build_folder)/main.out $(src_folder)/*.c
-	echo "$(green)Built and deploy at $(mag) $(build_folder)/$(outfile)$(reset)";
+	echo "$(green)Built and deploy at $(mag) $(outfile)$(reset)";
 
 # Test
 mergetest:
@@ -91,3 +92,14 @@ test/validator/validator: test/validator/validator.cpp
 score: build test/validator/validator
 	$(outfile) < test/data/test.in | test/validator/validator 
 	$(outfile) < test/data/test.in | test/validator/validator > test/validator/score.txt
+
+
+buildgf: 
+	mkdir -p  $(build_folder)
+	$(CCgf) -o $(build_folder)/main_gprof.out $(src_folder)/*.c
+	echo "$(green)Built and deploy at $(mag) $(build_folder)/main_gprof.out$(reset)";
+gprof: buildgf
+	$(build_folder)/main_gprof.out < test/data/test.in
+	gprof $(build_folder)/main_gprof.out 
+	rm gmon.out
+	

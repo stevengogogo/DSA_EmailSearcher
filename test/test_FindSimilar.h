@@ -58,7 +58,7 @@ void test_init_content_FS(void){
     }
     
     //The token array is 0 in default
-    for(int i=0;i<Q_MODULO;i++){
+    for(int i=0;i<Q_RABIN;i++){
         TEST_CHECK(smrys[n_mails-1].token[i].count==0);
         TEST_CHECK(smrys[234].token[i].count==0);
         TEST_CHECK(smrys[0].token[i].count==0);
@@ -78,19 +78,19 @@ void test_append_hash(void){
     Init_FindSimilar(&smrys, n_mails);
 
     for(int i=0;i<INIT_UNIQUE_TOKEN_SIZE-1;i++){
-        add_unique_hashlist(&smrys[0], i);
+        _add_unique_hashlist(&smrys[0], i);
     }
 
     TEST_CHECK(smrys[0].isExistTokens_DymArr == false);
     TEST_CHECK(smrys[0].existTokens_DymArr == NULL);
 
-    add_unique_hashlist(&smrys[0], INIT_UNIQUE_TOKEN_SIZE-1);
-    add_unique_hashlist(&smrys[0], INIT_UNIQUE_TOKEN_SIZE);
+    _add_unique_hashlist(&smrys[0], INIT_UNIQUE_TOKEN_SIZE-1);
+    _add_unique_hashlist(&smrys[0], INIT_UNIQUE_TOKEN_SIZE);
     TEST_CHECK(smrys[0].isExistTokens_DymArr == true);
     TEST_CHECK(smrys[0].existTokens_DymArr != NULL);
 
     for(int i=INIT_UNIQUE_TOKEN_SIZE+1;i<30*INIT_UNIQUE_TOKEN_SIZE;i++){
-        add_unique_hashlist(&smrys[0], i);
+        _add_unique_hashlist(&smrys[0], i);
     }    
 
     for(ULONG i=0;i<30*INIT_UNIQUE_TOKEN_SIZE;i++){
@@ -110,7 +110,135 @@ void test_summary_FS(void){
 }
 
 
+void test_RabinKarp_hashing(void){
+    char text[10000] = "What day+--@#4231is today??87\0";
+    char tokenStr[5][300] = {
+        "what",
+        "day",
+        "4231is",
+        "today",
+        "87"
+    };
+
+    char token[10000];
+    int iStr=0;
+    int iEnd;
+    int hash;
+    int hashExp;
+
+    /*Expected iteration*/
+    int iEndExp[5] =  {4,8,19,25, -1};//expected stop site
+    char iEndExpSr[4] = {' ','+',' ','?'};
+    for(int i=0;i<4;i++){
+        TEST_CHECK(text[iEndExp[i]]==iEndExpSr[i]);
+        TEST_MSG("Got %c at site %d (C: %c)", iEndExpSr[i], iEndExp[i], text[iEndExp[i]]);
+    }
+
+    int i = 0;
+    int j = 0;
+    while(1){
+        iEnd = popTokenHash(text, token, iStr, &hash);
+        if(token[0]!='\0' ){
+            TEST_CHECK(iEnd == iEndExp[i]);
+            TEST_MSG("iEnd=%d(%c); Expected=%d(%c); Token: %s", iEnd, text[iEnd],iEndExp[i], text[iEndExp[i]], token);
+            TEST_CHECK(i<= strlen(text));
+            TEST_CHECK(strncmp(tokenStr[j],token,strlen(token))==0);
+
+            //Hash
+            hashExp = HashString(token, D_RABIN, Q_RABIN);
+            TEST_CHECK(hashExp == hash);
+            TEST_MSG("Got %d; Exp: %d; token: %s", hash, hashExp, token);
+            ++j;
+        }
 
 
+        if(iEnd==-1){
+            break;
+        }
+        else{
+            iStr = iEnd;
+            ++i;
+        }
+    }
+
+    TEST_CHECK(i ==5-1 );
+    TEST_MSG("i=%d", i);
+
+}
+
+void test_summarize(void){
+    int num_mail;
+    mail* mails;
+    TxtSmry* smrys;
+    clock_t str;
+    clock_t end;
+
+    get_mails("test/data/test.in", &mails, &num_mail);
+
+    Init_FindSimilar(&smrys, num_mail);
+
+    Preprocess_FindSimilar(smrys, mails, 30);
+
+    kill_FindSimilar(smrys, num_mail);
+    free(mails);
+}
+
+void test_summarize_benchmark(void){
+    int num_mail;
+    mail* mails;
+    int countOver=0;
+    TxtSmry* smrys;
+    clock_t str;
+    clock_t end;
+
+    get_mails("test/data/test.in", &mails, &num_mail);
+
+    Init_FindSimilar(&smrys, num_mail);
+    
+    str = clock();
+    Preprocess_FindSimilar(smrys, mails, num_mail);
+    end = clock();
+    print_clock("(10000 email)Time: ", str, end);
+
+    for(int i=0;i<num_mail;i++){
+        if(smrys[i].maxSpurious>0){
+            ++countOver;
+        }
+    }
+    printf(" Spurious Overflow: %d/%d", countOver, num_mail);
+
+    for(int i=0;i<num_mail;i++){
+        if( smrys[i].maxSpurious > 0){
+        //printf(" Max Spurious: %d (out of %d unique hash)\n",smrys[i].maxSpurious, smrys[i].nToken);
+        }
+    }
+
+    kill_FindSimilar(smrys, num_mail);
+    free(mails);
+}
+
+
+void test_tokenhash(void){
+    char text[10000] = "aefarqt4qq5b342344f fwe++--~~~huhfa1+---23I faead we t+ga\0";
+    char token1[1000];
+    char token2[1000];
+    int i1 = 0;
+    int i2 = 0;
+    int h;
+
+    while(1){
+        i1 = popTokenHash(text, token1, i1, &h);
+        i2 = popToken(text, token2, i2);
+
+        
+        TEST_CHECK(strcmp(token1,token2)==0);
+        TEST_CHECK(i1==i2);
+        //TEST_CHECK(i1==i2);
+        if(i2==-1){
+            break;
+        }
+    }
+    
+}
 
 #endif

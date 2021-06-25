@@ -3,7 +3,9 @@
 
 #include "api.h"
 #include <string.h>
+#include <math.h>
 #include "acutest.h"
+#include "utils.h"
 
 /**
  * @brief Get the mails object
@@ -72,5 +74,25 @@ void print_clock(char* s,clock_t str, clock_t end){
     double total_t = (double)(end - str) / CLOCKS_PER_SEC;
     printf("%s Time %f", s,total_t);
 }
+
+static long power_int(int x, int n){
+    long p = 1;
+    for(long i=0;i<n;i++){
+        p *= x;
+    }
+    return p;
+};
+
+
+
+static int HashString(char s[], int D, int Q){
+    int len = strlen(s);
+    long hash = 0;
+    
+    for(long i=0;i<len;i++){
+        hash += (char2num(s[i])*power_int(D, len-i-1)) ;
+    }
+    return (int)(hash % Q);
+};
 
 #endif

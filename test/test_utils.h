@@ -41,5 +41,38 @@ void readmail(void){
     free(mails);
 }
 
+void test_power(void){
+    TEST_CHECK(power_int(4,0)==1);
+    TEST_CHECK(power_int(4,1)==4);
+    TEST_CHECK(power_int(4,2)==16);
+    TEST_CHECK(power_int(4,3)==64);
+}
+
+void test_char2num(void){
+    TEST_CHECK(char2num('0') == 0);
+    TEST_CHECK(char2num('1') == 1);
+    TEST_CHECK(char2num('2') == 2);
+    TEST_CHECK(char2num('3') == 3);
+    TEST_CHECK(char2num('4') == 4);
+    TEST_CHECK(char2num('5') == 5);
+    TEST_CHECK(char2num('6') == 6);
+    TEST_CHECK(char2num('7') == 7);
+    TEST_CHECK(char2num('8') == 8);
+    TEST_CHECK(char2num('9') == 9);
+    TEST_CHECK(char2num('a') == 10);
+    TEST_CHECK(char2num('b') == 11);
+    TEST_CHECK(char2num('c') == 12);
+    TEST_CHECK(char2num('d') == 13);
+    TEST_CHECK(char2num('e') == 14);
+    TEST_CHECK(char2num('f') == 15);
+    TEST_CHECK(char2num('g') == 16);
+    TEST_CHECK(char2num('h') == 17);
+    TEST_CHECK(char2num('i') == 18);
+    TEST_CHECK(char2num('j') == 19);
+    TEST_CHECK(char2num('k') == 20);
+    TEST_CHECK(char2num('z') == 35);
+    TEST_CHECK(char2num('A') == (int)('A'));
+}
+
 
 #endif

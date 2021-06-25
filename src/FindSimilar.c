@@ -3,7 +3,7 @@
 void init_MEM_ULONG(struct MEMORY_ULONG* mem, ULONG len){
     mem->LEN = len;
     //mem->ARRAY = (int*)malloc(mem->LEN*sizeof(int));
-    mem->ARRAY = (UINT*)calloc( mem->LEN, sizeof(ULONG));
+    mem->ARRAY = (int*)calloc( mem->LEN, sizeof(int));
     assert(mem->ARRAY != NULL);
     mem->top_unused = 0;
 }
@@ -29,11 +29,64 @@ void kill_MEM_SHORT(struct MEMORY_SHORT* mem){
     mem->top_unused = EMTY_QUE_SIG;
 }
 
+/*******HASH*******/
+int popTokenHash(char message[], char token[], int iStr, int* Hash){
+    char c;
+    int asc; //ascii number
+    *Hash = 0; //reset hash value
+    //No string left
+    if (iStr < 0){
+        token[0] = '\0';
+        return -1;
+    }
+
+    int i = 0; //token[i]
+    while(message[iStr] != '\0' ){
+        c = message[iStr];
+        asc = (int)c; //ascii number
+
+        if (isRegularExpr_ASCII(asc)){
+            if (isUpperCase_ASCII(c))
+                c = tolower(c);
+            token[i] = c;
+            *Hash = updateHash(c, *Hash);
+            ++i;
+            ++iStr;
+        }
+        else{
+            if (i==0){
+                ++iStr;
+                continue;
+            }
+            else 
+                break;
+        }
+
+    }
+
+    if (message[iStr] == '\0'){ // EOF
+        iStr= -1;
+    }
+
+    token[i] = '\0'; //end of token
+
+    return iStr;
+}
+
+int updateHash(char c, int Hash_cur){
+    int HashUPD;
+    HashUPD = Hash_cur * D_RABIN + char2num(c);
+    HashUPD = HashUPD % Q_RABIN;
+    return HashUPD;
+}
+
+
+/*******Main API****/
 void Init_FindSimilar(TxtSmry** smrys, int n_mails){
     ULONG nmail = (ULONG)n_mails;
     //Occupied hash index
     init_MEM_ULONG(&existTokens_mem, nmail*INIT_UNIQUE_TOKEN_SIZE);
-    init_TxtSmry_arr(smrys, nmail, Q_MODULO);
+    init_TxtSmry_arr(smrys, nmail, Q_RABIN);
 
 }
 
@@ -52,6 +105,7 @@ void init_TxtSmry(TxtSmry* smry, int hashMapsize){
     smry->text = NULL;
     smry->synced = false;
     smry->isExistTokens_DymArr = false;
+    smry->maxSpurious = 0;
 }
 
 void init_TxtSmry_arr(TxtSmry** smry, int len, int hashmapSize){
@@ -63,19 +117,19 @@ void init_TxtSmry_arr(TxtSmry** smry, int len, int hashmapSize){
     }
 }
 
-void append_hash_TxtSmry(TxtSmry* smry, ULONG hash){
+void append_hash_TxtSmry(TxtSmry* smry, int hash){
     if(smry->token[hash].count==0){
-        add_unique_hashlist(smry, hash);
-        ++smry->nToken;
+        _add_unique_hashlist(smry, hash);
     }
+    //Count is update here
     ++smry->token[hash].count;
 }
 
-void add_unique_hashlist(TxtSmry* smry, ULONG hash){
+void _add_unique_hashlist(TxtSmry* smry, int hash){
     //Augment array
     if(smry->nToken==INIT_UNIQUE_TOKEN_SIZE){
-        smry->existTokens_DymArr = (dymArr_ULONG*)malloc(sizeof(dymArr_ULONG));
-        init_dymArr_ULONG(smry->existTokens_DymArr, 2*INIT_UNIQUE_TOKEN_SIZE);
+        smry->existTokens_DymArr = (dymArr*)malloc(sizeof(dymArr));
+        init_dymArr(smry->existTokens_DymArr, 2*INIT_UNIQUE_TOKEN_SIZE);
 
         //Set flag    
         assert(smry->isExistTokens_DymArr == false); //only do this once
@@ -84,7 +138,7 @@ void add_unique_hashlist(TxtSmry* smry, ULONG hash){
 
     //Data [INIT...]
     if(smry->isExistTokens_DymArr){
-        append_dymArr_ULONG(smry->existTokens_DymArr, hash);
+        append_dymArr(smry->existTokens_DymArr, hash);
     }
     else{//Data [0,..INIT-1]
         smry->existTokens[smry->nToken] = hash;
@@ -108,22 +162,18 @@ ULONG get_unique_hashlist(TxtSmry* smry, int i){
 void kill_TxtSmry_arr(TxtSmry* smry, int len){
     for(int i=0;i<len;i++){
         if(smry[i].isExistTokens_DymArr){
-            kill_dymArr_ULONG(smry[i].existTokens_DymArr);
-            free(smry->existTokens_DymArr);
+            kill_dymArr(smry[i].existTokens_DymArr);
+            free(smry[i].existTokens_DymArr);
         }
     }
     free(smry);
 }
 
-TxtSmry* Preprocess_FindSimilar(mail*  mails, int n_mails){
-    TxtSmry* smrys;
-    Init_FindSimilar(&smrys, n_mails);
+void Preprocess_FindSimilar(TxtSmry* smrys, mail*  mails, int n_mails){
 
     for(int i=0;i<n_mails;i++){
         summarize_content(&smrys[i], &mails[i]);
     }
-
-    return smrys;
 }
 
 
@@ -133,71 +183,76 @@ void kill_FindSimilar(TxtSmry* smrys, int len){
 }
 
 void summarize_content(TxtSmry* smry, mail* m){
-    summarize_hash(smry, smry->text);
     smry->id = m->id;
+    summarize_hash(smry, m->content);
     smry->synced = true;
 }
 
 void summarize_hash(TxtSmry* smry, char* text){
+    //Record original text
     smry->text = text;
-}
+    //Retrieving Tokens
+    char token[TOKEN_STRING_LENGTH];
+    char tkH[TOKEN_STRING_LENGTH]; //history token
+    int iloc;
+    int iStrH = 0;
+    int iStr = 0; //Current pin
+    int iNxt; //Next pin
+    int hash;
+    bool next = false;
 
-/**Helper function*/
-void init_dymArr_ULONG(dymArr_ULONG* arr, ULONG size){
-    assert(size>=1);
-    ULONG* is = (ULONG*)malloc(size*sizeof(ULONG));
-    if(is==NULL){
-        fprintf(stderr, "Init Error: Insufficient Memory.\n");
-        exit(1);
+
+    while(1){
+        next = false;
+        iNxt = popTokenHash(text, token, iStr, &hash);
+        if(iNxt == -1){//no token left
+            break;
+        }
+
+        //Check new token is duplicate
+        for(int i=0;i<INIT_SPURIOUS_COUNT;i++){
+            if(i<smry->token[hash].count){
+                iStrH = smry->token[hash].loc[i];
+                iStrH = popToken(text, tkH, iStrH);
+                if(strncmp(tkH, token, strlen(token))==0){
+                    next = true;
+                    break;
+                }
+            }
+            else{
+                break;
+            }
+        }
+
+        if (next){
+            //Next token
+            iStr = iNxt;
+            continue;
+        }
+   
+
+        //Append New Hash Until FULL
+        if(smry->token[hash].count<INIT_SPURIOUS_COUNT){
+            iloc = smry->token[hash].count;
+            smry->token[hash].loc[iloc] = iStr;
+        }
+
+
+        //Append unique hash 
+        //if(smry->token[hash].count==0){//unique token
+        append_hash_TxtSmry(smry, hash);
+        //}
+
+
+        //Next token
+        iStr = iNxt;
+
+        //Check spurious overflow
+        if(smry->maxSpurious<smry->token[hash].count && smry->token[hash].count>1){
+            smry->maxSpurious = smry->token[hash].count - 1;
+        }
     }
 
-    arr->i = is;
-    arr->len = 0;
-    arr->size = size;
-}
 
-void kill_dymArr_ULONG(dymArr_ULONG* arr){
-    arr->size=0;
-    arr->len=0;
-    free(arr->i);
-};
-
-void resize_dymArr_ULONG(dymArr_ULONG* arr, ULONG new_max_size){
-    arr->size = new_max_size;
-    arr->i = realloc(arr->i, sizeof(ULONG)*new_max_size);
-}
-
-void clear_Arr_ULONG(dymArr_ULONG* arr){
-    arr->len = 0;
-}
-
-void append_dymArr_ULONG(dymArr_ULONG* arr, ULONG val){
-    ++(arr->len);
-    //Augement size
-
-    if((arr->len+1) > arr->size){
-      int new_size = (arr->size)*2 + 1;
-      arr->i = realloc(arr->i, sizeof(ULONG)*new_size);
-      arr->size = new_size;
-      if(arr==NULL){
-        fprintf(stderr, "Append Error: Insufficient Memory.\n");
-        exit(1);
-       }
-    }
-
-    arr->i[arr->len - 1] = val;
-}
-
-int get_item_ULONG(dymArr_ULONG arr, ULONG i){
-    return arr.i[i];
-}
-
-int pop_item_ULONG(dymArr_ULONG* arr){
-    if(arr->len==0)
-        return EMTY_QUE_SIG;
-    int val = arr->i[arr->len-1];
-    --arr->len;
-
-    return val;
 }
 

@@ -15,6 +15,7 @@ TEST_LIST = {
     //Tokenize
     {"Tokenize", test_popToken},
     {"Tokenize2", test_token},
+    {"Regular Expression", test_Regex},
     //Generic Array
     //{"Generic Array (int)", test_dynamic_universal_array},
     //{"Int array insert", array_compare},
@@ -28,10 +29,16 @@ TEST_LIST = {
     {"Dyanmic Array", test_array},
     {"Queue",test_queue},
     {"Read email", readmail},
+    {"Power", test_power},
+    {"Char 2 number", test_char2num},
     {"Find Similar: Memory", memory_allocation_FS},
     {"Find Similar: init", test_init_FS},
     {"Find Similar: init content", test_init_content_FS},
     {"Find Similar: append hash",test_append_hash},
     {"Find Similar: summary", test_summary_FS},
+    {"Find Similar: Rabin Karp", test_RabinKarp_hashing},
+    {"Find Similar: Preprocessing", test_summarize},
+    {"Find Similar: Preprocessing (Benchmark)", test_summarize_benchmark},
+    {"Find Similar: Token history", test_tokenhash},
     {NULL, NULL} // Terminate the test
 };

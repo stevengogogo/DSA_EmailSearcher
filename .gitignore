@@ -1,6 +1,5 @@
 build/*
 !build/merge.py
-main
 test/testEnv/main
 .DS_Store
 test/build/

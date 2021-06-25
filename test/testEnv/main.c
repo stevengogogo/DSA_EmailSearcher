@@ -169,10 +169,10 @@ void swap(int* x, int* y);
 #include <stdbool.h>
 
 /**********Constant Variable***********/
-#define Q_RABIN 170003
+#define Q_RABIN 100001
 #define D_RABIN 36
-#define INIT_SPURIOUS_COUNT 1
-#define INIT_UNIQUE_TOKEN_SIZE 10000
+#define INIT_SPURIOUS_COUNT 3
+#define INIT_UNIQUE_TOKEN_SIZE 10
 #define TOKEN_STRING_LENGTH 1000
 #define ULONG  long
 #define UINT  int
@@ -357,12 +357,12 @@ int main(void) {
         
         //Expression Match
         else if(queries[i].type == expression_match){
-		    api.answer(queries[i].id, NULL, 0);
+		    //api.answer(queries[i].id, NULL, 0);
         }
 
         //Group Analysis
         else {
-            api.answer(queries[i].id, NULL, 0);
+            //api.answer(queries[i].id, NULL, 0);
         }
     }
 
@@ -1001,10 +1001,22 @@ double similarity_val(TxtSmry* smry1, TxtSmry* smry2){
     int hash;
     double sim;
 
+    char tk1[10000];
+    char tk2[10000];
+
     for(int i=0;i<smry1->nToken;i++){
         hash = get_unique_hashlist(smry1, i);
         if(smry2->token[hash].count>0){
-            inter+=1;
+            
+            for(int I=0;I<smry1->token[hash].count;I++){
+                popToken(smry1->text, tk1, smry1->token[hash].loc[I]);
+                for(int j=0;j<smry2->token[hash].count;j++){
+                    popToken(smry2->text, tk2, smry2->token[hash].loc[j]);
+                    if(strcmp(tk1, tk2)==0){
+                        inter+=1;
+                    }
+                }
+            }
         }
     }
 

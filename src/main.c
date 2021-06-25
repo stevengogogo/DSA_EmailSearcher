@@ -23,6 +23,12 @@ int main(void) {
 	api.init(&n_mails, &n_queries, &mails, &queries);   
     Init_FindSimilar(&smrys, n_mails);
 
+    for(int i=0;i<n_queries;i++){
+        if(queries[i].type==find_similar){
+            printf("%f \n", queries[i].data.find_similar_data.threshold);
+        }
+    }
+
     //Preprocessing
     Preprocess_FindSimilar(smrys, mails, n_mails);
 
@@ -47,12 +53,12 @@ int main(void) {
         
         //Expression Match
         else if(queries[i].type == expression_match){
-		    api.answer(queries[i].id, NULL, 0);
+		    //api.answer(queries[i].id, NULL, 0);
         }
 
         //Group Analysis
         else {
-            api.answer(queries[i].id, NULL, 0);
+            //api.answer(queries[i].id, NULL, 0);
         }
     }
 

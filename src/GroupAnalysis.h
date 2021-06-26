@@ -105,18 +105,18 @@ static void answer_GroupAnalysis(int mid[], int len, mail* mails, int* list, int
 	}
 
 	//just for debugging
-	count = 0; 
-	max = 0;
-	for(int i = 0; i < SIZE; i++){
-		if(arr[i]){
-			if(findset(arr,i)==i){
-				count++;
-				if(arr[i]->size>max){
-					max = arr[i]->size;
-				}
-			}
-		}
-	}
+	// count = 0; 
+	// max = 0;
+	// for(int i = 0; i < SIZE; i++){
+	// 	if(arr[i]){
+	// 		if(findset(arr,i)==i){
+	// 			count++;
+	// 			if(arr[i]->size>max){
+	// 				max = arr[i]->size;
+	// 			}
+	// 		}
+	// 	}
+	// }
 	//just for debugging
 
     //ANS

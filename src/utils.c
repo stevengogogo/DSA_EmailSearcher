@@ -358,12 +358,13 @@ void swap(int* x, int* y){
 void init_Matrix(Matrix* M, int nrow, int ncol, long init_val){
     long* m = (long*)malloc(ncol*nrow*sizeof(long));
     long size = (long)nrow * (long)ncol;
-    
-    for(long i=0;i<size;i++){
-        m[i] = init_val;
+
+    long mem_pin = 0;
+    for(long i=0;i<nrow;i++){
+        M->m[i] = m+mem_pin*sizeof(long);
+        mem_pin += ncol;
     }
 
-    M->m = m;
     M->ncol = ncol;
     M->nrow = nrow;
 }
@@ -375,12 +376,11 @@ void kill_Matrix(Matrix* M){
 }
 
 void set_Matrix(Matrix* M, int r, int c, long val){
-    long offset = r*M->ncol + c;
-    M->m[offset] = val;
+    M->m[r][c] = val;
 }
 
 long get_Matrix(Matrix*M, int r, int c){
-    return M->m[r*M->ncol + c];
+    return M->m[r][c];
 }
 
 

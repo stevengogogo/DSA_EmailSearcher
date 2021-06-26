@@ -148,7 +148,7 @@ void swap(int* x, int* y);
 
 /*Matrix*/
 typedef struct Matrix{
-    long* m;
+    long** m;
     int nrow;
     int ncol;
 } Matrix;

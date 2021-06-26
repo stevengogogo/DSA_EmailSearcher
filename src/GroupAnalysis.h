@@ -1,13 +1,11 @@
+
 #ifndef GROUPANALYSIS_H
 #define GROUPANALYSIS_H
-
 #include <limits.h>
 #include <string.h>
-#include <stdio.h>
-#include <stdlib.h>
 #define SIZE 1000001
 
-typedef struct Node{
+static typedef struct Node{
 	char* name;
 	int parentIdx;
 	int rank;
@@ -98,6 +96,20 @@ static void setunion(node**set, char word1[],char word2[], int countArr[], int* 
 		}
 	}
 }
+//comment
 
+static void ans(int mid[], int len, mail* mails){
+	node** arr = makeset();
+	int count = 0;
+	int max = 0;
+	int countArr[SIZE];
+
+	for(int i = 0; i < len; i++){
+		setunion(arr,mails[mid[i]].from,mailes[mid[i]].to,countArr, &count, &max);
+	}
+	printf("%d %d",max,count);
+	int ans[] = {count,max};
+	api.answer(anx);
+}
 
 #endif

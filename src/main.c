@@ -5,7 +5,7 @@
 #include "utils.h"
 #include <stdio.h>
 #include <time.h>
-
+/*
 static void get_mails(char* filename, mail** mails, int* num_mail){
     FILE* fp;
     size_t len;
@@ -58,38 +58,42 @@ static void get_mails(char* filename, mail** mails, int* num_mail){
     free(from);
     free(to);
 }
-
-
 int main(){
-    int num_mail;
+       int num_mail;
     mail* mails;
     int* list = (int*)malloc(sizeof(int)*MAX_N_MAIL);
     int nlist;
     get_mails("test/data/test.in", &mails, &num_mail);
-
+  
     //Problem
-    int mid = 9069;
-    double thd = 0.15;
+    //ID: 5
+    int mid = 9541;
+    double thd = 0.17;
     //Answer
-    int ans[] = {238, 384, 696, 783, 835, 1212, 1766, 2280, 2515, 3481, 4600, 5672, 6296, 7108, 7265, 7370, 7735, 8045, 8552, 8731, 8760, 8770, 9229}; 
-    int lans = 23;
+    int ans[] = {1597, 4026, 4122, 5123, 7033, 7176, 7802, 7845}; 
+    int lans = 8;
 
 
     init_FS();
     proc_FS(mails, num_mail);
 
     //Solve
-    answer_FS(mails, mid, num_mail, thd,list, &nlist);
+    answer_FS(mails, mid, num_mail, thd, list, &nlist);
 
-
+    for(int i=0;i<nlist;i++){
+        printf("%d ", list[i]);
+    } printf("\n");
 
 
     //GC
     free(list);
-    kill_FS();
+    //kill_FS();
 }
+*/
 
-/*
+
+
+
 int main(void) {
     // Var: Api
     int n_mails, n_queries;
@@ -99,7 +103,7 @@ int main(void) {
     //Var: Find Similar
     int* list = (int*)malloc(MAX_N_MAIL*sizeof(int));
     int nlist;
-    int threshold;
+    double threshold;
     int mid;
 
     //Initiation
@@ -124,7 +128,7 @@ int main(void) {
             threshold = queries[i].data.find_similar_data.threshold;
 
             //process
-            answer_FS(mails, mid, threshold, n_mails, list, &nlist);
+            answer_FS(mails, mid,n_mails, threshold, list, &nlist);
 
             //answer
             api.answer(queries[i].id, list, nlist);
@@ -154,5 +158,3 @@ int main(void) {
 
     return 0;
 }
-
-*/

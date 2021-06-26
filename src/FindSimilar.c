@@ -16,7 +16,7 @@ void init_Matrix_ushort(Matrix_ushort* M, int nrow, int ncol){
 
 void kill_Matrix_ushort(Matrix_ushort* M){
     for(int i=0;i<M->nrow;i++){
-        free(M->m[i]);
+        free(&M->m[i]);
     }
     free(M->len);
 }
@@ -30,7 +30,6 @@ void init_FS(void){
     init_Matrix_ushort(&hstack, Q_RABIN, MAX_N_MAIL);
     num_unique = (double*)calloc(MAX_N_MAIL,sizeof(double));
     SimList = (double*)calloc(MAX_N_MAIL, sizeof(double));
-    memset(num_unique, 0, sizeof(num_unique));
 };
 
 void kill_FS(void){
@@ -170,9 +169,27 @@ void similarity(mail* mails, int ID,int n_mail){
         //Find similar
         for(int i=0;i<hstack.len[hash];i++){
             interID = hstack.m[hash][i];
-            if(id==interID){
-                continue;
-            }
+            ++Overlap[(int)interID];
+        }
+        isVis[hash] = true;
+    }
+
+    char* subject = mails[ID].subject; 
+    iStr = 0;
+    while(1){
+        iNxt = popTokenHash(subject, token, iStr, &hash);
+        if(iNxt==-1){
+            break;
+        }
+        iStr = iNxt;
+
+        if(isVis[hash]){
+            continue;
+        }
+        
+        //Find similar
+        for(int i=0;i<hstack.len[hash];i++){
+            interID = hstack.m[hash][i];
             ++Overlap[(int)interID];
         }
         isVis[hash] = true;
@@ -199,13 +216,13 @@ int Hash_RK(char s[]){
 
 
 
-void answer_FS(mail* mails, int ID, int n_mail, int threshold, int* list, int* nlist){
+void answer_FS(mail* mails, int ID, int n_mail, double threshold, int* list, int* nlist){
     similarity(mails, ID, n_mail);
     *nlist = 0;
 
     //Find Sim > threshold
     for(int i=0;i<n_mail;i++){
-        if(SimList[i] > threshold){
+        if(SimList[i] > threshold && i!=ID){
             list[*nlist] = i;
             ++(*nlist);
         }

@@ -22,18 +22,19 @@ void test_FS_data(void){
     get_mails("test/data/test.in", &mails, &num_mail);
   
     //Problem
-    int mid = 9069;
-    double thd = 0.15;
+    //ID: 5
+    int mid = 9451;
+    double thd = 0.17;
     //Answer
-    int ans[] = {238, 384, 696, 783, 835, 1212, 1766, 2280, 2515, 3481, 4600, 5672, 6296, 7108, 7265, 7370, 7735, 8045, 8552, 8731, 8760, 8770, 9229}; 
-    int lans = 23;
+    int ans[] = {1597, 4026, 4122, 5123, 7033, 7176, 7802, 7845}; 
+    int lans = 8;
 
 
     init_FS();
     proc_FS(mails, num_mail);
 
     //Solve
-    answer_FS(mails, mid, thd, num_mail, list, &nlist);
+    answer_FS(mails, mid, num_mail, thd, list, &nlist);
 
     //Validate
     TEST_CHECK(lans == nlist);
@@ -43,15 +44,19 @@ void test_FS_data(void){
         TEST_MSG("Exp: %d, Got: %d", ans[i], list[i]);
     }
 
-    printf("\n");
-    for(int i=0;i<nlist;i++){
-        printf("%d ", list[i]);
-    }
-
 
     //GC
     free(list);
-    kill_FS();
+    //kill_FS();
+}
+
+
+void void_test_matrix(void){
+    Matrix_ushort M; 
+    init_Matrix_ushort(&M, 1000, 200);
+    M.m[999][199] = 13;
+    TEST_CHECK(M.m[999][199]==13);
+    TEST_CHECK(M.m[999][194]==0);
 }
 
 #endif

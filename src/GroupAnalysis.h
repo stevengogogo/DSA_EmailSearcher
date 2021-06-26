@@ -1,6 +1,6 @@
 #ifndef GROUPANALYSIS_H
 #define GROUPANALYSIS_H
-
+#include "api.h"
 #include <limits.h>
 #include <string.h>
 #include <stdio.h>
@@ -56,7 +56,7 @@ static int findset(node **set, int hashed){
 	return set[hashed]->parentIdx;
 }
 
-static void link(node **set, int nodex, int nodey){
+static void link_GA(node **set, int nodex, int nodey){
 	if(set[nodex]->rank>set[nodey]->rank){
 		set[nodey]->parentIdx = nodex;
 	}else{
@@ -73,7 +73,7 @@ static void setunion(node**set, char word1[],char word2[], int countArr[], int* 
 	int idxx = findset(set, nodex);
 	int idxy = findset(set, nodey);
 	if(idxx!=idxy){
-		link(set, idxx, idxy);
+		link_GA(set, idxx, idxy);
 		if(countArr[idxx]>countArr[idxy]){
 			if(countArr[idxy]>=2){
 				*count-=1;
@@ -97,6 +97,22 @@ static void setunion(node**set, char word1[],char word2[], int countArr[], int* 
 			}
 		}
 	}
+}
+
+static void answer_GroupAnalysis(int mid[], int len, mail* mails, int* list, int* nlist){
+	node** arr = makeset();
+	int count = 0;
+	int max = 0;
+	int countArr[SIZE];
+
+	for(int i = 0; i < len; i++){
+		setunion(arr,mails[mid[i]].from, mails[mid[i]].to,countArr, &count, &max);
+	}
+
+    //ANS
+    list[0] = count;
+    list[1] = max;
+    *nlist = 2;
 }
 
 

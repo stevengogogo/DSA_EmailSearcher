@@ -26,11 +26,6 @@ int main(void) {
     //Init_FindSimilar(&smrys, n_mails);
 
     //GA//
-    //makeset
-	node** arr = makeset();
-	int count = 0;
-	int max = 0;
-	int countArr[SIZE];
 
     //Preprocessing
     //Preprocess_FindSimilar(smrys, mails, n_mails);
@@ -65,7 +60,23 @@ int main(void) {
         else {
 
             answer_GroupAnalysis(queries[i].data.group_analyse_data.mids, queries[i].data.group_analyse_data.len,mails, list, &nlist);
+
+            /*
+            printf("data ID:%d (len): %d\n", queries[i].id,queries[i].data.group_analyse_data.len);
+            for(int a=0;a<queries[i].data.group_analyse_data.len;a++){
+                printf("%d,", queries[i].data.group_analyse_data.mids[a]);
+            }
+            printf("\nEST\n");
+            for(int i=0;i<nlist;i++){
+                printf("%d, ", list[i]);
+            }
+            printf("\n");
+            */
+
+
             api.answer(queries[i].id, list, nlist);
+
+            
         }
     }
 

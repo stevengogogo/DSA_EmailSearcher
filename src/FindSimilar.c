@@ -1,5 +1,28 @@
 #include "FindSimilar.h"
 
+/*Tabulation*/
+void init_Random_Table(){
+    init_Matrix(&RANDOM_T, T_MINIHASH_PERM, T_MINIHASH_PERM*Q_CLUSTER);
+    for (int i = 0; i < 8; i++){
+        for (int j = 0; j < 256; j++){
+            RANDOM_T.m[i][j] = getRandomLong();
+        }
+    }
+}
+
+long getRandomLong(){
+    long lran = rand();
+    return lran;
+};
+
+long hash_Tabu(long x, int I){
+   long res = 0;
+   for (int i = 0; i < T_MINIHASH_PERM; i++){
+      res ^= RANDOM_T.m[i][(char)(x >> T_MINIHASH_PERM*i)];
+   }
+   return res;
+}
+
 /*Rabin Karp Hashing*/
 void init_PowerArray(long* arr, int len, long base, long mod){
     long p=1;
@@ -39,7 +62,12 @@ long power_long(long x, int n){
 /*Permuation*/
 /** Tabulation hashing*/
 long hash_tabu(long x, long a, long b){
-    return (x*a + b) % PERM_MOD;
+    x = x % PERM_MOD;
+    if(x<0){
+        x = -x;
+    }
+    a = a % PERM_MOD;
+    return ((x*a) % PERM_MOD + b) % PERM_MOD;
 }
 
 /** Return location*/
@@ -141,6 +169,7 @@ void miniHash(Matrix* SglM, short* hashmap, long a, long b, int IP, int ID){
 /**Main API*/
 void init_FindSimilar(TxtSmry* smry, int n_mails){
     init_PowerArray(PowerArray, MAX_TOKEN_LEN, D_RABIN, Q_RABIN);
+    init_Random_Table();
     init_Matrix(&smry->SglM, T_MINIHASH_PERM, n_mails);
     for(int r=0;r<T_MINIHASH_PERM;r++){
         for(int c=0; c<n_mails; c++){
@@ -152,6 +181,7 @@ void init_FindSimilar(TxtSmry* smry, int n_mails){
 void kill_FindSimilar(TxtSmry* smry){
     kill_Matrix(&smry->SglM);
 }
+
 
 void Preprocess_FindSimilar(TxtSmry* smry, mail* mails, int n_mails){
     //Build hash map
@@ -198,18 +228,21 @@ void Preprocess_FindSimilar(TxtSmry* smry, mail* mails, int n_mails){
     end = clock();
     printf("\n[Poptoken]Seconds: %f", (double)(end-str)/ CLOCKS_PER_SEC );
 
+
     str = clock();
     //mini hash aglorithm
     for(int r=0; r<Q_CLUSTER; r++){//each row
-        for(int ih=0; ih<T_MINIHASH_PERM;ih++){//each hash func
-            phash[ih] = hash_tabu(phash[ih], a[ih], b[ih]);
-
+        for(long ih=0; ih<T_MINIHASH_PERM;ih++){//each hash func
+            phash[ih] = hash_tabu(r, a[ih], b[ih]);
         }
         for(int c=0;c<n_mails;c++){
             if(hashmap.m[r][c] > 0){
-                for(int h=0;h<T_MINIHASH_PERM;h++){
-                    if(SglM->m[h][c] > phash[h]){
-                        set_Matrix(SglM, h, c, phash[h]);
+                for(int t=0;t<T_MINIHASH_PERM;t++){
+                    if(SglM->m[t][c] > phash[t]){
+                        set_Matrix(SglM, t, c, phash[t]);
+                        if(phash[t]<0){
+                            printf(" ");
+                        }
                     }
                 }
             }
@@ -218,6 +251,14 @@ void Preprocess_FindSimilar(TxtSmry* smry, mail* mails, int n_mails){
 
     end = clock();
     printf("\n[MiniHash]Seconds: %f", (double)(end-str)/ CLOCKS_PER_SEC );
+
+    for(int i=0;i<T_MINIHASH_PERM;i++){
+        for(int j=0;j<2;j++){
+            printf("%ld ", SglM->m[i][j]);
+        }
+        printf("\n");
+    }
+
 
     //GC
     kill_Matrix(&hashmap);
@@ -233,18 +274,18 @@ double similarity(Matrix* sglM, int IDbase, int IDcmp){
     double same=0;
     double sim;
 
-    for(int r=0;r<sglM->nrow;r++){
+    for(int r=0;r<T_MINIHASH_PERM;r++){
         b =  sglM->m[r][IDbase];
         c = sglM->m[r][IDcmp];
         if(b==LONG_MAX || c==LONG_MAX){
-            ++item;
             continue;
         }
+        ++item;
         if(b==c){++same;}
     }
 
 
-    sim = same/(T_MINIHASH_PERM);
+    sim = same/(item);
 
     return sim;
 }
@@ -265,7 +306,7 @@ void answer_FindSimilar(TxtSmry* smry, int ID, double threshold, mail* mails, in
         if(sim>threshold){
             SimList[*lenSim] = IDcmp;
             ++(*lenSim);
-            printf("%f\n",sim);
+            //printf("%f\n",sim);
         }
     }
 }

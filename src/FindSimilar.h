@@ -21,11 +21,11 @@
 
 
 /**********Constant Variable***********/
-#define Q_RABIN 170617
-#define D_RABIN 417
-#define Q_CLUSTER 5021
-#define D_CLUSTER 17
-#define PERM_MOD 1006799
+#define Q_RABIN 17061701
+#define D_RABIN 41721
+#define Q_CLUSTER 1001
+#define D_CLUSTER 7
+#define PERM_MOD 1003
 #define T_MINIHASH_PERM 300
 
 #define MAX_TOKEN_LEN 1000
@@ -33,6 +33,27 @@
 
 long PowerArray[MAX_TOKEN_LEN];
 static long PrimeArray[] = {2, 3, 5, 7, 11, 13, 17, 19, 23, 29, 31, 37, 41, 43, 47, 53, 59, 61, 67, 71, 73, 79, 83, 89, 97, 101, 103, 107, 109, 113, 127, 131, 137, 139, 149};
+
+
+// Simple Tabulation Hash function
+static Matrix RANDOM_T;//random table
+/**
+ * @brief 
+ * @note https://en.wikipedia.org/wiki/Tabulation_hashing
+ */
+void init_Random_Table();
+long getRandomLong();
+long hash_Tabu(long x, int i);
+
+static long hash_mod(long x,long a,long  b,long c){
+    return (a*x + b) % c;
+}
+
+static long hash_merge(long x, long i){
+    long h1 = hash_mod(x, 13213,241, Q_CLUSTER);
+    long h2 = hash_mod(x, 12131, 1, Q_CLUSTER);
+    return h1+ i*h2;
+}
 
 
 typedef struct TxtSmry{

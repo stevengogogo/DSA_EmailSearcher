@@ -72,7 +72,7 @@ static void link_GA(node **set, int nodex, int nodey ,int *count, int *max){
 		if(set[nodex]->size==set[nodey]->size&&set[nodex]->size==1){
 			*count += 1;
 		}
-		set[nodey]->size+=set[nodex]->size;
+		set[nodey]->size += set[nodex]->size;
 		if(set[nodex]->size>=2){
 			*count-= 1;
 		}

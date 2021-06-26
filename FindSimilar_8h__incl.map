@@ -1,14 +1,14 @@
 <map id="src/FindSimilar.h" name="src/FindSimilar.h">
-<area shape="rect" id="node1" title="Group Analysis. Use Jaccob&#39;s similarity with hash table to identify similar strings." alt="" coords="335,5,453,32"/>
-<area shape="rect" id="node2" href="$src_2api_8h_source.html" title=" " alt="" coords="256,80,305,107"/>
-<area shape="rect" id="node3" title=" " alt="" coords="265,155,325,181"/>
-<area shape="rect" id="node4" title=" " alt="" coords="5,155,68,181"/>
-<area shape="rect" id="node7" title=" " alt="" coords="350,155,425,181"/>
-<area shape="rect" id="node8" title=" " alt="" coords="537,155,601,181"/>
-<area shape="rect" id="node9" title=" " alt="" coords="712,155,780,181"/>
-<area shape="rect" id="node10" href="$utils_8h.html" title="General Utilities for C language." alt="" coords="445,80,501,107"/>
-<area shape="rect" id="node5" title=" " alt="" coords="93,155,159,181"/>
-<area shape="rect" id="node6" title=" " alt="" coords="184,155,241,181"/>
-<area shape="rect" id="node11" title=" " alt="" coords="625,155,688,181"/>
-<area shape="rect" id="node12" title=" " alt="" coords="449,155,512,181"/>
+<area shape="rect" id="node1" title="Group Analysis. Use Jaccob&#39;s similarity with hash table to identify similar strings." alt="" coords="257,5,376,32"/>
+<area shape="rect" id="node2" href="$src_2api_8h_source.html" title=" " alt="" coords="229,80,279,107"/>
+<area shape="rect" id="node3" title=" " alt="" coords="5,155,65,181"/>
+<area shape="rect" id="node4" title=" " alt="" coords="89,155,152,181"/>
+<area shape="rect" id="node7" title=" " alt="" coords="267,155,342,181"/>
+<area shape="rect" id="node8" title=" " alt="" coords="449,155,513,181"/>
+<area shape="rect" id="node9" title=" " alt="" coords="711,155,779,181"/>
+<area shape="rect" id="node10" href="$utils_8h.html" title="General Utilities for C language." alt="" coords="367,80,423,107"/>
+<area shape="rect" id="node5" title=" " alt="" coords="177,155,243,181"/>
+<area shape="rect" id="node6" title=" " alt="" coords="367,155,424,181"/>
+<area shape="rect" id="node11" title=" " alt="" coords="537,155,600,181"/>
+<area shape="rect" id="node12" title=" " alt="" coords="624,155,687,181"/>
 </map>

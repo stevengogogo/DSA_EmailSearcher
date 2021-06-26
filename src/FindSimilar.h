@@ -22,6 +22,7 @@
 /**********Constant Variable***********/
 #define Q_RABIN 35317
 #define D_RABIN 29
+#define PERM_MOD 35317
 #define MAX_TOKEN_LEN 1000
 #define T_MINIHASH_PERM 30
 #define MAX_TOKEN_NUM 10000

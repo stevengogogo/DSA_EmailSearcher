@@ -39,7 +39,7 @@ long power_long(long x, int n){
 /*Permuation*/
 /** Tabulation hashing*/
 long hash_tabu(long x, long a, long b){
-    return (x*a + b) % Q_RABIN;
+    return (x*a + b) % PERM_MOD;
 }
 
 /** Return location*/

@@ -54,6 +54,10 @@ void test_init_FS(void){
     printf("(Q:%d/D:%d)",Q_RABIN,D_RABIN);
     print_clock("Init & Preprocessing:",str, end);
 
+    for(int i=0;i<T_MINIHASH_PERM;i++){
+        printf("%ld\n", get_Matrix(&smry.SglM, i, 0));
+    }
+
     kill_FindSimilar(&smry);
 }
 

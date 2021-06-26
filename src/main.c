@@ -20,6 +20,8 @@ int main(void) {
     int mid;
 
     //Initiation
+
+    //FS//
 	api.init(&n_mails, &n_queries, &mails, &queries);   
     Init_FindSimilar(&smrys, n_mails);
 
@@ -28,6 +30,13 @@ int main(void) {
             printf("%f \n", queries[i].data.find_similar_data.threshold);
         }
     }
+
+    //GA//
+    //makeset
+	node** arr = makeset();
+	int count = 0;
+	int max = 0;
+	int countArr[SIZE];
 
     //Preprocessing
     Preprocess_FindSimilar(smrys, mails, n_mails);
@@ -58,7 +67,10 @@ int main(void) {
 
         //Group Analysis
         else {
-            //api.answer(queries[i].id, NULL, 0);
+
+            //TODO #78 @jcgs2503
+            //We need to answer
+            api.answer(queries[i].id, NULL, 2);
         }
     }
 

@@ -145,6 +145,18 @@ int partition(int number[], int left, int right);
 /** * Switch the value store in `x` and `y`. */
 void swap(int* x, int* y);
 
+/*Matrix*/
+typedef struct Matrix{
+    int* m;
+    int nrow;
+    int ncol;
+} Matrix;
+
+void init_Matrix(Matrix* M, int nrow, int ncol);
+void kill_Matrix(Matrix* M);
+void set_Matrix(Matrix* M, int r, int c, int val);
+int get_Matrix(Matrix*M, int r, int c);
+
 #endif
 
 #endif
@@ -169,7 +181,7 @@ void swap(int* x, int* y);
 #include <stdbool.h>
 
 /**********Constant Variable***********/
-#define Q_RABIN 100001
+#define Q_RABIN 170001
 #define D_RABIN 36
 #define INIT_SPURIOUS_COUNT 3
 #define INIT_UNIQUE_TOKEN_SIZE 10
@@ -332,6 +344,12 @@ int main(void) {
     //Initiation
 	api.init(&n_mails, &n_queries, &mails, &queries);   
     Init_FindSimilar(&smrys, n_mails);
+
+    for(int i=0;i<n_queries;i++){
+        if(queries[i].type==find_similar){
+            printf("%f \n", queries[i].data.find_similar_data.threshold);
+        }
+    }
 
     //Preprocessing
     Preprocess_FindSimilar(smrys, mails, n_mails);
@@ -725,6 +743,30 @@ void swap(int* x, int* y){
     *y = tmp;
 }
 
+/*matrix*/
+void init_Matrix(Matrix* M, int nrow, int ncol){
+    int* m = (int*)calloc(ncol*nrow, sizeof(int));
+    M->m = m;
+    M->ncol = ncol;
+    M->nrow = nrow;
+}
+
+void kill_Matrix(Matrix* M){
+    free(M->m);
+    M->ncol = 0;
+    M->nrow = 0;
+}
+
+void set_Matrix(Matrix* M, int r, int c, int val){
+    int offset = r*M->ncol + c;
+    M->m[offset] = val;
+}
+
+int get_Matrix(Matrix*M, int r, int c){
+    int offset = r*M->ncol + c;
+    return M->m[offset];
+}
+
 void init_MEM_ULONG(struct MEMORY_ULONG* mem, ULONG len){
     mem->LEN = len;
     //mem->ARRAY = (int*)malloc(mem->LEN*sizeof(int));
@@ -1001,22 +1043,10 @@ double similarity_val(TxtSmry* smry1, TxtSmry* smry2){
     int hash;
     double sim;
 
-    char tk1[10000];
-    char tk2[10000];
-
     for(int i=0;i<smry1->nToken;i++){
         hash = get_unique_hashlist(smry1, i);
         if(smry2->token[hash].count>0){
-            
-            for(int I=0;I<smry1->token[hash].count;I++){
-                popToken(smry1->text, tk1, smry1->token[hash].loc[I]);
-                for(int j=0;j<smry2->token[hash].count;j++){
-                    popToken(smry2->text, tk2, smry2->token[hash].loc[j]);
-                    if(strcmp(tk1, tk2)==0){
-                        inter+=1;
-                    }
-                }
-            }
+            inter+=1;
         }
     }
 

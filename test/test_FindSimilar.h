@@ -33,10 +33,24 @@ void test_powerArray(void){
 void test_random(void){
     int len=6;
     long* a = (long*)malloc(sizeof(long)*len);
-    RandGen_long(a, len, 0, Q_RABIN);
+    long* b = (long*)malloc(sizeof(long)*len);
+    
+    RandGen_long(a, len, 0, Q_RABIN, 111);
+    RandGen_long(b, len, 0, Q_RABIN, 111);
+    
+    for(int i=0;i<len;i++){
+        TEST_CHECK(a[i] == b[i]);
+    }
+
     for(int i=0;i<len;i++){
         printf("%ld ", a[i]);
     }
+    
+    RandGen_long(b, len, 0, Q_RABIN, 112);
+    for(int i=0;i<len;i++){
+        TEST_CHECK(a[i] != b[i]);
+    }
+
     free(a);
 }
 
@@ -116,6 +130,66 @@ void test_FS_data(void){
 
     //GC
     free(list);
+    kill_FindSimilar(&smry);
+}
+
+//WIP/
+void print_token(char s1[], char s2[]){
+    char token1[10000];
+    char token2[10000];
+    long hash;
+    int iStr = 0;
+    int i1=0;
+    int i2=0;
+    //String 1
+    printf("\n\n");
+    while(1){
+        iStr = popTokenHash(s1, token1, iStr, &hash);
+        if(iStr==-1){
+            break;
+        }
+        printf("%s ", token1);
+        ++i1;
+    }
+    printf("\n\n");
+    //String 2
+    iStr = 0;
+    while(1){
+        iStr = popTokenHash(s2, token2, iStr, &hash);
+        if(iStr==-1){
+            break;
+        }
+        printf("%s ", token2);
+        ++i2;
+    }
+    printf("\n\n");
+
+}
+
+
+
+void test_similarity(void){
+    int num_mail;
+    mail* mails;
+    TxtSmry smry;
+    int* list = (int*)malloc(sizeof(int)*MAX_N_MAIL);
+    int nlist;
+    get_mails("test/data/test.in", &mails, &num_mail);
+    
+    init_FindSimilar(&smry, num_mail);
+    Preprocess_FindSimilar(&smry, mails, num_mail);
+
+    double sim = similarity(&smry.SglM, 0, 1);
+    printf("Sim: %f\n", sim);
+    printf("Test1:\t%s\n", mails[0].content);
+    printf("Test2:\t%s\n", mails[1].content);
+
+    //minihash
+    for(int i=0;i<T_MINIHASH_PERM;i++){
+        printf("%ld %ld\n", smry.SglM.m[0][i], smry.SglM.m[1][i]);
+    }
+
+    print_token( mails[0].content,  mails[1].content);
     kill_FindSimilar(&smry);
 }
 

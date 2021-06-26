@@ -62,19 +62,28 @@ static void get_mails(char* filename, mail** mails, int* num_mail){
 
 int main(void){
  
-
-    TxtSmry* smry;
-    int n_mails;
+    int num_mail;
     mail* mails;
+    TxtSmry smry;
+    int* list = (int*)malloc(sizeof(int)*MAX_N_MAIL);
+    int nlist;
+    get_mails("test/data/test.in", &mails, &num_mail);
+    
+    init_FindSimilar(&smry, num_mail);
+    Preprocess_FindSimilar(&smry, mails, num_mail);
+
+    double sim = similarity(&smry.SglM, 0, 1);
+    printf("Sim: %f\n", sim);
+    printf("Test1:\t%s\n", mails[0].content);
+    printf("Test2:\t%s\n", mails[1].content);
+
+    //minihash
+    for(int i=0;i<T_MINIHASH_PERM;i++){
+        printf("%ld %ld\n", smry.SglM.m[0][i], smry.SglM.m[1][i]);
+    }
 
 
-    get_mails("test/data/test.in", &mails, &n_mails);
-
-    init_FindSimilar(smry, n_mails);
-    Preprocess_FindSimilar(smry, mails, n_mails);
-
-
-    kill_FindSimilar(smry);
+    kill_FindSimilar(&smry);
 
 }
 

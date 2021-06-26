@@ -21,11 +21,12 @@
 
 
 /**********Constant Variable***********/
-#define Q_RABIN 17061701
-#define D_RABIN 41721
-#define Q_CLUSTER 1001
-#define D_CLUSTER 7
-#define PERM_MOD 1003
+#define Q_RABIN 170617
+#define D_RABIN 257
+#define Q_CLUSTER 200
+
+#define PERM_MOD 41723
+#define D_CLUSTER 1
 #define T_MINIHASH_PERM 300
 
 #define MAX_TOKEN_LEN 1000

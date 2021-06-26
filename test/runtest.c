@@ -35,8 +35,10 @@ TEST_LIST = {
     {"Matrix", test_matrix},
     //{"FS: power", test_powerArray},
     {"FS: random", test_random},
-    {"FS: init",test_init_FS},
+    //{"FS: init",test_init_FS},
     {"FS: test data", test_FS_data},
+    {"FS: Similarity", test_similarity},
+    //{"FS: Similarity:naive", test_simlarity_naive},
     /*
     {"Find Similar: Memory", memory_allocation_FS},
     {"Find Similar: init", test_init_FS},

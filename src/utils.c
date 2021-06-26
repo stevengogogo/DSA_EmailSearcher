@@ -383,8 +383,9 @@ long get_Matrix(Matrix*M, int r, int c){
 }
 
 
-void RandGen_long(long* arr, int len, long low, long high){
+void RandGen_long(long* arr, int len, long low, long high, int seed){
     long ai;
+    srand(seed);
     for(int i=0;i<len;i++){
         ai = rand() % (high-low) + low;
 

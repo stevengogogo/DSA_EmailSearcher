@@ -27,7 +27,7 @@
 
 #define PERM_MOD 41723
 #define D_CLUSTER 1
-#define T_MINIHASH_PERM 300
+#define T_MINIHASH_PERM 3000
 
 #define MAX_TOKEN_LEN 1000
 #define MAX_TOKEN_NUM 10000

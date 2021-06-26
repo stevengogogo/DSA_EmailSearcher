@@ -18,9 +18,7 @@ void init_Matrix_ushort(Matrix_ushort* M, int nrow, int ncol){
 }
 
 void kill_Matrix_ushort(Matrix_ushort* M){
-    for(int i=0;i<M->nrow;i++){
-        free(&M->m[i]);
-    }
+    free(M->m);
     free(M->len);
 }
 
@@ -276,7 +274,7 @@ void answer_FS(infoFs*info, mail* mails, int ID, int n_mail, double threshold, i
     // Similarity
     for(int i=0;i<n_mail;i++){
         sim = Overlap[i] / (info->num_unique[i] + info->num_unique[ID] - Overlap[i]);
-        if(sim>threshold){
+        if(sim>threshold && i!=ID){
             list[*nlist]=i;
             ++(*nlist);
         }

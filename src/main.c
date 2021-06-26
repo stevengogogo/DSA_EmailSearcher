@@ -5,7 +5,7 @@
 #include "utils.h"
 #include <stdio.h>
 #include <time.h>
-
+/*
 static void get_mails(char* filename, mail** mails, int* num_mail){
     FILE* fp;
     size_t len;
@@ -88,10 +88,10 @@ int main(){
 }
 
 
+*/
 
 
 
-/*
 int main(void) {
     // Var: Api
     int n_mails, n_queries;
@@ -129,6 +129,9 @@ int main(void) {
             //process
             answer_FS(&infs, mails, mid,n_mails, threshold, list, &nlist);
 
+            printf("ID: %d\n", queries[i].id);
+            printf("MID: %d\n", queries[i].data.find_similar_data.mid);
+            printf("Threshold: %f\n", queries[i].data.find_similar_data.threshold);
             //answer
             api.answer(queries[i].id, list, nlist);
         }
@@ -157,4 +160,3 @@ int main(void) {
 
     return 0;
 }
-*/

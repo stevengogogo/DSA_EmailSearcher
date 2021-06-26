@@ -53,6 +53,38 @@ void test_FS_data(void){
     //kill_FS(&infs);
 }
 
+void test_data_2(void){
+    //Get mails
+    int num_mail;
+    mail* mails;
+    int* list = (int*)malloc(sizeof(int)*MAX_N_MAIL);
+    int nlist;
+    get_mails("test/data/test.in", &mails, &num_mail);
+  
+    //data
+    int mid30 = 4189;
+    double thd30 = 0.180000;
+    int ans30[] = {790, 1843, 1952, 8550 }; 
+    int len30 = sizeof(ans30)/sizeof(ans30[0]);
+
+
+    infoFs infs;
+
+    init_FS(&infs);
+    proc_FS(&infs, mails, num_mail);
+
+
+    answer_FS(&infs, mails, mid30, num_mail, thd30, list, &nlist);
+    TEST_CHECK(len30 == nlist);
+    TEST_MSG("Expected: %d, Got %d", len30, nlist);
+
+
+    //GC
+    free(list);
+    kill_FS(&infs);
+
+}
+
 
 void void_test_matrix(void){
     Matrix_ushort M; 

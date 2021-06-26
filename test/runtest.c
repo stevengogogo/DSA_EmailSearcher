@@ -35,6 +35,7 @@ TEST_LIST = {
     {"Quick sort", test_sort},
     {"Matrix", test_matrix},
     {"Find Similar: data", test_FS_data},
+    {"FS: data 2", test_data_2},
     {"Matrix ushort",void_test_matrix},
     /*
     {"Find Similar: Memory", memory_allocation_FS},

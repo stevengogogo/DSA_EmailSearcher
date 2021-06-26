@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
 <meta name="generator" content="Doxygen 1.9.1"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>C Project Template: MEMORY_SHORT Struct Reference</title>
+<title>C Project Template: Node Struct Reference</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -63,43 +63,26 @@ $(function() {
 <div class="header">
   <div class="summary">
 <a href="#pub-attribs">Public Attributes</a> &#124;
-<a href="structMEMORY__SHORT-members.html">List of all members</a>  </div>
+<a href="structNode-members.html">List of all members</a>  </div>
   <div class="headertitle">
-<div class="title">MEMORY_SHORT Struct Reference</div>  </div>
+<div class="title">Node Struct Reference</div>  </div>
 </div><!--header-->
 <div class="contents">
-
-<p>Information for global memory storage.  
- <a href="structMEMORY__SHORT.html#details">More...</a></p>
-
-<p><code>#include &lt;<a class="el" href="FindSimilar_8h_source.html">FindSimilar.h</a>&gt;</code></p>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-attribs"></a>
 Public Attributes</h2></td></tr>
-<tr class="memitem:ad4a76d9a61dfb6a3f87cd94f2b75957b"><td class="memItemLeft" align="right" valign="top"><a id="ad4a76d9a61dfb6a3f87cd94f2b75957b"></a>
-ULONG&#160;</td><td class="memItemRight" valign="bottom"><b>top_unused</b></td></tr>
-<tr class="separator:ad4a76d9a61dfb6a3f87cd94f2b75957b"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ac9e3c691c34403a7e576eca6ff94b10e"><td class="memItemLeft" align="right" valign="top"><a id="ac9e3c691c34403a7e576eca6ff94b10e"></a>
-USHORT *&#160;</td><td class="memItemRight" valign="bottom"><b>ARRAY</b></td></tr>
-<tr class="separator:ac9e3c691c34403a7e576eca6ff94b10e"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aca4aa4408d375e320efcbef321df655c"><td class="memItemLeft" align="right" valign="top"><a id="aca4aa4408d375e320efcbef321df655c"></a>
-ULONG&#160;</td><td class="memItemRight" valign="bottom"><b>LEN</b></td></tr>
-<tr class="separator:aca4aa4408d375e320efcbef321df655c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a059a0ea6f86dce9fd919c08a707b360b"><td class="memItemLeft" align="right" valign="top"><a id="a059a0ea6f86dce9fd919c08a707b360b"></a>
+char *&#160;</td><td class="memItemRight" valign="bottom"><b>name</b></td></tr>
+<tr class="separator:a059a0ea6f86dce9fd919c08a707b360b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a972310723618aead81d7d56f354d474a"><td class="memItemLeft" align="right" valign="top"><a id="a972310723618aead81d7d56f354d474a"></a>
+int&#160;</td><td class="memItemRight" valign="bottom"><b>parentIdx</b></td></tr>
+<tr class="separator:a972310723618aead81d7d56f354d474a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a085f5cff95f194f6e4a877915fecad0d"><td class="memItemLeft" align="right" valign="top"><a id="a085f5cff95f194f6e4a877915fecad0d"></a>
+int&#160;</td><td class="memItemRight" valign="bottom"><b>rank</b></td></tr>
+<tr class="separator:a085f5cff95f194f6e4a877915fecad0d"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
-<a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
-<div class="textblock"><p>Information for global memory storage. </p>
-<p>Helper function </p><dl class="section note"><dt>Note</dt><dd>This structure is to provide public memory, and minimize the use of malloc </dd></dl>
-<dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
-    <tr><td class="paramname">LOC_top_unused</td><td>index of unused memory </td></tr>
-    <tr><td class="paramname">LOC_ARRAY</td><td>array for store location data </td></tr>
-    <tr><td class="paramname">LEN</td><td>capacity of the memory </td></tr>
-  </table>
-  </dd>
-</dl>
-</div><hr/>The documentation for this struct was generated from the following files:<ul>
-<li>src/<a class="el" href="FindSimilar_8h_source.html">FindSimilar.h</a></li>
-<li>test/testEnv/main.c</li>
+<hr/>The documentation for this struct was generated from the following file:<ul>
+<li>src/<a class="el" href="GroupAnalysis_8h_source.html">GroupAnalysis.h</a></li>
 </ul>
 </div><!-- contents -->
 <!-- start footer part -->

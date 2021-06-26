@@ -8,15 +8,15 @@
 #include <assert.h>
 #define SIZE 1000001
 
+
 typedef struct Node{
 	char* name;
 	int parentIdx;
 	int size;
 }node;
 /**/
-static node** makeset(){
-	node** arr = (node**)malloc(SIZE*sizeof(node*));
- 	assert(arr!=NULL);
+static node* makeset(){
+	node* arr = (node*)malloc(SIZE*sizeof(node));
 	return arr;
 }
 
@@ -30,62 +30,61 @@ static int hash(char word[]){
 	return abs(RK)%SIZE;
 }
 
-static int findIdx(node**set, char word[]){
+static int findIdx(node*set, char word[]){
 	int hashed = hash(word);
-	while(set[hashed]){
-		if(strcmp(set[hashed]->name, word)!=0){
+	while(set[hashed].name){
+		if(strcmp(set[hashed].name, word)!=0){
 			hashed = (hashed+1)%SIZE;
 		}else return hashed;
 	}
 	return hashed;
 }
 
-static void inputTable(node** set, char word[]){
+static void inputTable(node* set, char word[]){
 	int hashed = findIdx(set, word);
-	if(!set[hashed]){
-		set[hashed] = (node *)malloc(sizeof(node));
-		set[hashed]->name = word;
-		set[hashed]->parentIdx = hashed;
-		set[hashed]->size = 1;
+	if(!set[hashed].name){
+		set[hashed].name = word;
+		set[hashed].parentIdx = hashed;
+		set[hashed].size = 1;
 	}
 }
 
-static int findset(node **set, int hashed){
-	if(set[hashed]->parentIdx!=hashed){
-		set[hashed]->parentIdx = findset(set,set[hashed]->parentIdx);
+static int findset(node *set, int hashed){
+	if(set[hashed].parentIdx!=hashed){
+		set[hashed].parentIdx = findset(set,set[hashed].parentIdx);
 	}
-	return set[hashed]->parentIdx;
+	return set[hashed].parentIdx;
 }
 
-static void link_GA(node **set, int nodex, int nodey ,int *count, int *max){
+static void link_GA(node *set, int nodex, int nodey ,int *count, int *max){
 
-	if(set[nodex]->size>set[nodey]->size){
-		set[nodey]->parentIdx = nodex;
-		set[nodex]->size += set[nodey]->size;
-		if(set[nodey]->size>=2){
+	if(set[nodex].size>set[nodey].size){
+		set[nodey].parentIdx = nodex;
+		set[nodex].size += set[nodey].size;
+		if(set[nodey].size>=2){
 			*count-=1;
 		}
-		set[nodey]->size = 0;
-		if(set[nodex]->size>*max){
-			*max = set[nodex]->size;
+		set[nodey].size = 0;
+		if(set[nodex].size>*max){
+			*max = set[nodex].size;
 		}
 	}else{
-		set[nodex]->parentIdx = nodey;
-		if(set[nodex]->size==set[nodey]->size&&set[nodex]->size==1){
+		set[nodex].parentIdx = nodey;
+		if(set[nodex].size==set[nodey].size&&set[nodex].size==1){
 			*count += 1;
 		}
-		set[nodey]->size += set[nodex]->size;
-		if(set[nodex]->size>=2){
+		set[nodey].size += set[nodex].size;
+		if(set[nodex].size>=2){
 			*count -= 1;
 		}
-		set[nodex]->size = 0;
-		if(set[nodey]->size>*max){
-			*max = set[nodey]->size;
+		set[nodex].size = 0;
+		if(set[nodey].size>*max){
+			*max = set[nodey].size;
 		}
 	}
 }
 
-static void setunion(node**set, char word1[],char word2[], int* count, int* max){
+static void setunion(node*set, char word1[],char word2[], int* count, int* max){
 	inputTable(set, word1);
 	inputTable(set, word2);
 	int nodex = findIdx(set, word1);
@@ -98,18 +97,21 @@ static void setunion(node**set, char word1[],char word2[], int* count, int* max)
 }
 
 static void answer_GroupAnalysis(int mid[], int len, mail* mails, int* list, int* nlist){
-	node** arr = makeset();
+	node* arr = makeset();
 	int count = 0;
 	int max = 0;
 
 	for(int i = 0; i < len; i++){
 		setunion(arr,mails[mid[i]].from, mails[mid[i]].to, &count, &max);
 	}
+ 
+  //ANS
+  list[0] = count;
+  list[1] = max;
+  *nlist = 2;
 
-    //ANS
-    list[0] = count;
-    list[1] = max;
-    *nlist = 2;
+  free(arr);
+
 }
 
 

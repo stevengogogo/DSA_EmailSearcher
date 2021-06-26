@@ -7,8 +7,8 @@
 void test_arr2(int* arr, int*arr2, int id){
     TEST_CHECK(arr[0]==arr2[0]);
     TEST_MSG("ID %d [Number of Groups] Ans: %d; Got %d", id, arr[0], arr2[0]);
-    TEST_MSG("ID %d [Size of largest Group] Ans: %d; Got %d", id, arr[1], arr2[1]);
     TEST_CHECK(arr[1]==arr2[1]);
+    TEST_MSG("ID %d [Size of largest Group] Ans: %d; Got %d", id, arr[1], arr2[1]);
 }
 
 void test_data_GA(void){

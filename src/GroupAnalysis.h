@@ -74,7 +74,7 @@ static void link_GA(node **set, int nodex, int nodey ,int *count, int *max){
 		}
 		set[nodey]->size += set[nodex]->size;
 		if(set[nodex]->size>=2){
-			*count-= 1;
+			*count -= 1;
 		}
 		set[nodex]->size = 0;
 		if(set[nodey]->size>*max){
@@ -103,6 +103,21 @@ static void answer_GroupAnalysis(int mid[], int len, mail* mails, int* list, int
 	for(int i = 0; i < len; i++){
 		setunion(arr,mails[mid[i]].from, mails[mid[i]].to, &count, &max);
 	}
+
+	//just for debugging
+	count = 0; 
+	max = 0;
+	for(int i = 0; i < SIZE; i++){
+		if(arr[i]){
+			if(findset(arr,i)==i){
+				count++;
+				if(arr[i]->size>max){
+					max = arr[i]->size;
+				}
+			}
+		}
+	}
+	//just for debugging
 
     //ANS
     list[0] = count;

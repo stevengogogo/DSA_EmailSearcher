@@ -1,6 +1,7 @@
 #ifndef GROUPANALYSIS_H
 #define GROUPANALYSIS_H
 #include "api.h"
+#include <limits.h>
 #include <string.h>
 #include <stdio.h>
 #include <stdlib.h>

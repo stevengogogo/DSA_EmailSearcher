@@ -1,5 +1,9 @@
 var searchData=
 [
-  ['indomainint_9',['inDomainInt',['../utils_8h.html#a5e5de4bf768b83c8bb0f35e75cce4d84',1,'utils.c']]],
-  ['isregularexpr_5fascii_10',['isRegularExpr_ASCII',['../utils_8h.html#a5ba940f06573ba87adcd6ee567673239',1,'utils.c']]]
+  ['mail_10',['mail',['../structmail.html',1,'']]],
+  ['matrix_11',['Matrix',['../structMatrix.html',1,'']]],
+  ['matrix_5fushort_12',['Matrix_ushort',['../structMatrix__ushort.html',1,'']]],
+  ['memory_5fshort_13',['MEMORY_SHORT',['../structMEMORY__SHORT.html',1,'']]],
+  ['memory_5fulong_14',['MEMORY_ULONG',['../structMEMORY__ULONG.html',1,'']]],
+  ['merge_15',['merge',['../namespacemerge.html',1,'']]]
 ];

@@ -33,7 +33,7 @@ TEST_LIST = {
     {"Char 2 number", test_char2num},
     {"Quick sort", test_sort},
     {"Matrix", test_matrix},
-    {"FS: power", test_powerArray},
+    //{"FS: power", test_powerArray},
     {"FS: random", test_random},
     {"FS: init",test_init_FS},
     {"FS: test data", test_FS_data},

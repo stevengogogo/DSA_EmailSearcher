@@ -56,12 +56,12 @@ static int findset(node **set, int hashed){
 	return set[hashed]->parentIdx;
 }
 
-static void link_GA(node **set, int nodex, int nodey){
-	if(set[nodex]->rank>set[nodey]->rank){
+static void link_GA(node **set, int nodex, int nodey, int countArr[]){
+	if(countArr[nodex]>countArr[nodey]){
 		set[nodey]->parentIdx = nodex;
 	}else{
 		set[nodex]->parentIdx = nodey;
-		set[nodey]->rank +=1;
+		if(countArr[nodex]==countArr[nodey]) set[nodey]->rank +=1;
 	}
 }
 
@@ -73,7 +73,7 @@ static void setunion(node**set, char word1[],char word2[], int countArr[], int* 
 	int idxx = findset(set, nodex);
 	int idxy = findset(set, nodey);
 	if(idxx!=idxy){
-		link_GA(set, idxx, idxy);
+		link_GA(set, idxx, idxy, countArr);
 		if(countArr[idxx]>countArr[idxy]){
 			if(countArr[idxy]>=2){
 				*count-=1;

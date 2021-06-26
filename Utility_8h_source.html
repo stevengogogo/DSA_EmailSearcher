@@ -153,7 +153,7 @@ $(function() {
 <div class="line"><a name="l00090"></a><span class="lineno">   90</span>&#160;    <span class="keywordtype">long</span> hash = 0;</div>
 <div class="line"><a name="l00091"></a><span class="lineno">   91</span>&#160;    </div>
 <div class="line"><a name="l00092"></a><span class="lineno">   92</span>&#160;    <span class="keywordflow">for</span>(<span class="keywordtype">long</span> i=0;i&lt;len;i++){</div>
-<div class="line"><a name="l00093"></a><span class="lineno">   93</span>&#160;        hash += (<a class="code" href="utils_8h.html#a387eeb3f2467f64a219ddedefa71edfb">char2num</a>(s[i])*power_int(D, len-i-1)) ;</div>
+<div class="line"><a name="l00093"></a><span class="lineno">   93</span>&#160;        hash += (<a class="code" href="utils_8h.html#a354d782aff0e826afbd382be3f6e527d">char2num</a>(s[i])*power_int(D, len-i-1)) ;</div>
 <div class="line"><a name="l00094"></a><span class="lineno">   94</span>&#160;    }</div>
 <div class="line"><a name="l00095"></a><span class="lineno">   95</span>&#160;    <span class="keywordflow">return</span> (<span class="keywordtype">int</span>)(hash % Q);</div>
 <div class="line"><a name="l00096"></a><span class="lineno">   96</span>&#160;};</div>
@@ -161,7 +161,7 @@ $(function() {
 <div class="line"><a name="l00098"></a><span class="lineno">   98</span>&#160;<span class="preprocessor">#endif</span></div>
 <div class="ttc" id="astructmail_html"><div class="ttname"><a href="structmail.html">mail</a></div><div class="ttdef"><b>Definition:</b> api.h:16</div></div>
 <div class="ttc" id="autils_8h_html"><div class="ttname"><a href="utils_8h.html">utils.h</a></div><div class="ttdoc">General Utilities for C language.</div></div>
-<div class="ttc" id="autils_8h_html_a387eeb3f2467f64a219ddedefa71edfb"><div class="ttname"><a href="utils_8h.html#a387eeb3f2467f64a219ddedefa71edfb">char2num</a></div><div class="ttdeci">int char2num(char c)</div><div class="ttdoc">[0-9] -&gt; [0-9]; [a-z] -&gt; [10-35]; otherwise: ASCII</div><div class="ttdef"><b>Definition:</b> utils.c:87</div></div>
+<div class="ttc" id="autils_8h_html_a354d782aff0e826afbd382be3f6e527d"><div class="ttname"><a href="utils_8h.html#a354d782aff0e826afbd382be3f6e527d">char2num</a></div><div class="ttdeci">long char2num(char c)</div><div class="ttdoc">[0-9] -&gt; [0-9]; [a-z] -&gt; [10-35]; otherwise: ASCII</div><div class="ttdef"><b>Definition:</b> utils.c:87</div></div>
 </div><!-- fragment --></div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>

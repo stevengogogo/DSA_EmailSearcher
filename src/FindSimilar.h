@@ -18,6 +18,7 @@
 #include <string.h>
 #include <stdbool.h>
 #include "utils.h"
+#include "GroupAnalysis.h"
 
 /**********Constant Variable***********/
 #define Q_RABIN 170001
@@ -28,148 +29,89 @@
 #define ULONG  long
 #define UINT  int
 #define USHORT unsigned short
+#define ushort unsigned short
 
-/**Helper function**/
-/************Dynamic Array (Int) Stack**************/
+#include <stdlib.h>
+#include <assert.h>
+#include <string.h>
+#include <stdio.h>
+#include "api.h"
 
+typedef struct HashStack {
+    ushort m[Q_RABIN][MAX_N_MAIL];
+    ushort len[Q_RABIN];
+} HashStack;
 
-/**
- * @brief Information for global memory storage.
- * @note This structure is to provide public memory, and minimize the use of @ref malloc
- * @param LOC_top_unused index of unused memory
- * @param LOC_ARRAY array for store location data
- * @param LEN capacity of the memory
- */
-typedef struct MEMORY_SHORT {
-    ULONG top_unused;
-    USHORT* ARRAY;
-    ULONG LEN;
-} MEMORY_SHORT;
+static HashStack* hstack;
+static int num_unique[MAX_N_MAIL];
 
-typedef struct MEMORY_ULONG {
-    ULONG top_unused;
-    int* ARRAY;
-    ULONG LEN;
-} MEMORY_ULONG;
+static void init_FS(void){
+    hstack = (HashStack*)calloc(1, sizeof(HashStack));
+    for(int i=0;i<MAX_N_MAIL;i++){
+        num_unique[i] = 0;
+    }
+};
 
-typedef struct TokenInfo {
-    USHORT count;
-    USHORT loc[INIT_SPURIOUS_COUNT];//location of the hash on string
-} TokenInfo;
+static void kill_FS(void){
+    free(hstack);
+};
 
+static void proc_FS(mail* mails, int n_mail){
+    int ID;
+    for(int i=0;i<n_mail;i++){
+        ID = mails[i].id;
+        append_mHash(mails, ID);
+    }
+}
 
-static struct MEMORY_ULONG existTokens_mem;
+static void append_mHash(mail* mails, int ID){
+    char* text = mails[ID].content;
 
+}
 
-/**
- * @brief 
- * @note Each email is using the hash map with @ref Q_RABIN size, and each slot has @ref INIT_SPURIOUS_COUNT location data.
- * @param loc_mem global struct for memory storage
- * @param num_mail number of email
- */
-void init_MEM_ULONG(struct MEMORY_ULONG* mem, ULONG len);
-void init_MEM_SHORT(struct MEMORY_SHORT* mem, ULONG len);
+/** Return location*/
+int popTokenHash(char message[], char token[], int iStr, long* Hash){
+    char c;
+    int asc; //ascii number
+    *Hash = 0; //reset hash value
+    //No string left
+    if (iStr < 0){
+        token[0] = '\0';
+        return -1;
+    }
 
-/** Recycle the memory of @ref LOC_MEM*/
-void kill_MEM_ULONG(struct MEMORY_ULONG* mem);
-void kill_MEM_SHORT(struct MEMORY_SHORT* mem);
+    int i = 0; //token[i]
+    while(message[iStr] != '\0' ){
+        c = message[iStr];
+        asc = (int)c; //ascii number
 
+        if (isRegularExpr_ASCII(asc)){
+            if (isUpperCase_ASCII(c))
+                c = tolower(c);
+            token[i] = c;
+            ++i;
+            ++iStr;
+        }
+        else{
+            if (i==0){
+                ++iStr;
+                continue;
+            }
+            else 
+                break;
+        }
 
-/******Token and Structure*******/
+    }
 
+    if (message[iStr] == '\0'){ // EOF
+        iStr= -1;
+    }
 
-/** Text Summary*/
-typedef struct TxtSmry{
-    int id;
-    TokenInfo token[Q_RABIN]; //len = Q_MODULE
-    int* existTokens; //Exist Token
-    dymArr* existTokens_DymArr;
-    int nToken; // unique token number
-    char* text; // Text
-    bool synced; // Check the information is updated
-    bool isExistTokens_DymArr;
-    int maxSpurious;
-} TxtSmry;
+    token[i] = '\0'; //end of token
+    *Hash = Hash_RK(token);
 
-
-/** Intiate text summary*/
-void init_TxtSmry(TxtSmry* smry, int hashMapsize);
-/** Initiate array of text summary*/
-void init_TxtSmry_arr(TxtSmry** smry, int len, int hashmapSize);
-void append_hash_TxtSmry(TxtSmry* smry, int hash);
-void _add_unique_hashlist(TxtSmry* smry, int hash);
-int get_unique_hashlist(TxtSmry* smry, int i);
-/** Kill array of TxtSmry.*/
-void kill_TxtSmry_arr(TxtSmry* smry, int len);
-
-
-/******Hash*******/
-/** Get token hash
- * @param iStr Pin for reading the string
- * @note Modified from @ref popToken.
- * @return iEnd. the end of the token
-*/
-int popTokenHash(char message[], char token[], int iStr, int* Hash);
-/**
- * @brief Update the hash value with new character.
- * @param c character to append
- * @param Hash_cur current hash value
- * @return int updated hash value.
- */
-int updateHash(char c, int Hash_cur);
-
-/**********Main API************/
-
-/**Initialte Memory for FindSimilar*/
-void Init_FindSimilar(TxtSmry**, int n_mails);
-
-/** Preprocessing: Summarize the mails*/
-void Preprocess_FindSimilar(TxtSmry*, mail*  mails, int n_mails);
-
-/*GC for FindSimilar problem*/
-void kill_FindSimilar(TxtSmry* smrys, int n_mails);
-
-
-/******************************/
-
-
-
-/*********Hash*********/
-/** Summarize a mail*/
-void summarize_content(TxtSmry* smry, mail* m);
-/** Add text and hashing*/
-void summarize_hash(TxtSmry* smry, char* text);
-
-
-
-/******Jaccob Similarity*****/
-
-/**
- * @brief Check the similarity of two messages is exceeding threshold.
- * 
- * @param smry1 Message 1.
- * @param smry2 Message 2.
- * @param threshold the threshold of similarity `[0,1]`
- * @note swich `smry1` and `smry2` will not affect the result.
- * @return true The jaccob's similarity of `smry1` and `smry2` is beyond the threshold
- * @return false otherwise
- */
-void answer_FindSimilar(TxtSmry* smrys, int ID, double threshold, int n_mails, int* SimList, int* lenSim);
-
-
-/************Helper Functions*****************/
-/**
- * @brief Get Jaccob's similarity from two summaries ( @ref TxtSmry). with `O(min(num_token))`
- * 
- * @note The inputs can be switched and get the same result. See https://github.com/stevengogogo/DSA_EmailSearcher/discussions/42 for Jaccob similarity 
- * @return int The jaccob similarity `[0,1]`
- */
-double similarity_val(TxtSmry* smry1, TxtSmry* smry2);
-
-/** Maximum Jaccob's similarity with `O(1)` speed.
- * @note This function uses:  MaxSimlarity = min(nToken1, nToken2) / (nToken1 + nToken2 - min(nToken1, nToken2) ). To accquire the maximum similarity.
-*/
-int max_similarity_val(TxtSmry* smry1, TxtSmry* smry2);
+    return iStr;
+}
 
 
 

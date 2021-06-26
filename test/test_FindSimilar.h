@@ -28,4 +28,33 @@ void test_powerArray(void){
     TEST_MSG("God %ld",Hash_RK("11"));
 }
 
+void test_random(void){
+    int len=6;
+    long* a = (long*)malloc(sizeof(long)*len);
+    RandGen_long(a, len, 0, Q_RABIN);
+    for(int i=0;i<len;i++){
+        printf("%ld ", a[i]);
+    }
+    free(a);
+}
+
+void test_init_FS(void){
+    TxtSmry smry;
+    int n_mails;
+    mail* mails;
+    clock_t str;
+    clock_t end;
+
+    get_mails("test/data/test.in", &mails, &n_mails);
+
+    str = clock();
+    init_FindSimilar(&smry, n_mails);
+    Preprocess_FindSimilar(&smry, mails, n_mails);
+    end = clock();
+    printf("(Q:%d/D:%d)",Q_RABIN,D_RABIN);
+    print_clock("Init & Preprocessing:",str, end);
+
+    kill_FindSimilar(&smry);
+}
+
 #endif

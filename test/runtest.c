@@ -34,6 +34,8 @@ TEST_LIST = {
     {"Quick sort", test_sort},
     {"Matrix", test_matrix},
     {"FS: power", test_powerArray},
+    {"FS: random", test_random},
+    {"FS: init",test_init_FS},
     /*
     {"Find Similar: Memory", memory_allocation_FS},
     {"Find Similar: init", test_init_FS},

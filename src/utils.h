@@ -18,6 +18,7 @@
 #include <string.h>
 #include <stdlib.h>
 #include <assert.h>
+#include <limits.h>
 #include <ctype.h> // tolower
 #define INIT_NUM_ARRAY_ELEMENT 10
 #define EMTY_QUE_SIG -121242
@@ -146,17 +147,17 @@ void swap(int* x, int* y);
 
 /*Matrix*/
 typedef struct Matrix{
-    int* m;
+    long* m;
     int nrow;
     int ncol;
 } Matrix;
 
-void init_Matrix(Matrix* M, int nrow, int ncol);
+void init_Matrix(Matrix* M, int nrow, int ncol, long init_val);
 void kill_Matrix(Matrix* M);
-void set_Matrix(Matrix* M, int r, int c, int val);
-int get_Matrix(Matrix*M, int r, int c);
+void set_Matrix(Matrix* M, int r, int c, long val);
+long get_Matrix(Matrix*M, int r, int c);
 
 /**Random array*/
-
+void RandGen_long(long* arr, int len, long low, long high);
 
 #endif

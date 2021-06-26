@@ -355,8 +355,14 @@ void swap(int* x, int* y){
 }
 
 /*matrix*/
-void init_Matrix(Matrix* M, int nrow, int ncol){
-    int* m = (int*)calloc(ncol*nrow, sizeof(int));
+void init_Matrix(Matrix* M, int nrow, int ncol, long init_val){
+    long* m = (long*)malloc(ncol*nrow*sizeof(long));
+    long size = (long)nrow * (long)ncol;
+    
+    for(long i=0;i<size;i++){
+        m[i] = init_val;
+    }
+
     M->m = m;
     M->ncol = ncol;
     M->nrow = nrow;
@@ -368,12 +374,19 @@ void kill_Matrix(Matrix* M){
     M->nrow = 0;
 }
 
-void set_Matrix(Matrix* M, int r, int c, int val){
+void set_Matrix(Matrix* M, int r, int c, long val){
     int offset = r*M->ncol + c;
     M->m[offset] = val;
 }
 
-int get_Matrix(Matrix*M, int r, int c){
+long get_Matrix(Matrix*M, int r, int c){
     int offset = r*M->ncol + c;
     return M->m[offset];
+}
+
+
+void RandGen_long(long* arr, int len, long low, long high){
+    for(int i=0;i<len;i++){
+        arr[i] = rand() % (high-low) + low;
+    }
 }

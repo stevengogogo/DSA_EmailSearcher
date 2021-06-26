@@ -86,11 +86,53 @@ int popTokenHash(char message[], char token[], int iStr, long* Hash){
     return iStr;
 }
 
+/*Minihashing*/
+void set_Sgl_Vec(Matrix* SglM, char text[], int ID, long* a, long* b, short* hashMap){
+    //Rest hash
+    memset(hashMap,0, sizeof(short)*Q_RABIN);
+    //RK hash map
+    int iStr = 0;
+    char token[MAX_TOKEN_LEN];
+    //long Added[MAX_TOKEN_NUM];
+    int iNxt;
+    long hash;
+    long hi[T_MINIHASH_PERM];
+
+
+    //Build Hash Map
+    while(1){
+        iNxt = popTokenHash(text, token, iStr, &hash);
+        if(iNxt==-1){
+            break;
+        }
+        ++hashMap[hash];
+        iStr = iNxt;
+    }
+
+    //Permutation
+    for(long i=0; i<T_MINIHASH_PERM;i++){
+        miniHash(SglM, hashMap, a[i], b[i], i, ID);
+    }
+
+}
+
+void miniHash(Matrix* SglM, short* hashmap, long a, long b, int IP, int ID){
+    long perm = 0;
+    long i=0;
+    perm = hash_tabu(perm, a, b);
+    for(int h=0;h< Q_RABIN;h++){
+        if(hashmap[perm]>0){
+            set_Matrix(SglM, IP, ID, perm);
+            break;
+        }
+        perm = hash_tabu(perm, a, b);
+    }
+}
 
 /**Main API*/
 void init_FindSimilar(TxtSmry* smry, int n_mails){
     init_PowerArray(PowerArray, MAX_TOKEN_LEN, D_RABIN, Q_RABIN);
-    init_Matrix(&smry->SglM, T_MINIHASH_PERM, n_mails);
+    init_Matrix(&smry->SglM, T_MINIHASH_PERM, n_mails, LONG_MAX);
 }
 
 void kill_FindSimilar(TxtSmry* smry){
@@ -98,6 +140,24 @@ void kill_FindSimilar(TxtSmry* smry){
 }
 
 void Preprocess_FindSimilar(TxtSmry* smry, mail* mails, int n_mails){
-    int a[T_MINIHASH_PERM];
-    int b[T_MINIHASH_PERM];
+    //Random Permutation
+    long* a = (long*)malloc(sizeof(long)*T_MINIHASH_PERM);
+    long* b = (long*)malloc(sizeof(long)*T_MINIHASH_PERM);
+    short* hashmap = (short*)calloc(Q_RABIN, sizeof(short));
+
+    //for(int i=0;i<T_MINIHASH_PERM;i++){
+        //a[i] = i+1;
+        //b[i] = i;
+    //}
+    RandGen_long(a, T_MINIHASH_PERM,0, Q_RABIN);
+    RandGen_long(b, T_MINIHASH_PERM,0, Q_RABIN);
+
+    for(int i=0;i<n_mails; i++){
+        set_Sgl_Vec(&smry->SglM, mails[i].content, mails[i].id, a, b, hashmap);
+    }
+
+    //GC
+    free(hashmap);
+    free(a);
+    free(b);
 }

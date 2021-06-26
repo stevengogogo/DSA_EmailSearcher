@@ -20,10 +20,11 @@
 
 
 /**********Constant Variable***********/
-#define Q_RABIN 170001
-#define D_RABIN 36
+#define Q_RABIN 35317
+#define D_RABIN 29
 #define MAX_TOKEN_LEN 1000
-#define T_MINIHASH_PERM 100
+#define T_MINIHASH_PERM 30
+#define MAX_TOKEN_NUM 10000
 
 long PowerArray[MAX_TOKEN_LEN];
 
@@ -47,9 +48,12 @@ int popTokenHash(char message[], char token[], int iStr, long* Hash);
 /* x power n*/
 long power_long(long x, int n);
 
+/*Minihashing*/
+void set_Sgl_Vec(Matrix* SglM, char text[], int ID, long* a, long* b, short* hashMap);
+void miniHash(Matrix* SglM, short* hashmap, long a, long b, int iperm, int ID);
 
 /**Main API*/
-void Init_FindSimilar(TxtSmry* smry, int n_mails);
+void init_FindSimilar(TxtSmry* smry, int n_mails);
 void kill_FindSimilar(TxtSmry* smry);
 void Preprocess_FindSimilar(TxtSmry* smry, mail*  mails, int n_mails);
 

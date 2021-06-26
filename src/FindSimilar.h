@@ -20,11 +20,11 @@
 
 
 /**********Constant Variable***********/
-#define Q_RABIN 17003
-#define D_RABIN 29
-#define PERM_MOD 17009
+#define Q_RABIN 3929
+#define D_RABIN 1619
+#define PERM_MOD 3929
 #define MAX_TOKEN_LEN 1000
-#define T_MINIHASH_PERM 40
+#define T_MINIHASH_PERM 500
 #define MAX_TOKEN_NUM 10000
 
 long PowerArray[MAX_TOKEN_LEN];

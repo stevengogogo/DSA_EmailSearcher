@@ -141,7 +141,12 @@ void miniHash(Matrix* SglM, short* hashmap, long a, long b, int IP, int ID){
 /**Main API*/
 void init_FindSimilar(TxtSmry* smry, int n_mails){
     init_PowerArray(PowerArray, MAX_TOKEN_LEN, D_RABIN, Q_RABIN);
-    init_Matrix(&smry->SglM, T_MINIHASH_PERM, n_mails, LONG_MAX);
+    init_Matrix(&smry->SglM, T_MINIHASH_PERM, n_mails);
+    for(int r=0;r<T_MINIHASH_PERM;r++){
+        for(int c=0; c<n_mails; c++){
+            smry->SglM.m[r][c] = LONG_MAX;
+        }
+    }
 }
 
 void kill_FindSimilar(TxtSmry* smry){
@@ -162,7 +167,7 @@ void Preprocess_FindSimilar(TxtSmry* smry, mail* mails, int n_mails){
     long* a = (long*)malloc(sizeof(long)*T_MINIHASH_PERM);
     long* b = (long*)malloc(sizeof(long)*T_MINIHASH_PERM);
     Matrix hashmap;
-    init_Matrix(&hashmap, Q_RABIN, n_mails, 0);
+    init_Matrix(&hashmap, Q_RABIN, n_mails);
     RandGen_long(a, T_MINIHASH_PERM,0, Q_RABIN);
     RandGen_long(b, T_MINIHASH_PERM,0, Q_RABIN);
 

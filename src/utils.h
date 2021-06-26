@@ -157,7 +157,7 @@ typedef struct Matrix{
  * @brief 2D matrix with one malloc;
  * @note https://stackoverflow.com/questions/8740195/how-do-we-allocate-a-2-d-array-using-one-malloc-statement
 */
-void init_Matrix(Matrix* M, int nrow, int ncol, long init_val);
+void init_Matrix(Matrix* M, int nrow, int ncol);
 void kill_Matrix(Matrix* M);
 void set_Matrix(Matrix* M, int r, int c, long val);
 long get_Matrix(Matrix*M, int r, int c);

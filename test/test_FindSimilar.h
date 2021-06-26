@@ -40,10 +40,13 @@ void test_FS_data(void){
  
     TEST_CHECK(lans == nlist);
     TEST_MSG("Expected: %d, Got %d", lans, nlist);
-    for(int i=0;i<nlist;i++){
+    
+
+    for(int i=0;i<lans;i++){
         TEST_CHECK(list[i]==ans[i]);
         TEST_MSG("Exp: %d, Got: %d", ans[i], list[i]);
     }
+
 
     //GC
     free(list);

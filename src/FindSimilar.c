@@ -230,6 +230,7 @@ void answer_FS(infoFs*info, mail* mails, int ID, int n_mail, double threshold, i
     char token[TOKEN_STRING_LENGTH];
     ushort id = (ushort)ID;
     ushort interID;
+    *nlist = 0;
 
     // Content
     while(1){

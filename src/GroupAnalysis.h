@@ -1,7 +1,6 @@
 #ifndef GROUPANALYSIS_H
 #define GROUPANALYSIS_H
 #include "api.h"
-#include <limits.h>
 #include <string.h>
 #include <stdio.h>
 #include <stdlib.h>
@@ -25,7 +24,7 @@ static int hash(char word[]){
 		RK = (62*RK + (int)word[i])%SIZE;
 		i++;
 	}
-	return abs(RK)%INT_MAX;
+	return abs(RK)%SIZE;
 }
 
 static int findIdx(node**set, char word[]){

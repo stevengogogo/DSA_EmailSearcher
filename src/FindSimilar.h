@@ -17,14 +17,18 @@
 #include <string.h>
 #include <stdbool.h>
 #include "utils.h"
+#include <time.h>
 
 
 /**********Constant Variable***********/
-#define Q_RABIN 3929
-#define D_RABIN 1619
-#define PERM_MOD 3929
+#define Q_RABIN 170617
+#define D_RABIN 417
+#define Q_CLUSTER 5021
+#define D_CLUSTER 17
+#define PERM_MOD 1006799
+#define T_MINIHASH_PERM 300
+
 #define MAX_TOKEN_LEN 1000
-#define T_MINIHASH_PERM 500
 #define MAX_TOKEN_NUM 10000
 
 long PowerArray[MAX_TOKEN_LEN];

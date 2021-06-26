@@ -7,6 +7,7 @@
 #include "Utility.h"
 #include <time.h>
 
+/*
 void test_powerArray(void){
     init_PowerArray(PowerArray, MAX_TOKEN_LEN, D_RABIN, Q_RABIN);
 
@@ -27,6 +28,7 @@ void test_powerArray(void){
     TEST_CHECK(Hash_RK("11\0") == D_RABIN+1);
     TEST_MSG("God %ld",Hash_RK("11"));
 }
+*/
 
 void test_random(void){
     int len=6;
@@ -49,10 +51,16 @@ void test_init_FS(void){
 
     str = clock();
     init_FindSimilar(&smry, n_mails);
-    Preprocess_FindSimilar(&smry, mails, n_mails);
     end = clock();
     printf("(Q:%d/D:%d)",Q_RABIN,D_RABIN);
-    print_clock("Init & Preprocessing:",str, end);
+    print_clock("Init:",str, end);
+
+    str = clock();
+    Preprocess_FindSimilar(&smry, mails, n_mails);
+    end = clock();
+    printf("\n(Q:%d/D:%d)",Q_RABIN,D_RABIN);
+    print_clock("Preprocessing:",str, end);
+
 
     /*
     for(int i=0;i<T_MINIHASH_PERM;i++){

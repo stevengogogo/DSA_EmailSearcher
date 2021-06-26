@@ -361,16 +361,10 @@ void init_Matrix(Matrix* M, int nrow, int ncol, long init_val){
     const size_t rowele = ncol * sizeof(**m);
     m = malloc(rowpt + nrow * rowele);
     
-    for(long i=0;i<nrow*ncol;i++){
-        (*m)[i] = init_val;
-    }
-
-    size_t i;
-    long r = nrow;
-    long* data = *m + nrow;
-
-    for(i =0;i<nrow;i++){
-        m[i] = data + i * ncol;
+    long nr = (long)nrow;
+    long nc = (long)ncol;
+    for(long i =0;i<nrow;i++){
+        m[i] = m + nr * sizeof(long*) + nr * nc * sizeof(long) * i;
     }
 
     M->m = m;

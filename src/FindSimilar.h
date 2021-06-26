@@ -37,82 +37,35 @@
 #include <stdio.h>
 #include "api.h"
 
-typedef struct HashStack {
-    ushort m[Q_RABIN][MAX_N_MAIL];
-    ushort len[Q_RABIN];
-} HashStack;
+typedef struct Matrix_ushort {
+    ushort** m;
+    ushort* len;
+    int nrow;
+    int ncol;
+} Matrix_ushort;
 
-static HashStack* hstack;
-static int num_unique[MAX_N_MAIL];
+void init_Matrix_ushort(Matrix_ushort* M, int nrow, int ncol);
+void kill_Matrix_ushort(Matrix_ushort* M);
 
-static void init_FS(void){
-    hstack = (HashStack*)calloc(1, sizeof(HashStack));
-    for(int i=0;i<MAX_N_MAIL;i++){
-        num_unique[i] = 0;
-    }
-};
+static Matrix_ushort hstack;
+static double* num_unique;
+static double* SimList;
 
-static void kill_FS(void){
-    free(hstack);
-};
 
-static void proc_FS(mail* mails, int n_mail){
-    int ID;
-    for(int i=0;i<n_mail;i++){
-        ID = mails[i].id;
-        append_mHash(mails, ID);
-    }
-}
 
-static void append_mHash(mail* mails, int ID){
-    char* text = mails[ID].content;
-
-}
+void init_FS(void);
+void kill_FS(void);
 
 /** Return location*/
-int popTokenHash(char message[], char token[], int iStr, long* Hash){
-    char c;
-    int asc; //ascii number
-    *Hash = 0; //reset hash value
-    //No string left
-    if (iStr < 0){
-        token[0] = '\0';
-        return -1;
-    }
+int popTokenHash(char message[], char token[], int iStr, int* Hash);
+void append_mHash(mail* mails, int ID);
 
-    int i = 0; //token[i]
-    while(message[iStr] != '\0' ){
-        c = message[iStr];
-        asc = (int)c; //ascii number
+void proc_FS(mail* mails, int n_mail);
 
-        if (isRegularExpr_ASCII(asc)){
-            if (isUpperCase_ASCII(c))
-                c = tolower(c);
-            token[i] = c;
-            ++i;
-            ++iStr;
-        }
-        else{
-            if (i==0){
-                ++iStr;
-                continue;
-            }
-            else 
-                break;
-        }
+void similarity(mail* mails, int ID,int n_mail);
+int Hash_RK(char s[]);
 
-    }
-
-    if (message[iStr] == '\0'){ // EOF
-        iStr= -1;
-    }
-
-    token[i] = '\0'; //end of token
-    *Hash = Hash_RK(token);
-
-    return iStr;
-}
-
+void answer_FS(mail* mails, int ID, int n_mail, double threshold, int* list, int* nlist);
 
 
 #endif

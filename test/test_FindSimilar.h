@@ -28,13 +28,13 @@ void test_FS_data(void){
     //Answer
     int ans[] = {1597, 4026, 4122, 5123, 7033, 7176, 7802, 7845}; 
     int lans = 8;
+    infoFs infs;
 
-
-    init_FS();
-    proc_FS(mails, num_mail);
+    init_FS(&infs);
+    proc_FS(&infs, mails, num_mail);
 
     //Solve
-    answer_FS(mails, mid, num_mail, thd, list, &nlist);
+    answer_FS(&infs, mails, mid, num_mail, thd, list, &nlist);
 
     //Validate
     TEST_CHECK(lans == nlist);
@@ -47,7 +47,7 @@ void test_FS_data(void){
 
     //GC
     free(list);
-    //kill_FS();
+    kill_FS(&infs);
 }
 
 

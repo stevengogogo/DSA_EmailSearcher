@@ -47,25 +47,28 @@ typedef struct Matrix_ushort {
 void init_Matrix_ushort(Matrix_ushort* M, int nrow, int ncol);
 void kill_Matrix_ushort(Matrix_ushort* M);
 
-static Matrix_ushort hstack;
-static double* num_unique;
-static double* SimList;
+
+typedef struct infoFS{
+    Matrix_ushort hstack;
+    double* num_unique;
+    double* SimList;
+} infoFs;
 
 
-
-void init_FS(void);
-void kill_FS(void);
+void init_FS(infoFs* info);
+void kill_FS(infoFs* info);
 
 /** Return location*/
 int popTokenHash(char message[], char token[], int iStr, int* Hash);
-void append_mHash(mail* mails, int ID);
+void append_mHash(infoFs* info,mail* mails, int ID);
 
-void proc_FS(mail* mails, int n_mail);
+void proc_FS(infoFs* info, mail* mails, int n_mail);
 
-void similarity(mail* mails, int ID,int n_mail);
+void similarity(infoFs* info, mail* mails, int ID,int n_mail);
 int Hash_RK(char s[]);
 
-void answer_FS(mail* mails, int ID, int n_mail, double threshold, int* list, int* nlist);
+void answer_FS(infoFs*info, mail* mails, int ID, int n_mail, double threshold, int* list, int* nlist);
+void register_hash(infoFs* info, int ID, int hash);
 
 
 #endif

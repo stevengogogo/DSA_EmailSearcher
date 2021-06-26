@@ -1,5 +1,8 @@
 #include "FindSimilar.h"
 
+
+
+
 void init_Matrix_ushort(Matrix_ushort* M, int nrow, int ncol){
     ushort **array = malloc(nrow * sizeof *array + (nrow * (ncol * sizeof **array)));
     size_t i;
@@ -26,32 +29,32 @@ void kill_Matrix_ushort(Matrix_ushort* M){
 
 
 
-void init_FS(void){
-    init_Matrix_ushort(&hstack, Q_RABIN, MAX_N_MAIL);
-    num_unique = (double*)calloc(MAX_N_MAIL,sizeof(double));
-    SimList = (double*)calloc(MAX_N_MAIL, sizeof(double));
+void init_FS(infoFs* info){
+    init_Matrix_ushort(&info->hstack, Q_RABIN, MAX_N_MAIL);
+    info->num_unique = (double*)calloc(MAX_N_MAIL,sizeof(double));
+    info->SimList = (double*)calloc(MAX_N_MAIL, sizeof(double));
 };
 
-void kill_FS(void){
-    free(num_unique);
-    free(SimList);
-    kill_Matrix_ushort(&hstack);
+void kill_FS(infoFs* info){
+    free(info->num_unique);
+    free(info->SimList);
+    kill_Matrix_ushort(&info->hstack);
 };
 
-void register_hash(int ID, int hash){
-    if(hstack.len[hash] != 0){//check duplicate
-        int end = hstack.m[hash][hstack.len[hash]-1];
+void register_hash(infoFs* info, int ID, int hash){
+    if(info->hstack.len[hash] != 0){//check duplicate
+        int end = info->hstack.m[hash][info->hstack.len[hash]-1];
         if(end == ID){//already appended
             return;
         }
     }
 
     //Add hash
-    hstack.m[hash][hstack.len[hash]] = ID;
-    ++hstack.len[hash];
+    info->hstack.m[hash][info->hstack.len[hash]] = ID;
+    ++info->hstack.len[hash];
 
     //Register unique count
-    num_unique[ID] += 1;
+    info->num_unique[ID] += 1;
 };
 
 /** Return location*/
@@ -99,7 +102,7 @@ int popTokenHash(char message[], char token[], int iStr, int* Hash){
 }
 
 
-void append_mHash(mail* mails, int ID){
+void append_mHash(infoFs* info, mail* mails, int ID){
     char* text = mails[ID].content;
     char* subject = mails[ID].subject;
     int hash;
@@ -114,7 +117,7 @@ void append_mHash(mail* mails, int ID){
             break;
         }
         iStr = iNxt;
-        register_hash(ID, hash);
+        register_hash(info, ID, hash);
     }
 
     //Subject
@@ -125,15 +128,15 @@ void append_mHash(mail* mails, int ID){
             break;
         }
         iStr = iNxt;
-        register_hash(ID, hash);
+        register_hash(info,ID, hash);
     }
 }
 
-void proc_FS(mail* mails, int n_mail){
+void proc_FS(infoFs* info, mail* mails, int n_mail){
     int ID;
     for(int i=0;i<n_mail;i++){
         ID = mails[i].id;
-        append_mHash(mails, ID);
+        append_mHash(info,mails, ID);
     }
 }
 
@@ -142,7 +145,7 @@ void proc_FS(mail* mails, int n_mail){
 
 
 
-void similarity(mail* mails, int ID,int n_mail){
+void similarity(infoFs* info, mail* mails, int ID,int n_mail){
     bool isVis[Q_RABIN];
     double Overlap[MAX_N_MAIL];
     char* text = mails[ID].content;//Remember to add subject
@@ -167,8 +170,8 @@ void similarity(mail* mails, int ID,int n_mail){
         }
         
         //Find similar
-        for(int i=0;i<hstack.len[hash];i++){
-            interID = hstack.m[hash][i];
+        for(int i=0;i<info->hstack.len[hash];i++){
+            interID = info->hstack.m[hash][i];
             ++Overlap[(int)interID];
         }
         isVis[hash] = true;
@@ -188,8 +191,8 @@ void similarity(mail* mails, int ID,int n_mail){
         }
         
         //Find similar
-        for(int i=0;i<hstack.len[hash];i++){
-            interID = hstack.m[hash][i];
+        for(int i=0;i<info->hstack.len[hash];i++){
+            interID = info->hstack.m[hash][i];
             ++Overlap[(int)interID];
         }
         isVis[hash] = true;
@@ -197,8 +200,8 @@ void similarity(mail* mails, int ID,int n_mail){
     
     // Similarity
     for(int i=0;i<n_mail;i++){
-        sim = Overlap[i] / (num_unique[i] + num_unique[ID] - Overlap[i]);
-        SimList[i] = sim;
+        sim = Overlap[i] / (info->num_unique[i] + info->num_unique[ID] - Overlap[i]);
+        info->SimList[i] = sim;
     }
 }
 
@@ -216,14 +219,64 @@ int Hash_RK(char s[]){
 
 
 
-void answer_FS(mail* mails, int ID, int n_mail, double threshold, int* list, int* nlist){
-    similarity(mails, ID, n_mail);
-    *nlist = 0;
+void answer_FS(infoFs*info, mail* mails, int ID, int n_mail, double threshold, int* list, int* nlist){
+    bool isVis[Q_RABIN];
+    double Overlap[MAX_N_MAIL];
+    char* text = mails[ID].content;//Remember to add subject
+    int iNxt;
+    int iStr=0;
+    int hash;
+    double sim;
+    char token[TOKEN_STRING_LENGTH];
+    ushort id = (ushort)ID;
+    ushort interID;
 
-    //Find Sim > threshold
+    // Content
+    while(1){
+        iNxt = popTokenHash(text, token, iStr, &hash);
+        if(iNxt==-1){
+            break;
+        }
+        iStr = iNxt;
+
+        if(isVis[hash]){
+            continue;
+        }
+        
+        //Find similar
+        for(int i=0;i<info->hstack.len[hash];i++){
+            interID = info->hstack.m[hash][i];
+            ++Overlap[(int)interID];
+        }
+        isVis[hash] = true;
+    }
+
+    char* subject = mails[ID].subject; 
+    iStr = 0;
+    while(1){
+        iNxt = popTokenHash(subject, token, iStr, &hash);
+        if(iNxt==-1){
+            break;
+        }
+        iStr = iNxt;
+
+        if(isVis[hash]){
+            continue;
+        }
+        
+        //Find similar
+        for(int i=0;i<info->hstack.len[hash];i++){
+            interID = info->hstack.m[hash][i];
+            ++Overlap[(int)interID];
+        }
+        isVis[hash] = true;
+    }
+    
+    // Similarity
     for(int i=0;i<n_mail;i++){
-        if(SimList[i] > threshold && i!=ID){
-            list[*nlist] = i;
+        sim = Overlap[i] / (info->num_unique[i] + info->num_unique[ID] - Overlap[i]);
+        if(sim>threshold){
+            list[*nlist]=i;
             ++(*nlist);
         }
     }

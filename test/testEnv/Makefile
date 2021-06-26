@@ -6,4 +6,4 @@ validator/validator: validator/validator.cpp
 
 .PHONY=run
 run: main validator/validator
-  ./main < testdata/test.in | validator/validator
+	sudo ./main < testdata/test.in | validator/validator

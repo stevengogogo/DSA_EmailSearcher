@@ -360,14 +360,13 @@ static int findIdx(node**set, char word[]){
 	return hashed;
 }
 
-static void inputTable(node** set, char word[], int countArr[]){
+static void inputTable(node** set, char word[]){
 	int hashed = findIdx(set, word);
 	if(!set[hashed]){
 		set[hashed] = (node*)malloc(sizeof(node));
 		set[hashed]->name = word;
 		set[hashed]->parentIdx = hashed;
 		set[hashed]->size = 1;
-		countArr[hashed] = 1;
 	}
 }
 
@@ -378,7 +377,7 @@ static int findset(node **set, int hashed){
 	return set[hashed]->parentIdx;
 }
 
-static void link_GA(node **set, int nodex, int nodey, int countArr[],int *count, int *max){
+static void link_GA(node **set, int nodex, int nodey ,int *count, int *max){
 
 	if(set[nodex]->size>set[nodey]->size){
 		set[nodey]->parentIdx = nodex;
@@ -395,7 +394,7 @@ static void link_GA(node **set, int nodex, int nodey, int countArr[],int *count,
 		if(set[nodex]->size==set[nodey]->size&&set[nodex]->size==1){
 			*count += 1;
 		}
-		set[nodey]->size+=set[nodex]->size;
+		set[nodey]->size += set[nodex]->size;
 		if(set[nodex]->size>=2){
 			*count-= 1;
 		}
@@ -406,24 +405,25 @@ static void link_GA(node **set, int nodex, int nodey, int countArr[],int *count,
 	}
 }
 
-static void setunion(node**set, char word1[],char word2[], int countArr[], int* count, int* max){
-	inputTable(set, word1, countArr);
-	inputTable(set, word2, countArr);
+static void setunion(node**set, char word1[],char word2[], int* count, int* max){
+	inputTable(set, word1);
+	inputTable(set, word2);
 	int nodex = findIdx(set, word1);
 	int nodey = findIdx(set, word2);
 	int idxx = findset(set, nodex);
 	int idxy = findset(set, nodey);
-	link_GA(set, idxx, idxy, countArr, count, max);
+	if(idxx!=idxy){
+		link_GA(set, idxx, idxy, count, max);
+	}
 }
 
 static void answer_GroupAnalysis(int mid[], int len, mail* mails, int* list, int* nlist){
 	node** arr = makeset();
 	int count = 0;
 	int max = 0;
-	int countArr[SIZE];
 
 	for(int i = 0; i < len; i++){
-		setunion(arr,mails[mid[i]].from, mails[mid[i]].to,countArr, &count, &max);
+		setunion(arr,mails[mid[i]].from, mails[mid[i]].to, &count, &max);
 	}
 
     //ANS

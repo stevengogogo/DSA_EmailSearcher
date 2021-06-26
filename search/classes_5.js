@@ -1,4 +1,5 @@
 var searchData=
 [
-  ['uarray_39',['uArray',['../structuArray.html',1,'']]]
+  ['tokeninfo_42',['TokenInfo',['../structTokenInfo.html',1,'']]],
+  ['txtsmry_43',['TxtSmry',['../structTxtSmry.html',1,'']]]
 ];

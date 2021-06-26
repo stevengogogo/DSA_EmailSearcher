@@ -70,88 +70,117 @@ $(function() {
 </div><!--header-->
 <div class="contents">
 <a href="FindSimilar_8h.html">Go to the documentation of this file.</a><div class="fragment"><div class="line"><a name="l00001"></a><span class="lineno">    1</span>&#160; </div>
-<div class="line"><a name="l00011"></a><span class="lineno">   11</span>&#160;<span class="preprocessor">#ifndef FINDSIMILAR_H</span></div>
-<div class="line"><a name="l00012"></a><span class="lineno">   12</span>&#160;<span class="preprocessor">#define FINDSIMILAR_H</span></div>
-<div class="line"><a name="l00013"></a><span class="lineno">   13</span>&#160;<span class="preprocessor">#include &quot;api.h&quot;</span></div>
-<div class="line"><a name="l00014"></a><span class="lineno">   14</span>&#160;<span class="preprocessor">#include &lt;stdio.h&gt;</span></div>
-<div class="line"><a name="l00015"></a><span class="lineno">   15</span>&#160;<span class="preprocessor">#include &lt;stdlib.h&gt;</span></div>
-<div class="line"><a name="l00016"></a><span class="lineno">   16</span>&#160;<span class="preprocessor">#include &lt;assert.h&gt;</span></div>
-<div class="line"><a name="l00017"></a><span class="lineno">   17</span>&#160;<span class="preprocessor">#include &lt;string.h&gt;</span></div>
-<div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160;<span class="preprocessor">#include &lt;stdbool.h&gt;</span></div>
-<div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160;<span class="preprocessor">#include &quot;<a class="code" href="utils_8h.html">utils.h</a>&quot;</span></div>
-<div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160;<span class="preprocessor">#include &lt;time.h&gt;</span></div>
-<div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160; </div>
+<div class="line"><a name="l00012"></a><span class="lineno">   12</span>&#160;<span class="preprocessor">#ifndef FINDSIMILAR_H</span></div>
+<div class="line"><a name="l00013"></a><span class="lineno">   13</span>&#160;<span class="preprocessor">#define FINDSIMILAR_H</span></div>
+<div class="line"><a name="l00014"></a><span class="lineno">   14</span>&#160;<span class="preprocessor">#include &quot;api.h&quot;</span></div>
+<div class="line"><a name="l00015"></a><span class="lineno">   15</span>&#160;<span class="preprocessor">#include &lt;stdio.h&gt;</span></div>
+<div class="line"><a name="l00016"></a><span class="lineno">   16</span>&#160;<span class="preprocessor">#include &lt;stdlib.h&gt;</span></div>
+<div class="line"><a name="l00017"></a><span class="lineno">   17</span>&#160;<span class="preprocessor">#include &lt;assert.h&gt;</span></div>
+<div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160;<span class="preprocessor">#include &lt;string.h&gt;</span></div>
+<div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160;<span class="preprocessor">#include &lt;stdbool.h&gt;</span></div>
+<div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160;<span class="preprocessor">#include &quot;<a class="code" href="utils_8h.html">utils.h</a>&quot;</span></div>
+<div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160;<span class="preprocessor">#include &quot;GroupAnalysis.h&quot;</span></div>
 <div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160; </div>
 <div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160;<span class="comment">/**********Constant Variable***********/</span></div>
-<div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160;<span class="preprocessor">#define Q_RABIN 170617</span></div>
-<div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160;<span class="preprocessor">#define D_RABIN 257</span></div>
-<div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160;<span class="preprocessor">#define Q_CLUSTER 200</span></div>
-<div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160; </div>
-<div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160;<span class="preprocessor">#define PERM_MOD 41723</span></div>
-<div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160;<span class="preprocessor">#define D_CLUSTER 1</span></div>
-<div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160;<span class="preprocessor">#define T_MINIHASH_PERM 3000</span></div>
-<div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160; </div>
-<div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160;<span class="preprocessor">#define MAX_TOKEN_LEN 1000</span></div>
-<div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160;<span class="preprocessor">#define MAX_TOKEN_NUM 10000</span></div>
-<div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160; </div>
-<div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160;<span class="keywordtype">long</span> PowerArray[MAX_TOKEN_LEN];</div>
-<div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160;<span class="keyword">static</span> <span class="keywordtype">long</span> PrimeArray[] = {2, 3, 5, 7, 11, 13, 17, 19, 23, 29, 31, 37, 41, 43, 47, 53, 59, 61, 67, 71, 73, 79, 83, 89, 97, 101, 103, 107, 109, 113, 127, 131, 137, 139, 149};</div>
-<div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160; </div>
-<div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160; </div>
-<div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160;<span class="comment">// Simple Tabulation Hash function</span></div>
-<div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160;<span class="keyword">static</span> <a class="code" href="structMatrix.html">Matrix</a> RANDOM_T;<span class="comment">//random table</span></div>
-<div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160;<span class="comment"></span><span class="keywordtype">void</span> <a class="code" href="FindSimilar_8h.html#abbd6fd9c2153cb5f0616ffe87549fab6">init_Random_Table</a>();</div>
-<div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160;<span class="keywordtype">long</span> getRandomLong();</div>
-<div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160;<span class="keywordtype">long</span> hash_Tabu(<span class="keywordtype">long</span> x, <span class="keywordtype">int</span> i);</div>
-<div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160; </div>
-<div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160;<span class="keyword">static</span> <span class="keywordtype">long</span> hash_mod(<span class="keywordtype">long</span> x,<span class="keywordtype">long</span> a,<span class="keywordtype">long</span>  b,<span class="keywordtype">long</span> c){</div>
-<div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160;    <span class="keywordflow">return</span> (a*x + b) % c;</div>
-<div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160;}</div>
-<div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160; </div>
-<div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160;<span class="keyword">static</span> <span class="keywordtype">long</span> hash_merge(<span class="keywordtype">long</span> x, <span class="keywordtype">long</span> i){</div>
-<div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160;    <span class="keywordtype">long</span> h1 = hash_mod(x, 13213,241, Q_CLUSTER);</div>
-<div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160;    <span class="keywordtype">long</span> h2 = hash_mod(x, 12131, 1, Q_CLUSTER);</div>
-<div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160;    <span class="keywordflow">return</span> h1+ i*h2;</div>
-<div class="line"><a name="l00057"></a><span class="lineno">   57</span>&#160;}</div>
+<div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160;<span class="preprocessor">#define Q_RABIN 170001</span></div>
+<div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160;<span class="preprocessor">#define D_RABIN 36</span></div>
+<div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160;<span class="preprocessor">#define INIT_SPURIOUS_COUNT 3</span></div>
+<div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160;<span class="preprocessor">#define INIT_UNIQUE_TOKEN_SIZE 10</span></div>
+<div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160;<span class="preprocessor">#define TOKEN_STRING_LENGTH 1000</span></div>
+<div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160;<span class="preprocessor">#define ULONG  long</span></div>
+<div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160;<span class="preprocessor">#define UINT  int</span></div>
+<div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160;<span class="preprocessor">#define USHORT unsigned short</span></div>
+<div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160;<span class="preprocessor">#define ushort unsigned short</span></div>
+<div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160; </div>
+<div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160;<span class="preprocessor">#include &lt;stdlib.h&gt;</span></div>
+<div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160;<span class="preprocessor">#include &lt;assert.h&gt;</span></div>
+<div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160;<span class="preprocessor">#include &lt;string.h&gt;</span></div>
+<div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160;<span class="preprocessor">#include &lt;stdio.h&gt;</span></div>
+<div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160;<span class="preprocessor">#include &quot;api.h&quot;</span></div>
+<div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160; </div>
+<div class="line"><a name="l00040"></a><span class="lineno"><a class="line" href="structHashStack.html">   40</a></span>&#160;<span class="keyword">typedef</span> <span class="keyword">struct </span><a class="code" href="structHashStack.html">HashStack</a> {</div>
+<div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160;    ushort m[Q_RABIN][MAX_N_MAIL];</div>
+<div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160;    ushort len[Q_RABIN];</div>
+<div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160;} <a class="code" href="structHashStack.html">HashStack</a>;</div>
+<div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160; </div>
+<div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160;<span class="keyword">static</span> <a class="code" href="structHashStack.html">HashStack</a>* hstack;</div>
+<div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160;<span class="keyword">static</span> <span class="keywordtype">int</span> num_unique[MAX_N_MAIL];</div>
+<div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160; </div>
+<div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160;<span class="keyword">static</span> <span class="keywordtype">void</span> init_FS(<span class="keywordtype">void</span>){</div>
+<div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160;    hstack = (<a class="code" href="structHashStack.html">HashStack</a>*)calloc(1, <span class="keyword">sizeof</span>(<a class="code" href="structHashStack.html">HashStack</a>));</div>
+<div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160;    <span class="keywordflow">for</span>(<span class="keywordtype">int</span> i=0;i&lt;MAX_N_MAIL;i++){</div>
+<div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160;        num_unique[i] = 0;</div>
+<div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160;    }</div>
+<div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160;};</div>
+<div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160; </div>
+<div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160;<span class="keyword">static</span> <span class="keywordtype">void</span> kill_FS(<span class="keywordtype">void</span>){</div>
+<div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160;    free(hstack);</div>
+<div class="line"><a name="l00057"></a><span class="lineno">   57</span>&#160;};</div>
 <div class="line"><a name="l00058"></a><span class="lineno">   58</span>&#160; </div>
-<div class="line"><a name="l00059"></a><span class="lineno">   59</span>&#160; </div>
-<div class="line"><a name="l00060"></a><span class="lineno"><a class="line" href="structTxtSmry.html">   60</a></span>&#160;<span class="keyword">typedef</span> <span class="keyword">struct </span><a class="code" href="structTxtSmry.html">TxtSmry</a>{</div>
-<div class="line"><a name="l00061"></a><span class="lineno">   61</span>&#160;    <a class="code" href="structMatrix.html">Matrix</a> SglM; <span class="comment">//Shingle Matrix</span></div>
-<div class="line"><a name="l00062"></a><span class="lineno">   62</span>&#160;} <a class="code" href="structTxtSmry.html">TxtSmry</a>;</div>
-<div class="line"><a name="l00063"></a><span class="lineno">   63</span>&#160; </div>
-<div class="line"><a name="l00064"></a><span class="lineno">   64</span>&#160; </div>
-<div class="line"><a name="l00065"></a><span class="lineno">   65</span>&#160; </div>
-<div class="line"><a name="l00066"></a><span class="lineno">   66</span>&#160;<span class="comment">/*Rabin Karp Hashing*/</span></div>
-<div class="line"><a name="l00067"></a><span class="lineno">   67</span>&#160;<span class="keywordtype">void</span> init_PowerArray(<span class="keywordtype">long</span>* arr, <span class="keywordtype">int</span> len, <span class="keywordtype">long</span> base, <span class="keywordtype">long</span> mod);</div>
-<div class="line"><a name="l00068"></a><span class="lineno">   68</span>&#160;<span class="keywordtype">long</span> Hash_RK(<span class="keywordtype">char</span> tokenStr[]);</div>
+<div class="line"><a name="l00059"></a><span class="lineno">   59</span>&#160;<span class="keyword">static</span> <span class="keywordtype">void</span> proc_FS(<a class="code" href="structmail.html">mail</a>* mails, <span class="keywordtype">int</span> n_mail){</div>
+<div class="line"><a name="l00060"></a><span class="lineno">   60</span>&#160;    <span class="keywordtype">int</span> ID;</div>
+<div class="line"><a name="l00061"></a><span class="lineno">   61</span>&#160;    <span class="keywordflow">for</span>(<span class="keywordtype">int</span> i=0;i&lt;n_mail;i++){</div>
+<div class="line"><a name="l00062"></a><span class="lineno">   62</span>&#160;        ID = mails[i].id;</div>
+<div class="line"><a name="l00063"></a><span class="lineno">   63</span>&#160;        append_mHash(mails, ID);</div>
+<div class="line"><a name="l00064"></a><span class="lineno">   64</span>&#160;    }</div>
+<div class="line"><a name="l00065"></a><span class="lineno">   65</span>&#160;}</div>
+<div class="line"><a name="l00066"></a><span class="lineno">   66</span>&#160; </div>
+<div class="line"><a name="l00067"></a><span class="lineno">   67</span>&#160;<span class="keyword">static</span> <span class="keywordtype">void</span> append_mHash(<a class="code" href="structmail.html">mail</a>* mails, <span class="keywordtype">int</span> ID){</div>
+<div class="line"><a name="l00068"></a><span class="lineno">   68</span>&#160;    <span class="keywordtype">char</span>* text = mails[ID].content;</div>
 <div class="line"><a name="l00069"></a><span class="lineno">   69</span>&#160; </div>
-<div class="line"><a name="l00070"></a><span class="lineno">   70</span>&#160;<span class="comment">/*Permuation*/</span></div>
-<div class="line"><a name="l00072"></a><span class="lineno">   72</span>&#160;<span class="keywordtype">long</span> <a class="code" href="FindSimilar_8h.html#a52ebcc2eaaff851f437f674fed362980">hash_tabu</a>(<span class="keywordtype">long</span> x, <span class="keywordtype">long</span> a, <span class="keywordtype">long</span> b);</div>
-<div class="line"><a name="l00073"></a><span class="lineno">   73</span>&#160; </div>
-<div class="line"><a name="l00075"></a><span class="lineno">   75</span>&#160;<span class="keywordtype">int</span> <a class="code" href="FindSimilar_8h.html#a824e7aa2a38b2e927aa9c9ff79edd5d7">popTokenHash</a>(<span class="keywordtype">char</span> message[], <span class="keywordtype">char</span> token[], <span class="keywordtype">int</span> iStr, <span class="keywordtype">long</span>* Hash);</div>
-<div class="line"><a name="l00076"></a><span class="lineno">   76</span>&#160;<span class="comment">/* x power n*/</span></div>
-<div class="line"><a name="l00077"></a><span class="lineno">   77</span>&#160;<span class="keywordtype">long</span> power_long(<span class="keywordtype">long</span> x, <span class="keywordtype">int</span> n);</div>
-<div class="line"><a name="l00078"></a><span class="lineno">   78</span>&#160; </div>
-<div class="line"><a name="l00079"></a><span class="lineno">   79</span>&#160;<span class="comment">/*Minihashing*/</span></div>
-<div class="line"><a name="l00080"></a><span class="lineno">   80</span>&#160;<span class="keywordtype">void</span> set_Sgl_Vec(<a class="code" href="structMatrix.html">Matrix</a>* SglM, <span class="keywordtype">char</span> text[], <span class="keywordtype">int</span> ID, <span class="keywordtype">long</span>* a, <span class="keywordtype">long</span>* b, <span class="keywordtype">short</span>* hashMap);</div>
-<div class="line"><a name="l00081"></a><span class="lineno">   81</span>&#160;<span class="keywordtype">void</span> miniHash(<a class="code" href="structMatrix.html">Matrix</a>* SglM, <span class="keywordtype">short</span>* hashmap, <span class="keywordtype">long</span> a, <span class="keywordtype">long</span> b, <span class="keywordtype">int</span> iperm, <span class="keywordtype">int</span> ID);</div>
+<div class="line"><a name="l00070"></a><span class="lineno">   70</span>&#160;}</div>
+<div class="line"><a name="l00071"></a><span class="lineno">   71</span>&#160; </div>
+<div class="line"><a name="l00073"></a><span class="lineno"><a class="line" href="FindSimilar_8h.html#a824e7aa2a38b2e927aa9c9ff79edd5d7">   73</a></span>&#160;<span class="keywordtype">int</span> <a class="code" href="FindSimilar_8h.html#a824e7aa2a38b2e927aa9c9ff79edd5d7">popTokenHash</a>(<span class="keywordtype">char</span> message[], <span class="keywordtype">char</span> token[], <span class="keywordtype">int</span> iStr, <span class="keywordtype">long</span>* Hash){</div>
+<div class="line"><a name="l00074"></a><span class="lineno">   74</span>&#160;    <span class="keywordtype">char</span> c;</div>
+<div class="line"><a name="l00075"></a><span class="lineno">   75</span>&#160;    <span class="keywordtype">int</span> asc; <span class="comment">//ascii number</span></div>
+<div class="line"><a name="l00076"></a><span class="lineno">   76</span>&#160;    *Hash = 0; <span class="comment">//reset hash value</span></div>
+<div class="line"><a name="l00077"></a><span class="lineno">   77</span>&#160;    <span class="comment">//No string left</span></div>
+<div class="line"><a name="l00078"></a><span class="lineno">   78</span>&#160;    <span class="keywordflow">if</span> (iStr &lt; 0){</div>
+<div class="line"><a name="l00079"></a><span class="lineno">   79</span>&#160;        token[0] = <span class="charliteral">&#39;\0&#39;</span>;</div>
+<div class="line"><a name="l00080"></a><span class="lineno">   80</span>&#160;        <span class="keywordflow">return</span> -1;</div>
+<div class="line"><a name="l00081"></a><span class="lineno">   81</span>&#160;    }</div>
 <div class="line"><a name="l00082"></a><span class="lineno">   82</span>&#160; </div>
-<div class="line"><a name="l00084"></a><span class="lineno">   84</span>&#160;<span class="keywordtype">void</span> <a class="code" href="FindSimilar_8h.html#a4f8d67953276b5d145dfbb11ed39d76e">init_FindSimilar</a>(<a class="code" href="structTxtSmry.html">TxtSmry</a>* smry, <span class="keywordtype">int</span> n_mails);</div>
-<div class="line"><a name="l00085"></a><span class="lineno">   85</span>&#160;<span class="keywordtype">void</span> kill_FindSimilar(<a class="code" href="structTxtSmry.html">TxtSmry</a>* smry);</div>
-<div class="line"><a name="l00086"></a><span class="lineno">   86</span>&#160;<span class="keywordtype">void</span> Preprocess_FindSimilar(<a class="code" href="structTxtSmry.html">TxtSmry</a>* smry, <a class="code" href="structmail.html">mail</a>*  mails, <span class="keywordtype">int</span> n_mails);</div>
-<div class="line"><a name="l00087"></a><span class="lineno">   87</span>&#160;<span class="keywordtype">double</span> similarity(<a class="code" href="structMatrix.html">Matrix</a>* sglM, <span class="keywordtype">int</span> IDbase, <span class="keywordtype">int</span> IDcmp);</div>
-<div class="line"><a name="l00088"></a><span class="lineno">   88</span>&#160;<span class="keywordtype">void</span> answer_FindSimilar(<a class="code" href="structTxtSmry.html">TxtSmry</a>* smrys, <span class="keywordtype">int</span> ID, <span class="keywordtype">double</span> threshold, <a class="code" href="structmail.html">mail</a>* mails, <span class="keywordtype">int</span> n_mails, <span class="keywordtype">int</span>* SimList, <span class="keywordtype">int</span>* lenSim);</div>
-<div class="line"><a name="l00089"></a><span class="lineno">   89</span>&#160; </div>
-<div class="line"><a name="l00090"></a><span class="lineno">   90</span>&#160; </div>
-<div class="line"><a name="l00091"></a><span class="lineno">   91</span>&#160;<span class="preprocessor">#endif</span></div>
-<div class="ttc" id="aFindSimilar_8h_html_a4f8d67953276b5d145dfbb11ed39d76e"><div class="ttname"><a href="FindSimilar_8h.html#a4f8d67953276b5d145dfbb11ed39d76e">init_FindSimilar</a></div><div class="ttdeci">void init_FindSimilar(TxtSmry *smry, int n_mails)</div><div class="ttdef"><b>Definition:</b> FindSimilar.c:170</div></div>
-<div class="ttc" id="aFindSimilar_8h_html_a52ebcc2eaaff851f437f674fed362980"><div class="ttname"><a href="FindSimilar_8h.html#a52ebcc2eaaff851f437f674fed362980">hash_tabu</a></div><div class="ttdeci">long hash_tabu(long x, long a, long b)</div><div class="ttdef"><b>Definition:</b> FindSimilar.c:64</div></div>
-<div class="ttc" id="aFindSimilar_8h_html_a824e7aa2a38b2e927aa9c9ff79edd5d7"><div class="ttname"><a href="FindSimilar_8h.html#a824e7aa2a38b2e927aa9c9ff79edd5d7">popTokenHash</a></div><div class="ttdeci">int popTokenHash(char message[], char token[], int iStr, long *Hash)</div><div class="ttdef"><b>Definition:</b> FindSimilar.c:74</div></div>
-<div class="ttc" id="aFindSimilar_8h_html_abbd6fd9c2153cb5f0616ffe87549fab6"><div class="ttname"><a href="FindSimilar_8h.html#abbd6fd9c2153cb5f0616ffe87549fab6">init_Random_Table</a></div><div class="ttdeci">void init_Random_Table()</div><div class="ttdef"><b>Definition:</b> FindSimilar.c:4</div></div>
-<div class="ttc" id="astructMatrix_html"><div class="ttname"><a href="structMatrix.html">Matrix</a></div><div class="ttdef"><b>Definition:</b> utils.h:150</div></div>
-<div class="ttc" id="astructTxtSmry_html"><div class="ttname"><a href="structTxtSmry.html">TxtSmry</a></div><div class="ttdef"><b>Definition:</b> FindSimilar.h:60</div></div>
+<div class="line"><a name="l00083"></a><span class="lineno">   83</span>&#160;    <span class="keywordtype">int</span> i = 0; <span class="comment">//token[i]</span></div>
+<div class="line"><a name="l00084"></a><span class="lineno">   84</span>&#160;    <span class="keywordflow">while</span>(message[iStr] != <span class="charliteral">&#39;\0&#39;</span> ){</div>
+<div class="line"><a name="l00085"></a><span class="lineno">   85</span>&#160;        c = message[iStr];</div>
+<div class="line"><a name="l00086"></a><span class="lineno">   86</span>&#160;        asc = (int)c; <span class="comment">//ascii number</span></div>
+<div class="line"><a name="l00087"></a><span class="lineno">   87</span>&#160; </div>
+<div class="line"><a name="l00088"></a><span class="lineno">   88</span>&#160;        <span class="keywordflow">if</span> (<a class="code" href="utils_8h.html#a5ba940f06573ba87adcd6ee567673239">isRegularExpr_ASCII</a>(asc)){</div>
+<div class="line"><a name="l00089"></a><span class="lineno">   89</span>&#160;            <span class="keywordflow">if</span> (isUpperCase_ASCII(c))</div>
+<div class="line"><a name="l00090"></a><span class="lineno">   90</span>&#160;                c = tolower(c);</div>
+<div class="line"><a name="l00091"></a><span class="lineno">   91</span>&#160;            token[i] = c;</div>
+<div class="line"><a name="l00092"></a><span class="lineno">   92</span>&#160;            ++i;</div>
+<div class="line"><a name="l00093"></a><span class="lineno">   93</span>&#160;            ++iStr;</div>
+<div class="line"><a name="l00094"></a><span class="lineno">   94</span>&#160;        }</div>
+<div class="line"><a name="l00095"></a><span class="lineno">   95</span>&#160;        <span class="keywordflow">else</span>{</div>
+<div class="line"><a name="l00096"></a><span class="lineno">   96</span>&#160;            <span class="keywordflow">if</span> (i==0){</div>
+<div class="line"><a name="l00097"></a><span class="lineno">   97</span>&#160;                ++iStr;</div>
+<div class="line"><a name="l00098"></a><span class="lineno">   98</span>&#160;                <span class="keywordflow">continue</span>;</div>
+<div class="line"><a name="l00099"></a><span class="lineno">   99</span>&#160;            }</div>
+<div class="line"><a name="l00100"></a><span class="lineno">  100</span>&#160;            <span class="keywordflow">else</span> </div>
+<div class="line"><a name="l00101"></a><span class="lineno">  101</span>&#160;                <span class="keywordflow">break</span>;</div>
+<div class="line"><a name="l00102"></a><span class="lineno">  102</span>&#160;        }</div>
+<div class="line"><a name="l00103"></a><span class="lineno">  103</span>&#160; </div>
+<div class="line"><a name="l00104"></a><span class="lineno">  104</span>&#160;    }</div>
+<div class="line"><a name="l00105"></a><span class="lineno">  105</span>&#160; </div>
+<div class="line"><a name="l00106"></a><span class="lineno">  106</span>&#160;    <span class="keywordflow">if</span> (message[iStr] == <span class="charliteral">&#39;\0&#39;</span>){ <span class="comment">// EOF</span></div>
+<div class="line"><a name="l00107"></a><span class="lineno">  107</span>&#160;        iStr= -1;</div>
+<div class="line"><a name="l00108"></a><span class="lineno">  108</span>&#160;    }</div>
+<div class="line"><a name="l00109"></a><span class="lineno">  109</span>&#160; </div>
+<div class="line"><a name="l00110"></a><span class="lineno">  110</span>&#160;    token[i] = <span class="charliteral">&#39;\0&#39;</span>; <span class="comment">//end of token</span></div>
+<div class="line"><a name="l00111"></a><span class="lineno">  111</span>&#160;    *Hash = Hash_RK(token);</div>
+<div class="line"><a name="l00112"></a><span class="lineno">  112</span>&#160; </div>
+<div class="line"><a name="l00113"></a><span class="lineno">  113</span>&#160;    <span class="keywordflow">return</span> iStr;</div>
+<div class="line"><a name="l00114"></a><span class="lineno">  114</span>&#160;}</div>
+<div class="line"><a name="l00115"></a><span class="lineno">  115</span>&#160; </div>
+<div class="line"><a name="l00116"></a><span class="lineno">  116</span>&#160; </div>
+<div class="line"><a name="l00117"></a><span class="lineno">  117</span>&#160; </div>
+<div class="line"><a name="l00118"></a><span class="lineno">  118</span>&#160;<span class="preprocessor">#endif</span></div>
+<div class="ttc" id="aFindSimilar_8h_html_a824e7aa2a38b2e927aa9c9ff79edd5d7"><div class="ttname"><a href="FindSimilar_8h.html#a824e7aa2a38b2e927aa9c9ff79edd5d7">popTokenHash</a></div><div class="ttdeci">int popTokenHash(char message[], char token[], int iStr, long *Hash)</div><div class="ttdef"><b>Definition:</b> FindSimilar.h:73</div></div>
+<div class="ttc" id="astructHashStack_html"><div class="ttname"><a href="structHashStack.html">HashStack</a></div><div class="ttdef"><b>Definition:</b> FindSimilar.h:40</div></div>
 <div class="ttc" id="astructmail_html"><div class="ttname"><a href="structmail.html">mail</a></div><div class="ttdef"><b>Definition:</b> api.h:16</div></div>
 <div class="ttc" id="autils_8h_html"><div class="ttname"><a href="utils_8h.html">utils.h</a></div><div class="ttdoc">General Utilities for C language.</div></div>
+<div class="ttc" id="autils_8h_html_a5ba940f06573ba87adcd6ee567673239"><div class="ttname"><a href="utils_8h.html#a5ba940f06573ba87adcd6ee567673239">isRegularExpr_ASCII</a></div><div class="ttdeci">bool isRegularExpr_ASCII(int)</div><div class="ttdoc">Judge a character belong to regular expression or not.</div><div class="ttdef"><b>Definition:</b> utils.c:64</div></div>
 </div><!-- fragment --></div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>

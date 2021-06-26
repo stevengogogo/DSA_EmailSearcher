@@ -32,7 +32,7 @@ static int findIdx(node**set, char word[]){
 	int hashed = hash(word);
 	while(set[hashed]){
 		if(strcmp(set[hashed]->name, word)!=0){
-			hashed = hashed+1;
+			hashed = (hashed+1)%SIZE;
 		}else return hashed;
 	}
 	return hashed;

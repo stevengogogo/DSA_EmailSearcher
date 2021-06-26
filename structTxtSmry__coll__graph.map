@@ -1,6 +1,5 @@
 <map id="TxtSmry" name="TxtSmry">
-<area shape="rect" id="node1" title=" " alt="" coords="106,95,177,121"/>
+<area shape="rect" id="node1" title=" " alt="" coords="58,95,129,121"/>
 <area shape="rect" id="node2" href="$structTokenInfo.html" title=" " alt="" coords="5,5,85,32"/>
 <area shape="rect" id="node3" href="$structdymArr.html" title=" " alt="" coords="110,5,173,32"/>
-<area shape="rect" id="node4" href="$structMatrix.html" title=" " alt="" coords="267,5,325,32"/>
 </map>

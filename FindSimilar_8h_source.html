@@ -70,86 +70,139 @@ $(function() {
 </div><!--header-->
 <div class="contents">
 <a href="FindSimilar_8h.html">Go to the documentation of this file.</a><div class="fragment"><div class="line"><a name="l00001"></a><span class="lineno">    1</span>&#160; </div>
-<div class="line"><a name="l00011"></a><span class="lineno">   11</span>&#160;<span class="preprocessor">#ifndef FINDSIMILAR_H</span></div>
-<div class="line"><a name="l00012"></a><span class="lineno">   12</span>&#160;<span class="preprocessor">#define FINDSIMILAR_H</span></div>
-<div class="line"><a name="l00013"></a><span class="lineno">   13</span>&#160;<span class="preprocessor">#include &quot;api.h&quot;</span></div>
-<div class="line"><a name="l00014"></a><span class="lineno">   14</span>&#160;<span class="preprocessor">#include &lt;stdio.h&gt;</span></div>
-<div class="line"><a name="l00015"></a><span class="lineno">   15</span>&#160;<span class="preprocessor">#include &lt;stdlib.h&gt;</span></div>
-<div class="line"><a name="l00016"></a><span class="lineno">   16</span>&#160;<span class="preprocessor">#include &lt;assert.h&gt;</span></div>
-<div class="line"><a name="l00017"></a><span class="lineno">   17</span>&#160;<span class="preprocessor">#include &lt;string.h&gt;</span></div>
-<div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160;<span class="preprocessor">#include &lt;stdbool.h&gt;</span></div>
-<div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160;<span class="preprocessor">#include &quot;<a class="code" href="utils_8h.html">utils.h</a>&quot;</span></div>
-<div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160;<span class="preprocessor">#include &lt;time.h&gt;</span></div>
+<div class="line"><a name="l00012"></a><span class="lineno">   12</span>&#160;<span class="preprocessor">#ifndef FINDSIMILAR_H</span></div>
+<div class="line"><a name="l00013"></a><span class="lineno">   13</span>&#160;<span class="preprocessor">#define FINDSIMILAR_H</span></div>
+<div class="line"><a name="l00014"></a><span class="lineno">   14</span>&#160;<span class="preprocessor">#include &quot;api.h&quot;</span></div>
+<div class="line"><a name="l00015"></a><span class="lineno">   15</span>&#160;<span class="preprocessor">#include &lt;stdio.h&gt;</span></div>
+<div class="line"><a name="l00016"></a><span class="lineno">   16</span>&#160;<span class="preprocessor">#include &lt;stdlib.h&gt;</span></div>
+<div class="line"><a name="l00017"></a><span class="lineno">   17</span>&#160;<span class="preprocessor">#include &lt;assert.h&gt;</span></div>
+<div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160;<span class="preprocessor">#include &lt;string.h&gt;</span></div>
+<div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160;<span class="preprocessor">#include &lt;stdbool.h&gt;</span></div>
+<div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160;<span class="preprocessor">#include &quot;<a class="code" href="utils_8h.html">utils.h</a>&quot;</span></div>
 <div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160; </div>
-<div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160; </div>
-<div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160;<span class="comment">/**********Constant Variable***********/</span></div>
-<div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160;<span class="preprocessor">#define Q_RABIN 17061701</span></div>
-<div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160;<span class="preprocessor">#define D_RABIN 41721</span></div>
-<div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160;<span class="preprocessor">#define Q_CLUSTER 1001</span></div>
-<div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160;<span class="preprocessor">#define D_CLUSTER 7</span></div>
-<div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160;<span class="preprocessor">#define PERM_MOD 1003</span></div>
-<div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160;<span class="preprocessor">#define T_MINIHASH_PERM 300</span></div>
-<div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160; </div>
-<div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160;<span class="preprocessor">#define MAX_TOKEN_LEN 1000</span></div>
-<div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160;<span class="preprocessor">#define MAX_TOKEN_NUM 10000</span></div>
-<div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160; </div>
-<div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160;<span class="keywordtype">long</span> PowerArray[MAX_TOKEN_LEN];</div>
-<div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160;<span class="keyword">static</span> <span class="keywordtype">long</span> PrimeArray[] = {2, 3, 5, 7, 11, 13, 17, 19, 23, 29, 31, 37, 41, 43, 47, 53, 59, 61, 67, 71, 73, 79, 83, 89, 97, 101, 103, 107, 109, 113, 127, 131, 137, 139, 149};</div>
-<div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160; </div>
-<div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160; </div>
-<div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160;<span class="comment">// Simple Tabulation Hash function</span></div>
-<div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160;<span class="keyword">static</span> <a class="code" href="structMatrix.html">Matrix</a> RANDOM_T;<span class="comment">//random table</span></div>
-<div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160;<span class="comment"></span><span class="keywordtype">void</span> <a class="code" href="FindSimilar_8h.html#abbd6fd9c2153cb5f0616ffe87549fab6">init_Random_Table</a>();</div>
-<div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160;<span class="keywordtype">long</span> getRandomLong();</div>
-<div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160;<span class="keywordtype">long</span> hash_Tabu(<span class="keywordtype">long</span> x, <span class="keywordtype">int</span> i);</div>
-<div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160; </div>
-<div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160;<span class="keyword">static</span> <span class="keywordtype">long</span> hash_mod(<span class="keywordtype">long</span> x,<span class="keywordtype">long</span> a,<span class="keywordtype">long</span>  b,<span class="keywordtype">long</span> c){</div>
-<div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160;    <span class="keywordflow">return</span> (a*x + b) % c;</div>
-<div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160;}</div>
-<div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160; </div>
-<div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160;<span class="keyword">static</span> <span class="keywordtype">long</span> hash_merge(<span class="keywordtype">long</span> x, <span class="keywordtype">long</span> i){</div>
-<div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160;    <span class="keywordtype">long</span> h1 = hash_mod(x, 13213,241, Q_CLUSTER);</div>
-<div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160;    <span class="keywordtype">long</span> h2 = hash_mod(x, 12131, 1, Q_CLUSTER);</div>
-<div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160;    <span class="keywordflow">return</span> h1+ i*h2;</div>
-<div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160;}</div>
-<div class="line"><a name="l00057"></a><span class="lineno">   57</span>&#160; </div>
-<div class="line"><a name="l00058"></a><span class="lineno">   58</span>&#160; </div>
-<div class="line"><a name="l00059"></a><span class="lineno"><a class="line" href="structTxtSmry.html">   59</a></span>&#160;<span class="keyword">typedef</span> <span class="keyword">struct </span><a class="code" href="structTxtSmry.html">TxtSmry</a>{</div>
-<div class="line"><a name="l00060"></a><span class="lineno">   60</span>&#160;    <a class="code" href="structMatrix.html">Matrix</a> SglM; <span class="comment">//Shingle Matrix</span></div>
-<div class="line"><a name="l00061"></a><span class="lineno">   61</span>&#160;} <a class="code" href="structTxtSmry.html">TxtSmry</a>;</div>
+<div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160;<span class="comment">/**********Constant Variable***********/</span></div>
+<div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160;<span class="preprocessor">#define Q_RABIN 170001</span></div>
+<div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160;<span class="preprocessor">#define D_RABIN 36</span></div>
+<div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160;<span class="preprocessor">#define INIT_SPURIOUS_COUNT 3</span></div>
+<div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160;<span class="preprocessor">#define INIT_UNIQUE_TOKEN_SIZE 10</span></div>
+<div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160;<span class="preprocessor">#define TOKEN_STRING_LENGTH 1000</span></div>
+<div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160;<span class="preprocessor">#define ULONG  long</span></div>
+<div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160;<span class="preprocessor">#define UINT  int</span></div>
+<div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160;<span class="preprocessor">#define USHORT unsigned short</span></div>
+<div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160; </div>
+<div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160;<span class="comment">/************Dynamic Array (Int) Stack**************/</span></div>
+<div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160; </div>
+<div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160; </div>
+<div class="line"><a name="l00043"></a><span class="lineno"><a class="line" href="structMEMORY__SHORT.html">   43</a></span>&#160;<span class="keyword">typedef</span> <span class="keyword">struct </span><a class="code" href="structMEMORY__SHORT.html">MEMORY_SHORT</a> {</div>
+<div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160;    ULONG top_unused;</div>
+<div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160;    USHORT* ARRAY;</div>
+<div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160;    ULONG LEN;</div>
+<div class="line"><a name="l00047"></a><span class="lineno"><a class="line" href="FindSimilar_8h.html#ab733bdf458b5ea7c5ee9f4f5c46f5062">   47</a></span>&#160;} <a class="code" href="FindSimilar_8h.html#ab733bdf458b5ea7c5ee9f4f5c46f5062">MEMORY_SHORT</a>;</div>
+<div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160; </div>
+<div class="line"><a name="l00049"></a><span class="lineno"><a class="line" href="structMEMORY__ULONG.html">   49</a></span>&#160;<span class="keyword">typedef</span> <span class="keyword">struct </span><a class="code" href="structMEMORY__ULONG.html">MEMORY_ULONG</a> {</div>
+<div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160;    ULONG top_unused;</div>
+<div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160;    <span class="keywordtype">int</span>* ARRAY;</div>
+<div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160;    ULONG LEN;</div>
+<div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160;} <a class="code" href="structMEMORY__ULONG.html">MEMORY_ULONG</a>;</div>
+<div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160; </div>
+<div class="line"><a name="l00055"></a><span class="lineno"><a class="line" href="structTokenInfo.html">   55</a></span>&#160;<span class="keyword">typedef</span> <span class="keyword">struct </span><a class="code" href="structTokenInfo.html">TokenInfo</a> {</div>
+<div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160;    USHORT count;</div>
+<div class="line"><a name="l00057"></a><span class="lineno">   57</span>&#160;    USHORT loc[INIT_SPURIOUS_COUNT];<span class="comment">//location of the hash on string</span></div>
+<div class="line"><a name="l00058"></a><span class="lineno">   58</span>&#160;} <a class="code" href="structTokenInfo.html">TokenInfo</a>;</div>
+<div class="line"><a name="l00059"></a><span class="lineno">   59</span>&#160; </div>
+<div class="line"><a name="l00060"></a><span class="lineno">   60</span>&#160; </div>
+<div class="line"><a name="l00061"></a><span class="lineno">   61</span>&#160;<span class="keyword">static</span> <span class="keyword">struct </span><a class="code" href="structMEMORY__ULONG.html">MEMORY_ULONG</a> existTokens_mem;</div>
 <div class="line"><a name="l00062"></a><span class="lineno">   62</span>&#160; </div>
 <div class="line"><a name="l00063"></a><span class="lineno">   63</span>&#160; </div>
-<div class="line"><a name="l00064"></a><span class="lineno">   64</span>&#160; </div>
-<div class="line"><a name="l00065"></a><span class="lineno">   65</span>&#160;<span class="comment">/*Rabin Karp Hashing*/</span></div>
-<div class="line"><a name="l00066"></a><span class="lineno">   66</span>&#160;<span class="keywordtype">void</span> init_PowerArray(<span class="keywordtype">long</span>* arr, <span class="keywordtype">int</span> len, <span class="keywordtype">long</span> base, <span class="keywordtype">long</span> mod);</div>
-<div class="line"><a name="l00067"></a><span class="lineno">   67</span>&#160;<span class="keywordtype">long</span> Hash_RK(<span class="keywordtype">char</span> tokenStr[]);</div>
-<div class="line"><a name="l00068"></a><span class="lineno">   68</span>&#160; </div>
-<div class="line"><a name="l00069"></a><span class="lineno">   69</span>&#160;<span class="comment">/*Permuation*/</span></div>
-<div class="line"><a name="l00071"></a><span class="lineno">   71</span>&#160;<span class="keywordtype">long</span> <a class="code" href="FindSimilar_8h.html#a52ebcc2eaaff851f437f674fed362980">hash_tabu</a>(<span class="keywordtype">long</span> x, <span class="keywordtype">long</span> a, <span class="keywordtype">long</span> b);</div>
+<div class="line"><a name="l00070"></a><span class="lineno">   70</span>&#160;<span class="keywordtype">void</span> <a class="code" href="FindSimilar_8h.html#a788083b928d53aaefab439f02b2b3133">init_MEM_ULONG</a>(<span class="keyword">struct</span> <a class="code" href="structMEMORY__ULONG.html">MEMORY_ULONG</a>* mem, ULONG len);</div>
+<div class="line"><a name="l00071"></a><span class="lineno">   71</span>&#160;<span class="keywordtype">void</span> init_MEM_SHORT(<span class="keyword">struct</span> <a class="code" href="structMEMORY__SHORT.html">MEMORY_SHORT</a>* mem, ULONG len);</div>
 <div class="line"><a name="l00072"></a><span class="lineno">   72</span>&#160; </div>
-<div class="line"><a name="l00074"></a><span class="lineno">   74</span>&#160;<span class="keywordtype">int</span> <a class="code" href="FindSimilar_8h.html#a824e7aa2a38b2e927aa9c9ff79edd5d7">popTokenHash</a>(<span class="keywordtype">char</span> message[], <span class="keywordtype">char</span> token[], <span class="keywordtype">int</span> iStr, <span class="keywordtype">long</span>* Hash);</div>
-<div class="line"><a name="l00075"></a><span class="lineno">   75</span>&#160;<span class="comment">/* x power n*/</span></div>
-<div class="line"><a name="l00076"></a><span class="lineno">   76</span>&#160;<span class="keywordtype">long</span> power_long(<span class="keywordtype">long</span> x, <span class="keywordtype">int</span> n);</div>
+<div class="line"><a name="l00074"></a><span class="lineno">   74</span>&#160;<span class="keywordtype">void</span> <a class="code" href="FindSimilar_8h.html#a6e2dd2f8a6e68dd5aaca7c76a32ddc05">kill_MEM_ULONG</a>(<span class="keyword">struct</span> <a class="code" href="structMEMORY__ULONG.html">MEMORY_ULONG</a>* mem);</div>
+<div class="line"><a name="l00075"></a><span class="lineno">   75</span>&#160;<span class="keywordtype">void</span> kill_MEM_SHORT(<span class="keyword">struct</span> <a class="code" href="structMEMORY__SHORT.html">MEMORY_SHORT</a>* mem);</div>
+<div class="line"><a name="l00076"></a><span class="lineno">   76</span>&#160; </div>
 <div class="line"><a name="l00077"></a><span class="lineno">   77</span>&#160; </div>
-<div class="line"><a name="l00078"></a><span class="lineno">   78</span>&#160;<span class="comment">/*Minihashing*/</span></div>
-<div class="line"><a name="l00079"></a><span class="lineno">   79</span>&#160;<span class="keywordtype">void</span> set_Sgl_Vec(<a class="code" href="structMatrix.html">Matrix</a>* SglM, <span class="keywordtype">char</span> text[], <span class="keywordtype">int</span> ID, <span class="keywordtype">long</span>* a, <span class="keywordtype">long</span>* b, <span class="keywordtype">short</span>* hashMap);</div>
-<div class="line"><a name="l00080"></a><span class="lineno">   80</span>&#160;<span class="keywordtype">void</span> miniHash(<a class="code" href="structMatrix.html">Matrix</a>* SglM, <span class="keywordtype">short</span>* hashmap, <span class="keywordtype">long</span> a, <span class="keywordtype">long</span> b, <span class="keywordtype">int</span> iperm, <span class="keywordtype">int</span> ID);</div>
-<div class="line"><a name="l00081"></a><span class="lineno">   81</span>&#160; </div>
-<div class="line"><a name="l00083"></a><span class="lineno">   83</span>&#160;<span class="keywordtype">void</span> <a class="code" href="FindSimilar_8h.html#a4f8d67953276b5d145dfbb11ed39d76e">init_FindSimilar</a>(<a class="code" href="structTxtSmry.html">TxtSmry</a>* smry, <span class="keywordtype">int</span> n_mails);</div>
-<div class="line"><a name="l00084"></a><span class="lineno">   84</span>&#160;<span class="keywordtype">void</span> kill_FindSimilar(<a class="code" href="structTxtSmry.html">TxtSmry</a>* smry);</div>
-<div class="line"><a name="l00085"></a><span class="lineno">   85</span>&#160;<span class="keywordtype">void</span> <a class="code" href="FindSimilar_8h.html#ad6ee6e1548fe2f7a4e3d0a711b8e5846">Preprocess_FindSimilar</a>(<a class="code" href="structTxtSmry.html">TxtSmry</a>* smry, <a class="code" href="structmail.html">mail</a>*  mails, <span class="keywordtype">int</span> n_mails);</div>
-<div class="line"><a name="l00086"></a><span class="lineno">   86</span>&#160;<span class="keywordtype">double</span> similarity(<a class="code" href="structMatrix.html">Matrix</a>* sglM, <span class="keywordtype">int</span> IDbase, <span class="keywordtype">int</span> IDcmp);</div>
-<div class="line"><a name="l00087"></a><span class="lineno">   87</span>&#160;<span class="keywordtype">void</span> answer_FindSimilar(<a class="code" href="structTxtSmry.html">TxtSmry</a>* smrys, <span class="keywordtype">int</span> ID, <span class="keywordtype">double</span> threshold, <a class="code" href="structmail.html">mail</a>* mails, <span class="keywordtype">int</span> n_mails, <span class="keywordtype">int</span>* SimList, <span class="keywordtype">int</span>* lenSim);</div>
-<div class="line"><a name="l00088"></a><span class="lineno">   88</span>&#160; </div>
-<div class="line"><a name="l00089"></a><span class="lineno">   89</span>&#160; </div>
-<div class="line"><a name="l00090"></a><span class="lineno">   90</span>&#160;<span class="preprocessor">#endif</span></div>
-<div class="ttc" id="aFindSimilar_8h_html_a4f8d67953276b5d145dfbb11ed39d76e"><div class="ttname"><a href="FindSimilar_8h.html#a4f8d67953276b5d145dfbb11ed39d76e">init_FindSimilar</a></div><div class="ttdeci">void init_FindSimilar(TxtSmry *smry, int n_mails)</div><div class="ttdef"><b>Definition:</b> FindSimilar.c:170</div></div>
-<div class="ttc" id="aFindSimilar_8h_html_a52ebcc2eaaff851f437f674fed362980"><div class="ttname"><a href="FindSimilar_8h.html#a52ebcc2eaaff851f437f674fed362980">hash_tabu</a></div><div class="ttdeci">long hash_tabu(long x, long a, long b)</div><div class="ttdef"><b>Definition:</b> FindSimilar.c:64</div></div>
-<div class="ttc" id="aFindSimilar_8h_html_a824e7aa2a38b2e927aa9c9ff79edd5d7"><div class="ttname"><a href="FindSimilar_8h.html#a824e7aa2a38b2e927aa9c9ff79edd5d7">popTokenHash</a></div><div class="ttdeci">int popTokenHash(char message[], char token[], int iStr, long *Hash)</div><div class="ttdef"><b>Definition:</b> FindSimilar.c:74</div></div>
-<div class="ttc" id="aFindSimilar_8h_html_abbd6fd9c2153cb5f0616ffe87549fab6"><div class="ttname"><a href="FindSimilar_8h.html#abbd6fd9c2153cb5f0616ffe87549fab6">init_Random_Table</a></div><div class="ttdeci">void init_Random_Table()</div><div class="ttdef"><b>Definition:</b> FindSimilar.c:4</div></div>
-<div class="ttc" id="aFindSimilar_8h_html_ad6ee6e1548fe2f7a4e3d0a711b8e5846"><div class="ttname"><a href="FindSimilar_8h.html#ad6ee6e1548fe2f7a4e3d0a711b8e5846">Preprocess_FindSimilar</a></div><div class="ttdeci">void Preprocess_FindSimilar(TxtSmry *smry, mail *mails, int n_mails)</div><div class="ttdef"><b>Definition:</b> FindSimilar.c:186</div></div>
-<div class="ttc" id="astructMatrix_html"><div class="ttname"><a href="structMatrix.html">Matrix</a></div><div class="ttdef"><b>Definition:</b> utils.h:150</div></div>
-<div class="ttc" id="astructTxtSmry_html"><div class="ttname"><a href="structTxtSmry.html">TxtSmry</a></div><div class="ttdef"><b>Definition:</b> FindSimilar.h:59</div></div>
+<div class="line"><a name="l00078"></a><span class="lineno">   78</span>&#160;<span class="comment">/******Token and Structure*******/</span></div>
+<div class="line"><a name="l00079"></a><span class="lineno">   79</span>&#160; </div>
+<div class="line"><a name="l00080"></a><span class="lineno">   80</span>&#160; </div>
+<div class="line"><a name="l00082"></a><span class="lineno"><a class="line" href="structTxtSmry.html">   82</a></span>&#160;<span class="keyword">typedef</span> <span class="keyword">struct </span><a class="code" href="structTxtSmry.html">TxtSmry</a>{</div>
+<div class="line"><a name="l00083"></a><span class="lineno">   83</span>&#160;    <span class="keywordtype">int</span> id;</div>
+<div class="line"><a name="l00084"></a><span class="lineno">   84</span>&#160;    <a class="code" href="structTokenInfo.html">TokenInfo</a> token[Q_RABIN]; <span class="comment">//len = Q_MODULE</span></div>
+<div class="line"><a name="l00085"></a><span class="lineno">   85</span>&#160;    <span class="keywordtype">int</span>* existTokens; <span class="comment">//Exist Token</span></div>
+<div class="line"><a name="l00086"></a><span class="lineno">   86</span>&#160;    <a class="code" href="structdymArr.html">dymArr</a>* existTokens_DymArr;</div>
+<div class="line"><a name="l00087"></a><span class="lineno">   87</span>&#160;    <span class="keywordtype">int</span> nToken; <span class="comment">// unique token number</span></div>
+<div class="line"><a name="l00088"></a><span class="lineno">   88</span>&#160;    <span class="keywordtype">char</span>* text; <span class="comment">// Text</span></div>
+<div class="line"><a name="l00089"></a><span class="lineno">   89</span>&#160;    <span class="keywordtype">bool</span> synced; <span class="comment">// Check the information is updated</span></div>
+<div class="line"><a name="l00090"></a><span class="lineno">   90</span>&#160;    <span class="keywordtype">bool</span> isExistTokens_DymArr;</div>
+<div class="line"><a name="l00091"></a><span class="lineno">   91</span>&#160;    <span class="keywordtype">int</span> maxSpurious;</div>
+<div class="line"><a name="l00092"></a><span class="lineno"><a class="line" href="FindSimilar_8h.html#ad58311979581ac4e2545af1d5d6067e7">   92</a></span>&#160;} <a class="code" href="FindSimilar_8h.html#ad58311979581ac4e2545af1d5d6067e7">TxtSmry</a>;</div>
+<div class="line"><a name="l00093"></a><span class="lineno">   93</span>&#160; </div>
+<div class="line"><a name="l00094"></a><span class="lineno">   94</span>&#160; </div>
+<div class="line"><a name="l00096"></a><span class="lineno">   96</span>&#160;<span class="keywordtype">void</span> <a class="code" href="FindSimilar_8h.html#a1161ac42a619f6eb9ed7589d299a18f1">init_TxtSmry</a>(<a class="code" href="structTxtSmry.html">TxtSmry</a>* smry, <span class="keywordtype">int</span> hashMapsize);</div>
+<div class="line"><a name="l00098"></a><span class="lineno">   98</span>&#160;<span class="keywordtype">void</span> <a class="code" href="FindSimilar_8h.html#a0ab7f47d3de757cf44fb6d774c224e21">init_TxtSmry_arr</a>(<a class="code" href="structTxtSmry.html">TxtSmry</a>** smry, <span class="keywordtype">int</span> len, <span class="keywordtype">int</span> hashmapSize);</div>
+<div class="line"><a name="l00099"></a><span class="lineno">   99</span>&#160;<span class="keywordtype">void</span> append_hash_TxtSmry(<a class="code" href="structTxtSmry.html">TxtSmry</a>* smry, <span class="keywordtype">int</span> hash);</div>
+<div class="line"><a name="l00100"></a><span class="lineno">  100</span>&#160;<span class="keywordtype">void</span> _add_unique_hashlist(<a class="code" href="structTxtSmry.html">TxtSmry</a>* smry, <span class="keywordtype">int</span> hash);</div>
+<div class="line"><a name="l00101"></a><span class="lineno">  101</span>&#160;<span class="keywordtype">int</span> get_unique_hashlist(<a class="code" href="structTxtSmry.html">TxtSmry</a>* smry, <span class="keywordtype">int</span> i);</div>
+<div class="line"><a name="l00103"></a><span class="lineno">  103</span>&#160;<span class="keywordtype">void</span> <a class="code" href="FindSimilar_8h.html#a59b118272255ea41350b6fc60bff4ecd">kill_TxtSmry_arr</a>(<a class="code" href="structTxtSmry.html">TxtSmry</a>* smry, <span class="keywordtype">int</span> len);</div>
+<div class="line"><a name="l00104"></a><span class="lineno">  104</span>&#160; </div>
+<div class="line"><a name="l00105"></a><span class="lineno">  105</span>&#160; </div>
+<div class="line"><a name="l00106"></a><span class="lineno">  106</span>&#160;<span class="comment">/******Hash*******/</span></div>
+<div class="line"><a name="l00112"></a><span class="lineno">  112</span>&#160;<span class="keywordtype">int</span> <a class="code" href="FindSimilar_8h.html#a5d1c13d719525d926512bacf0d5e154c">popTokenHash</a>(<span class="keywordtype">char</span> message[], <span class="keywordtype">char</span> token[], <span class="keywordtype">int</span> iStr, <span class="keywordtype">int</span>* Hash);</div>
+<div class="line"><a name="l00119"></a><span class="lineno">  119</span>&#160;<span class="keywordtype">int</span> <a class="code" href="FindSimilar_8h.html#a06642823ef32a4056a29c76dba683d33">updateHash</a>(<span class="keywordtype">char</span> c, <span class="keywordtype">int</span> Hash_cur);</div>
+<div class="line"><a name="l00120"></a><span class="lineno">  120</span>&#160; </div>
+<div class="line"><a name="l00121"></a><span class="lineno">  121</span>&#160;<span class="comment">/**********Main API************/</span></div>
+<div class="line"><a name="l00122"></a><span class="lineno">  122</span>&#160; </div>
+<div class="line"><a name="l00124"></a><span class="lineno">  124</span>&#160;<span class="keywordtype">void</span> <a class="code" href="FindSimilar_8h.html#abcef5cbf6a37e7160503d572705094cc">Init_FindSimilar</a>(<a class="code" href="structTxtSmry.html">TxtSmry</a>**, <span class="keywordtype">int</span> n_mails);</div>
+<div class="line"><a name="l00125"></a><span class="lineno">  125</span>&#160; </div>
+<div class="line"><a name="l00127"></a><span class="lineno">  127</span>&#160;<span class="keywordtype">void</span> <a class="code" href="FindSimilar_8h.html#abff53c80583525a6cf8f0c4ea926afec">Preprocess_FindSimilar</a>(<a class="code" href="structTxtSmry.html">TxtSmry</a>*, <a class="code" href="structmail.html">mail</a>*  mails, <span class="keywordtype">int</span> n_mails);</div>
+<div class="line"><a name="l00128"></a><span class="lineno">  128</span>&#160; </div>
+<div class="line"><a name="l00129"></a><span class="lineno">  129</span>&#160;<span class="comment">/*GC for FindSimilar problem*/</span></div>
+<div class="line"><a name="l00130"></a><span class="lineno">  130</span>&#160;<span class="keywordtype">void</span> kill_FindSimilar(<a class="code" href="structTxtSmry.html">TxtSmry</a>* smrys, <span class="keywordtype">int</span> n_mails);</div>
+<div class="line"><a name="l00131"></a><span class="lineno">  131</span>&#160; </div>
+<div class="line"><a name="l00132"></a><span class="lineno">  132</span>&#160; </div>
+<div class="line"><a name="l00133"></a><span class="lineno">  133</span>&#160;<span class="comment">/******************************/</span></div>
+<div class="line"><a name="l00134"></a><span class="lineno">  134</span>&#160; </div>
+<div class="line"><a name="l00135"></a><span class="lineno">  135</span>&#160; </div>
+<div class="line"><a name="l00136"></a><span class="lineno">  136</span>&#160; </div>
+<div class="line"><a name="l00137"></a><span class="lineno">  137</span>&#160;<span class="comment">/*********Hash*********/</span></div>
+<div class="line"><a name="l00139"></a><span class="lineno">  139</span>&#160;<span class="keywordtype">void</span> <a class="code" href="FindSimilar_8h.html#a064b545bf35f24202ee1f17bacea0005">summarize_content</a>(<a class="code" href="structTxtSmry.html">TxtSmry</a>* smry, <a class="code" href="structmail.html">mail</a>* m);</div>
+<div class="line"><a name="l00141"></a><span class="lineno">  141</span>&#160;<span class="keywordtype">void</span> <a class="code" href="FindSimilar_8h.html#abd6c52480b4cbdbcd4f364853961734e">summarize_hash</a>(<a class="code" href="structTxtSmry.html">TxtSmry</a>* smry, <span class="keywordtype">char</span>* text);</div>
+<div class="line"><a name="l00142"></a><span class="lineno">  142</span>&#160; </div>
+<div class="line"><a name="l00143"></a><span class="lineno">  143</span>&#160; </div>
+<div class="line"><a name="l00144"></a><span class="lineno">  144</span>&#160; </div>
+<div class="line"><a name="l00145"></a><span class="lineno">  145</span>&#160;<span class="comment">/******Jaccob Similarity*****/</span></div>
+<div class="line"><a name="l00146"></a><span class="lineno">  146</span>&#160; </div>
+<div class="line"><a name="l00157"></a><span class="lineno">  157</span>&#160;<span class="keywordtype">void</span> <a class="code" href="FindSimilar_8h.html#a2b3e02756540c46b7cac63979931b7ad">answer_FindSimilar</a>(<a class="code" href="structTxtSmry.html">TxtSmry</a>* smrys, <span class="keywordtype">int</span> ID, <span class="keywordtype">double</span> threshold, <span class="keywordtype">int</span> n_mails, <span class="keywordtype">int</span>* SimList, <span class="keywordtype">int</span>* lenSim);</div>
+<div class="line"><a name="l00158"></a><span class="lineno">  158</span>&#160; </div>
+<div class="line"><a name="l00159"></a><span class="lineno">  159</span>&#160; </div>
+<div class="line"><a name="l00160"></a><span class="lineno">  160</span>&#160;<span class="comment">/************Helper Functions*****************/</span></div>
+<div class="line"><a name="l00167"></a><span class="lineno">  167</span>&#160;<span class="keywordtype">double</span> <a class="code" href="FindSimilar_8h.html#aa90c4e9bbbbf76dbcd3ea2ffa3a2b297">similarity_val</a>(<a class="code" href="structTxtSmry.html">TxtSmry</a>* smry1, <a class="code" href="structTxtSmry.html">TxtSmry</a>* smry2);</div>
+<div class="line"><a name="l00168"></a><span class="lineno">  168</span>&#160; </div>
+<div class="line"><a name="l00172"></a><span class="lineno"><a class="line" href="FindSimilar_8h.html#a61fe077f7d3542ce71eebb229949e97f">  172</a></span>&#160;<span class="keywordtype">int</span> <a class="code" href="FindSimilar_8h.html#a61fe077f7d3542ce71eebb229949e97f">max_similarity_val</a>(<a class="code" href="structTxtSmry.html">TxtSmry</a>* smry1, <a class="code" href="structTxtSmry.html">TxtSmry</a>* smry2);</div>
+<div class="line"><a name="l00173"></a><span class="lineno">  173</span>&#160; </div>
+<div class="line"><a name="l00174"></a><span class="lineno">  174</span>&#160; </div>
+<div class="line"><a name="l00175"></a><span class="lineno">  175</span>&#160; </div>
+<div class="line"><a name="l00176"></a><span class="lineno">  176</span>&#160;<span class="preprocessor">#endif</span></div>
+<div class="ttc" id="aFindSimilar_8h_html_a064b545bf35f24202ee1f17bacea0005"><div class="ttname"><a href="FindSimilar_8h.html#a064b545bf35f24202ee1f17bacea0005">summarize_content</a></div><div class="ttdeci">void summarize_content(TxtSmry *smry, mail *m)</div><div class="ttdef"><b>Definition:</b> FindSimilar.c:185</div></div>
+<div class="ttc" id="aFindSimilar_8h_html_a06642823ef32a4056a29c76dba683d33"><div class="ttname"><a href="FindSimilar_8h.html#a06642823ef32a4056a29c76dba683d33">updateHash</a></div><div class="ttdeci">int updateHash(char c, int Hash_cur)</div><div class="ttdoc">Update the hash value with new character.</div><div class="ttdef"><b>Definition:</b> FindSimilar.c:76</div></div>
+<div class="ttc" id="aFindSimilar_8h_html_a0ab7f47d3de757cf44fb6d774c224e21"><div class="ttname"><a href="FindSimilar_8h.html#a0ab7f47d3de757cf44fb6d774c224e21">init_TxtSmry_arr</a></div><div class="ttdeci">void init_TxtSmry_arr(TxtSmry **smry, int len, int hashmapSize)</div><div class="ttdef"><b>Definition:</b> FindSimilar.c:111</div></div>
+<div class="ttc" id="aFindSimilar_8h_html_a1161ac42a619f6eb9ed7589d299a18f1"><div class="ttname"><a href="FindSimilar_8h.html#a1161ac42a619f6eb9ed7589d299a18f1">init_TxtSmry</a></div><div class="ttdeci">void init_TxtSmry(TxtSmry *smry, int hashMapsize)</div><div class="ttdef"><b>Definition:</b> FindSimilar.c:95</div></div>
+<div class="ttc" id="aFindSimilar_8h_html_a2b3e02756540c46b7cac63979931b7ad"><div class="ttname"><a href="FindSimilar_8h.html#a2b3e02756540c46b7cac63979931b7ad">answer_FindSimilar</a></div><div class="ttdeci">void answer_FindSimilar(TxtSmry *smrys, int ID, double threshold, int n_mails, int *SimList, int *lenSim)</div><div class="ttdoc">Check the similarity of two messages is exceeding threshold.</div><div class="ttdef"><b>Definition:</b> FindSimilar.c:261</div></div>
+<div class="ttc" id="aFindSimilar_8h_html_a59b118272255ea41350b6fc60bff4ecd"><div class="ttname"><a href="FindSimilar_8h.html#a59b118272255ea41350b6fc60bff4ecd">kill_TxtSmry_arr</a></div><div class="ttdeci">void kill_TxtSmry_arr(TxtSmry *smry, int len)</div><div class="ttdef"><b>Definition:</b> FindSimilar.c:162</div></div>
+<div class="ttc" id="aFindSimilar_8h_html_a5d1c13d719525d926512bacf0d5e154c"><div class="ttname"><a href="FindSimilar_8h.html#a5d1c13d719525d926512bacf0d5e154c">popTokenHash</a></div><div class="ttdeci">int popTokenHash(char message[], char token[], int iStr, int *Hash)</div><div class="ttdef"><b>Definition:</b> FindSimilar.c:33</div></div>
+<div class="ttc" id="aFindSimilar_8h_html_a61fe077f7d3542ce71eebb229949e97f"><div class="ttname"><a href="FindSimilar_8h.html#a61fe077f7d3542ce71eebb229949e97f">max_similarity_val</a></div><div class="ttdeci">int max_similarity_val(TxtSmry *smry1, TxtSmry *smry2)</div></div>
+<div class="ttc" id="aFindSimilar_8h_html_a6e2dd2f8a6e68dd5aaca7c76a32ddc05"><div class="ttname"><a href="FindSimilar_8h.html#a6e2dd2f8a6e68dd5aaca7c76a32ddc05">kill_MEM_ULONG</a></div><div class="ttdeci">void kill_MEM_ULONG(struct MEMORY_ULONG *mem)</div><div class="ttdef"><b>Definition:</b> FindSimilar.c:18</div></div>
+<div class="ttc" id="aFindSimilar_8h_html_a788083b928d53aaefab439f02b2b3133"><div class="ttname"><a href="FindSimilar_8h.html#a788083b928d53aaefab439f02b2b3133">init_MEM_ULONG</a></div><div class="ttdeci">void init_MEM_ULONG(struct MEMORY_ULONG *mem, ULONG len)</div><div class="ttdef"><b>Definition:</b> FindSimilar.c:3</div></div>
+<div class="ttc" id="aFindSimilar_8h_html_aa90c4e9bbbbf76dbcd3ea2ffa3a2b297"><div class="ttname"><a href="FindSimilar_8h.html#aa90c4e9bbbbf76dbcd3ea2ffa3a2b297">similarity_val</a></div><div class="ttdeci">double similarity_val(TxtSmry *smry1, TxtSmry *smry2)</div><div class="ttdoc">Get Jaccob's similarity from two summaries ( TxtSmry). with O(min(num_token))</div><div class="ttdef"><b>Definition:</b> FindSimilar.c:284</div></div>
+<div class="ttc" id="aFindSimilar_8h_html_ab733bdf458b5ea7c5ee9f4f5c46f5062"><div class="ttname"><a href="FindSimilar_8h.html#ab733bdf458b5ea7c5ee9f4f5c46f5062">MEMORY_SHORT</a></div><div class="ttdeci">struct MEMORY_SHORT MEMORY_SHORT</div><div class="ttdoc">Information for global memory storage.</div></div>
+<div class="ttc" id="aFindSimilar_8h_html_abcef5cbf6a37e7160503d572705094cc"><div class="ttname"><a href="FindSimilar_8h.html#abcef5cbf6a37e7160503d572705094cc">Init_FindSimilar</a></div><div class="ttdeci">void Init_FindSimilar(TxtSmry **, int n_mails)</div><div class="ttdef"><b>Definition:</b> FindSimilar.c:85</div></div>
+<div class="ttc" id="aFindSimilar_8h_html_abd6c52480b4cbdbcd4f364853961734e"><div class="ttname"><a href="FindSimilar_8h.html#abd6c52480b4cbdbcd4f364853961734e">summarize_hash</a></div><div class="ttdeci">void summarize_hash(TxtSmry *smry, char *text)</div><div class="ttdef"><b>Definition:</b> FindSimilar.c:191</div></div>
+<div class="ttc" id="aFindSimilar_8h_html_abff53c80583525a6cf8f0c4ea926afec"><div class="ttname"><a href="FindSimilar_8h.html#abff53c80583525a6cf8f0c4ea926afec">Preprocess_FindSimilar</a></div><div class="ttdeci">void Preprocess_FindSimilar(TxtSmry *, mail *mails, int n_mails)</div><div class="ttdef"><b>Definition:</b> FindSimilar.c:172</div></div>
+<div class="ttc" id="aFindSimilar_8h_html_ad58311979581ac4e2545af1d5d6067e7"><div class="ttname"><a href="FindSimilar_8h.html#ad58311979581ac4e2545af1d5d6067e7">TxtSmry</a></div><div class="ttdeci">struct TxtSmry TxtSmry</div></div>
+<div class="ttc" id="astructMEMORY__SHORT_html"><div class="ttname"><a href="structMEMORY__SHORT.html">MEMORY_SHORT</a></div><div class="ttdoc">Information for global memory storage.</div><div class="ttdef"><b>Definition:</b> FindSimilar.h:43</div></div>
+<div class="ttc" id="astructMEMORY__ULONG_html"><div class="ttname"><a href="structMEMORY__ULONG.html">MEMORY_ULONG</a></div><div class="ttdef"><b>Definition:</b> FindSimilar.h:49</div></div>
+<div class="ttc" id="astructTokenInfo_html"><div class="ttname"><a href="structTokenInfo.html">TokenInfo</a></div><div class="ttdef"><b>Definition:</b> FindSimilar.h:55</div></div>
+<div class="ttc" id="astructTxtSmry_html"><div class="ttname"><a href="structTxtSmry.html">TxtSmry</a></div><div class="ttdef"><b>Definition:</b> FindSimilar.h:82</div></div>
+<div class="ttc" id="astructdymArr_html"><div class="ttname"><a href="structdymArr.html">dymArr</a></div><div class="ttdef"><b>Definition:</b> utils.h:74</div></div>
 <div class="ttc" id="astructmail_html"><div class="ttname"><a href="structmail.html">mail</a></div><div class="ttdef"><b>Definition:</b> api.h:16</div></div>
 <div class="ttc" id="autils_8h_html"><div class="ttname"><a href="utils_8h.html">utils.h</a></div><div class="ttdoc">General Utilities for C language.</div></div>
 </div><!-- fragment --></div><!-- contents -->

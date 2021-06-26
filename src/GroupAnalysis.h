@@ -16,7 +16,8 @@ typedef struct Node{
 }node;
 /**/
 static node* makeset(){
-	node* arr = (node*)malloc(SIZE*sizeof(node));
+	node* arr = (node*)malloc(sizeof(node)* SIZE*10);
+	assert(arr!=NULL);
 	return arr;
 }
 
@@ -32,6 +33,9 @@ static int hash(char word[]){
 
 static int findIdx(node*set, char word[]){
 	int hashed = hash(word);
+	if(hashed>=SIZE){
+		printf(" ");
+	}
 	while(set[hashed].name){
 		if(strcmp(set[hashed].name, word)!=0){
 			hashed = (hashed+1)%SIZE;
@@ -42,6 +46,9 @@ static int findIdx(node*set, char word[]){
 
 static void inputTable(node* set, char word[]){
 	int hashed = findIdx(set, word);
+	if(hashed>=SIZE){
+		printf(" ");
+	}
 	if(!set[hashed].name){
 		set[hashed].name = word;
 		set[hashed].parentIdx = hashed;
@@ -50,6 +57,9 @@ static void inputTable(node* set, char word[]){
 }
 
 static int findset(node *set, int hashed){
+	if(hashed>=SIZE){
+		printf(" ");
+	}
 	if(set[hashed].parentIdx!=hashed){
 		set[hashed].parentIdx = findset(set,set[hashed].parentIdx);
 	}
@@ -57,11 +67,19 @@ static int findset(node *set, int hashed){
 }
 
 static void link_GA(node *set, int nodex, int nodey ,int *count, int *max){
-
+	if(nodex>=SIZE){
+		printf(" ");
+	}
+	if(nodey>=SIZE){
+		printf(" ");
+	}
 	if(set[nodex].size>set[nodey].size){
 		set[nodey].parentIdx = nodex;
 		set[nodex].size += set[nodey].size;
 		if(set[nodey].size>=2){
+			if(*count<=0){
+				printf(  " ");
+			}
 			*count-=1;
 		}
 		set[nodey].size = 0;
@@ -75,6 +93,9 @@ static void link_GA(node *set, int nodex, int nodey ,int *count, int *max){
 		}
 		set[nodey].size += set[nodex].size;
 		if(set[nodex].size>=2){
+			if(*count<=0){
+				printf(  " ");
+			}
 			*count -= 1;
 		}
 		set[nodex].size = 0;

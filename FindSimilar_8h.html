@@ -85,21 +85,22 @@ $(function() {
 <code>#include &lt;string.h&gt;</code><br />
 <code>#include &lt;stdbool.h&gt;</code><br />
 <code>#include &quot;<a class="el" href="utils_8h_source.html">utils.h</a>&quot;</code><br />
+<code>#include &lt;time.h&gt;</code><br />
 </div><div class="textblock"><div class="dynheader">
 Include dependency graph for FindSimilar.h:</div>
 <div class="dyncontent">
 <div class="center"><img src="FindSimilar_8h__incl.png" border="0" usemap="#asrc_2FindSimilar_8h" alt=""/></div>
 <map name="asrc_2FindSimilar_8h" id="asrc_2FindSimilar_8h">
-<area shape="rect" title="Group Analysis. Use Jaccob&#39;s similarity with hash table to identify similar strings." alt="" coords="257,5,376,32"/>
-<area shape="rect" href="src_2api_8h_source.html" title=" " alt="" coords="229,80,279,107"/>
-<area shape="rect" title=" " alt="" coords="5,155,65,181"/>
-<area shape="rect" title=" " alt="" coords="89,155,152,181"/>
-<area shape="rect" title=" " alt="" coords="267,155,342,181"/>
+<area shape="rect" title="Group Analysis. Use Jaccob&#39;s similarity with hash table to identify similar strings." alt="" coords="263,5,381,32"/>
+<area shape="rect" href="src_2api_8h_source.html" title=" " alt="" coords="209,80,259,107"/>
+<area shape="rect" title=" " alt="" coords="265,155,325,181"/>
+<area shape="rect" title=" " alt="" coords="5,155,68,181"/>
+<area shape="rect" title=" " alt="" coords="92,155,149,181"/>
+<area shape="rect" title=" " alt="" coords="350,155,425,181"/>
 <area shape="rect" title=" " alt="" coords="449,155,513,181"/>
 <area shape="rect" title=" " alt="" coords="711,155,779,181"/>
-<area shape="rect" href="utils_8h.html" title="General Utilities for C language." alt="" coords="367,80,423,107"/>
-<area shape="rect" title=" " alt="" coords="177,155,243,181"/>
-<area shape="rect" title=" " alt="" coords="367,155,424,181"/>
+<area shape="rect" href="utils_8h.html" title="General Utilities for C language." alt="" coords="385,80,441,107"/>
+<area shape="rect" title=" " alt="" coords="174,155,241,181"/>
 <area shape="rect" title=" " alt="" coords="537,155,600,181"/>
 <area shape="rect" title=" " alt="" coords="624,155,687,181"/>
 </map>
@@ -124,20 +125,26 @@ Classes</h2></td></tr>
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="define-members"></a>
 Macros</h2></td></tr>
 <tr class="memitem:a35711bcac45cf1d1a72c3ebf2f3f6b07"><td class="memItemLeft" align="right" valign="top"><a id="a35711bcac45cf1d1a72c3ebf2f3f6b07"></a>
-#define&#160;</td><td class="memItemRight" valign="bottom"><b>Q_RABIN</b>&#160;&#160;&#160;3929</td></tr>
+#define&#160;</td><td class="memItemRight" valign="bottom"><b>Q_RABIN</b>&#160;&#160;&#160;170617</td></tr>
 <tr class="separator:a35711bcac45cf1d1a72c3ebf2f3f6b07"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a7cab064e819abdeec12b4c0cd6e6817c"><td class="memItemLeft" align="right" valign="top"><a id="a7cab064e819abdeec12b4c0cd6e6817c"></a>
-#define&#160;</td><td class="memItemRight" valign="bottom"><b>D_RABIN</b>&#160;&#160;&#160;1619</td></tr>
+#define&#160;</td><td class="memItemRight" valign="bottom"><b>D_RABIN</b>&#160;&#160;&#160;417</td></tr>
 <tr class="separator:a7cab064e819abdeec12b4c0cd6e6817c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a6c11bb334ce93e2e971a9310c90cb467"><td class="memItemLeft" align="right" valign="top"><a id="a6c11bb334ce93e2e971a9310c90cb467"></a>
+#define&#160;</td><td class="memItemRight" valign="bottom"><b>Q_CLUSTER</b>&#160;&#160;&#160;5021</td></tr>
+<tr class="separator:a6c11bb334ce93e2e971a9310c90cb467"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af10e313cd0a1c322e2700172f7fa492a"><td class="memItemLeft" align="right" valign="top"><a id="af10e313cd0a1c322e2700172f7fa492a"></a>
+#define&#160;</td><td class="memItemRight" valign="bottom"><b>D_CLUSTER</b>&#160;&#160;&#160;17</td></tr>
+<tr class="separator:af10e313cd0a1c322e2700172f7fa492a"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a3a73ca352e818f6a6419ebdf0d5fd925"><td class="memItemLeft" align="right" valign="top"><a id="a3a73ca352e818f6a6419ebdf0d5fd925"></a>
-#define&#160;</td><td class="memItemRight" valign="bottom"><b>PERM_MOD</b>&#160;&#160;&#160;3929</td></tr>
+#define&#160;</td><td class="memItemRight" valign="bottom"><b>PERM_MOD</b>&#160;&#160;&#160;1006799</td></tr>
 <tr class="separator:a3a73ca352e818f6a6419ebdf0d5fd925"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a8345476f548fcf06bfe8ff1651366130"><td class="memItemLeft" align="right" valign="top"><a id="a8345476f548fcf06bfe8ff1651366130"></a>
+#define&#160;</td><td class="memItemRight" valign="bottom"><b>T_MINIHASH_PERM</b>&#160;&#160;&#160;300</td></tr>
+<tr class="separator:a8345476f548fcf06bfe8ff1651366130"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a3f6d16dfdf7920e1e5f1dad5db5347f2"><td class="memItemLeft" align="right" valign="top"><a id="a3f6d16dfdf7920e1e5f1dad5db5347f2"></a>
 #define&#160;</td><td class="memItemRight" valign="bottom"><b>MAX_TOKEN_LEN</b>&#160;&#160;&#160;1000</td></tr>
 <tr class="separator:a3f6d16dfdf7920e1e5f1dad5db5347f2"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a8345476f548fcf06bfe8ff1651366130"><td class="memItemLeft" align="right" valign="top"><a id="a8345476f548fcf06bfe8ff1651366130"></a>
-#define&#160;</td><td class="memItemRight" valign="bottom"><b>T_MINIHASH_PERM</b>&#160;&#160;&#160;500</td></tr>
-<tr class="separator:a8345476f548fcf06bfe8ff1651366130"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a554258c93efa168dbd5133cbcbb23900"><td class="memItemLeft" align="right" valign="top"><a id="a554258c93efa168dbd5133cbcbb23900"></a>
 #define&#160;</td><td class="memItemRight" valign="bottom"><b>MAX_TOKEN_NUM</b>&#160;&#160;&#160;10000</td></tr>
 <tr class="separator:a554258c93efa168dbd5133cbcbb23900"><td class="memSeparator" colspan="2">&#160;</td></tr>

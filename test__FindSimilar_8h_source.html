@@ -125,14 +125,18 @@ $(function() {
 <div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160;    printf(<span class="stringliteral">&quot;(Q:%d/D:%d)&quot;</span>,Q_RABIN,D_RABIN);</div>
 <div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160;    print_clock(<span class="stringliteral">&quot;Init &amp; Preprocessing:&quot;</span>,str, end);</div>
 <div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160; </div>
-<div class="line"><a name="l00057"></a><span class="lineno">   57</span>&#160;    kill_FindSimilar(&amp;smry);</div>
-<div class="line"><a name="l00058"></a><span class="lineno">   58</span>&#160;}</div>
-<div class="line"><a name="l00059"></a><span class="lineno">   59</span>&#160; </div>
-<div class="line"><a name="l00060"></a><span class="lineno">   60</span>&#160;<span class="preprocessor">#endif</span></div>
+<div class="line"><a name="l00057"></a><span class="lineno">   57</span>&#160;    <span class="keywordflow">for</span>(<span class="keywordtype">int</span> i=0;i&lt;T_MINIHASH_PERM;i++){</div>
+<div class="line"><a name="l00058"></a><span class="lineno">   58</span>&#160;        printf(<span class="stringliteral">&quot;%ld\n&quot;</span>, get_Matrix(&amp;smry.SglM, i, 0));</div>
+<div class="line"><a name="l00059"></a><span class="lineno">   59</span>&#160;    }</div>
+<div class="line"><a name="l00060"></a><span class="lineno">   60</span>&#160; </div>
+<div class="line"><a name="l00061"></a><span class="lineno">   61</span>&#160;    kill_FindSimilar(&amp;smry);</div>
+<div class="line"><a name="l00062"></a><span class="lineno">   62</span>&#160;}</div>
+<div class="line"><a name="l00063"></a><span class="lineno">   63</span>&#160; </div>
+<div class="line"><a name="l00064"></a><span class="lineno">   64</span>&#160;<span class="preprocessor">#endif</span></div>
 <div class="ttc" id="aFindSimilar_8h_html"><div class="ttname"><a href="FindSimilar_8h.html">FindSimilar.h</a></div><div class="ttdoc">Group Analysis. Use Jaccob's similarity with hash table to identify similar strings.</div></div>
 <div class="ttc" id="aFindSimilar_8h_html_a4f8d67953276b5d145dfbb11ed39d76e"><div class="ttname"><a href="FindSimilar_8h.html#a4f8d67953276b5d145dfbb11ed39d76e">init_FindSimilar</a></div><div class="ttdeci">void init_FindSimilar(TxtSmry *smry, int n_mails)</div><div class="ttdef"><b>Definition:</b> FindSimilar.c:133</div></div>
 <div class="ttc" id="aFindSimilar_8h_html_ad6ee6e1548fe2f7a4e3d0a711b8e5846"><div class="ttname"><a href="FindSimilar_8h.html#ad6ee6e1548fe2f7a4e3d0a711b8e5846">Preprocess_FindSimilar</a></div><div class="ttdeci">void Preprocess_FindSimilar(TxtSmry *smry, mail *mails, int n_mails)</div><div class="ttdef"><b>Definition:</b> FindSimilar.c:142</div></div>
-<div class="ttc" id="astructTxtSmry_html"><div class="ttname"><a href="structTxtSmry.html">TxtSmry</a></div><div class="ttdef"><b>Definition:</b> FindSimilar.h:32</div></div>
+<div class="ttc" id="astructTxtSmry_html"><div class="ttname"><a href="structTxtSmry.html">TxtSmry</a></div><div class="ttdef"><b>Definition:</b> FindSimilar.h:33</div></div>
 <div class="ttc" id="astructmail_html"><div class="ttname"><a href="structmail.html">mail</a></div><div class="ttdef"><b>Definition:</b> api.h:16</div></div>
 <div class="ttc" id="autils_8h_html_a9514f7680b838021298afacb0a91cb61"><div class="ttname"><a href="utils_8h.html#a9514f7680b838021298afacb0a91cb61">RandGen_long</a></div><div class="ttdeci">void RandGen_long(long *arr, int len, long low, long high)</div><div class="ttdef"><b>Definition:</b> utils.c:388</div></div>
 </div><!-- fragment --></div><!-- contents -->

@@ -153,6 +153,7 @@ void Preprocess_FindSimilar(TxtSmry* smry, mail* mails, int n_mails){
     long* a = (long*)malloc(sizeof(long)*T_MINIHASH_PERM);
     long* b = (long*)malloc(sizeof(long)*T_MINIHASH_PERM);
     short* hashmap = (short*)calloc(Q_RABIN, sizeof(short));
+    Matrix hmap;
 
     //for(int i=0;i<T_MINIHASH_PERM;i++){
         //a[i] = i+1;
@@ -164,11 +165,27 @@ void Preprocess_FindSimilar(TxtSmry* smry, mail* mails, int n_mails){
         //a[i] = PrimeArray[i];
     }
 
+    //Build 2D hash map
+    init_Matrix(&hmap, T_MINIHASH_PERM, n_mails, LONG_MAX);
+    for(int id=0;id<n_mails;id++){
+        //Build Hash Map
+        while(1){
+            iNxt = popTokenHash(mails[id].content, token, iStr, &hash);
+            if(iNxt==-1){
+                break;
+            }
+            ++hashMap[hash];
+            iStr = iNxt;
+        }
+    }
+
+
     for(int i=0;i<n_mails; i++){
         set_Sgl_Vec(&smry->SglM, mails[i].content, mails[i].id, a, b, hashmap);
     }
 
     //GC
+    kill_Matrix(&hmap);
     free(hashmap);
     free(a);
     free(b);

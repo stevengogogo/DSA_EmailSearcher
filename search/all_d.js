@@ -1,5 +1,4 @@
 var searchData=
 [
-  ['tokeninfo_28',['TokenInfo',['../structTokenInfo.html',1,'']]],
-  ['txtsmry_29',['TxtSmry',['../structTxtSmry.html',1,'']]]
+  ['swap_28',['swap',['../utils_8h.html#acd3415eef442ced2b5e064f95f04b624',1,'utils.c']]]
 ];

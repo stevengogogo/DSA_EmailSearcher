@@ -356,15 +356,24 @@ void swap(int* x, int* y){
 
 /*matrix*/
 void init_Matrix(Matrix* M, int nrow, int ncol, long init_val){
-    long* m = (long*)malloc(ncol*nrow*sizeof(long));
-    long size = (long)nrow * (long)ncol;
-
-    long mem_pin = 0;
-    for(long i=0;i<nrow;i++){
-        M->m[i] = m+mem_pin*sizeof(long);
-        mem_pin += ncol;
+    long **m; /* Declare this first so we can use it with sizeof. */
+    const size_t rowpt = nrow * sizeof(*m);
+    const size_t rowele = ncol * sizeof(**m);
+    m = malloc(rowpt + nrow * rowele);
+    
+    for(long i=0;i<nrow*ncol;i++){
+        (*m)[i] = init_val;
     }
 
+    size_t i;
+    long r = nrow;
+    long* data = *m + nrow;
+
+    for(i =0;i<nrow;i++){
+        m[i] = data + i * ncol;
+    }
+
+    M->m = m;
     M->ncol = ncol;
     M->nrow = nrow;
 }

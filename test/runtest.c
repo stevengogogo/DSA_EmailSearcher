@@ -16,6 +16,7 @@ TEST_LIST = {
     {"Tokenize", test_popToken},
     {"Tokenize2", test_token},
     {"Regular Expression", test_Regex},
+    {"Test GA data",test_data_GA},
     //Generic Array
     //{"Generic Array (int)", test_dynamic_universal_array},
     //{"Int array insert", array_compare},

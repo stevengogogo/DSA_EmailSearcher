@@ -94,7 +94,7 @@ merge_standalone:
 
 # Memory check
 leak: build
-	valgrind  $(outfile) < test/data/test.in
+	valgrind  $(outfile) < ./test/data/test.in
 	
 leaktest: test 
 	valgrind --leak-check=full test/build/test.out

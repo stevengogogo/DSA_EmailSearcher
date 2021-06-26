@@ -14,23 +14,21 @@ int main(void) {
 
     //Var: Find Similar
     TxtSmry* smrys;
-    int* list_FS = (int*)malloc(MAX_N_MAIL*sizeof(int));
-    int len_FS;
+    int* list = (int*)malloc(MAX_N_MAIL*sizeof(int));
+    int nlist;
     int threshold;
     int mid;
 
     //Initiation
-	api.init(&n_mails, &n_queries, &mails, &queries);   
-    Init_FindSimilar(&smrys, n_mails);
 
-    for(int i=0;i<n_queries;i++){
-        if(queries[i].type==find_similar){
-            printf("%f \n", queries[i].data.find_similar_data.threshold);
-        }
-    }
+    //FS//
+	api.init(&n_mails, &n_queries, &mails, &queries);   
+    //Init_FindSimilar(&smrys, n_mails);
+
+    //GA//
 
     //Preprocessing
-    Preprocess_FindSimilar(smrys, mails, n_mails);
+    //Preprocess_FindSimilar(smrys, mails, n_mails);
 
     //Answer
 	for(int i = 0; i < n_queries; i++){
@@ -38,17 +36,19 @@ int main(void) {
 		//Find Similar
         if (queries[i].type == find_similar){
             //data
+            /*
             mid = queries[i].data.find_similar_data.mid;
             threshold = queries[i].data.find_similar_data.threshold;
 
             //process
-            answer_FindSimilar(smrys, mid, threshold, n_mails, list_FS, &len_FS);
+            answer_FindSimilar(smrys, mid, threshold, n_mails, list, &nlist);
 
             //answer
-            if(len_FS>0){
-                api.answer(queries[i].id, list_FS, len_FS);
+            if(nlist>0){
+                api.answer(queries[i].id, list, nlist);
             }
             else{api.answer(queries[i].id,NULL,0);}
+            */
         }
         
         //Expression Match
@@ -58,15 +58,20 @@ int main(void) {
 
         //Group Analysis
         else {
-            //api.answer(queries[i].id, NULL, 0);
+
+            answer_GroupAnalysis(queries[i].data.group_analyse_data.mids, queries[i].data.group_analyse_data.len,mails, list, &nlist);
+            
+            api.answer(queries[i].id, list, nlist);
+
+            
         }
     }
 
     //Garbage Collection
-    kill_FindSimilar(smrys, n_mails);
+    //kill_FindSimilar(smrys, n_mails);
     free(mails);
     free(queries);
-    free(list_FS);
+    free(list);
 
     return 0;
 }

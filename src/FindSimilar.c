@@ -131,9 +131,11 @@ void miniHash(Matrix* SglM, short* hashmap, long a, long b, int IP, int ID){
         ++i;
     }
 
+    /*
     if(!run){
         printf("Not found: %d %d (a: %ld; b: %ld)\n",IP, ID, a, b);
     }
+    */
 }
 
 /**Main API*/
@@ -158,6 +160,9 @@ void Preprocess_FindSimilar(TxtSmry* smry, mail* mails, int n_mails){
     //}
     RandGen_long(a, T_MINIHASH_PERM,0, Q_RABIN);
     RandGen_long(b, T_MINIHASH_PERM,0, Q_RABIN);
+    for(int i=0;i<T_MINIHASH_PERM;i++){
+        //a[i] = PrimeArray[i];
+    }
 
     for(int i=0;i<n_mails; i++){
         set_Sgl_Vec(&smry->SglM, mails[i].content, mails[i].id, a, b, hashmap);
@@ -169,16 +174,41 @@ void Preprocess_FindSimilar(TxtSmry* smry, mail* mails, int n_mails){
     free(b);
 }
 
+
+
 double similarity(Matrix* sglM, int IDbase, int IDcmp){
     long b, c;
-    int item;
+    double item=0;
+    double same=0;
 
     for(int r=0;r<sglM->nrow;r++){
         b = get_Matrix(sglM, r, IDbase);
-        c = get_Matrix(sglM, c, IDcmp);
+        c = get_Matrix(sglM, r, IDcmp);
         if(b==LONG_MAX || c==LONG_MAX){
-            
+            continue;
+        }
+        ++item;
+        if(b==c){++same;}
+    }
+    return same/item;
+}
+
+void answer_FindSimilar(TxtSmry* smry, int ID, double threshold, mail* mails, int n_mails, int* SimList, int* lenSim){
+    int IDcmp;
+    double sim;
+    *lenSim = 0;
+    for(int i=0;i<n_mails;i++){
+        IDcmp = mails[i].id;
+        
+        if(IDcmp == ID){ 
+            continue;
+        }
+
+        sim = similarity(&smry->SglM, ID, IDcmp);
+
+        if(sim>threshold){
+            SimList[*lenSim] = IDcmp;
+            ++(*lenSim);
         }
     }
-
 }

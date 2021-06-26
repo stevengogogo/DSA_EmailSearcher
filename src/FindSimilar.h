@@ -24,10 +24,11 @@
 #define D_RABIN 29
 #define PERM_MOD 35317
 #define MAX_TOKEN_LEN 1000
-#define T_MINIHASH_PERM 30
+#define T_MINIHASH_PERM 40
 #define MAX_TOKEN_NUM 10000
 
 long PowerArray[MAX_TOKEN_LEN];
+static long PrimeArray[] = {2, 3, 5, 7, 11, 13, 17, 19, 23, 29, 31, 37, 41, 43, 47, 53, 59, 61, 67, 71, 73, 79, 83, 89, 97, 101, 103, 107, 109, 113, 127, 131, 137, 139, 149};
 
 
 typedef struct TxtSmry{
@@ -58,6 +59,7 @@ void init_FindSimilar(TxtSmry* smry, int n_mails);
 void kill_FindSimilar(TxtSmry* smry);
 void Preprocess_FindSimilar(TxtSmry* smry, mail*  mails, int n_mails);
 double similarity(Matrix* sglM, int IDbase, int IDcmp);
+void answer_FindSimilar(TxtSmry* smrys, int ID, double threshold, mail* mails, int n_mails, int* SimList, int* lenSim);
 
 
 #endif

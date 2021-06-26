@@ -36,6 +36,7 @@ TEST_LIST = {
     {"FS: power", test_powerArray},
     {"FS: random", test_random},
     {"FS: init",test_init_FS},
+    {"FS: test data", test_FS_data},
     /*
     {"Find Similar: Memory", memory_allocation_FS},
     {"Find Similar: init", test_init_FS},

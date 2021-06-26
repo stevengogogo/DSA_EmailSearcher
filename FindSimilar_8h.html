@@ -121,6 +121,8 @@ This graph shows which files directly or indirectly include this file:</div>
 Classes</h2></td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structMatrix__ushort.html">Matrix_ushort</a></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structinfoFS.html">infoFS</a></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="define-members"></a>
 Macros</h2></td></tr>
@@ -157,6 +159,9 @@ Typedefs</h2></td></tr>
 <tr class="memitem:ad68e26bbb81cc841c9763d300992dc13"><td class="memItemLeft" align="right" valign="top"><a id="ad68e26bbb81cc841c9763d300992dc13"></a>
 typedef struct <a class="el" href="structMatrix__ushort.html">Matrix_ushort</a>&#160;</td><td class="memItemRight" valign="bottom"><b>Matrix_ushort</b></td></tr>
 <tr class="separator:ad68e26bbb81cc841c9763d300992dc13"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aefc1f27d941b7bcc6dec4af434202175"><td class="memItemLeft" align="right" valign="top"><a id="aefc1f27d941b7bcc6dec4af434202175"></a>
+typedef struct <a class="el" href="structinfoFS.html">infoFS</a>&#160;</td><td class="memItemRight" valign="bottom"><b>infoFs</b></td></tr>
+<tr class="separator:aefc1f27d941b7bcc6dec4af434202175"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="func-members"></a>
 Functions</h2></td></tr>
@@ -166,29 +171,32 @@ void&#160;</td><td class="memItemRight" valign="bottom"><b>init_Matrix_ushort</b
 <tr class="memitem:a8f220b6ebabe1b99b476fd09020bfe7d"><td class="memItemLeft" align="right" valign="top"><a id="a8f220b6ebabe1b99b476fd09020bfe7d"></a>
 void&#160;</td><td class="memItemRight" valign="bottom"><b>kill_Matrix_ushort</b> (<a class="el" href="structMatrix__ushort.html">Matrix_ushort</a> *M)</td></tr>
 <tr class="separator:a8f220b6ebabe1b99b476fd09020bfe7d"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ae08f3c3c50d37e67018c3b0a26f7a2ac"><td class="memItemLeft" align="right" valign="top"><a id="ae08f3c3c50d37e67018c3b0a26f7a2ac"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>init_FS</b> (void)</td></tr>
-<tr class="separator:ae08f3c3c50d37e67018c3b0a26f7a2ac"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a60cfefb04ddcc866225cb0c3d570a864"><td class="memItemLeft" align="right" valign="top"><a id="a60cfefb04ddcc866225cb0c3d570a864"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>kill_FS</b> (void)</td></tr>
-<tr class="separator:a60cfefb04ddcc866225cb0c3d570a864"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a7398c72318754eec7dc995af1e244e2d"><td class="memItemLeft" align="right" valign="top"><a id="a7398c72318754eec7dc995af1e244e2d"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><b>init_FS</b> (<a class="el" href="structinfoFS.html">infoFs</a> *info)</td></tr>
+<tr class="separator:a7398c72318754eec7dc995af1e244e2d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a4447b2d43e43fedb64d9922fe9dd6b56"><td class="memItemLeft" align="right" valign="top"><a id="a4447b2d43e43fedb64d9922fe9dd6b56"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><b>kill_FS</b> (<a class="el" href="structinfoFS.html">infoFs</a> *info)</td></tr>
+<tr class="separator:a4447b2d43e43fedb64d9922fe9dd6b56"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a5d1c13d719525d926512bacf0d5e154c"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="FindSimilar_8h.html#a5d1c13d719525d926512bacf0d5e154c">popTokenHash</a> (char message[], char token[], int iStr, int *Hash)</td></tr>
 <tr class="separator:a5d1c13d719525d926512bacf0d5e154c"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a87f37a4662bdfaf11c341fbbd30032f8"><td class="memItemLeft" align="right" valign="top"><a id="a87f37a4662bdfaf11c341fbbd30032f8"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>append_mHash</b> (<a class="el" href="structmail.html">mail</a> *mails, int ID)</td></tr>
-<tr class="separator:a87f37a4662bdfaf11c341fbbd30032f8"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a243b55f09016a1ef82b9ba7337bd73ef"><td class="memItemLeft" align="right" valign="top"><a id="a243b55f09016a1ef82b9ba7337bd73ef"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>proc_FS</b> (<a class="el" href="structmail.html">mail</a> *mails, int n_mail)</td></tr>
-<tr class="separator:a243b55f09016a1ef82b9ba7337bd73ef"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:af0b39786bf30b6297cefd9a3516b7dd3"><td class="memItemLeft" align="right" valign="top"><a id="af0b39786bf30b6297cefd9a3516b7dd3"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>similarity</b> (<a class="el" href="structmail.html">mail</a> *mails, int ID, int n_mail)</td></tr>
-<tr class="separator:af0b39786bf30b6297cefd9a3516b7dd3"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a6cc4c0018a06eb6620a5a73bb34d5c47"><td class="memItemLeft" align="right" valign="top"><a id="a6cc4c0018a06eb6620a5a73bb34d5c47"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><b>append_mHash</b> (<a class="el" href="structinfoFS.html">infoFs</a> *info, <a class="el" href="structmail.html">mail</a> *mails, int ID)</td></tr>
+<tr class="separator:a6cc4c0018a06eb6620a5a73bb34d5c47"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa13aa9b07ab372fa6eea8b9da4dcff6a"><td class="memItemLeft" align="right" valign="top"><a id="aa13aa9b07ab372fa6eea8b9da4dcff6a"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><b>proc_FS</b> (<a class="el" href="structinfoFS.html">infoFs</a> *info, <a class="el" href="structmail.html">mail</a> *mails, int n_mail)</td></tr>
+<tr class="separator:aa13aa9b07ab372fa6eea8b9da4dcff6a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac8758961cc08880bde52f48ef97d71c0"><td class="memItemLeft" align="right" valign="top"><a id="ac8758961cc08880bde52f48ef97d71c0"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><b>similarity</b> (<a class="el" href="structinfoFS.html">infoFs</a> *info, <a class="el" href="structmail.html">mail</a> *mails, int ID, int n_mail)</td></tr>
+<tr class="separator:ac8758961cc08880bde52f48ef97d71c0"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a6b4ce85199f07efa869e7a66dbc28a2b"><td class="memItemLeft" align="right" valign="top"><a id="a6b4ce85199f07efa869e7a66dbc28a2b"></a>
 int&#160;</td><td class="memItemRight" valign="bottom"><b>Hash_RK</b> (char s[])</td></tr>
 <tr class="separator:a6b4ce85199f07efa869e7a66dbc28a2b"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a72653765ef50a60bd1b9d09e8a9d1016"><td class="memItemLeft" align="right" valign="top"><a id="a72653765ef50a60bd1b9d09e8a9d1016"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>answer_FS</b> (<a class="el" href="structmail.html">mail</a> *mails, int ID, int n_mail, double threshold, int *list, int *nlist)</td></tr>
-<tr class="separator:a72653765ef50a60bd1b9d09e8a9d1016"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:adf13c3d8eef93c92de06ea0549f7e360"><td class="memItemLeft" align="right" valign="top"><a id="adf13c3d8eef93c92de06ea0549f7e360"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><b>answer_FS</b> (<a class="el" href="structinfoFS.html">infoFs</a> *info, <a class="el" href="structmail.html">mail</a> *mails, int ID, int n_mail, double threshold, int *list, int *nlist)</td></tr>
+<tr class="separator:adf13c3d8eef93c92de06ea0549f7e360"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a48eff4f82b1664dcab945dec70e32005"><td class="memItemLeft" align="right" valign="top"><a id="a48eff4f82b1664dcab945dec70e32005"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><b>register_hash</b> (<a class="el" href="structinfoFS.html">infoFs</a> *info, int ID, int hash)</td></tr>
+<tr class="separator:a48eff4f82b1664dcab945dec70e32005"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>Group Analysis. Use Jaccob's similarity with hash table to identify similar strings. </p>

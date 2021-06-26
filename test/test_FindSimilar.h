@@ -7,251 +7,89 @@
 #include "Utility.h"
 #include <time.h>
 
-void memory_allocation_FS(void){
-    int num_mail = 10;
-    
-    //Initiation
-    init_MEM_ULONG(&existTokens_mem, num_mail*INIT_UNIQUE_TOKEN_SIZE);
+/*
+void test_powerArray(void){
+    init_PowerArray(PowerArray, MAX_TOKEN_LEN, D_RABIN, Q_RABIN);
 
-    TEST_CHECK(existTokens_mem.LEN == num_mail*INIT_UNIQUE_TOKEN_SIZE);
-    TEST_CHECK(existTokens_mem.top_unused == 0);
+    TEST_CHECK(PowerArray[0]== 1);
+    TEST_CHECK(PowerArray[1]== D_RABIN);
+    TEST_CHECK(PowerArray[2]== D_RABIN*D_RABIN);
+    TEST_CHECK(PowerArray[3]== D_RABIN*D_RABIN*D_RABIN);
+    TEST_MSG("God %ld",PowerArray[0]);
+    TEST_CHECK(power_long(10,0) == 1);
+    TEST_CHECK(power_long(10,1) == 10);
+    TEST_CHECK(power_long(10,2) == 100);
+
+    //Rabin Karp
+    TEST_CHECK(Hash_RK("000000\0") == 0);
+    TEST_CHECK(Hash_RK("1\0") == 1);
+    TEST_CHECK(Hash_RK("2\0") == 2);
+    TEST_CHECK(Hash_RK("01\0") == D_RABIN);
+    TEST_CHECK(Hash_RK("11\0") == D_RABIN+1);
+    TEST_MSG("God %ld",Hash_RK("11"));
+}
+*/
+
+void test_random(void){
+    int len=6;
+    long* a = (long*)malloc(sizeof(long)*len);
+    long* b = (long*)malloc(sizeof(long)*len);
     
-    //Garbage Collection
-    kill_MEM_ULONG(&existTokens_mem);
-    TEST_CHECK(existTokens_mem.ARRAY == NULL);
-    TEST_CHECK(existTokens_mem.LEN == 0);
+    RandGen_long(a, len, 0, Q_RABIN, 111);
+    RandGen_long(b, len, 0, Q_RABIN, 111);
+    
+    for(int i=0;i<len;i++){
+        TEST_CHECK(a[i] == b[i]);
+    }
+
+    for(int i=0;i<len;i++){
+        printf("%ld ", a[i]);
+    }
+    
+    RandGen_long(b, len, 0, Q_RABIN, 112);
+    for(int i=0;i<len;i++){
+        TEST_CHECK(a[i] != b[i]);
+    }
+
+    free(a);
 }
 
 void test_init_FS(void){
-    TxtSmry* smrys;
-    int n_mails=10000;
+    TxtSmry smry;
+    int n_mails;
+    mail* mails;
     clock_t str;
     clock_t end;
 
+    get_mails("test/data/test.in", &mails, &n_mails);
 
     str = clock();
-    Init_FindSimilar(&smrys, n_mails);
+    init_FindSimilar(&smry, n_mails);
     end = clock();
-    print_clock("Init: ",str, end);
+    printf("(Q:%d/D:%d)",Q_RABIN,D_RABIN);
+    print_clock("Init:",str, end);
 
-    
     str = clock();
-    kill_FindSimilar(smrys, n_mails);
+    Preprocess_FindSimilar(&smry, mails, n_mails);
     end = clock();
-    print_clock(" GC: ",str, end);
+    printf("\n(Q:%d/D:%d)",Q_RABIN,D_RABIN);
+    print_clock("Preprocessing:",str, end);
+
+
+    /*
+    for(int i=0;i<T_MINIHASH_PERM;i++){
+        printf("%ld\n", get_Matrix(&smry.SglM, i, 0));
+    }
+    */
+
+    kill_FindSimilar(&smry);
 }
 
-void test_init_content_FS(void){
-    TxtSmry* smrys;
-    int n_mails=10000;
-
-    Init_FindSimilar(&smrys, n_mails);
-
-    //Initial values
-    for(int i=0;i<n_mails;i++){
-        TEST_CHECK(smrys[i].nToken == 0);
-        TEST_CHECK(smrys[i].isExistTokens_DymArr == false);
-        TEST_CHECK(smrys[i].synced == false);
-        TEST_CHECK(smrys[i].text == NULL);
-        TEST_CHECK(smrys[i].token[0].count == 0);
-        TEST_CHECK(smrys[i].token[230].count == 0);
-    }
-    
-    //The token array is 0 in default
-    for(int i=0;i<Q_RABIN;i++){
-        TEST_CHECK(smrys[n_mails-1].token[i].count==0);
-        TEST_CHECK(smrys[234].token[i].count==0);
-        TEST_CHECK(smrys[0].token[i].count==0);
-    }
-
-    for(int i=0;i<INIT_SPURIOUS_COUNT;i++){
-        TEST_CHECK(smrys[n_mails-1].token[0].loc[i]==0);
-    }
-
-    kill_FindSimilar(smrys, n_mails);
-}
-
-void test_append_hash(void){
-    TxtSmry* smrys;
-    int n_mails=10000;
-
-    Init_FindSimilar(&smrys, n_mails);
-
-    for(int i=0;i<INIT_UNIQUE_TOKEN_SIZE-1;i++){
-        _add_unique_hashlist(&smrys[0], i);
-    }
-
-    TEST_CHECK(smrys[0].isExistTokens_DymArr == false);
-    TEST_CHECK(smrys[0].existTokens_DymArr == NULL);
-
-    _add_unique_hashlist(&smrys[0], INIT_UNIQUE_TOKEN_SIZE-1);
-    _add_unique_hashlist(&smrys[0], INIT_UNIQUE_TOKEN_SIZE);
-    TEST_CHECK(smrys[0].isExistTokens_DymArr == true);
-    TEST_CHECK(smrys[0].existTokens_DymArr != NULL);
-
-    for(int i=INIT_UNIQUE_TOKEN_SIZE+1;i<30*INIT_UNIQUE_TOKEN_SIZE;i++){
-        _add_unique_hashlist(&smrys[0], i);
-    }    
-
-    for(int i=0;i<30*INIT_UNIQUE_TOKEN_SIZE;i++){
-        TEST_CHECK(get_unique_hashlist(&smrys[0], (int)i) == i );
-        TEST_MSG("Expected %d; Got %d", get_unique_hashlist(&smrys[0], (int)i),i);;
-    }
-
-    
-    kill_FindSimilar(smrys, n_mails);
-}
-
-void test_summary_FS(void){
-    mail* mails;
-    int n_mail;
-    get_mails("test/data/test.in", &mails, &n_mail);
-    free(mails);
-}
-
-
-void test_RabinKarp_hashing(void){
-    char text[10000] = "What day+--@#4231is today??87\0";
-    char tokenStr[5][300] = {
-        "what",
-        "day",
-        "4231is",
-        "today",
-        "87"
-    };
-
-    char token[10000];
-    int iStr=0;
-    int iEnd;
-    int hash;
-    int hashExp;
-
-    /*Expected iteration*/
-    int iEndExp[5] =  {4,8,19,25, -1};//expected stop site
-    char iEndExpSr[4] = {' ','+',' ','?'};
-    for(int i=0;i<4;i++){
-        TEST_CHECK(text[iEndExp[i]]==iEndExpSr[i]);
-        TEST_MSG("Got %c at site %d (C: %c)", iEndExpSr[i], iEndExp[i], text[iEndExp[i]]);
-    }
-
-    int i = 0;
-    int j = 0;
-    while(1){
-        iEnd = popTokenHash(text, token, iStr, &hash);
-        if(token[0]!='\0' ){
-            TEST_CHECK(iEnd == iEndExp[i]);
-            TEST_MSG("iEnd=%d(%c); Expected=%d(%c); Token: %s", iEnd, text[iEnd],iEndExp[i], text[iEndExp[i]], token);
-            TEST_CHECK(i<= strlen(text));
-            TEST_CHECK(strncmp(tokenStr[j],token,strlen(token))==0);
-
-            //Hash
-            hashExp = HashString(token, D_RABIN, Q_RABIN);
-            TEST_CHECK(hashExp == hash);
-            TEST_MSG("Got %d; Exp: %d; token: %s", hash, hashExp, token);
-            ++j;
-        }
-
-
-        if(iEnd==-1){
-            break;
-        }
-        else{
-            iStr = iEnd;
-            ++i;
-        }
-    }
-
-    TEST_CHECK(i ==5-1 );
-    TEST_MSG("i=%d", i);
-
-}
-
-void test_summarize(void){
-    int num_mail;
-    mail* mails;
-    TxtSmry* smrys;
-    clock_t str;
-    clock_t end;
-
-    get_mails("test/data/test.in", &mails, &num_mail);
-
-    Init_FindSimilar(&smrys, num_mail);
-
-    Preprocess_FindSimilar(smrys, mails, 30);
-
-    kill_FindSimilar(smrys, num_mail);
-    free(mails);
-}
-
-void test_summarize_benchmark(void){
-    int num_mail;
-    mail* mails;
-    int countOver=0;
-    TxtSmry* smrys;
-    clock_t str;
-    clock_t end;
-
-    get_mails("test/data/test.in", &mails, &num_mail);
-
-    Init_FindSimilar(&smrys, num_mail);
-    
-    str = clock();
-    Preprocess_FindSimilar(smrys, mails, num_mail);
-    end = clock();
-    print_clock("(10000 email)Time: ", str, end);
-
-    for(int i=0;i<num_mail;i++){
-        if(smrys[i].maxSpurious>0){
-            ++countOver;
-        }
-    }
-    printf(" Spurious Overflow: %d/%d", countOver, num_mail);
-
-    for(int i=0;i<num_mail;i++){
-        if( smrys[i].maxSpurious > 0){
-        //printf(" Max Spurious: %d (out of %d unique hash)\n",smrys[i].maxSpurious, smrys[i].nToken);
-        }
-    }
-
-    kill_FindSimilar(smrys, num_mail);
-    free(mails);
-}
-
-
-void test_tokenhash(void){
-    char text[10000] = "aefarqt4qq5b342344f fwe++--~~~huhfa1+---23I faead we t+ga\0";
-    char token1[1000];
-    char token2[1000];
-    int i1 = 0;
-    int i2 = 0;
-    int h;
-
-    while(1){
-        i1 = popTokenHash(text, token1, i1, &h);
-        i2 = popToken(text, token2, i2);
-
-        
-        TEST_CHECK(strcmp(token1,token2)==0);
-        TEST_CHECK(i1==i2);
-        //TEST_CHECK(i1==i2);
-        if(i2==-1){
-            break;
-        }
-    }
-    
-}
-
-/*
-* MID: 9069
-* Threshold: 0.150000
-* Query ID : 
-4922: 238 384 696 783 835 1212 1766 2280 2515 3481 4600 5672 6296 7108 7265 7370 7735 8045 8552 8731 8760 8770 9229 
-*/
 void test_FS_data(void){
     
     int num_mail;
     mail* mails;
-    TxtSmry* smrys;
+    TxtSmry smry;
     int* list = (int*)malloc(sizeof(int)*MAX_N_MAIL);
     int nlist;
     get_mails("test/data/test.in", &mails, &num_mail);
@@ -264,30 +102,95 @@ void test_FS_data(void){
     int lans = 23;
 
 
-    Init_FindSimilar(&smrys, num_mail);
+    init_FindSimilar(&smry, num_mail);
 
-    Preprocess_FindSimilar(smrys, mails, num_mail);
+    Preprocess_FindSimilar(&smry, mails, num_mail);
 
     //Solve
-    answer_FindSimilar(smrys, mid, thd, num_mail, list, &nlist);
+    answer_FindSimilar(&smry, mid, thd, mails, num_mail, list, &nlist);
 
     //Validate
     TEST_CHECK(lans == nlist);
-    TEST_MSG("Expected: %d, Got %d", lans, nlist);
+    TEST_MSG("Expected total emails: %d, Got %d", lans, nlist);
     for(int i=0;i<lans;i++){
         TEST_CHECK(list[i]==ans[i]);
         TEST_MSG("Exp: %d, Got: %d", ans[i], list[i]);
     }
 
     printf("\n");
+    printf("Number of similar item (measured): %d\n", nlist);
+    
+    /*
     for(int i=0;i<nlist;i++){
         printf("%d ", list[i]);
     }
+    */
+    
 
 
     //GC
     free(list);
-    kill_FindSimilar(smrys, num_mail);
+    kill_FindSimilar(&smry);
+}
+
+//WIP/
+void print_token(char s1[], char s2[]){
+    char token1[10000];
+    char token2[10000];
+    long hash;
+    int iStr = 0;
+    int i1=0;
+    int i2=0;
+    //String 1
+    printf("\n\n");
+    while(1){
+        iStr = popTokenHash(s1, token1, iStr, &hash);
+        if(iStr==-1){
+            break;
+        }
+        printf("%s ", token1);
+        ++i1;
+    }
+    printf("\n\n");
+    //String 2
+    iStr = 0;
+    while(1){
+        iStr = popTokenHash(s2, token2, iStr, &hash);
+        if(iStr==-1){
+            break;
+        }
+        printf("%s ", token2);
+        ++i2;
+    }
+    printf("\n\n");
+
+}
+
+
+
+void test_similarity(void){
+    int num_mail;
+    mail* mails;
+    TxtSmry smry;
+    int* list = (int*)malloc(sizeof(int)*MAX_N_MAIL);
+    int nlist;
+    get_mails("test/data/test.in", &mails, &num_mail);
+    
+    init_FindSimilar(&smry, num_mail);
+    Preprocess_FindSimilar(&smry, mails, num_mail);
+
+    double sim = similarity(&smry.SglM, 0, 1);
+    printf("Sim: %f\n", sim);
+    printf("Test1:\t%s\n", mails[0].content);
+    printf("Test2:\t%s\n", mails[1].content);
+
+    //minihash
+    for(int i=0;i<T_MINIHASH_PERM;i++){
+        printf("%ld %ld\n", smry.SglM.m[0][i], smry.SglM.m[1][i]);
+    }
+
+    print_token( mails[0].content,  mails[1].content);
+    kill_FindSimilar(&smry);
 }
 
 #endif

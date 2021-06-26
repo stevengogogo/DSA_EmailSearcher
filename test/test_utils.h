@@ -100,13 +100,15 @@ void test_sort(void){
 
 void test_matrix(void){
     Matrix M;
-    init_Matrix(&M, 2, 2);
+    init_Matrix(&M, 1000, 1000);
     set_Matrix(&M, 0,0,1);
     TEST_CHECK(get_Matrix(&M, 0, 0) == 1);
     TEST_CHECK(get_Matrix(&M, 0, 1) == 0);
     TEST_CHECK(get_Matrix(&M, 1, 0) == 0);
     TEST_CHECK(get_Matrix(&M, 1, 1) == 0);
+    TEST_MSG("Got %ld", get_Matrix(&M, 1, 1));
 
+    kill_Matrix(&M);
 }
 
 

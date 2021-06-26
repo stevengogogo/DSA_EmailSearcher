@@ -84,15 +84,15 @@ bool isLowerCase_ASCII(int asc){
     return inDomainInt(asc, 97, 122);
 }
 
-int char2num(char c){
+long char2num(char c){
     if(isNumber_ASCII(c)){
-        return (int)c - '0';
+        return (long)c - '0';
     }
     else if(isLowerCase_ASCII(c)){
-        return (int)c - 'a' + 10;
+        return (long)c - 'a' + 10;
     }
     else{
-        return (int)c;
+        return (long)c;
     }
 }
 
@@ -356,8 +356,14 @@ void swap(int* x, int* y){
 
 /*matrix*/
 void init_Matrix(Matrix* M, int nrow, int ncol){
-    int* m = (int*)calloc(ncol*nrow, sizeof(int));
-    M->m = m;
+    long **array = malloc(nrow * sizeof *array + (nrow * (ncol * sizeof **array)));
+    memset(array, 0, nrow * sizeof *array + (nrow * (ncol * sizeof **array)));
+    size_t i;
+    long * const data = array + nrow;
+    for(i = 0; i < nrow; i++)
+        array[i] = data + i * ncol;
+
+    M->m = array;
     M->ncol = ncol;
     M->nrow = nrow;
 }
@@ -368,12 +374,25 @@ void kill_Matrix(Matrix* M){
     M->nrow = 0;
 }
 
-void set_Matrix(Matrix* M, int r, int c, int val){
-    int offset = r*M->ncol + c;
-    M->m[offset] = val;
+void set_Matrix(Matrix* M, int r, int c, long val){
+    M->m[r][c] = val;
 }
 
-int get_Matrix(Matrix*M, int r, int c){
-    int offset = r*M->ncol + c;
-    return M->m[offset];
+long get_Matrix(Matrix*M, int r, int c){
+    return M->m[r][c];
+}
+
+
+void RandGen_long(long* arr, int len, long low, long high, int seed){
+    long ai;
+    srand(seed);
+    for(int i=0;i<len;i++){
+        ai = rand() % (high-low) + low;
+
+        if(ai==32471){
+            --ai;
+        }
+
+        arr[i] = ai;
+    }
 }

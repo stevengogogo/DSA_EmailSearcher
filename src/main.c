@@ -6,6 +6,88 @@
 #include <stdio.h>
 #include <time.h>
 
+static void get_mails(char* filename, mail** mails, int* num_mail){
+    FILE* fp;
+    size_t len;
+    ssize_t read;
+    //Mail info
+    int id;
+    int maxnum = 1000000;
+    char* line = (char *) malloc(maxnum);
+    char* from= (char *) malloc(maxnum);
+    char* subject= (char *) malloc(maxnum);
+    char* idstr= (char *) malloc(maxnum);
+    char* content= (char *) malloc(maxnum);
+    char* to= (char *) malloc(maxnum);
+    size_t buffer=32;
+    size_t chr;
+    
+
+    fp = fopen(filename, "r");
+    if (fp == NULL)
+        printf("File not found");
+
+    chr = getline(&idstr,&buffer,fp);
+    sscanf(idstr, "%d", num_mail);
+    *mails = (mail*)malloc(*num_mail*sizeof(mail));
+    
+    for(int i=0;i<*num_mail;i++){
+       
+        chr = getline(&line,&buffer,fp);
+        chr = getline(&idstr,&buffer,fp);
+        chr = getline(&from,&buffer,fp);
+        chr = getline(&content,&buffer,fp);
+        chr = getline(&subject,&buffer,fp);
+        chr = getline(&to,&buffer,fp);
+
+        sscanf(idstr, "%d", &id);
+        //Check content
+        //Copy mail information
+        (*mails)[i].id = id;
+        strcpy((*mails)[i].subject, subject);
+        strcpy((*mails)[i].content, content);
+        strcpy((*mails)[i].from, from);
+        strcpy((*mails)[i].to, to);
+
+    }
+
+    fclose(fp);
+    free(line);
+    free(idstr);
+    free(content);
+    free(subject);
+    free(from);
+    free(to);
+}
+
+int main(void){
+ 
+    int num_mail;
+    mail* mails;
+    TxtSmry smry;
+    int* list = (int*)malloc(sizeof(int)*MAX_N_MAIL);
+    int nlist;
+    get_mails("test/data/test.in", &mails, &num_mail);
+    
+    init_FindSimilar(&smry, num_mail);
+    Preprocess_FindSimilar(&smry, mails, num_mail);
+
+    double sim = similarity(&smry.SglM, 0, 1);
+    printf("Sim: %f\n", sim);
+    printf("Test1:\t%s\n", mails[0].content);
+    printf("Test2:\t%s\n", mails[1].content);
+
+    //minihash
+    for(int i=0;i<T_MINIHASH_PERM;i++){
+        printf("%ld %ld\n", smry.SglM.m[0][i], smry.SglM.m[1][i]);
+    }
+
+
+    kill_FindSimilar(&smry);
+
+}
+
+/*
 int main(void) {
     // Var: Api
     int n_mails, n_queries;
@@ -13,7 +95,6 @@ int main(void) {
     query *queries;
 
     //Var: Find Similar
-    TxtSmry* smrys;
     int* list_FS = (int*)malloc(MAX_N_MAIL*sizeof(int));
     int len_FS;
     int threshold;
@@ -21,16 +102,10 @@ int main(void) {
 
     //Initiation
 	api.init(&n_mails, &n_queries, &mails, &queries);   
-    Init_FindSimilar(&smrys, n_mails);
-
-    for(int i=0;i<n_queries;i++){
-        if(queries[i].type==find_similar){
-            printf("%f \n", queries[i].data.find_similar_data.threshold);
-        }
-    }
+    //Init_FindSimilar(&smrys, n_mails);
 
     //Preprocessing
-    Preprocess_FindSimilar(smrys, mails, n_mails);
+    //Preprocess_FindSimilar(smrys, mails, n_mails);
 
     //Answer
 	for(int i = 0; i < n_queries; i++){
@@ -42,7 +117,7 @@ int main(void) {
             threshold = queries[i].data.find_similar_data.threshold;
 
             //process
-            answer_FindSimilar(smrys, mid, threshold, n_mails, list_FS, &len_FS);
+            //answer_FindSimilar(smrys, mid, threshold, n_mails, list_FS, &len_FS);
 
             //answer
             if(len_FS>0){
@@ -63,10 +138,10 @@ int main(void) {
     }
 
     //Garbage Collection
-    kill_FindSimilar(smrys, n_mails);
     free(mails);
     free(queries);
     free(list_FS);
 
     return 0;
 }
+*/

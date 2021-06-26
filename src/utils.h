@@ -18,7 +18,9 @@
 #include <string.h>
 #include <stdlib.h>
 #include <assert.h>
+#include <limits.h>
 #include <ctype.h> // tolower
+#include <time.h>
 #define INIT_NUM_ARRAY_ELEMENT 10
 #define EMTY_QUE_SIG -121242
 #define MAX_N_MAIL 11000
@@ -67,7 +69,7 @@ bool isLowerCase_ASCII(int);
  * @param c 
  * @return int 
  */
-int char2num(char c);
+long char2num(char c);
 
 /************Dynamic Array (Int) Stack**************/
 //dynamic array
@@ -146,16 +148,22 @@ void swap(int* x, int* y);
 
 /*Matrix*/
 typedef struct Matrix{
-    int* m;
+    long** m;
     int nrow;
     int ncol;
 } Matrix;
 
+/**
+ * @brief 2D matrix with one malloc;
+ * @note https://stackoverflow.com/questions/8740195/how-do-we-allocate-a-2-d-array-using-one-malloc-statement
+*/
 void init_Matrix(Matrix* M, int nrow, int ncol);
 void kill_Matrix(Matrix* M);
-void set_Matrix(Matrix* M, int r, int c, int val);
-int get_Matrix(Matrix*M, int r, int c);
+void set_Matrix(Matrix* M, int r, int c, long val);
+long get_Matrix(Matrix*M, int r, int c);
 
 
+/**Random array*/
+void RandGen_long(long* arr, int len, long low, long high, int seed);
 
 #endif

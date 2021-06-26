@@ -190,7 +190,7 @@ double similarity(Matrix* sglM, int IDbase, int IDcmp){
         ++item;
         if(b==c){++same;}
     }
-    return same/item;
+    return same/(same+item);
 }
 
 void answer_FindSimilar(TxtSmry* smry, int ID, double threshold, mail* mails, int n_mails, int* SimList, int* lenSim){

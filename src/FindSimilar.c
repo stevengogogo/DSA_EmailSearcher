@@ -149,27 +149,62 @@ void kill_FindSimilar(TxtSmry* smry){
 }
 
 void Preprocess_FindSimilar(TxtSmry* smry, mail* mails, int n_mails){
+    //Build hash map
+    char* text;
+    char token[MAX_TOKEN_LEN];
+    int iStr = 0;
+    int iNxt;
+    long phash[T_MINIHASH_PERM];
+    long ele;
+    long hash;
+    Matrix* SglM = &smry->SglM;
     //Random Permutation
     long* a = (long*)malloc(sizeof(long)*T_MINIHASH_PERM);
     long* b = (long*)malloc(sizeof(long)*T_MINIHASH_PERM);
-    short* hashmap = (short*)calloc(Q_RABIN, sizeof(short));
-
-    //for(int i=0;i<T_MINIHASH_PERM;i++){
-        //a[i] = i+1;
-        //b[i] = i;
-    //}
+    Matrix hashmap;
+    init_Matrix(&hashmap, Q_RABIN, n_mails, 0);
     RandGen_long(a, T_MINIHASH_PERM,0, Q_RABIN);
     RandGen_long(b, T_MINIHASH_PERM,0, Q_RABIN);
-    for(int i=0;i<T_MINIHASH_PERM;i++){
-        //a[i] = PrimeArray[i];
+
+    //2D hash map [numHash, numDoc]
+    for(int id=0;id<n_mails; id++){  
+        //Reset  
+        text = mails[id].content;
+        iStr = 0;
+        hash = 0;
+        //Build Hash Map
+        while(1){
+            iNxt = popTokenHash(text, token, iStr, &hash);
+            if(iNxt==-1){
+                break;
+            }
+            ele = get_Matrix(&hashmap,  hash, id);
+            ++ele;
+            set_Matrix(&hashmap, hash, id, ele);
+            iStr = iNxt;
+        }
     }
 
-    for(int i=0;i<n_mails; i++){
-        set_Sgl_Vec(&smry->SglM, mails[i].content, mails[i].id, a, b, hashmap);
+
+    //mini hash aglorithm
+    for(int r=0; r<Q_RABIN; r++){//each row
+        for(int ih=0; ih<T_MINIHASH_PERM;ih++){//each hash func
+            phash[ih] = hash_tabu(phash[ih], a[ih], b[ih]);
+
+        }
+        for(int c=0;c<n_mails;c++){
+            if(get_Matrix(&hashmap, r, c) > 0){
+                for(int h=0;h<T_MINIHASH_PERM;h++){
+                    if(get_Matrix(SglM, h, c) > phash[h]){
+                        set_Matrix(SglM, h, c, phash[h]);
+                    }
+                }
+            }
+        }
     }
 
     //GC
-    free(hashmap);
+    kill_Matrix(&hashmap);
     free(a);
     free(b);
 }

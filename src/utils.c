@@ -375,13 +375,12 @@ void kill_Matrix(Matrix* M){
 }
 
 void set_Matrix(Matrix* M, int r, int c, long val){
-    int offset = r*M->ncol + c;
+    long offset = r*M->ncol + c;
     M->m[offset] = val;
 }
 
 long get_Matrix(Matrix*M, int r, int c){
-    int offset = r*M->ncol + c;
-    return M->m[offset];
+    return M->m[r*M->ncol + c];
 }
 
 
@@ -389,7 +388,7 @@ void RandGen_long(long* arr, int len, long low, long high){
     long ai;
     for(int i=0;i<len;i++){
         ai = rand() % (high-low) + low;
-        
+
         if(ai==32471){
             --ai;
         }

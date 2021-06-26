@@ -158,6 +158,7 @@ void kill_Matrix(Matrix* M);
 void set_Matrix(Matrix* M, int r, int c, long val);
 long get_Matrix(Matrix*M, int r, int c);
 
+
 /**Random array*/
 void RandGen_long(long* arr, int len, long low, long high);
 

@@ -9,14 +9,14 @@
 #define SIZE 1000001
 
 typedef struct Node{
-	char name[32];
+	char* name;
 	int parentIdx;
 	int size;
 }node;
-
+/**/
 static node** makeset(){
-	static node* arr = (node*)malloc(SIZE*sizeof(node));
-  	assert(a!=NULL);
+	node** arr = (node**)malloc(SIZE*sizeof(node*));
+ 	assert(arr!=NULL);
 	return arr;
 }
 
@@ -35,7 +35,7 @@ static int findIdx(node**set, char word[]){
 	while(set[hashed]){
 		if(strcmp(set[hashed]->name, word)!=0){
 			hashed = (hashed+1)%SIZE;
-		}
+		}else return hashed;
 	}
 	return hashed;
 }
@@ -43,6 +43,7 @@ static int findIdx(node**set, char word[]){
 static void inputTable(node** set, char word[]){
 	int hashed = findIdx(set, word);
 	if(!set[hashed]){
+		set[hashed] = (node *)malloc(sizeof(node));
 		set[hashed]->name = word;
 		set[hashed]->parentIdx = hashed;
 		set[hashed]->size = 1;
@@ -104,21 +105,6 @@ static void answer_GroupAnalysis(int mid[], int len, mail* mails, int* list, int
 	for(int i = 0; i < len; i++){
 		setunion(arr,mails[mid[i]].from, mails[mid[i]].to, &count, &max);
 	}
-
-	//just for debugging
-	// count = 0; 
-	// max = 0;
-	// for(int i = 0; i < SIZE; i++){
-	// 	if(arr[i]){
-	// 		if(findset(arr,i)==i){
-	// 			count++;
-	// 			if(arr[i]->size>max){
-	// 				max = arr[i]->size;
-	// 			}
-	// 		}
-	// 	}
-	// }
-	//just for debugging
 
     //ANS
     list[0] = count;

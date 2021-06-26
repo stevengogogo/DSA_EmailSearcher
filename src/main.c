@@ -59,7 +59,6 @@ static void get_mails(char* filename, mail** mails, int* num_mail){
     free(to);
 }
 int main(){
-void test_FS_data(void){
     
     int num_mail;
     mail* mails;

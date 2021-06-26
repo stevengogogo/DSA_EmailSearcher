@@ -37,17 +37,17 @@ void test_FS_data(void){
     answer_FS(&infs, mails, mid, num_mail, thd, list, &nlist);
 
     //Validate
+ 
     TEST_CHECK(lans == nlist);
     TEST_MSG("Expected: %d, Got %d", lans, nlist);
-    for(int i=0;i<lans;i++){
+    for(int i=0;i<nlist;i++){
         TEST_CHECK(list[i]==ans[i]);
         TEST_MSG("Exp: %d, Got: %d", ans[i], list[i]);
     }
 
-
     //GC
     free(list);
-    kill_FS(&infs);
+    //kill_FS(&infs);
 }
 
 

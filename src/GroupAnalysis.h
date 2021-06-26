@@ -5,16 +5,18 @@
 #include <string.h>
 #include <stdio.h>
 #include <stdlib.h>
+#include <assert.h>
 #define SIZE 1000001
 
 typedef struct Node{
-	char* name;
+	char name[32];
 	int parentIdx;
 	int size;
 }node;
 
 static node** makeset(){
-	static node* arr[SIZE];
+	static node* arr = (node*)malloc(SIZE*sizeof(node));
+  	assert(a!=NULL);
 	return arr;
 }
 
@@ -33,7 +35,7 @@ static int findIdx(node**set, char word[]){
 	while(set[hashed]){
 		if(strcmp(set[hashed]->name, word)!=0){
 			hashed = (hashed+1)%SIZE;
-		}else return hashed;
+		}
 	}
 	return hashed;
 }
@@ -41,7 +43,6 @@ static int findIdx(node**set, char word[]){
 static void inputTable(node** set, char word[]){
 	int hashed = findIdx(set, word);
 	if(!set[hashed]){
-		set[hashed] = (node*)malloc(sizeof(node));
 		set[hashed]->name = word;
 		set[hashed]->parentIdx = hashed;
 		set[hashed]->size = 1;

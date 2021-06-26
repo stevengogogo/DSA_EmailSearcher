@@ -120,12 +120,19 @@ void miniHash(Matrix* SglM, short* hashmap, long a, long b, int IP, int ID){
     long perm = 0;
     long i=0;
     perm = hash_tabu(perm, a, b);
-    for(int h=0;h< Q_RABIN;h++){
+    bool run=false;
+    for(int h=0;h < Q_RABIN;h++){
         if(hashmap[perm]>0){
             set_Matrix(SglM, IP, ID, perm);
+            run = true;
             break;
         }
         perm = hash_tabu(perm, a, b);
+        ++i;
+    }
+
+    if(!run){
+        printf("Not found: %d %d (a: %ld; b: %ld)\n",IP, ID, a, b);
     }
 }
 
@@ -160,4 +167,18 @@ void Preprocess_FindSimilar(TxtSmry* smry, mail* mails, int n_mails){
     free(hashmap);
     free(a);
     free(b);
+}
+
+double similarity(Matrix* sglM, int IDbase, int IDcmp){
+    long b, c;
+    int item;
+
+    for(int r=0;r<sglM->nrow;r++){
+        b = get_Matrix(sglM, r, IDbase);
+        c = get_Matrix(sglM, c, IDcmp);
+        if(b==LONG_MAX || c==LONG_MAX){
+            
+        }
+    }
+
 }

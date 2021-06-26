@@ -386,7 +386,14 @@ long get_Matrix(Matrix*M, int r, int c){
 
 
 void RandGen_long(long* arr, int len, long low, long high){
+    long ai;
     for(int i=0;i<len;i++){
-        arr[i] = rand() % (high-low) + low;
+        ai = rand() % (high-low) + low;
+        
+        if(ai==32471){
+            --ai;
+        }
+
+        arr[i] = ai;
     }
 }

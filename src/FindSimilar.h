@@ -57,7 +57,7 @@ void miniHash(Matrix* SglM, short* hashmap, long a, long b, int iperm, int ID);
 void init_FindSimilar(TxtSmry* smry, int n_mails);
 void kill_FindSimilar(TxtSmry* smry);
 void Preprocess_FindSimilar(TxtSmry* smry, mail*  mails, int n_mails);
-
+double similarity(Matrix* sglM, int IDbase, int IDcmp);
 
 
 #endif

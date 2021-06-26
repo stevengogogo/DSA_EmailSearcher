@@ -20,6 +20,7 @@
 #include <assert.h>
 #include <limits.h>
 #include <ctype.h> // tolower
+#include <time.h>
 #define INIT_NUM_ARRAY_ELEMENT 10
 #define EMTY_QUE_SIG -121242
 #define MAX_N_MAIL 11000

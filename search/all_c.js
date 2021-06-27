@@ -1,5 +1,5 @@
 var searchData=
 [
-  ['uarray_28',['uArray',['../structuArray.html',1,'uArray'],['../utils_8h.html#afa43d1c77d1ea818ac56829c343bee9d',1,'uArray():&#160;utils.h']]],
-  ['utils_2eh_29',['utils.h',['../utils_8h.html',1,'']]]
+  ['stack_29',['Stack',['../structStack.html',1,'']]],
+  ['swap_30',['swap',['../utils_8h.html#acd3415eef442ced2b5e064f95f04b624',1,'utils.c']]]
 ];

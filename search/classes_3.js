@@ -1,5 +1,7 @@
 var searchData=
 [
-  ['node_36',['Node',['../structNode.html',1,'']]],
-  ['node_37',['node',['../structnode.html',1,'']]]
+  ['mail_37',['mail',['../structmail.html',1,'']]],
+  ['matrix_38',['Matrix',['../structMatrix.html',1,'']]],
+  ['matrix_5fushort_39',['Matrix_ushort',['../structMatrix__ushort.html',1,'']]],
+  ['mem_5fga_40',['MEM_GA',['../structMEM__GA.html',1,'']]]
 ];

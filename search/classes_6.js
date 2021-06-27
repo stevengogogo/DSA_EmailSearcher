@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['uarray_42',['uArray',['../structuArray.html',1,'']]]
+  ['stack_47',['Stack',['../structStack.html',1,'']]]
 ];

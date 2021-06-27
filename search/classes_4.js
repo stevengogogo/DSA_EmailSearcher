@@ -1,6 +1,6 @@
 var searchData=
 [
-  ['que_38',['que',['../structque.html',1,'']]],
-  ['query_39',['query',['../structquery.html',1,'']]],
-  ['query_5fdata_40',['query_data',['../unionquery_1_1query__data.html',1,'query']]]
+  ['ndl_41',['ndl',['../structndl.html',1,'']]],
+  ['node_42',['Node',['../structNode.html',1,'']]],
+  ['node_43',['node',['../structnode.html',1,'']]]
 ];

@@ -50,7 +50,7 @@ void test_FS_data(void){
 
     //GC
     free(list);
-    //kill_FS(&infs);
+    kill_FS(&infs);
 }
 
 void test_data_2(void){
@@ -124,6 +124,11 @@ void test_data_2(void){
         if(OccurAns[list[i]] == 0){
             ++ndiff;
         }
+    }
+
+    for(int i=0;i<nlist;i++){
+        TEST_CHECK(list[i]==ans91[i]);
+        TEST_MSG("Exp: %d, Got: %d", ans91[i], list[i]);
     }
     printf("\nFalse positive num: %d\n", ndiff);
 

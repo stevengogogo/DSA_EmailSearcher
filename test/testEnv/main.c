@@ -468,11 +468,9 @@ static int answer_ExpressionMatch(char expression[], mail* mails, int* list, int
 #include <stdbool.h>
 
 /**********Constant Variable***********/
-#define Q_RABIN 4000039
+#define Q_RABIN 7388607
 #define D_RABIN 36
-#define INIT_SPURIOUS_COUNT 3
-#define INIT_UNIQUE_TOKEN_SIZE 10
-#define TOKEN_STRING_LENGTH 1000
+#define TOKEN_STRING_LENGTH 4000
 #define ULONG  long
 #define UINT  int
 #define USHORT unsigned short
@@ -519,6 +517,7 @@ void register_hash(infoFs* info, int ID, int hash);
 #include <stdio.h>
 #include <time.h>
 
+/*
 static void get_mails(char* filename, mail** mails, int* num_mail){
     FILE* fp;
     size_t len;
@@ -584,6 +583,7 @@ int main(){
 
     char tokenInter[100000] = "a,actually,adrift,after,agree,all,also,alternate,an,and,announces,antbird,antbirds,appear,are,around,arrested,as,ashore,at,backed,battling,be,beak,because,been,being,bird,black,bolivia,book,brazil,buccaneers,buried,bursts,but,by,called,can,captain,captures,caribbean,cartoon,celebrate,century,chest,colombia,comic,contains,counterfeit,crew,dated,dead,decoy,directly,discussion,disguises,disney,donald,down,drop,duck,eating,echo,ecuador,eight,end,endings,ends,england,eyes,family,film,find,finds,first,fish,for,forests,found,french,from,game,gap,get,getting,geysers,ghost,ghosts,gloom,gold,good,goofy,got,guiana,guyana,guys,habitats,had,has,have,haven,he,heading,headline,heard,hearted,help,henry,hidden,hiding,him,himself,his,http,hunters,hylophylax,i,if,in,interludes,is,island,it,its,just,later,lease,leg,lifted,location,long,loot,losing,lost,lowland,man,map,men,mickey,moist,morgan,mouse,naevia,naevius,named,natural,new,newspaper,night,no,not,nutty,obtain,of,off,offers,old,on,one,or,org,over,overhears,owners,paragraph,parrot,passing,peg,persuades,peru,pete,pieces,pirate,pirates,place,placed,plants,pointer,production,quicksand,raft,read,real,rear,released,remembered,rescue,returning,reveal,ride,sea,series,sets,share,ship,skunk,slapstick,small,so,species,spot,stormy,story,subtropical,suriname,swamps,take,taking,tales,tattoo,tattooed,tavern,tell,thamnophilidae,that,the,their,them,there,they,this,three,tiny,to,trapped,treasure,trio,tropical,true,trying,two,unreleased,venezuela,version,very,village,visited,was,wash,were,what,when,where,which,who,whom,wikipedia,with,woman,would,yellow\0";
 
+
     int iStr = 0;
     int iNxt;
     int hash;
@@ -599,8 +599,8 @@ int main(){
         strncpy(hashmap[hash], tokenB, strlen(tokenB)+1);
     }
 }
+*/
 
-/*
 int main(void) {
     // Var: Api
     int n_mails, n_queries;
@@ -634,17 +634,10 @@ int main(void) {
 
             answer_FS(&infs, mails, mid,n_mails, threshold, list, &nlist);
 
-  
-            printf("QID: %d\n", queries[i].id);
-            printf("MID: %d\n",queries[i].data.find_similar_data.mid);
-            printf("Threshold: %f\n", queries[i].data.find_similar_data.threshold);
-
-
             //answer
-            if(queries[i].data.find_similar_data.threshold<0.19){
-                continue;
-            }
+            //if(queries[i].data.find_similar_data.threshold>=-1){
             api.answer(queries[i].id, list, nlist);
+            //}
         }
         
         //Expression Match
@@ -658,8 +651,7 @@ int main(void) {
 
             answer_GroupAnalysis(queries[i].data.group_analyse_data.mids, queries[i].data.group_analyse_data.len,mails, list, &nlist);
             api.answer(queries[i].id, list, nlist);
-
-            
+   
         }
     }
 
@@ -671,7 +663,6 @@ int main(void) {
 
     return 0;
 }
-*/
 
 /************Math************/
 
@@ -1049,6 +1040,9 @@ int get_Matrix(Matrix*M, int r, int c){
 
 void init_Matrix_ushort(Matrix_ushort* M, int nrow, int ncol){
     ushort **array = malloc(nrow * sizeof *array + (nrow * (ncol * sizeof **array)));
+    if(array==NULL){
+        printf("Memeory Insufficient: init matrix");
+    };
     size_t i;
     ushort * const data = array + nrow;
     for(i = 0; i < nrow; i++){

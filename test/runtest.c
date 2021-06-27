@@ -38,8 +38,8 @@ TEST_LIST = {
     {"Find Similar: data", test_FS_data},
     {"FS: data 2", test_data_2},
     {"Matrix ushort",void_test_matrix},
-    {"FS check spurious hit", test_check_spurious},
-    {"FS check spurious hit QID91: email 1099 vs 91 ", test_check_spurious2},
+    //{"FS check spurious hit", test_check_spurious},
+    //{"FS check spurious hit QID91: email 1099 vs 91 ", test_check_spurious2},
     /*
     {"Find Similar: Memory", memory_allocation_FS},
     {"Find Similar: init", test_init_FS},

@@ -7,7 +7,7 @@
 #include <stdio.h>
 #include <time.h>
 
-
+/*
 static void get_mails(char* filename, mail** mails, int* num_mail){
     FILE* fp;
     size_t len;
@@ -89,11 +89,11 @@ int main(){
         strncpy(hashmap[hash], tokenB, strlen(tokenB)+1);
     }
 }
+*/
 
 
 
 
-/*
 int main(void) {
     // Var: Api
     int n_mails, n_queries;
@@ -127,17 +127,11 @@ int main(void) {
 
             answer_FS(&infs, mails, mid,n_mails, threshold, list, &nlist);
 
-  
-            printf("QID: %d\n", queries[i].id);
-            printf("MID: %d\n",queries[i].data.find_similar_data.mid);
-            printf("Threshold: %f\n", queries[i].data.find_similar_data.threshold);
-
 
             //answer
-            if(queries[i].data.find_similar_data.threshold<0.19){
-                continue;
-            }
+            //if(queries[i].data.find_similar_data.threshold>=-1){
             api.answer(queries[i].id, list, nlist);
+            //}
         }
         
         //Expression Match
@@ -151,8 +145,7 @@ int main(void) {
 
             answer_GroupAnalysis(queries[i].data.group_analyse_data.mids, queries[i].data.group_analyse_data.len,mails, list, &nlist);
             api.answer(queries[i].id, list, nlist);
-
-            
+   
         }
     }
 
@@ -164,4 +157,3 @@ int main(void) {
 
     return 0;
 }
-*/

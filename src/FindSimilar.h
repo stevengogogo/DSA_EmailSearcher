@@ -29,7 +29,7 @@
 #define ULONG  long
 #define UINT  int
 #define USHORT unsigned short
-#define ushort unsigned short
+#define ushort int
 
 #include <stdlib.h>
 #include <assert.h>
@@ -58,7 +58,7 @@ typedef struct lkmem {
 void init_lkmem(lkmem* lkm, int size);
 void kill_lkmem(lkmem* lkm);
 ndl* get_ndl_mem(lkmem*lkm);
-void append_lk(lklist* list, short val, lkmem* lkm);
+void append_lk(lklist* list, ushort val, lkmem* lkm);
 
 
 
@@ -80,6 +80,7 @@ typedef struct infoFS{
     bool* isVis;
     lkmem lkm;//nodes memory
     int* resetID;
+    Matrix_ushort tokenID;
 } infoFs;
 
 
@@ -96,7 +97,7 @@ void proc_FS(infoFs* info, mail* mails, int n_mail);
 int Hash_RK(char s[]);
 
 void answer_FS(infoFs*info, mail* mails, int ID, int n_mail, double threshold, int* list, int* nlist);
-void register_hash(infoFs* info, int ID, int hash, char token[], int i);
+void register_hash(infoFs* info, int ID, int* hash, char token[], int i);
 
 
 #endif

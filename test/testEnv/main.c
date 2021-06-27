@@ -490,7 +490,7 @@ static int answer_ExpressionMatch(char expression[], mail* mails, int* list, int
 #define ULONG  long
 #define UINT  int
 #define USHORT unsigned short
-#define ushort unsigned short
+#define ushort int
 
 #include <stdlib.h>
 #include <assert.h>
@@ -519,7 +519,7 @@ typedef struct lkmem {
 void init_lkmem(lkmem* lkm, int size);
 void kill_lkmem(lkmem* lkm);
 ndl* get_ndl_mem(lkmem*lkm);
-void append_lk(lklist* list, short val, lkmem* lkm);
+void append_lk(lklist* list, ushort val, lkmem* lkm);
 
 typedef struct Matrix_ushort {
     lklist* map;
@@ -536,6 +536,7 @@ typedef struct infoFS{
     bool* isVis;
     lkmem lkm;//nodes memory
     int* resetID;
+    Matrix_ushort tokenID;
 } infoFs;
 
 void init_FS(infoFs* info);
@@ -550,7 +551,7 @@ void proc_FS(infoFs* info, mail* mails, int n_mail);
 int Hash_RK(char s[]);
 
 void answer_FS(infoFs*info, mail* mails, int ID, int n_mail, double threshold, int* list, int* nlist);
-void register_hash(infoFs* info, int ID, int hash, char token[], int i);
+void register_hash(infoFs* info, int ID, int* hash, char token[], int i);
 
 #endif
 
@@ -1091,7 +1092,7 @@ void kill_lkmem(lkmem* lkm){
     lkm->max = 0;
 };
 
-void append_lk(lklist* list, short val, lkmem* lkm){
+void append_lk(lklist* list, ushort val, lkmem* lkm){
     if(lkm->used == lkm->max){
     lkm->node = (ndl*)realloc(lkm->node, (lkm->max*2)*sizeof(ndl));
     lkm->max = lkm->max*2;
@@ -1123,6 +1124,7 @@ void kill_Matrix_ushort(Matrix_ushort* M){
 
 void init_FS(infoFs* info){
     init_Matrix_ushort(&info->hstack, Q_RABIN);
+    init_Matrix_ushort(&info->tokenID, MAX_N_MAIL);
     init_lkmem(&info->lkm, 10000000);
     info->num_unique = (double*)calloc(MAX_N_MAIL,sizeof(double));
     info->SimList = (double*)calloc(MAX_N_MAIL, sizeof(double));
@@ -1139,7 +1141,8 @@ void kill_FS(infoFs* info){
     kill_lkmem(&info->lkm);
 };
 
-void register_hash(infoFs* info, int ID, int hash, char token[], int i){
+void register_hash(infoFs* info, int ID, int* hashp, char token[], int i){
+    int hash = *hashp;
     lklist* row = &info->hstack.map[hash];
 
     if(row->end == NULL){//First one to be in this slot
@@ -1150,6 +1153,7 @@ void register_hash(infoFs* info, int ID, int hash, char token[], int i){
         info->num_unique[ID] += 1;
         //Register Token
         strcpy(row->token, token);
+        append_lk(&info->tokenID.map[ID], *hashp, &info->lkm);
         return;
     }
     else{
@@ -1163,9 +1167,11 @@ void register_hash(infoFs* info, int ID, int hash, char token[], int i){
                 append_lk(row, ID, &info->lkm);
                 //Register unique count
                 info->num_unique[ID] += 1;
+                append_lk(&info->tokenID.map[ID], *hashp, &info->lkm);
             }
             else{
-                register_hash(info, ID, (hash + C1*i+ (C2*i^2)% Q_RABIN) % Q_RABIN, token, i+1);
+                *hashp = (*hashp + C1*i+ (C2*i^2)% Q_RABIN) % Q_RABIN;
+                register_hash(info, ID, hashp, token, i+1);
             }
         }
     }
@@ -1230,7 +1236,7 @@ void append_mHash(infoFs* info, mail* mails, int ID){
             break;
         }
         iStr = iNxt;
-        register_hash(info, ID, hash, token, 1);
+        register_hash(info, ID, &hash, token, 1);
     }
 
     //Subject
@@ -1241,7 +1247,8 @@ void append_mHash(infoFs* info, mail* mails, int ID){
             break;
         }
         iStr = iNxt;
-        register_hash(info, ID, hash, token, 1);
+        register_hash(info, ID, &hash, token, 1);
+        append_lk(&info->tokenID.map[ID], hash, &info->lkm);
     }
 }
 
@@ -1279,29 +1286,11 @@ void answer_FS(infoFs*info, mail* mails, int ID, int n_mail, double threshold, i
     int i;
 
     // Content
-    while(1){
-        iNxt = popTokenHash(text, token, iStr, &hash);
-        if(iNxt==-1){
-            break;
-        }
-        iStr = iNxt;
+    ndl* tokenIDL = info->tokenID.map[ID].str;
+    while(tokenIDL != NULL){
+    
+      hash = tokenIDL->id;
 
-        if(isVis[hash]){
-            continue;
-        }
-
-        //Find slot 
-       /*
-       while(strcmp(token, info->hstack.map[hash].token)!=0){
-           hash = (hash + C1*i+ (C2*i^2)% Q_RABIN) % Q_RABIN;
-           i++;
-       }
-       */
-      i = 1;
-      if (token[0] != info->hstack.map[hash].token[0]){
-           hash = (hash + C1*i+ (C2*i^2)% Q_RABIN) % Q_RABIN;
-           i++;
-       }
         
         //Find similar
         ndl* inode = info->hstack.map[hash].str;
@@ -1313,46 +1302,10 @@ void answer_FS(infoFs*info, mail* mails, int ID, int n_mail, double threshold, i
         isVis[hash] = true;
         info->resetID[lenRes] = hash;
         ++lenRes;
+
+        tokenIDL = tokenIDL->nxt;
     }
     
-    char* subject = mails[ID].subject; 
-    iStr = 0;
-    while(1){
-        iNxt = popTokenHash(subject, token, iStr, &hash);
-        if(iNxt==-1){
-            break;
-        }
-        iStr = iNxt;
-
-        if(isVis[hash]){
-            continue;
-        }
-        
-       //Find slot 
-
-       /*
-       while(strcmp(token, info->hstack.map[hash].token)!=0){
-           hash = (hash + C1*i+ (C2*i^2)% Q_RABIN) % Q_RABIN;
-           i++;
-       }
-       */
-      i = 1;
-      if (token[0] != info->hstack.map[hash].token[0]){
-           hash = (hash + C1*i+ (C2*i^2)% Q_RABIN) % Q_RABIN;
-           i++;
-       }
-
-       //Find similar
-        ndl* inode = info->hstack.map[hash].str;
-        while(inode != NULL){
-            interID = inode->id;
-            ++Overlap[(int)interID];
-            inode = inode->nxt;
-        }
-        isVis[hash] = true;
-        info->resetID[lenRes] = hash;
-        ++lenRes;
-    }
     
     // Similarity
     for(int i=0;i<n_mail;i++){
@@ -1368,4 +1321,5 @@ void answer_FS(infoFs*info, mail* mails, int ID, int n_mail, double threshold, i
         hash = info->resetID[i];
         isVis[hash] = false;
     }
+
 }

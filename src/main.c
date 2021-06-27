@@ -2,6 +2,7 @@
 #include "ExpressionMatch.h"
 #include "FindSimilar.h"
 #include "GroupAnalysis.h"
+#include "ExpressionMatch.h"
 #include "utils.h"
 #include <stdio.h>
 #include <time.h>
@@ -112,6 +113,7 @@ int main(void) {
     int* list = (int*)malloc(MAX_N_MAIL*sizeof(int));
     int nlist;
     double threshold;
+
     int mid;
     infoFs infs;
 
@@ -119,7 +121,9 @@ int main(void) {
 
     //FS//
 	api.init(&n_mails, &n_queries, &mails, &queries);   
+
     init_FS(&infs);
+
 
     //GA//
 
@@ -132,11 +136,11 @@ int main(void) {
 		//Find Similar
         if (queries[i].type == find_similar){
             //data
-           
             mid = queries[i].data.find_similar_data.mid;
             threshold = queries[i].data.find_similar_data.threshold;
 
             //process
+
             answer_FS(&infs, mails, mid,n_mails, threshold, list, &nlist);
 
             /*
@@ -154,14 +158,14 @@ int main(void) {
         
         //Expression Match
         else if(queries[i].type == expression_match){
-		    //api.answer(queries[i].id, NULL, 0);
+			answer_ExpressionMatch(queries[i].data.expression_match_data.expression,mails,list,&nlist);
+		    api.answer(queries[i].id, list, nlist);
         }
 
         //Group Analysis
         else {
 
             answer_GroupAnalysis(queries[i].data.group_analyse_data.mids, queries[i].data.group_analyse_data.len,mails, list, &nlist);
-            
             api.answer(queries[i].id, list, nlist);
 
             

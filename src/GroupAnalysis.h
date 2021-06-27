@@ -16,8 +16,9 @@ typedef struct Node{
 }node;
 /**/
 static node* makeset(){
-	node* arr = (node*)malloc(sizeof(node)* SIZE*10);
-	assert(arr!=NULL);
+
+	node* arr = (node*)malloc(10*SIZE*sizeof(node));
+
 	return arr;
 }
 
@@ -31,27 +32,36 @@ static int hash(char word[]){
 	return abs(RK)%SIZE;
 }
 
+
+static int hash1(char word[]){
+	return (int)word[0]*(int)word[0]+1;
+}
+
 static int findIdx(node*set, char word[]){
 	int hashed = hash(word);
+	int step = hash1(word);
 	while(set[hashed].name){
 		if(strcmp(set[hashed].name, word)!=0){
-			hashed = (hashed+1)%SIZE;
+			hashed = (hashed+step)%SIZE;
+
 		}else return hashed;
 	}
 	return hashed;
 }
 
-static void inputTable(node* set, char word[]){
+
+static int inputTable(node* set, char word[]){
 	int hashed = findIdx(set, word);
 	if(!set[hashed].name){
 		set[hashed].name = word;
 		set[hashed].parentIdx = hashed;
 		set[hashed].size = 1;
 	}
+
+	return hashed;
 }
 
 static int findset(node *set, int hashed){
-
 	if(set[hashed].parentIdx!=hashed){
 		set[hashed].parentIdx = findset(set,set[hashed].parentIdx);
 	}
@@ -85,11 +95,10 @@ static void link_GA(node *set, int nodex, int nodey ,int *count, int *max){
 	}
 }
 
-static void setunion(node*set, char word1[],char word2[], int* count, int* max){
-	inputTable(set, word1);
-	inputTable(set, word2);
-	int nodex = findIdx(set, word1);
-	int nodey = findIdx(set, word2);
+
+static void setunion(node* set, char word1[],char word2[], int* count, int* max){
+	int nodex = inputTable(set, word1);
+	int nodey = inputTable(set, word2);
 	int idxx = findset(set, nodex);
 	int idxy = findset(set, nodey);
 	if(idxx!=idxy){

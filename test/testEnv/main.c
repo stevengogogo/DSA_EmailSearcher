@@ -487,7 +487,7 @@ int main(void) {
             */
 
             //answer
-            if(queries[i].data.find_similar_data.threshold<0.2){
+            if(queries[i].data.find_similar_data.threshold<0.19){
                 continue;
             }
             api.answer(queries[i].id, list, nlist);

@@ -5,17 +5,11 @@
 #include <string.h>
 #include <stdio.h>
 #include <stdlib.h>
+#include "GroupAnalysis.h"
 #define SIZE 1000001
 
-#include <limits.h>
-#include <string.h>
-#include <stdio.h>
-#include <stdlib.h>
-#include <stdbool.h>
-#include "utils.h"
-#define SIZE 1000001
 
-static typedef struct Stack{
+typedef struct Stack{
 	int top;
 	char* array;
 }stack;
@@ -58,20 +52,6 @@ static int isOp(char op){
 	}
 }
 
-static int hash(char word[]){
-	int i = 0;
-	int RK = 0;
-	while(word[i]!='\0'){
-		RK = (62*RK + (int)word[i])%SIZE;
-		i++;
-	}
-	return abs(RK)%SIZE;
-}
-
-static int hash1(char word[]){
-	return (int)word[0]*(int)word[0]+1;
-}
-
 static void inputHashTable(char** hashTable,char content[]){
 	int istr=0;
   	char token[100];
@@ -94,7 +74,7 @@ static void inputHashTable(char** hashTable,char content[]){
 	}
 }
 
-static schar findToken(char** hashTable, char word[]){
+static char findToken(char** hashTable, char word[]){
 	int hashed = hash(word);
 	int step = hash1(word);
 	while(hashTable[hashed]){
@@ -173,17 +153,17 @@ static int answer_ExpressionMatch(char expression[], mail* mails, int* list, int
 	main_stack->top = -1;
 	main_stack->array = (char*)malloc(sizeof(char)*2048);
 	int k = 0, i = 0;
-	while(mails[i]){
-		char** hashTable = (char**)malloc(10*SIZE*sizeof(char*));
-		char* input = (char*)malloc(sizeof(char)*101000);
-		strcat(input, mails[i].subject);
-		strcat(input, mails[i].content);
-		inputHashTable(hashTable, input);
-		char* output = expressionPostfix(expression, main_stack, hashTable);
-		if(postfixToValue(output, main_stack)==1) list[k++] = i;
-		free(hashTable);
-		free(input);
-	}
+	// while(mails[i]){
+	// 	char** hashTable = (char**)malloc(10*SIZE*sizeof(char*));
+	// 	char* input = (char*)malloc(sizeof(char)*101000);
+	// 	strcat(input, mails[i].subject);
+	// 	strcat(input, mails[i].content);
+	// 	inputHashTable(hashTable, input);
+	// 	char* output = expressionPostfix(expression, main_stack, hashTable);
+	// 	if(postfixToValue(output, main_stack)==1) list[k++] = i;
+	// 	free(hashTable);
+	// 	free(input);
+	// }
 	*nlist = k;
 	free(main_stack);
 }

@@ -481,10 +481,10 @@ static int answer_ExpressionMatch(char expression[], mail* mails, int* list, int
 #include <stdbool.h>
 
 /**********Constant Variable***********/
-#define Q_RABIN 17048577//4388607
+#define Q_RABIN 17047//4388607
 #define D_RABIN 36
 #define TOKEN_STRING_LENGTH 4000
-#define INIT_UNIQUE_TOKEN_NUM 1000000
+//#define INIT_UNIQUE_TOKEN_NUM 
 #define ULONG  long
 #define UINT  int
 #define USHORT unsigned short
@@ -553,6 +553,7 @@ void register_hash(infoFs* info, int ID, int hash);
 #include <stdio.h>
 #include <time.h>
 
+/*
 static void get_mails(char* filename, mail** mails, int* num_mail){
     FILE* fp;
     size_t len;
@@ -607,6 +608,7 @@ static void get_mails(char* filename, mail** mails, int* num_mail){
     free(to);
 }
 
+
 int main(){
     int num_mail;
     mail* mails;
@@ -633,8 +635,8 @@ int main(){
     free(list);
     kill_FS(&infs);
 }
+*/
 
-/*
 int main(void) {
     // Var: Api
     int n_mails, n_queries;
@@ -669,7 +671,6 @@ int main(void) {
 
             answer_FS(&infs, mails, mid,n_mails, threshold, list, &nlist);
 
-
             //answer
             //if(queries[i].data.find_similar_data.threshold>=-1){
             api.answer(queries[i].id, list, nlist);
@@ -701,7 +702,6 @@ int main(void) {
 
     return 0;
 }
-*/
 
 /************Math************/
 
@@ -1087,20 +1087,16 @@ void kill_lkmem(lkmem* lkm){
     lkm->max = 0;
 };
 
-ndl* get_ndl_mem(lkmem*lkm){
-    if(lkm->used == lkm->max){
-        lkm->node = (ndl*)realloc(lkm->node, (lkm->max*2)*sizeof(ndl));
-        lkm->max = lkm->max*2;
-    }
-    ndl* hold = &lkm->node[lkm->used];
-    hold->nxt = NULL;
-    ++lkm->used;
-    return hold;
-}
-
 void append_lk(lklist* list, short val, lkmem* lkm){
-    ndl* new = get_ndl_mem(lkm);
+    if(lkm->used == lkm->max){
+    lkm->node = (ndl*)realloc(lkm->node, (lkm->max*2)*sizeof(ndl));
+    lkm->max = lkm->max*2;
+    }
+    ndl* new = &lkm->node[lkm->used];
+    new->nxt = NULL;
+    ++(lkm->used);
     new->id = val;
+
     if(list->str==NULL){
         list->str = new;
         list->end = new;
@@ -1123,7 +1119,7 @@ void kill_Matrix_ushort(Matrix_ushort* M){
 
 void init_FS(infoFs* info){
     init_Matrix_ushort(&info->hstack, Q_RABIN);
-    init_lkmem(&info->lkm, INIT_UNIQUE_TOKEN_NUM);
+    init_lkmem(&info->lkm, 10000000);
     info->num_unique = (double*)calloc(MAX_N_MAIL,sizeof(double));
     info->SimList = (double*)calloc(MAX_N_MAIL, sizeof(double));
     info->isVis = (bool*)calloc(Q_RABIN, sizeof(bool));

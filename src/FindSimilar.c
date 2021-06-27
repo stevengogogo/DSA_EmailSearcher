@@ -12,20 +12,17 @@ void kill_lkmem(lkmem* lkm){
 };
 
 
-ndl* get_ndl_mem(lkmem*lkm){
-    if(lkm->used == lkm->max){
-        lkm->node = (ndl*)realloc(lkm->node, (lkm->max*2)*sizeof(ndl));
-        lkm->max = lkm->max*2;
-    }
-    ndl* hold = &lkm->node[lkm->used];
-    hold->nxt = NULL;
-    ++lkm->used;
-    return hold;
-}
-
 void append_lk(lklist* list, short val, lkmem* lkm){
-    ndl* new = get_ndl_mem(lkm);
+    if(lkm->used == lkm->max){
+    lkm->node = (ndl*)realloc(lkm->node, (lkm->max*2)*sizeof(ndl));
+    lkm->max = lkm->max*2;
+    }
+    ndl* new = &lkm->node[lkm->used];
+    new->nxt = NULL;
+    ++(lkm->used);
     new->id = val;
+
+
     if(list->str==NULL){
         list->str = new;
         list->end = new;
@@ -52,7 +49,7 @@ void kill_Matrix_ushort(Matrix_ushort* M){
 
 void init_FS(infoFs* info){
     init_Matrix_ushort(&info->hstack, Q_RABIN);
-    init_lkmem(&info->lkm, INIT_UNIQUE_TOKEN_NUM);
+    init_lkmem(&info->lkm, 10000000);
     info->num_unique = (double*)calloc(MAX_N_MAIL,sizeof(double));
     info->SimList = (double*)calloc(MAX_N_MAIL, sizeof(double));
     info->isVis = (bool*)calloc(Q_RABIN, sizeof(bool));
@@ -164,9 +161,6 @@ void proc_FS(infoFs* info, mail* mails, int n_mail){
         append_mHash(info,mails, ID);
     }
 }
-
-
-
 
 
 

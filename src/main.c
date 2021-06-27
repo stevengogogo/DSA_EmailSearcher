@@ -7,7 +7,7 @@
 #include <stdio.h>
 #include <time.h>
 
-
+/*
 static void get_mails(char* filename, mail** mails, int* num_mail){
     FILE* fp;
     size_t len;
@@ -89,8 +89,8 @@ int main(){
     free(list);
     kill_FS(&infs);
 }
+*/
 
-/*
 int main(void) {
     // Var: Api
     int n_mails, n_queries;
@@ -157,4 +157,3 @@ int main(void) {
 
     return 0;
 }
-*/

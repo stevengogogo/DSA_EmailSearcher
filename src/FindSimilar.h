@@ -18,13 +18,12 @@
 #include <string.h>
 #include <stdbool.h>
 #include "utils.h"
-#include "GroupAnalysis.h"
 
 /**********Constant Variable***********/
-#define Q_RABIN 17048577//4388607
+#define Q_RABIN 134217727
 #define D_RABIN 36
 #define TOKEN_STRING_LENGTH 4000
-#define INIT_UNIQUE_TOKEN_NUM 1000000
+//#define INIT_UNIQUE_TOKEN_NUM 
 #define ULONG  long
 #define UINT  int
 #define USHORT unsigned short

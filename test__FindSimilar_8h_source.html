@@ -191,7 +191,7 @@ $(function() {
 <div class="line"><a name="l00120"></a><span class="lineno">  120</span>&#160;    <span class="keywordtype">int</span> ndiff=0;</div>
 <div class="line"><a name="l00121"></a><span class="lineno">  121</span>&#160;    <span class="keywordflow">for</span>(<span class="keywordtype">int</span> i=0;i&lt;nlist;i++){</div>
 <div class="line"><a name="l00122"></a><span class="lineno">  122</span>&#160;        TEST_CHECK(OccurAns[list[i]] != 0);</div>
-<div class="line"><a name="l00123"></a><span class="lineno">  123</span>&#160;        TEST_MSG(<span class="stringliteral">&quot;ID: %d is in Est but not in ANS&quot;</span>, list[i]);</div>
+<div class="line"><a name="l00123"></a><span class="lineno">  123</span>&#160;        TEST_MSG(<span class="stringliteral">&quot;ID: %d is in Est but not in ANS (Compare with %d) &quot;</span>, list[i], mid91);</div>
 <div class="line"><a name="l00124"></a><span class="lineno">  124</span>&#160;        <span class="keywordflow">if</span>(OccurAns[list[i]] == 0){</div>
 <div class="line"><a name="l00125"></a><span class="lineno">  125</span>&#160;            ++ndiff;</div>
 <div class="line"><a name="l00126"></a><span class="lineno">  126</span>&#160;        }</div>

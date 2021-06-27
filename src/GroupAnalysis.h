@@ -114,7 +114,7 @@ static void setunion(node* set, char word1[],char word2[], int* count, int* max)
 }
 
 static void init_GA(mem_GA* mem, int size){
-	mem->arr = (node*)malloc(10*SIZE*sizeof(node));
+	mem->arr = (node*)malloc(SIZE*sizeof(node));
 	mem->len = size;
 }
 static void kill_GA(mem_GA* mem){

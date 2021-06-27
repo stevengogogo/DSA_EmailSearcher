@@ -5,7 +5,7 @@
 #include "utils.h"
 #include <stdio.h>
 #include <time.h>
-/*
+
 static void get_mails(char* filename, mail** mails, int* num_mail){
     FILE* fp;
     size_t len;
@@ -60,26 +60,36 @@ static void get_mails(char* filename, mail** mails, int* num_mail){
 }
 int main(){
     
+    //Get mails
     int num_mail;
     mail* mails;
     int* list = (int*)malloc(sizeof(int)*MAX_N_MAIL);
     int nlist;
     get_mails("test/data/test.in", &mails, &num_mail);
   
-    //Problem
-    //ID: 5
-    int mid = 9451;
-    double thd = 0.17;
-    //Answer
-    int ans[] = {1597, 4026, 4122, 5123, 7033, 7176, 7802, 7845}; 
-    int lans = 8;
+    //data
+    int mid30 = 4189;
+    int mid5=9451;
+    double thd30 = 0.180000;
+    double thd5 = 0.170000;
+    int ans30[] = {790, 1843, 1952, 8550 }; 
+    int ans5[] = {1597, 4026, 4122, 5123, 7033, 7176, 7802, 7845};
+    
+    int len30 = sizeof(ans30)/sizeof(ans30[0]);
+    int len5 = sizeof(ans5)/sizeof(ans5[0]);
+
+
+
     infoFs infs;
 
     init_FS(&infs);
     proc_FS(&infs, mails, num_mail);
 
-    //Solve
-    answer_FS(&infs, mails, mid, num_mail, thd, list, &nlist);
+    answer_FS(&infs, mails, mid5, num_mail, thd5, list, &nlist);
+
+    answer_FS(&infs, mails, mid30, num_mail, thd30, list, &nlist);
+
+
 
 
     //GC
@@ -88,10 +98,9 @@ int main(){
 }
 
 
-*/
 
 
-
+/*
 int main(void) {
     // Var: Api
     int n_mails, n_queries;
@@ -160,3 +169,4 @@ int main(void) {
 
     return 0;
 }
+*/

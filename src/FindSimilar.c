@@ -143,67 +143,6 @@ void proc_FS(infoFs* info, mail* mails, int n_mail){
 
 
 
-void similarity(infoFs* info, mail* mails, int ID,int n_mail){
-    bool isVis[Q_RABIN];
-    double Overlap[MAX_N_MAIL];
-    char* text = mails[ID].content;//Remember to add subject
-    int iNxt;
-    int iStr=0;
-    int hash;
-    double sim;
-    char token[TOKEN_STRING_LENGTH];
-    ushort id = (ushort)ID;
-    ushort interID;
-
-    // Content
-    while(1){
-        iNxt = popTokenHash(text, token, iStr, &hash);
-        if(iNxt==-1){
-            break;
-        }
-        iStr = iNxt;
-
-        if(isVis[hash]){
-            continue;
-        }
-        
-        //Find similar
-        for(int i=0;i<info->hstack.len[hash];i++){
-            interID = info->hstack.m[hash][i];
-            ++Overlap[(int)interID];
-        }
-        isVis[hash] = true;
-    }
-
-    char* subject = mails[ID].subject; 
-    iStr = 0;
-    while(1){
-        iNxt = popTokenHash(subject, token, iStr, &hash);
-        if(iNxt==-1){
-            break;
-        }
-        iStr = iNxt;
-
-        if(isVis[hash]){
-            continue;
-        }
-        
-        //Find similar
-        for(int i=0;i<info->hstack.len[hash];i++){
-            interID = info->hstack.m[hash][i];
-            ++Overlap[(int)interID];
-        }
-        isVis[hash] = true;
-    }
-    
-    // Similarity
-    for(int i=0;i<n_mail;i++){
-        sim = Overlap[i] / (info->num_unique[i] + info->num_unique[ID] - Overlap[i]);
-        info->SimList[i] = sim;
-    }
-}
-
-
 int Hash_RK(char s[]){
 	int i = 0;
 	int RK = 0;
@@ -218,8 +157,8 @@ int Hash_RK(char s[]){
 
 
 void answer_FS(infoFs*info, mail* mails, int ID, int n_mail, double threshold, int* list, int* nlist){
-    bool isVis[Q_RABIN];
-    double Overlap[MAX_N_MAIL];
+    bool isVis[Q_RABIN] = {false};
+    double Overlap[MAX_N_MAIL]={0};
     char* text = mails[ID].content;//Remember to add subject
     int iNxt;
     int iStr=0;
@@ -273,7 +212,7 @@ void answer_FS(infoFs*info, mail* mails, int ID, int n_mail, double threshold, i
     
     // Similarity
     for(int i=0;i<n_mail;i++){
-        sim = Overlap[i] / (info->num_unique[i] + info->num_unique[ID] - Overlap[i]);
+        sim = Overlap[i] / (info->num_unique[i] + info->num_unique[ID]  - Overlap[i]);
         if(sim>threshold && i!=ID){
             list[*nlist]=i;
             ++(*nlist);

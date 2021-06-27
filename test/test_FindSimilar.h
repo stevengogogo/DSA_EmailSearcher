@@ -63,9 +63,15 @@ void test_data_2(void){
   
     //data
     int mid30 = 4189;
+    int mid5=9451;
     double thd30 = 0.180000;
+    double thd5 = 0.170000;
     int ans30[] = {790, 1843, 1952, 8550 }; 
+    int ans5[] = {1597, 4026, 4122, 5123, 7033, 7176, 7802, 7845};
+    
     int len30 = sizeof(ans30)/sizeof(ans30[0]);
+    int len5 = sizeof(ans5)/sizeof(ans5[0]);
+
 
 
     infoFs infs;
@@ -74,9 +80,27 @@ void test_data_2(void){
     proc_FS(&infs, mails, num_mail);
 
 
+
     answer_FS(&infs, mails, mid30, num_mail, thd30, list, &nlist);
     TEST_CHECK(len30 == nlist);
     TEST_MSG("Expected: %d, Got %d", len30, nlist);
+    for(int i=0;i<nlist;i++){
+        TEST_CHECK(list[i]==ans30[i]);
+        TEST_MSG("Exp: %d, Got: %d", ans30[i], list[i]);
+    }
+    
+    answer_FS(&infs, mails, mid5, num_mail, thd5, list, &nlist);
+    TEST_CHECK(len5 == nlist);
+    TEST_MSG("Expected: %d, Got %d", len5, nlist);
+    for(int i=0;i<nlist;i++){
+        TEST_CHECK(list[i]==ans5[i]);
+        TEST_MSG("Exp: %d, Got: %d", ans5[i], list[i]);
+    }
+
+
+
+
+
 
 
     //GC

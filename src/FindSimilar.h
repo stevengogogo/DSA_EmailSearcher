@@ -64,7 +64,7 @@ void append_mHash(infoFs* info,mail* mails, int ID);
 
 void proc_FS(infoFs* info, mail* mails, int n_mail);
 
-void similarity(infoFs* info, mail* mails, int ID,int n_mail);
+
 int Hash_RK(char s[]);
 
 void answer_FS(infoFs*info, mail* mails, int ID, int n_mail, double threshold, int* list, int* nlist);

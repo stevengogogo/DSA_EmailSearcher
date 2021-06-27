@@ -131,10 +131,10 @@ Classes</h2></td></tr>
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="define-members"></a>
 Macros</h2></td></tr>
 <tr class="memitem:a35711bcac45cf1d1a72c3ebf2f3f6b07"><td class="memItemLeft" align="right" valign="top"><a id="a35711bcac45cf1d1a72c3ebf2f3f6b07"></a>
-#define&#160;</td><td class="memItemRight" valign="bottom"><b>Q_RABIN</b>&#160;&#160;&#160;268435455</td></tr>
+#define&#160;</td><td class="memItemRight" valign="bottom"><b>Q_RABIN</b>&#160;&#160;&#160;8388607</td></tr>
 <tr class="separator:a35711bcac45cf1d1a72c3ebf2f3f6b07"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a7cab064e819abdeec12b4c0cd6e6817c"><td class="memItemLeft" align="right" valign="top"><a id="a7cab064e819abdeec12b4c0cd6e6817c"></a>
-#define&#160;</td><td class="memItemRight" valign="bottom"><b>D_RABIN</b>&#160;&#160;&#160;36</td></tr>
+#define&#160;</td><td class="memItemRight" valign="bottom"><b>D_RABIN</b>&#160;&#160;&#160;81</td></tr>
 <tr class="separator:a7cab064e819abdeec12b4c0cd6e6817c"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a41790ef76b1b2ab0762a1eb0159b01dc"><td class="memItemLeft" align="right" valign="top"><a id="a41790ef76b1b2ab0762a1eb0159b01dc"></a>
 #define&#160;</td><td class="memItemRight" valign="bottom"><b>TOKEN_STRING_LENGTH</b>&#160;&#160;&#160;4000</td></tr>
@@ -209,9 +209,9 @@ int&#160;</td><td class="memItemRight" valign="bottom"><b>Hash_RK</b> (char s[])
 <tr class="memitem:adf13c3d8eef93c92de06ea0549f7e360"><td class="memItemLeft" align="right" valign="top"><a id="adf13c3d8eef93c92de06ea0549f7e360"></a>
 void&#160;</td><td class="memItemRight" valign="bottom"><b>answer_FS</b> (<a class="el" href="structinfoFS.html">infoFs</a> *info, <a class="el" href="structmail.html">mail</a> *mails, int ID, int n_mail, double threshold, int *list, int *nlist)</td></tr>
 <tr class="separator:adf13c3d8eef93c92de06ea0549f7e360"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a48eff4f82b1664dcab945dec70e32005"><td class="memItemLeft" align="right" valign="top"><a id="a48eff4f82b1664dcab945dec70e32005"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>register_hash</b> (<a class="el" href="structinfoFS.html">infoFs</a> *info, int ID, int hash)</td></tr>
-<tr class="separator:a48eff4f82b1664dcab945dec70e32005"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a2b92e2b140b5fc3d41bbaf80643a04cb"><td class="memItemLeft" align="right" valign="top"><a id="a2b92e2b140b5fc3d41bbaf80643a04cb"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><b>register_hash</b> (<a class="el" href="structinfoFS.html">infoFs</a> *info, int ID, int hash, char token[], int i)</td></tr>
+<tr class="separator:a2b92e2b140b5fc3d41bbaf80643a04cb"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>Group Analysis. Use Jaccob's similarity with hash table to identify similar strings. </p>

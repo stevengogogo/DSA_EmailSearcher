@@ -20,9 +20,11 @@
 #include "utils.h"
 
 /**********Constant Variable***********/
-#define Q_RABIN 8388607
-#define D_RABIN 81
+#define Q_RABIN 16388807
+#define D_RABIN 86
 #define TOKEN_STRING_LENGTH 4000
+#define C1 1
+#define C2 1
 //#define INIT_UNIQUE_TOKEN_NUM 
 #define ULONG  long
 #define UINT  int

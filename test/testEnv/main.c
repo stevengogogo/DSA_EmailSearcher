@@ -481,9 +481,11 @@ static int answer_ExpressionMatch(char expression[], mail* mails, int* list, int
 #include <stdbool.h>
 
 /**********Constant Variable***********/
-#define Q_RABIN 8388607
-#define D_RABIN 81
+#define Q_RABIN 16388807
+#define D_RABIN 86
 #define TOKEN_STRING_LENGTH 4000
+#define C1 1
+#define C2 1
 //#define INIT_UNIQUE_TOKEN_NUM 
 #define ULONG  long
 #define UINT  int
@@ -1163,7 +1165,7 @@ void register_hash(infoFs* info, int ID, int hash, char token[], int i){
                 info->num_unique[ID] += 1;
             }
             else{
-                register_hash(info, ID, (hash+i+2)%Q_RABIN, token, i+1);
+                register_hash(info, ID, (hash + C1*i+ (C2*i^2)% Q_RABIN) % Q_RABIN, token, i+1);
             }
         }
     }
@@ -1289,10 +1291,10 @@ void answer_FS(infoFs*info, mail* mails, int ID, int n_mail, double threshold, i
         }
 
         //Find slot 
-       i = 1;
-       while(strncmp(token, info->hstack.map[hash].token, strlen(token))!=0){
-            hash = (hash + i) % Q_RABIN;
-            ++i;
+        i = 1;
+        while(strcmp(token, info->hstack.map[hash].token)!=0){
+            hash = (hash + C1*i+ (C2*i^2)% Q_RABIN) % Q_RABIN;
+            i++;
         }
         
         //Find similar
@@ -1323,7 +1325,7 @@ void answer_FS(infoFs*info, mail* mails, int ID, int n_mail, double threshold, i
        //Find slot 
        i = 1;
        while(strcmp(token, info->hstack.map[hash].token)!=0){
-           hash = (hash +i+2) % Q_RABIN;
+           hash = (hash + C1*i+ (C2*i^2)% Q_RABIN) % Q_RABIN;
            i++;
        }
 

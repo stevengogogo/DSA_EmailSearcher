@@ -1,5 +1,7 @@
 var searchData=
 [
-  ['kill_5fmem_5fulong_71',['kill_MEM_ULONG',['../FindSimilar_8h.html#a6e2dd2f8a6e68dd5aaca7c76a32ddc05',1,'FindSimilar.c']]],
-  ['kill_5ftxtsmry_5farr_72',['kill_TxtSmry_arr',['../FindSimilar_8h.html#a59b118272255ea41350b6fc60bff4ecd',1,'FindSimilar.c']]]
+  ['partition_49',['partition',['../utils_8h.html#a63802919fc588a396c2037346d2ea072',1,'utils.c']]],
+  ['pop_5fitem_50',['pop_item',['../utils_8h.html#a49e8d2cc8816925b320ba33f4dcea5e6',1,'utils.c']]],
+  ['poptoken_51',['popToken',['../utils_8h.html#a81f4883411916757a7c41b8a74f73c2b',1,'utils.c']]],
+  ['poptokenhash_52',['popTokenHash',['../FindSimilar_8h.html#a5d1c13d719525d926512bacf0d5e154c',1,'FindSimilar.c']]]
 ];

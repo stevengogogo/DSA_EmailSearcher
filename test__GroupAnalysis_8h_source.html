@@ -117,46 +117,49 @@ $(function() {
 <div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160;    TEST_CHECK(<span class="keyword">sizeof</span>(mids11)/<span class="keyword">sizeof</span>(mids11[0]) == len11);</div>
 <div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160;    TEST_CHECK(<span class="keyword">sizeof</span>(mids14)/<span class="keyword">sizeof</span>(mids14[0]) == len14);</div>
 <div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160; </div>
-<div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160; </div>
-<div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160; </div>
-<div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160;    <span class="comment">//Problem</span></div>
-<div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160;    <span class="keywordtype">int</span>* list = (<span class="keywordtype">int</span>*)malloc(<span class="keyword">sizeof</span>(<span class="keywordtype">int</span>)*10000);</div>
-<div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160;    <span class="keywordtype">int</span> nlist = 0;</div>
-<div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160; </div>
+<div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160;    <a class="code" href="structMEM__GA.html">mem_GA</a> memGA;</div>
+<div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160;    init_GA(&amp;memGA, SIZE);</div>
+<div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160; </div>
+<div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160;    <span class="comment">//Problem</span></div>
+<div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160;    <span class="keywordtype">int</span>* list = (<span class="keywordtype">int</span>*)malloc(<span class="keyword">sizeof</span>(<span class="keywordtype">int</span>)*10000);</div>
+<div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160;    <span class="keywordtype">int</span> nlist = 0;</div>
 <div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160; </div>
-<div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160;    <span class="comment">//Test sets</span></div>
-<div class="line"><a name="l00057"></a><span class="lineno">   57</span>&#160;    answer_GroupAnalysis(mids0, len0, mails, list, &amp;nlist); </div>
-<div class="line"><a name="l00058"></a><span class="lineno">   58</span>&#160;    test_arr2(ans0, list,0);   </div>
-<div class="line"><a name="l00059"></a><span class="lineno">   59</span>&#160; </div>
-<div class="line"><a name="l00060"></a><span class="lineno">   60</span>&#160;    answer_GroupAnalysis(mids2, len2, mails, list, &amp;nlist); </div>
-<div class="line"><a name="l00061"></a><span class="lineno">   61</span>&#160;    test_arr2(ans2, list,2); </div>
-<div class="line"><a name="l00062"></a><span class="lineno">   62</span>&#160; </div>
-<div class="line"><a name="l00063"></a><span class="lineno">   63</span>&#160;    answer_GroupAnalysis(mids3, len3, mails, list, &amp;nlist); </div>
-<div class="line"><a name="l00064"></a><span class="lineno">   64</span>&#160;    test_arr2(ans3, list,3); </div>
-<div class="line"><a name="l00065"></a><span class="lineno">   65</span>&#160; </div>
-<div class="line"><a name="l00066"></a><span class="lineno">   66</span>&#160;    answer_GroupAnalysis(mids9, len9, mails, list, &amp;nlist); </div>
-<div class="line"><a name="l00067"></a><span class="lineno">   67</span>&#160;    test_arr2(ans9, list,9); </div>
-<div class="line"><a name="l00068"></a><span class="lineno">   68</span>&#160; </div>
-<div class="line"><a name="l00069"></a><span class="lineno">   69</span>&#160;    answer_GroupAnalysis(mids11, len11, mails, list, &amp;nlist); </div>
-<div class="line"><a name="l00070"></a><span class="lineno">   70</span>&#160;    test_arr2(ans11, list,11); </div>
-<div class="line"><a name="l00071"></a><span class="lineno">   71</span>&#160; </div>
-<div class="line"><a name="l00072"></a><span class="lineno">   72</span>&#160;    answer_GroupAnalysis(mids14, len14, mails, list, &amp;nlist); </div>
-<div class="line"><a name="l00073"></a><span class="lineno">   73</span>&#160;    test_arr2(ans14, list,14); </div>
-<div class="line"><a name="l00074"></a><span class="lineno">   74</span>&#160; </div>
-<div class="line"><a name="l00075"></a><span class="lineno">   75</span>&#160;    <span class="comment">//Memory Test</span></div>
-<div class="line"><a name="l00076"></a><span class="lineno">   76</span>&#160;    <span class="keywordtype">int</span> mid[MAX_N_MAIL];</div>
-<div class="line"><a name="l00077"></a><span class="lineno">   77</span>&#160;    <span class="keywordflow">for</span>(<span class="keywordtype">int</span> i=0;i&lt;MAX_N_MAIL;i++){</div>
-<div class="line"><a name="l00078"></a><span class="lineno">   78</span>&#160;        mid[i] = i;</div>
-<div class="line"><a name="l00079"></a><span class="lineno">   79</span>&#160;    }</div>
-<div class="line"><a name="l00080"></a><span class="lineno">   80</span>&#160;    answer_GroupAnalysis(mid, 10000, mails, list, &amp;nlist); </div>
-<div class="line"><a name="l00081"></a><span class="lineno">   81</span>&#160; </div>
+<div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160; </div>
+<div class="line"><a name="l00057"></a><span class="lineno">   57</span>&#160;    <span class="comment">//Test sets</span></div>
+<div class="line"><a name="l00058"></a><span class="lineno">   58</span>&#160;    answer_GroupAnalysis(mids0, len0, mails, list, &amp;nlist, &amp;memGA); </div>
+<div class="line"><a name="l00059"></a><span class="lineno">   59</span>&#160;    test_arr2(ans0, list,0);   </div>
+<div class="line"><a name="l00060"></a><span class="lineno">   60</span>&#160; </div>
+<div class="line"><a name="l00061"></a><span class="lineno">   61</span>&#160;    answer_GroupAnalysis(mids2, len2, mails, list, &amp;nlist, &amp;memGA); </div>
+<div class="line"><a name="l00062"></a><span class="lineno">   62</span>&#160;    test_arr2(ans2, list,2); </div>
+<div class="line"><a name="l00063"></a><span class="lineno">   63</span>&#160; </div>
+<div class="line"><a name="l00064"></a><span class="lineno">   64</span>&#160;    answer_GroupAnalysis(mids3, len3, mails, list, &amp;nlist, &amp;memGA); </div>
+<div class="line"><a name="l00065"></a><span class="lineno">   65</span>&#160;    test_arr2(ans3, list,3); </div>
+<div class="line"><a name="l00066"></a><span class="lineno">   66</span>&#160; </div>
+<div class="line"><a name="l00067"></a><span class="lineno">   67</span>&#160;    answer_GroupAnalysis(mids9, len9, mails, list, &amp;nlist, &amp;memGA); </div>
+<div class="line"><a name="l00068"></a><span class="lineno">   68</span>&#160;    test_arr2(ans9, list,9); </div>
+<div class="line"><a name="l00069"></a><span class="lineno">   69</span>&#160; </div>
+<div class="line"><a name="l00070"></a><span class="lineno">   70</span>&#160;    answer_GroupAnalysis(mids11, len11, mails, list, &amp;nlist, &amp;memGA); </div>
+<div class="line"><a name="l00071"></a><span class="lineno">   71</span>&#160;    test_arr2(ans11, list,11); </div>
+<div class="line"><a name="l00072"></a><span class="lineno">   72</span>&#160; </div>
+<div class="line"><a name="l00073"></a><span class="lineno">   73</span>&#160;    answer_GroupAnalysis(mids14, len14, mails, list, &amp;nlist, &amp;memGA); </div>
+<div class="line"><a name="l00074"></a><span class="lineno">   74</span>&#160;    test_arr2(ans14, list,14); </div>
+<div class="line"><a name="l00075"></a><span class="lineno">   75</span>&#160; </div>
+<div class="line"><a name="l00076"></a><span class="lineno">   76</span>&#160;    <span class="comment">//Memory Test</span></div>
+<div class="line"><a name="l00077"></a><span class="lineno">   77</span>&#160;    <span class="keywordtype">int</span> mid[MAX_N_MAIL];</div>
+<div class="line"><a name="l00078"></a><span class="lineno">   78</span>&#160;    <span class="keywordflow">for</span>(<span class="keywordtype">int</span> i=0;i&lt;MAX_N_MAIL;i++){</div>
+<div class="line"><a name="l00079"></a><span class="lineno">   79</span>&#160;        mid[i] = i;</div>
+<div class="line"><a name="l00080"></a><span class="lineno">   80</span>&#160;    }</div>
+<div class="line"><a name="l00081"></a><span class="lineno">   81</span>&#160;    answer_GroupAnalysis(mid, 10000, mails, list, &amp;nlist, &amp;memGA); </div>
 <div class="line"><a name="l00082"></a><span class="lineno">   82</span>&#160; </div>
-<div class="line"><a name="l00083"></a><span class="lineno">   83</span>&#160;    <span class="comment">//Garbage</span></div>
-<div class="line"><a name="l00084"></a><span class="lineno">   84</span>&#160;    free(mails);</div>
-<div class="line"><a name="l00085"></a><span class="lineno">   85</span>&#160;    free(list);</div>
-<div class="line"><a name="l00086"></a><span class="lineno">   86</span>&#160;}   </div>
-<div class="line"><a name="l00087"></a><span class="lineno">   87</span>&#160; </div>
-<div class="line"><a name="l00088"></a><span class="lineno">   88</span>&#160;<span class="preprocessor">#endif</span></div>
+<div class="line"><a name="l00083"></a><span class="lineno">   83</span>&#160; </div>
+<div class="line"><a name="l00084"></a><span class="lineno">   84</span>&#160;    <span class="comment">//Garbage</span></div>
+<div class="line"><a name="l00085"></a><span class="lineno">   85</span>&#160;    kill_GA(&amp;memGA);</div>
+<div class="line"><a name="l00086"></a><span class="lineno">   86</span>&#160;    free(mails);</div>
+<div class="line"><a name="l00087"></a><span class="lineno">   87</span>&#160;    free(list);</div>
+<div class="line"><a name="l00088"></a><span class="lineno">   88</span>&#160;}   </div>
+<div class="line"><a name="l00089"></a><span class="lineno">   89</span>&#160; </div>
+<div class="line"><a name="l00090"></a><span class="lineno">   90</span>&#160;<span class="preprocessor">#endif</span></div>
+<div class="ttc" id="astructMEM__GA_html"><div class="ttname"><a href="structMEM__GA.html">MEM_GA</a></div><div class="ttdef"><b>Definition:</b> GroupAnalysis.h:18</div></div>
 <div class="ttc" id="astructmail_html"><div class="ttname"><a href="structmail.html">mail</a></div><div class="ttdef"><b>Definition:</b> api.h:16</div></div>
 </div><!-- fragment --></div><!-- contents -->
 <!-- start footer part -->

@@ -177,10 +177,17 @@ typedef struct Node{
 	int parentIdx;
 	int size;
 }node;
-/**/
-static node* makeset(){
 
-	node* arr = (node*)malloc(10*SIZE*sizeof(node));
+typedef struct MEM_GA{
+	node* arr;
+	int len;
+} mem_GA;
+
+/**/
+static node* makeset(mem_GA* mem){
+
+	node* arr = mem->arr;
+	memset(arr, 0,mem->len*sizeof(node));
 
 	return arr;
 }
@@ -266,8 +273,17 @@ static void setunion(node* set, char word1[],char word2[], int* count, int* max)
 	}
 }
 
-static void answer_GroupAnalysis(int mid[], int len, mail* mails, int* list, int* nlist){
-	node* arr = makeset();
+static void init_GA(mem_GA* mem, int size){
+	mem->arr = (node*)malloc(10*SIZE*sizeof(node));
+	mem->len = size;
+}
+static void kill_GA(mem_GA* mem){
+	free(mem->arr);
+	mem->len = 0;
+}
+
+static void answer_GroupAnalysis(int mid[], int len, mail* mails, int* list, int* nlist, mem_GA* mem){
+	node* arr = makeset(mem);
 	int count = 0;
 	int max = 0;
 
@@ -279,9 +295,6 @@ static void answer_GroupAnalysis(int mid[], int len, mail* mails, int* list, int
   list[0] = count;
   list[1] = max;
   *nlist = 2;
-
-  free(arr);
-
 }
 
 #endif
@@ -468,7 +481,7 @@ static int answer_ExpressionMatch(char expression[], mail* mails, int* list, int
 #include <stdbool.h>
 
 /**********Constant Variable***********/
-#define Q_RABIN 7388607
+#define Q_RABIN 2388607//4388607
 #define D_RABIN 36
 #define TOKEN_STRING_LENGTH 4000
 #define ULONG  long
@@ -496,6 +509,7 @@ typedef struct infoFS{
     Matrix_ushort hstack;
     double* num_unique;
     double* SimList;
+    bool* isVis;
 } infoFs;
 
 void init_FS(infoFs* info);
@@ -611,15 +625,16 @@ int main(void) {
     int* list = (int*)malloc(MAX_N_MAIL*sizeof(int));
     int nlist;
     double threshold;
-
     int mid;
     infoFs infs;
 
-    //Initiation
+    //VAR: GA
+    mem_GA memGA;
 
-    //FS//
+    //Initiation
 	api.init(&n_mails, &n_queries, &mails, &queries);   
     init_FS(&infs);
+    init_GA(&memGA, SIZE);
 
     //Answer
 	for(int i = 0; i < n_queries; i++){
@@ -649,7 +664,8 @@ int main(void) {
         //Group Analysis
         else {
 
-            answer_GroupAnalysis(queries[i].data.group_analyse_data.mids, queries[i].data.group_analyse_data.len,mails, list, &nlist);
+            answer_GroupAnalysis(queries[i].data.group_analyse_data.mids, queries[i].data.group_analyse_data.len,mails, list, &nlist, &memGA);
+
             api.answer(queries[i].id, list, nlist);
    
         }
@@ -660,6 +676,7 @@ int main(void) {
     free(mails);
     free(queries);
     free(list);
+    kill_GA(&memGA);
 
     return 0;
 }
@@ -1041,7 +1058,7 @@ int get_Matrix(Matrix*M, int r, int c){
 void init_Matrix_ushort(Matrix_ushort* M, int nrow, int ncol){
     ushort **array = malloc(nrow * sizeof *array + (nrow * (ncol * sizeof **array)));
     if(array==NULL){
-        printf("Memeory Insufficient: init matrix");
+        printf("\n\n\nMemeory Insufficient: init matrix\n\n\n");
     };
     size_t i;
     ushort * const data = array + nrow;
@@ -1064,11 +1081,13 @@ void init_FS(infoFs* info){
     init_Matrix_ushort(&info->hstack, Q_RABIN, MAX_N_MAIL);
     info->num_unique = (double*)calloc(MAX_N_MAIL,sizeof(double));
     info->SimList = (double*)calloc(MAX_N_MAIL, sizeof(double));
+    info->isVis = (bool*)calloc(Q_RABIN, sizeof(bool));
 };
 
 void kill_FS(infoFs* info){
     free(info->num_unique);
     free(info->SimList);
+    free(info->isVis);
     kill_Matrix_ushort(&info->hstack);
 };
 
@@ -1181,7 +1200,8 @@ int Hash_RK(char s[]){
 }
 
 void answer_FS(infoFs*info, mail* mails, int ID, int n_mail, double threshold, int* list, int* nlist){
-    bool isVis[Q_RABIN] = {false};
+    bool* isVis = info->isVis;
+    memset(isVis, 0, Q_RABIN*sizeof(bool));
     double Overlap[MAX_N_MAIL]={0};
     char* text = mails[ID].content;//Remember to add subject
     int iNxt;
@@ -1242,4 +1262,5 @@ void answer_FS(infoFs*info, mail* mails, int ID, int n_mail, double threshold, i
             ++(*nlist);
         }
     }
+
 }

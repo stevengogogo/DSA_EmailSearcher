@@ -21,7 +21,7 @@
 #include "GroupAnalysis.h"
 
 /**********Constant Variable***********/
-#define Q_RABIN 7388607
+#define Q_RABIN 2388607//4388607
 #define D_RABIN 36
 #define TOKEN_STRING_LENGTH 4000
 #define ULONG  long
@@ -50,6 +50,7 @@ typedef struct infoFS{
     Matrix_ushort hstack;
     double* num_unique;
     double* SimList;
+    bool* isVis;
 } infoFs;
 
 

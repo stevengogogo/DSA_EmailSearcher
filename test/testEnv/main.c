@@ -481,7 +481,7 @@ static int answer_ExpressionMatch(char expression[], mail* mails, int* list, int
 #include <stdbool.h>
 
 /**********Constant Variable***********/
-#define Q_RABIN 97388807
+#define Q_RABIN 17388807
 #define D_RABIN 86
 #define TOKEN_STRING_LENGTH 4000
 #define C1 1

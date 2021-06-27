@@ -151,8 +151,8 @@ int main(void) {
         
         //Expression Match
         else if(queries[i].type == expression_match){
-			//answer_ExpressionMatch(queries[i].data.expression_match_data.expression,mails,list,&nlist);
-		    //api.answer(queries[i].id, list, nlist);
+			answer_ExpressionMatch(queries[i].data.expression_match_data.expression,mails, n_mails,list,&nlist);
+		    api.answer(queries[i].id, list, nlist);
         }
 
         //Group Analysis

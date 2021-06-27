@@ -148,22 +148,22 @@ static int postfixToValue(char postfix[], stack* stack1){
 	return value;
 }
 
-static int answer_ExpressionMatch(char expression[], mail* mails, int* list, int *nlist){
+static int answer_ExpressionMatch(char expression[], mail* mails, int n_mail,int* list, int *nlist){
 	stack* main_stack = (stack*)malloc(sizeof(stack));
 	main_stack->top = -1;
 	main_stack->array = (char*)malloc(sizeof(char)*2048);
 	int k = 0, i = 0;
-	// while(mails[i]){
-	// 	char** hashTable = (char**)malloc(10*SIZE*sizeof(char*));
-	// 	char* input = (char*)malloc(sizeof(char)*101000);
-	// 	strcat(input, mails[i].subject);
-	// 	strcat(input, mails[i].content);
-	// 	inputHashTable(hashTable, input);
-	// 	char* output = expressionPostfix(expression, main_stack, hashTable);
-	// 	if(postfixToValue(output, main_stack)==1) list[k++] = i;
-	// 	free(hashTable);
-	// 	free(input);
-	// }
+	for(i=0;i<n_mail;i++){
+	 	char** hashTable = (char**)malloc(10*SIZE*sizeof(char*));
+	 	char* input = (char*)malloc(sizeof(char)*101000);
+	 	strcat(input, mails[i].subject);
+	 	strcat(input, mails[i].content);
+	 	inputHashTable(hashTable, input);
+	 	char* output = expressionPostfix(expression, main_stack, hashTable);
+	 	if(postfixToValue(output, main_stack)==1) list[k++] = i;
+	 	free(hashTable);
+	 	free(input);
+	 }
 	*nlist = k;
 	free(main_stack);
 }

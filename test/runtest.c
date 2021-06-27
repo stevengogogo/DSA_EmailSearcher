@@ -34,6 +34,9 @@ TEST_LIST = {
     {"Char 2 number", test_char2num},
     {"Quick sort", test_sort},
     {"Matrix", test_matrix},
+    {"Find Similar: data", test_FS_data},
+    //{"FS: data 2", test_data_2},
+    {"Matrix ushort",void_test_matrix},
     /*
     {"Find Similar: Memory", memory_allocation_FS},
     {"Find Similar: init", test_init_FS},

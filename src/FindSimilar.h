@@ -21,9 +21,10 @@
 #include "GroupAnalysis.h"
 
 /**********Constant Variable***********/
-#define Q_RABIN 2388607//4388607
+#define Q_RABIN 17048577//4388607
 #define D_RABIN 36
 #define TOKEN_STRING_LENGTH 4000
+#define INIT_UNIQUE_TOKEN_NUM 1000000
 #define ULONG  long
 #define UINT  int
 #define USHORT unsigned short
@@ -35,15 +36,39 @@
 #include <stdio.h>
 #include "api.h"
 
+/**Linked list**/
+typedef struct ndl {
+    ushort id;
+    struct ndl* nxt;
+} ndl;
+
+typedef struct lklist {
+    ndl* str;
+    ndl* end;
+} lklist;
+
+typedef struct lkmem {
+    ndl* node;
+    int used;
+    int max;
+} lkmem;
+
+void init_lkmem(lkmem* lkm, int size);
+void kill_lkmem(lkmem* lkm);
+ndl* get_ndl_mem(lkmem*lkm);
+void append_lk(lklist* list, short val, lkmem* lkm);
+
+
+
+
 typedef struct Matrix_ushort {
-    ushort** m;
-    ushort* len;
+    lklist* map;
     int nrow;
-    int ncol;
 } Matrix_ushort;
 
-void init_Matrix_ushort(Matrix_ushort* M, int nrow, int ncol);
+void init_Matrix_ushort(Matrix_ushort* M, int nrow);
 void kill_Matrix_ushort(Matrix_ushort* M);
+
 
 
 typedef struct infoFS{
@@ -51,6 +76,7 @@ typedef struct infoFS{
     double* num_unique;
     double* SimList;
     bool* isVis;
+    lkmem lkm;//nodes memory
 } infoFs;
 
 

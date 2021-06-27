@@ -21,7 +21,7 @@
 #include <ctype.h> // tolower
 #define INIT_NUM_ARRAY_ELEMENT 10
 #define EMTY_QUE_SIG -121242
-#define MAX_N_MAIL 11000
+#define MAX_N_MAIL 10000
 typedef unsigned char byte;
 
 /************Math************/

@@ -1,35 +1,58 @@
 #include "FindSimilar.h"
 
 
+void init_lkmem(lkmem* lkm, int size){
+    lkm->node = (ndl*)malloc(size*sizeof(ndl));
+    lkm->used = 0;
+    lkm->max = size;
+}
+void kill_lkmem(lkmem* lkm){
+    free(lkm->node);
+    lkm->max = 0;
+};
 
 
-void init_Matrix_ushort(Matrix_ushort* M, int nrow, int ncol){
-    ushort **array = malloc(nrow * sizeof *array + (nrow * (ncol * sizeof **array)));
-    if(array==NULL){
-        printf("\n\n\nMemeory Insufficient: init matrix\n\n\n");
-    };
-    size_t i;
-    ushort * const data = array + nrow;
-    for(i = 0; i < nrow; i++){
-        array[i] = data + i * ncol;
+ndl* get_ndl_mem(lkmem*lkm){
+    if(lkm->used == lkm->max){
+        lkm->node = (ndl*)realloc(lkm->node, (lkm->max*2)*sizeof(ndl));
+        lkm->max = lkm->max*2;
     }
+    ndl* hold = &lkm->node[lkm->used];
+    hold->nxt = NULL;
+    ++lkm->used;
+    return hold;
+}
 
-    M->m = array;
-    M->ncol = ncol;
-    M->nrow = nrow;
-    M->len = (ushort*)calloc(nrow, sizeof(ushort));
+void append_lk(lklist* list, short val, lkmem* lkm){
+    ndl* new = get_ndl_mem(lkm);
+    new->id = val;
+    if(list->str==NULL){
+        list->str = new;
+        list->end = new;
+    }
+    else{
+        list->end->nxt = new;
+        list->end = new;
+    }
+}
+
+
+
+void init_Matrix_ushort(Matrix_ushort* M, int nrow){
+   M->map = (lklist*)calloc(nrow,sizeof(lklist));
+   M->nrow = nrow;
 }
 
 void kill_Matrix_ushort(Matrix_ushort* M){
-    free(M->m);
-    free(M->len);
+    free(M->map);
+    M->nrow = 0;
 }
-
 
 
 
 void init_FS(infoFs* info){
-    init_Matrix_ushort(&info->hstack, Q_RABIN, MAX_N_MAIL);
+    init_Matrix_ushort(&info->hstack, Q_RABIN);
+    init_lkmem(&info->lkm, INIT_UNIQUE_TOKEN_NUM);
     info->num_unique = (double*)calloc(MAX_N_MAIL,sizeof(double));
     info->SimList = (double*)calloc(MAX_N_MAIL, sizeof(double));
     info->isVis = (bool*)calloc(Q_RABIN, sizeof(bool));
@@ -40,19 +63,20 @@ void kill_FS(infoFs* info){
     free(info->SimList);
     free(info->isVis);
     kill_Matrix_ushort(&info->hstack);
+    kill_lkmem(&info->lkm);
 };
 
 void register_hash(infoFs* info, int ID, int hash){
-    if(info->hstack.len[hash] != 0){//check duplicate
-        int end = info->hstack.m[hash][info->hstack.len[hash]-1];
+    lklist* row = &info->hstack.map[hash];
+    if(row->end != NULL){//check duplicate
+        int end = row->end->id;
         if(end == ID){//already appended
             return;
         }
     }
 
     //Add hash
-    info->hstack.m[hash][info->hstack.len[hash]] = ID;
-    ++info->hstack.len[hash];
+    append_lk(&info->hstack.map[hash], ID, &info->lkm);
 
     //Register unique count
     info->num_unique[ID] += 1;
@@ -186,9 +210,11 @@ void answer_FS(infoFs*info, mail* mails, int ID, int n_mail, double threshold, i
         }
         
         //Find similar
-        for(int i=0;i<info->hstack.len[hash];i++){
-            interID = info->hstack.m[hash][i];
+        ndl* inode = info->hstack.map[hash].str;
+        while(inode != NULL){
+            interID = inode->id;
             ++Overlap[(int)interID];
+            inode = inode->nxt;
         }
         isVis[hash] = true;
     }
@@ -206,10 +232,12 @@ void answer_FS(infoFs*info, mail* mails, int ID, int n_mail, double threshold, i
             continue;
         }
         
-        //Find similar
-        for(int i=0;i<info->hstack.len[hash];i++){
-            interID = info->hstack.m[hash][i];
+       //Find similar
+        ndl* inode = info->hstack.map[hash].str;
+        while(inode != NULL){
+            interID = inode->id;
             ++Overlap[(int)interID];
+            inode = inode->nxt;
         }
         isVis[hash] = true;
     }

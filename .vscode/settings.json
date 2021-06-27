@@ -5,6 +5,7 @@
         "test_genericstack.h": "c",
         "sstream": "c",
         "time.h": "c",
-        "api.h": "c"
+        "api.h": "c",
+        "groupanalysis.h": "c"
     }
 }

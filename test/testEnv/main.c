@@ -25,7 +25,7 @@
 #include <ctype.h> // tolower
 #define INIT_NUM_ARRAY_ELEMENT 10
 #define EMTY_QUE_SIG -121242
-#define MAX_N_MAIL 11000
+#define MAX_N_MAIL 10000
 typedef unsigned char byte;
 
 /************Math************/
@@ -274,7 +274,7 @@ static void setunion(node* set, char word1[],char word2[], int* count, int* max)
 }
 
 static void init_GA(mem_GA* mem, int size){
-	mem->arr = (node*)malloc(10*SIZE*sizeof(node));
+	mem->arr = (node*)malloc(SIZE*sizeof(node));
 	mem->len = size;
 }
 static void kill_GA(mem_GA* mem){
@@ -481,9 +481,10 @@ static int answer_ExpressionMatch(char expression[], mail* mails, int* list, int
 #include <stdbool.h>
 
 /**********Constant Variable***********/
-#define Q_RABIN 2388607//4388607
+#define Q_RABIN 17048577//4388607
 #define D_RABIN 36
 #define TOKEN_STRING_LENGTH 4000
+#define INIT_UNIQUE_TOKEN_NUM 1000000
 #define ULONG  long
 #define UINT  int
 #define USHORT unsigned short
@@ -495,14 +496,34 @@ static int answer_ExpressionMatch(char expression[], mail* mails, int* list, int
 #include <stdio.h>
 //#include "api.h"
 
+/**Linked list**/
+typedef struct ndl {
+    ushort id;
+    struct ndl* nxt;
+} ndl;
+
+typedef struct lklist {
+    ndl* str;
+    ndl* end;
+} lklist;
+
+typedef struct lkmem {
+    ndl* node;
+    int used;
+    int max;
+} lkmem;
+
+void init_lkmem(lkmem* lkm, int size);
+void kill_lkmem(lkmem* lkm);
+ndl* get_ndl_mem(lkmem*lkm);
+void append_lk(lklist* list, short val, lkmem* lkm);
+
 typedef struct Matrix_ushort {
-    ushort** m;
-    ushort* len;
+    lklist* map;
     int nrow;
-    int ncol;
 } Matrix_ushort;
 
-void init_Matrix_ushort(Matrix_ushort* M, int nrow, int ncol);
+void init_Matrix_ushort(Matrix_ushort* M, int nrow);
 void kill_Matrix_ushort(Matrix_ushort* M);
 
 typedef struct infoFS{
@@ -510,6 +531,7 @@ typedef struct infoFS{
     double* num_unique;
     double* SimList;
     bool* isVis;
+    lkmem lkm;//nodes memory
 } infoFs;
 
 void init_FS(infoFs* info);
@@ -531,7 +553,6 @@ void register_hash(infoFs* info, int ID, int hash);
 #include <stdio.h>
 #include <time.h>
 
-/*
 static void get_mails(char* filename, mail** mails, int* num_mail){
     FILE* fp;
     size_t len;
@@ -574,6 +595,7 @@ static void get_mails(char* filename, mail** mails, int* num_mail){
         strcpy((*mails)[i].content, content);
         strcpy((*mails)[i].from, from);
         strcpy((*mails)[i].to, to);
+
     }
 
     fclose(fp);
@@ -584,37 +606,35 @@ static void get_mails(char* filename, mail** mails, int* num_mail){
     free(from);
     free(to);
 }
+
 int main(){
-    
-    char* hashmap[Q_RABIN];
-    for(int i=0;i<Q_RABIN;i++){
-        hashmap[i] = (char*)malloc(1000*sizeof(char));
-    }
+    int num_mail;
+    mail* mails;
+    int* list = (int*)malloc(sizeof(int)*MAX_N_MAIL);
+    int nlist;
+    get_mails("test/data/test.in", &mails, &num_mail);
+  
+    //Problem
+    //ID: 5
+    int mid = 9451;
+    double thd = 0.17;
+    //Answer
+    int ans[] = {1597, 4026, 4122, 5123, 7033, 7176, 7802, 7845}; 
+    int lans = 8;
+    infoFs infs;
 
-    char token6286[10000] = "a,and,antbird,antbirds,are,backed,bird,bolivia,brazil,colombia,ecuador,family,forests,found,french,guiana,guyana,habitats,http,hylophylax,i,in,is,it,its,lowland,moist,naevia,naevius,natural,of,on,or,org,paragraph,peru,read,species,spot,subtropical,suriname,swamps,thamnophilidae,the,tropical,venezuela,wikipedia\0";
+    init_FS(&infs);
+    proc_FS(&infs, mails, num_mail);
 
-    char token676[10000] = "a,actually,adrift,after,agree,all,also,alternate,an,and,announces,appear,are,around,arrested,as,ashore,at,battling,be,beak,beak,because,been,being,black,book,buccaneers,buried,bursts,but,by,called,can,can,captain,captures,caribbean,cartoon,celebrate,century,chest,comic,contains,counterfeit,crew,dated,dead,decoy,directly,discussion,disguises,disney,donald,down,drop,duck,eating,echo,eight,end,endings,ends,england,eyes,film,find,finds,first,fish,for,found,from,game,gap,get,getting,geysers,ghost,ghosts,gloom,gold,good,goofy,got,guys,had,has,have,haven,he,heading,headline,heard,hearted,help,henry,hidden,hiding,him,himself,his,http,hunters,i,if,in,interludes,is,island,it,just,later,lease,leg,lifted,location,long,loot,losing,lost,man,map,men,mickey,morgan,morgan,mouse,named,new,newspaper,night,no,not,nutty,obtain,of,off,offers,old,on,one,org,over,overhears,owners,paragraph,parrot,passing,peg,persuades,pete,pieces,pirate,pirates,place,placed,plants,pointer,production,quicksand,raft,read,real,rear,released,remembered,rescue,returning,reveal,ride,sea,series,sets,share,ship,skunk,slapstick,small,so,stormy,story,take,taking,tales,tattoo,tattooed,tavern,tell,that,the,their,them,there,they,this,three,tiny,to,trapped,treasure,treasure,trio,tropical,true,trying,two,unreleased,version,very,village,visited,was,wash,were,what,when,where,which,who,whom,wikipedia,with,woman,would,yellow\0";
+    //Solve
+    answer_FS(&infs, mails, mid, num_mail, thd, list, &nlist);
 
-    char tokenInter[100000] = "a,actually,adrift,after,agree,all,also,alternate,an,and,announces,antbird,antbirds,appear,are,around,arrested,as,ashore,at,backed,battling,be,beak,because,been,being,bird,black,bolivia,book,brazil,buccaneers,buried,bursts,but,by,called,can,captain,captures,caribbean,cartoon,celebrate,century,chest,colombia,comic,contains,counterfeit,crew,dated,dead,decoy,directly,discussion,disguises,disney,donald,down,drop,duck,eating,echo,ecuador,eight,end,endings,ends,england,eyes,family,film,find,finds,first,fish,for,forests,found,french,from,game,gap,get,getting,geysers,ghost,ghosts,gloom,gold,good,goofy,got,guiana,guyana,guys,habitats,had,has,have,haven,he,heading,headline,heard,hearted,help,henry,hidden,hiding,him,himself,his,http,hunters,hylophylax,i,if,in,interludes,is,island,it,its,just,later,lease,leg,lifted,location,long,loot,losing,lost,lowland,man,map,men,mickey,moist,morgan,mouse,naevia,naevius,named,natural,new,newspaper,night,no,not,nutty,obtain,of,off,offers,old,on,one,or,org,over,overhears,owners,paragraph,parrot,passing,peg,persuades,peru,pete,pieces,pirate,pirates,place,placed,plants,pointer,production,quicksand,raft,read,real,rear,released,remembered,rescue,returning,reveal,ride,sea,series,sets,share,ship,skunk,slapstick,small,so,species,spot,stormy,story,subtropical,suriname,swamps,take,taking,tales,tattoo,tattooed,tavern,tell,thamnophilidae,that,the,their,them,there,they,this,three,tiny,to,trapped,treasure,trio,tropical,true,trying,two,unreleased,venezuela,version,very,village,visited,was,wash,were,what,when,where,which,who,whom,wikipedia,with,woman,would,yellow\0";
-
-
-    int iStr = 0;
-    int iNxt;
-    int hash;
-    char tokenB[10000];
-    while(1){
-        iNxt = popTokenHash(tokenInter, tokenB, iStr, &hash);
-        if(iNxt==-1){
-            break;
-        }
-        if(strncmp(hashmap[hash], tokenB, strlen(tokenB)) != 0){
-            printf("Spurious Hit: %s / %s with ID=%d", hashmap[hash], tokenB, hash);
-        };
-        strncpy(hashmap[hash], tokenB, strlen(tokenB)+1);
-    }
+    //GC
+    free(list);
+    kill_FS(&infs);
 }
-*/
 
+/*
 int main(void) {
     // Var: Api
     int n_mails, n_queries;
@@ -649,6 +669,7 @@ int main(void) {
 
             answer_FS(&infs, mails, mid,n_mails, threshold, list, &nlist);
 
+
             //answer
             //if(queries[i].data.find_similar_data.threshold>=-1){
             api.answer(queries[i].id, list, nlist);
@@ -680,6 +701,7 @@ int main(void) {
 
     return 0;
 }
+*/
 
 /************Math************/
 
@@ -1055,30 +1077,53 @@ int get_Matrix(Matrix*M, int r, int c){
     return M->m[offset];
 }
 
-void init_Matrix_ushort(Matrix_ushort* M, int nrow, int ncol){
-    ushort **array = malloc(nrow * sizeof *array + (nrow * (ncol * sizeof **array)));
-    if(array==NULL){
-        printf("\n\n\nMemeory Insufficient: init matrix\n\n\n");
-    };
-    size_t i;
-    ushort * const data = array + nrow;
-    for(i = 0; i < nrow; i++){
-        array[i] = data + i * ncol;
-    }
+void init_lkmem(lkmem* lkm, int size){
+    lkm->node = (ndl*)malloc(size*sizeof(ndl));
+    lkm->used = 0;
+    lkm->max = size;
+}
+void kill_lkmem(lkmem* lkm){
+    free(lkm->node);
+    lkm->max = 0;
+};
 
-    M->m = array;
-    M->ncol = ncol;
-    M->nrow = nrow;
-    M->len = (ushort*)calloc(nrow, sizeof(ushort));
+ndl* get_ndl_mem(lkmem*lkm){
+    if(lkm->used == lkm->max){
+        lkm->node = (ndl*)realloc(lkm->node, (lkm->max*2)*sizeof(ndl));
+        lkm->max = lkm->max*2;
+    }
+    ndl* hold = &lkm->node[lkm->used];
+    hold->nxt = NULL;
+    ++lkm->used;
+    return hold;
+}
+
+void append_lk(lklist* list, short val, lkmem* lkm){
+    ndl* new = get_ndl_mem(lkm);
+    new->id = val;
+    if(list->str==NULL){
+        list->str = new;
+        list->end = new;
+    }
+    else{
+        list->end->nxt = new;
+        list->end = new;
+    }
+}
+
+void init_Matrix_ushort(Matrix_ushort* M, int nrow){
+   M->map = (lklist*)calloc(nrow,sizeof(lklist));
+   M->nrow = nrow;
 }
 
 void kill_Matrix_ushort(Matrix_ushort* M){
-    free(M->m);
-    free(M->len);
+    free(M->map);
+    M->nrow = 0;
 }
 
 void init_FS(infoFs* info){
-    init_Matrix_ushort(&info->hstack, Q_RABIN, MAX_N_MAIL);
+    init_Matrix_ushort(&info->hstack, Q_RABIN);
+    init_lkmem(&info->lkm, INIT_UNIQUE_TOKEN_NUM);
     info->num_unique = (double*)calloc(MAX_N_MAIL,sizeof(double));
     info->SimList = (double*)calloc(MAX_N_MAIL, sizeof(double));
     info->isVis = (bool*)calloc(Q_RABIN, sizeof(bool));
@@ -1089,19 +1134,20 @@ void kill_FS(infoFs* info){
     free(info->SimList);
     free(info->isVis);
     kill_Matrix_ushort(&info->hstack);
+    kill_lkmem(&info->lkm);
 };
 
 void register_hash(infoFs* info, int ID, int hash){
-    if(info->hstack.len[hash] != 0){//check duplicate
-        int end = info->hstack.m[hash][info->hstack.len[hash]-1];
+    lklist* row = &info->hstack.map[hash];
+    if(row->end != NULL){//check duplicate
+        int end = row->end->id;
         if(end == ID){//already appended
             return;
         }
     }
 
     //Add hash
-    info->hstack.m[hash][info->hstack.len[hash]] = ID;
-    ++info->hstack.len[hash];
+    append_lk(&info->hstack.map[hash], ID, &info->lkm);
 
     //Register unique count
     info->num_unique[ID] += 1;
@@ -1226,9 +1272,11 @@ void answer_FS(infoFs*info, mail* mails, int ID, int n_mail, double threshold, i
         }
         
         //Find similar
-        for(int i=0;i<info->hstack.len[hash];i++){
-            interID = info->hstack.m[hash][i];
+        ndl* inode = info->hstack.map[hash].str;
+        while(inode != NULL){
+            interID = inode->id;
             ++Overlap[(int)interID];
+            inode = inode->nxt;
         }
         isVis[hash] = true;
     }
@@ -1246,10 +1294,12 @@ void answer_FS(infoFs*info, mail* mails, int ID, int n_mail, double threshold, i
             continue;
         }
         
-        //Find similar
-        for(int i=0;i<info->hstack.len[hash];i++){
-            interID = info->hstack.m[hash][i];
+       //Find similar
+        ndl* inode = info->hstack.map[hash].str;
+        while(inode != NULL){
+            interID = inode->id;
             ++Overlap[(int)interID];
+            inode = inode->nxt;
         }
         isVis[hash] = true;
     }

@@ -142,12 +142,4 @@ void test_data_2(void){
 }
 
 
-void void_test_matrix(void){
-    Matrix_ushort M; 
-    init_Matrix_ushort(&M, 1000, 200);
-    M.m[999][199] = 13;
-    TEST_CHECK(M.m[999][199]==13);
-    TEST_CHECK(M.m[999][194]==0);
-}
-
 #endif

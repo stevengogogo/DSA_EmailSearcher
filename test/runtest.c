@@ -34,10 +34,9 @@ TEST_LIST = {
     {"Power", test_power},
     {"Char 2 number", test_char2num},
     {"Quick sort", test_sort},
-    {"Matrix", test_matrix},
     {"Find Similar: data", test_FS_data},
     {"FS: data 2", test_data_2},
-    {"Matrix ushort",void_test_matrix},
+    //{"Matrix ushort",void_test_matrix},
     //{"FS check spurious hit", test_check_spurious},
     //{"FS check spurious hit QID91: email 1099 vs 91 ", test_check_spurious2},
     /*

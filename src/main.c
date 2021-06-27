@@ -53,7 +53,8 @@ int main(void) {
         
         //Expression Match
         else if(queries[i].type == expression_match){
-		    //api.answer(queries[i].id, NULL, 0);
+			answer_ExpressionMatch(queries[i].data.expression_match_data.expression,mails,list,&nlist);
+		    api.answer(queries[i].id, list, nlist);
         }
 
         //Group Analysis

@@ -106,7 +106,7 @@ void test_matrix(void){
     TEST_CHECK(get_Matrix(&M, 0, 1) == 0);
     TEST_CHECK(get_Matrix(&M, 1, 0) == 0);
     TEST_CHECK(get_Matrix(&M, 1, 1) == 0);
-
+    kill_Matrix(&M);
 }
 
 

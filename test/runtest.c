@@ -8,6 +8,7 @@
 #include "test_dymarr.h"
 #include "test_FindSimilar.h"
 #include "test_GroupAnalysis.h"
+#include "test_FS_spurious_hit.h"
 
 // Run TESTs 
 TEST_LIST = {
@@ -35,8 +36,10 @@ TEST_LIST = {
     {"Quick sort", test_sort},
     {"Matrix", test_matrix},
     {"Find Similar: data", test_FS_data},
-    //{"FS: data 2", test_data_2},
+    {"FS: data 2", test_data_2},
     {"Matrix ushort",void_test_matrix},
+    //{"FS check spurious hit", test_check_spurious},
+    //{"FS check spurious hit QID91: email 1099 vs 91 ", test_check_spurious2},
     /*
     {"Find Similar: Memory", memory_allocation_FS},
     {"Find Similar: init", test_init_FS},

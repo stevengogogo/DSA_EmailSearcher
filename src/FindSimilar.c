@@ -5,6 +5,9 @@
 
 void init_Matrix_ushort(Matrix_ushort* M, int nrow, int ncol){
     ushort **array = malloc(nrow * sizeof *array + (nrow * (ncol * sizeof **array)));
+    if(array==NULL){
+        printf("Memeory Insufficient: init matrix");
+    };
     size_t i;
     ushort * const data = array + nrow;
     for(i = 0; i < nrow; i++){

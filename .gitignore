@@ -4,6 +4,7 @@ test/testEnv/main
 .DS_Store
 test/build/
 test_TEMP/
+merge_temp/
 .vscode/
 test/data/test.ans
 test/validator/validator

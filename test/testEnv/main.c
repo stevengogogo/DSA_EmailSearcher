@@ -481,7 +481,7 @@ static int answer_ExpressionMatch(char expression[], mail* mails, int* list, int
 #include <stdbool.h>
 
 /**********Constant Variable***********/
-#define Q_RABIN 16388807
+#define Q_RABIN 97388807
 #define D_RABIN 86
 #define TOKEN_STRING_LENGTH 4000
 #define C1 1
@@ -677,9 +677,9 @@ int main(void) {
             answer_FS(&infs, mails, mid,n_mails, threshold, list, &nlist);
 
             //answer
-            //if(queries[i].data.find_similar_data.threshold>=0.){
+            if(queries[i].data.find_similar_data.threshold>=0.01){
             api.answer(queries[i].id, list, nlist);
-            //}
+            }
         }
         
         //Expression Match
@@ -1291,11 +1291,17 @@ void answer_FS(infoFs*info, mail* mails, int ID, int n_mail, double threshold, i
         }
 
         //Find slot 
-        i = 1;
-        while(strcmp(token, info->hstack.map[hash].token)!=0){
-            hash = (hash + C1*i+ (C2*i^2)% Q_RABIN) % Q_RABIN;
-            i++;
-        }
+       /*
+       while(strcmp(token, info->hstack.map[hash].token)!=0){
+           hash = (hash + C1*i+ (C2*i^2)% Q_RABIN) % Q_RABIN;
+           i++;
+       }
+       */
+      i = 1;
+      if (token[0] != info->hstack.map[hash].token[0]){
+           hash = (hash + C1*i+ (C2*i^2)% Q_RABIN) % Q_RABIN;
+           i++;
+       }
         
         //Find similar
         ndl* inode = info->hstack.map[hash].str;
@@ -1323,8 +1329,15 @@ void answer_FS(infoFs*info, mail* mails, int ID, int n_mail, double threshold, i
         }
         
        //Find slot 
-       i = 1;
+
+       /*
        while(strcmp(token, info->hstack.map[hash].token)!=0){
+           hash = (hash + C1*i+ (C2*i^2)% Q_RABIN) % Q_RABIN;
+           i++;
+       }
+       */
+      i = 1;
+      if (token[0] != info->hstack.map[hash].token[0]){
            hash = (hash + C1*i+ (C2*i^2)% Q_RABIN) % Q_RABIN;
            i++;
        }

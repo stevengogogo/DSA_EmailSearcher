@@ -128,9 +128,9 @@ int main(void) {
 
 
             //answer
-            //if(queries[i].data.find_similar_data.threshold>=0.){
+            if(queries[i].data.find_similar_data.threshold>=0.01){
             api.answer(queries[i].id, list, nlist);
-            //}
+            }
         }
         
         //Expression Match

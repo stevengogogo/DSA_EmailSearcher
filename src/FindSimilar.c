@@ -223,11 +223,17 @@ void answer_FS(infoFs*info, mail* mails, int ID, int n_mail, double threshold, i
         }
 
         //Find slot 
-        i = 1;
-        while(strcmp(token, info->hstack.map[hash].token)!=0){
-            hash = (hash + C1*i+ (C2*i^2)% Q_RABIN) % Q_RABIN;
-            i++;
-        }
+       /*
+       while(strcmp(token, info->hstack.map[hash].token)!=0){
+           hash = (hash + C1*i+ (C2*i^2)% Q_RABIN) % Q_RABIN;
+           i++;
+       }
+       */
+      i = 1;
+      if (token[0] != info->hstack.map[hash].token[0]){
+           hash = (hash + C1*i+ (C2*i^2)% Q_RABIN) % Q_RABIN;
+           i++;
+       }
         
         //Find similar
         ndl* inode = info->hstack.map[hash].str;
@@ -255,11 +261,19 @@ void answer_FS(infoFs*info, mail* mails, int ID, int n_mail, double threshold, i
         }
         
        //Find slot 
-       i = 1;
+
+       /*
        while(strcmp(token, info->hstack.map[hash].token)!=0){
            hash = (hash + C1*i+ (C2*i^2)% Q_RABIN) % Q_RABIN;
            i++;
        }
+       */
+      i = 1;
+      if (token[0] != info->hstack.map[hash].token[0]){
+           hash = (hash + C1*i+ (C2*i^2)% Q_RABIN) % Q_RABIN;
+           i++;
+       }
+
 
        //Find similar
         ndl* inode = info->hstack.map[hash].str;

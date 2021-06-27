@@ -20,7 +20,7 @@
 #include "utils.h"
 
 /**********Constant Variable***********/
-#define Q_RABIN 16388807
+#define Q_RABIN 97388807
 #define D_RABIN 86
 #define TOKEN_STRING_LENGTH 4000
 #define C1 1

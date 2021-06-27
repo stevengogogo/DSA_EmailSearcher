@@ -121,14 +121,7 @@ int main(void) {
 
     //FS//
 	api.init(&n_mails, &n_queries, &mails, &queries);   
-
     init_FS(&infs);
-
-
-    //GA//
-
-    //Preprocessing
-    //Preprocess_FindSimilar(smrys, mails, n_mails);
 
     //Answer
 	for(int i = 0; i < n_queries; i++){
@@ -158,8 +151,8 @@ int main(void) {
         
         //Expression Match
         else if(queries[i].type == expression_match){
-			answer_ExpressionMatch(queries[i].data.expression_match_data.expression,mails,list,&nlist);
-		    api.answer(queries[i].id, list, nlist);
+			//answer_ExpressionMatch(queries[i].data.expression_match_data.expression,mails,list,&nlist);
+		    //api.answer(queries[i].id, list, nlist);
         }
 
         //Group Analysis

@@ -20,8 +20,8 @@
 #include "utils.h"
 
 /**********Constant Variable***********/
-#define Q_RABIN 268435455
-#define D_RABIN 36
+#define Q_RABIN 8388607
+#define D_RABIN 81
 #define TOKEN_STRING_LENGTH 4000
 //#define INIT_UNIQUE_TOKEN_NUM 
 #define ULONG  long
@@ -44,6 +44,7 @@ typedef struct ndl {
 typedef struct lklist {
     ndl* str;
     ndl* end;
+    char token[400];
 } lklist;
 
 typedef struct lkmem {
@@ -76,6 +77,7 @@ typedef struct infoFS{
     double* SimList;
     bool* isVis;
     lkmem lkm;//nodes memory
+    int* resetID;
 } infoFs;
 
 
@@ -92,7 +94,7 @@ void proc_FS(infoFs* info, mail* mails, int n_mail);
 int Hash_RK(char s[]);
 
 void answer_FS(infoFs*info, mail* mails, int ID, int n_mail, double threshold, int* list, int* nlist);
-void register_hash(infoFs* info, int ID, int hash);
+void register_hash(infoFs* info, int ID, int hash, char token[], int i);
 
 
 #endif

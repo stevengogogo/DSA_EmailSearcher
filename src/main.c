@@ -110,6 +110,7 @@ int main(void) {
     //Initiation
 	api.init(&n_mails, &n_queries, &mails, &queries);   
     init_FS(&infs);
+    proc_FS(&infs, mails,n_mails);
     init_GA(&memGA, SIZE);
 
     //Answer
@@ -127,7 +128,7 @@ int main(void) {
 
 
             //answer
-            //if(queries[i].data.find_similar_data.threshold>=-1){
+            //if(queries[i].data.find_similar_data.threshold>=0.){
             api.answer(queries[i].id, list, nlist);
             //}
         }
@@ -142,7 +143,6 @@ int main(void) {
         else {
 
             answer_GroupAnalysis(queries[i].data.group_analyse_data.mids, queries[i].data.group_analyse_data.len,mails, list, &nlist, &memGA);
-
             api.answer(queries[i].id, list, nlist);
    
         }

@@ -481,8 +481,8 @@ static int answer_ExpressionMatch(char expression[], mail* mails, int* list, int
 #include <stdbool.h>
 
 /**********Constant Variable***********/
-#define Q_RABIN 17047//4388607
-#define D_RABIN 36
+#define Q_RABIN 8388607
+#define D_RABIN 81
 #define TOKEN_STRING_LENGTH 4000
 //#define INIT_UNIQUE_TOKEN_NUM 
 #define ULONG  long
@@ -505,6 +505,7 @@ typedef struct ndl {
 typedef struct lklist {
     ndl* str;
     ndl* end;
+    char token[400];
 } lklist;
 
 typedef struct lkmem {
@@ -532,6 +533,7 @@ typedef struct infoFS{
     double* SimList;
     bool* isVis;
     lkmem lkm;//nodes memory
+    int* resetID;
 } infoFs;
 
 void init_FS(infoFs* info);
@@ -546,7 +548,7 @@ void proc_FS(infoFs* info, mail* mails, int n_mail);
 int Hash_RK(char s[]);
 
 void answer_FS(infoFs*info, mail* mails, int ID, int n_mail, double threshold, int* list, int* nlist);
-void register_hash(infoFs* info, int ID, int hash);
+void register_hash(infoFs* info, int ID, int hash, char token[], int i);
 
 #endif
 
@@ -656,6 +658,7 @@ int main(void) {
     //Initiation
 	api.init(&n_mails, &n_queries, &mails, &queries);   
     init_FS(&infs);
+    proc_FS(&infs, mails,n_mails);
     init_GA(&memGA, SIZE);
 
     //Answer
@@ -672,7 +675,7 @@ int main(void) {
             answer_FS(&infs, mails, mid,n_mails, threshold, list, &nlist);
 
             //answer
-            //if(queries[i].data.find_similar_data.threshold>=-1){
+            //if(queries[i].data.find_similar_data.threshold>=0.){
             api.answer(queries[i].id, list, nlist);
             //}
         }
@@ -687,7 +690,6 @@ int main(void) {
         else {
 
             answer_GroupAnalysis(queries[i].data.group_analyse_data.mids, queries[i].data.group_analyse_data.len,mails, list, &nlist, &memGA);
-
             api.answer(queries[i].id, list, nlist);
    
         }
@@ -1123,30 +1125,48 @@ void init_FS(infoFs* info){
     info->num_unique = (double*)calloc(MAX_N_MAIL,sizeof(double));
     info->SimList = (double*)calloc(MAX_N_MAIL, sizeof(double));
     info->isVis = (bool*)calloc(Q_RABIN, sizeof(bool));
+    info->resetID = (int*)malloc(100000*sizeof(int));
 };
 
 void kill_FS(infoFs* info){
     free(info->num_unique);
     free(info->SimList);
+    free(info->resetID);
     free(info->isVis);
     kill_Matrix_ushort(&info->hstack);
     kill_lkmem(&info->lkm);
 };
 
-void register_hash(infoFs* info, int ID, int hash){
+void register_hash(infoFs* info, int ID, int hash, char token[], int i){
     lklist* row = &info->hstack.map[hash];
-    if(row->end != NULL){//check duplicate
+
+    if(row->end == NULL){//First one to be in this slot
+        //Add hash
+        append_lk(row, ID, &info->lkm);
+
+        //Register unique count
+        info->num_unique[ID] += 1;
+        //Register Token
+        strcpy(row->token, token);
+        return;
+    }
+    else{
         int end = row->end->id;
         if(end == ID){//already appended
             return;
         }
+        else{
+            if(strcmp(token, row->token)==0){
+                //Add hash
+                append_lk(row, ID, &info->lkm);
+                //Register unique count
+                info->num_unique[ID] += 1;
+            }
+            else{
+                register_hash(info, ID, (hash+i+2)%Q_RABIN, token, i+1);
+            }
+        }
     }
-
-    //Add hash
-    append_lk(&info->hstack.map[hash], ID, &info->lkm);
-
-    //Register unique count
-    info->num_unique[ID] += 1;
 };
 
 /** Return location*/
@@ -1208,7 +1228,7 @@ void append_mHash(infoFs* info, mail* mails, int ID){
             break;
         }
         iStr = iNxt;
-        register_hash(info, ID, hash);
+        register_hash(info, ID, hash, token, 1);
     }
 
     //Subject
@@ -1219,7 +1239,7 @@ void append_mHash(infoFs* info, mail* mails, int ID){
             break;
         }
         iStr = iNxt;
-        register_hash(info,ID, hash);
+        register_hash(info, ID, hash, token, 1);
     }
 }
 
@@ -1238,12 +1258,12 @@ int Hash_RK(char s[]){
 		RK = (D_RABIN*RK + (int)s[i])%Q_RABIN;
 		i++;
 	}
-	return abs(RK)%Q_RABIN;
+	return (abs(RK))%Q_RABIN;
 }
 
 void answer_FS(infoFs*info, mail* mails, int ID, int n_mail, double threshold, int* list, int* nlist){
     bool* isVis = info->isVis;
-    memset(isVis, 0, Q_RABIN*sizeof(bool));
+    int lenRes = 0;//reset len
     double Overlap[MAX_N_MAIL]={0};
     char* text = mails[ID].content;//Remember to add subject
     int iNxt;
@@ -1254,6 +1274,7 @@ void answer_FS(infoFs*info, mail* mails, int ID, int n_mail, double threshold, i
     ushort id = (ushort)ID;
     ushort interID;
     *nlist = 0;
+    int i;
 
     // Content
     while(1){
@@ -1266,6 +1287,13 @@ void answer_FS(infoFs*info, mail* mails, int ID, int n_mail, double threshold, i
         if(isVis[hash]){
             continue;
         }
+
+        //Find slot 
+       i = 1;
+       while(strncmp(token, info->hstack.map[hash].token, strlen(token))!=0){
+            hash = (hash + i) % Q_RABIN;
+            ++i;
+        }
         
         //Find similar
         ndl* inode = info->hstack.map[hash].str;
@@ -1275,8 +1303,10 @@ void answer_FS(infoFs*info, mail* mails, int ID, int n_mail, double threshold, i
             inode = inode->nxt;
         }
         isVis[hash] = true;
+        info->resetID[lenRes] = hash;
+        ++lenRes;
     }
-
+    
     char* subject = mails[ID].subject; 
     iStr = 0;
     while(1){
@@ -1290,6 +1320,13 @@ void answer_FS(infoFs*info, mail* mails, int ID, int n_mail, double threshold, i
             continue;
         }
         
+       //Find slot 
+       i = 1;
+       while(strcmp(token, info->hstack.map[hash].token)!=0){
+           hash = (hash +i+2) % Q_RABIN;
+           i++;
+       }
+
        //Find similar
         ndl* inode = info->hstack.map[hash].str;
         while(inode != NULL){
@@ -1298,6 +1335,8 @@ void answer_FS(infoFs*info, mail* mails, int ID, int n_mail, double threshold, i
             inode = inode->nxt;
         }
         isVis[hash] = true;
+        info->resetID[lenRes] = hash;
+        ++lenRes;
     }
     
     // Similarity
@@ -1309,4 +1348,9 @@ void answer_FS(infoFs*info, mail* mails, int ID, int n_mail, double threshold, i
         }
     }
 
+    //Reset
+    for(int i=0;i<lenRes;i++){
+        hash = info->resetID[i];
+        isVis[hash] = false;
+    }
 }

@@ -180,144 +180,259 @@ int get_Matrix(Matrix*M, int r, int c);
 #include <string.h>
 #include <stdbool.h>
 
+#ifndef GROUPANALYSIS_H
+#define GROUPANALYSIS_H
+//#include "api.h"
+#include <limits.h>
+#include <string.h>
+#include <stdio.h>
+#include <stdlib.h>
+#include <assert.h>
+#define SIZE 1000001
+
+typedef struct Node{
+	char* name;
+	int parentIdx;
+	int size;
+}node;
+/**/
+static node* makeset(){
+	node* arr = (node*)malloc(sizeof(node)* SIZE*10);
+	assert(arr!=NULL);
+	return arr;
+}
+
+static int hash(char word[]){
+	int i = 0;
+	int RK = 0;
+	while(word[i]!='\0'){
+		RK = (62*RK + (int)word[i])%SIZE;
+		i++;
+	}
+	return abs(RK)%SIZE;
+}
+
+static int findIdx(node*set, char word[]){
+	int hashed = hash(word);
+	while(set[hashed].name){
+		if(strcmp(set[hashed].name, word)!=0){
+			hashed = (hashed+1)%SIZE;
+		}else return hashed;
+	}
+	return hashed;
+}
+
+static void inputTable(node* set, char word[]){
+	int hashed = findIdx(set, word);
+	if(!set[hashed].name){
+		set[hashed].name = word;
+		set[hashed].parentIdx = hashed;
+		set[hashed].size = 1;
+	}
+}
+
+static int findset(node *set, int hashed){
+
+	if(set[hashed].parentIdx!=hashed){
+		set[hashed].parentIdx = findset(set,set[hashed].parentIdx);
+	}
+	return set[hashed].parentIdx;
+}
+
+static void link_GA(node *set, int nodex, int nodey ,int *count, int *max){
+	if(set[nodex].size>set[nodey].size){
+		set[nodey].parentIdx = nodex;
+		set[nodex].size += set[nodey].size;
+		if(set[nodey].size>=2){
+			*count-=1;
+		}
+		set[nodey].size = 0;
+		if(set[nodex].size>*max){
+			*max = set[nodex].size;
+		}
+	}else{
+		set[nodex].parentIdx = nodey;
+		if(set[nodex].size==set[nodey].size&&set[nodex].size==1){
+			*count += 1;
+		}
+		set[nodey].size += set[nodex].size;
+		if(set[nodex].size>=2){
+			*count -= 1;
+		}
+		set[nodex].size = 0;
+		if(set[nodey].size>*max){
+			*max = set[nodey].size;
+		}
+	}
+}
+
+static void setunion(node*set, char word1[],char word2[], int* count, int* max){
+	inputTable(set, word1);
+	inputTable(set, word2);
+	int nodex = findIdx(set, word1);
+	int nodey = findIdx(set, word2);
+	int idxx = findset(set, nodex);
+	int idxy = findset(set, nodey);
+	if(idxx!=idxy){
+		link_GA(set, idxx, idxy, count, max);
+	}
+}
+
+static void answer_GroupAnalysis(int mid[], int len, mail* mails, int* list, int* nlist){
+	node* arr = makeset();
+	int count = 0;
+	int max = 0;
+
+	for(int i = 0; i < len; i++){
+		setunion(arr,mails[mid[i]].from, mails[mid[i]].to, &count, &max);
+	}
+ 
+  //ANS
+  list[0] = count;
+  list[1] = max;
+  *nlist = 2;
+
+  free(arr);
+
+}
+
+#endif
+
 /**********Constant Variable***********/
 #define Q_RABIN 170001
-#define D_RABIN 36
+#define D_RABIN 62
 #define INIT_SPURIOUS_COUNT 3
 #define INIT_UNIQUE_TOKEN_SIZE 10
 #define TOKEN_STRING_LENGTH 1000
 #define ULONG  long
 #define UINT  int
 #define USHORT unsigned short
+#define ushort unsigned short
 
-/**Helper function**/
-/************Dynamic Array (Int) Stack**************/
+#include <stdlib.h>
+#include <assert.h>
+#include <string.h>
+#include <stdio.h>
+//#include "api.h"
 
-/**
- * @brief Information for global memory storage.
- * @note This structure is to provide public memory, and minimize the use of @ref malloc
- * @param LOC_top_unused index of unused memory
- * @param LOC_ARRAY array for store location data
- * @param LEN capacity of the memory
- */
-typedef struct MEMORY_SHORT {
-    ULONG top_unused;
-    USHORT* ARRAY;
-    ULONG LEN;
-} MEMORY_SHORT;
+typedef struct Matrix_ushort {
+    ushort** m;
+    ushort* len;
+    int nrow;
+    int ncol;
+} Matrix_ushort;
 
-typedef struct MEMORY_ULONG {
-    ULONG top_unused;
-    int* ARRAY;
-    ULONG LEN;
-} MEMORY_ULONG;
+void init_Matrix_ushort(Matrix_ushort* M, int nrow, int ncol);
+void kill_Matrix_ushort(Matrix_ushort* M);
 
-typedef struct TokenInfo {
-    USHORT count;
-    USHORT loc[INIT_SPURIOUS_COUNT];//location of the hash on string
-} TokenInfo;
+typedef struct infoFS{
+    Matrix_ushort hstack;
+    double* num_unique;
+    double* SimList;
+} infoFs;
 
-static struct MEMORY_ULONG existTokens_mem;
+void init_FS(infoFs* info);
+void kill_FS(infoFs* info);
 
-/**
- * @brief 
- * @note Each email is using the hash map with @ref Q_RABIN size, and each slot has @ref INIT_SPURIOUS_COUNT location data.
- * @param loc_mem global struct for memory storage
- * @param num_mail number of email
- */
-void init_MEM_ULONG(struct MEMORY_ULONG* mem, ULONG len);
-void init_MEM_SHORT(struct MEMORY_SHORT* mem, ULONG len);
-
-/** Recycle the memory of @ref LOC_MEM*/
-void kill_MEM_ULONG(struct MEMORY_ULONG* mem);
-void kill_MEM_SHORT(struct MEMORY_SHORT* mem);
-
-/******Token and Structure*******/
-
-/** Text Summary*/
-typedef struct TxtSmry{
-    int id;
-    TokenInfo token[Q_RABIN]; //len = Q_MODULE
-    int* existTokens; //Exist Token
-    dymArr* existTokens_DymArr;
-    int nToken; // unique token number
-    char* text; // Text
-    bool synced; // Check the information is updated
-    bool isExistTokens_DymArr;
-    int maxSpurious;
-} TxtSmry;
-
-/** Intiate text summary*/
-void init_TxtSmry(TxtSmry* smry, int hashMapsize);
-/** Initiate array of text summary*/
-void init_TxtSmry_arr(TxtSmry** smry, int len, int hashmapSize);
-void append_hash_TxtSmry(TxtSmry* smry, int hash);
-void _add_unique_hashlist(TxtSmry* smry, int hash);
-int get_unique_hashlist(TxtSmry* smry, int i);
-/** Kill array of TxtSmry.*/
-void kill_TxtSmry_arr(TxtSmry* smry, int len);
-
-/******Hash*******/
-/** Get token hash
- * @param iStr Pin for reading the string
- * @note Modified from @ref popToken.
- * @return iEnd. the end of the token
-*/
+/** Return location*/
 int popTokenHash(char message[], char token[], int iStr, int* Hash);
-/**
- * @brief Update the hash value with new character.
- * @param c character to append
- * @param Hash_cur current hash value
- * @return int updated hash value.
- */
-int updateHash(char c, int Hash_cur);
+void append_mHash(infoFs* info,mail* mails, int ID);
 
-/**********Main API************/
+void proc_FS(infoFs* info, mail* mails, int n_mail);
 
-/**Initialte Memory for FindSimilar*/
-void Init_FindSimilar(TxtSmry**, int n_mails);
+int Hash_RK(char s[]);
 
-/** Preprocessing: Summarize the mails*/
-void Preprocess_FindSimilar(TxtSmry*, mail*  mails, int n_mails);
+void answer_FS(infoFs*info, mail* mails, int ID, int n_mail, double threshold, int* list, int* nlist);
+void register_hash(infoFs* info, int ID, int hash);
 
-/*GC for FindSimilar problem*/
-void kill_FindSimilar(TxtSmry* smrys, int n_mails);
+#endif
 
-/******************************/
+#include <stdio.h>
+#include <time.h>
 
-/*********Hash*********/
-/** Summarize a mail*/
-void summarize_content(TxtSmry* smry, mail* m);
-/** Add text and hashing*/
-void summarize_hash(TxtSmry* smry, char* text);
+/*
+static void get_mails(char* filename, mail** mails, int* num_mail){
+    FILE* fp;
+    size_t len;
+    ssize_t read;
+    //Mail info
+    int id;
+    int maxnum = 1000000;
+    char* line = (char *) malloc(maxnum);
+    char* from= (char *) malloc(maxnum);
+    char* subject= (char *) malloc(maxnum);
+    char* idstr= (char *) malloc(maxnum);
+    char* content= (char *) malloc(maxnum);
+    char* to= (char *) malloc(maxnum);
+    size_t buffer=32;
+    size_t chr;
+    
 
-/******Jaccob Similarity*****/
+    fp = fopen(filename, "r");
+    if (fp == NULL)
+        printf("File not found");
 
-/**
- * @brief Check the similarity of two messages is exceeding threshold.
- * 
- * @param smry1 Message 1.
- * @param smry2 Message 2.
- * @param threshold the threshold of similarity `[0,1]`
- * @note swich `smry1` and `smry2` will not affect the result.
- * @return true The jaccob's similarity of `smry1` and `smry2` is beyond the threshold
- * @return false otherwise
- */
-void answer_FindSimilar(TxtSmry* smrys, int ID, double threshold, int n_mails, int* SimList, int* lenSim);
+    chr = getline(&idstr,&buffer,fp);
+    sscanf(idstr, "%d", num_mail);
+    *mails = (mail*)malloc(*num_mail*sizeof(mail));
+    
+    for(int i=0;i<*num_mail;i++){
+       
+        chr = getline(&line,&buffer,fp);
+        chr = getline(&idstr,&buffer,fp);
+        chr = getline(&from,&buffer,fp);
+        chr = getline(&content,&buffer,fp);
+        chr = getline(&subject,&buffer,fp);
+        chr = getline(&to,&buffer,fp);
 
-/************Helper Functions*****************/
-/**
- * @brief Get Jaccob's similarity from two summaries ( @ref TxtSmry). with `O(min(num_token))`
- * 
- * @note The inputs can be switched and get the same result. See https://github.com/stevengogogo/DSA_EmailSearcher/discussions/42 for Jaccob similarity 
- * @return int The jaccob similarity `[0,1]`
- */
-double similarity_val(TxtSmry* smry1, TxtSmry* smry2);
+        sscanf(idstr, "%d", &id);
+        //Check content
+        //Copy mail information
+        (*mails)[i].id = id;
+        strcpy((*mails)[i].subject, subject);
+        strcpy((*mails)[i].content, content);
+        strcpy((*mails)[i].from, from);
+        strcpy((*mails)[i].to, to);
+    }
 
-/** Maximum Jaccob's similarity with `O(1)` speed.
- * @note This function uses:  MaxSimlarity = min(nToken1, nToken2) / (nToken1 + nToken2 - min(nToken1, nToken2) ). To accquire the maximum similarity.
-*/
-int max_similarity_val(TxtSmry* smry1, TxtSmry* smry2);
+    fclose(fp);
+    free(line);
+    free(idstr);
+    free(content);
+    free(subject);
+    free(from);
+    free(to);
+}
+int main(){
+    
+    //Get mails
+    int num_mail;
+    mail* mails;
+    int* list = (int*)malloc(sizeof(int)*MAX_N_MAIL);
+    int nlist;
+    get_mails("test/data/test.in", &mails, &num_mail);
+  
+    //data
+    int mid30 = 4189;
+    int mid5=9451;
+    double thd30 = 0.180000;
+    double thd5 = 0.170000;
+    int ans30[] = {790, 1843, 1952, 8550 }; 
+    int ans5[] = {1597, 4026, 4122, 5123, 7033, 7176, 7802, 7845};
+    
+    int len30 = sizeof(ans30)/sizeof(ans30[0]);
+    int len5 = sizeof(ans5)/sizeof(ans5[0]);
+
+
+
+    infoFs infs;
+
+    init_FS(&infs);
+    proc_FS(&infs, mails, num_mail);
+
+    answer_FS(&infs, mails, mid5, num_mail, thd5, list, &nlist);
+
+    answer_FS(&infs, mails, mid30, num_mail, thd30, list, &nlist);
 
 #endif
 #ifndef GROUPANALYSIS_H
@@ -432,10 +547,13 @@ static void answer_GroupAnalysis(int mid[], int len, mail* mails, int* list, int
     *nlist = 2;
 }
 
-#endif
 
-#include <stdio.h>
-#include <time.h>
+
+    //GC
+    free(list);
+    kill_FS(&infs);
+}
+*/
 
 int main(void) {
     // Var: Api
@@ -444,17 +562,14 @@ int main(void) {
     query *queries;
 
     //Var: Find Similar
-    TxtSmry* smrys;
-    int* list = (int*)malloc(MAX_N_MAIL*sizeof(int));
-    int nlist;
-    int threshold;
+
     int mid;
+    infoFs infs;
 
     //Initiation
 
     //FS//
 	api.init(&n_mails, &n_queries, &mails, &queries);   
-    //Init_FindSimilar(&smrys, n_mails);
 
     //GA//
 
@@ -467,11 +582,12 @@ int main(void) {
 		//Find Similar
         if (queries[i].type == find_similar){
             //data
-            /*
+
             mid = queries[i].data.find_similar_data.mid;
             threshold = queries[i].data.find_similar_data.threshold;
 
             //process
+
             answer_FindSimilar(smrys, mid, threshold, n_mails, list, &nlist);
 
             //answer
@@ -480,6 +596,7 @@ int main(void) {
             }
             else{api.answer(queries[i].id,NULL,0);}
             */
+
         }
         
         //Expression Match
@@ -491,19 +608,6 @@ int main(void) {
         else {
 
             answer_GroupAnalysis(queries[i].data.group_analyse_data.mids, queries[i].data.group_analyse_data.len,mails, list, &nlist);
-
-            /*
-            printf("data ID:%d (len): %d\n", queries[i].id,queries[i].data.group_analyse_data.len);
-            for(int a=0;a<queries[i].data.group_analyse_data.len;a++){
-                printf("%d,", queries[i].data.group_analyse_data.mids[a]);
-            }
-            printf("\nEST\n");
-            for(int i=0;i<nlist;i++){
-                printf("%d, ", list[i]);
-            }
-            printf("\n");
-            */
-
             api.answer(queries[i].id, list, nlist);
 
             
@@ -881,6 +985,7 @@ void kill_Matrix(Matrix* M){
     free(M->m);
     M->ncol = 0;
     M->nrow = 0;
+
 }
 
 void set_Matrix(Matrix* M, int r, int c, int val){
@@ -899,30 +1004,67 @@ void init_MEM_ULONG(struct MEMORY_ULONG* mem, ULONG len){
     mem->ARRAY = (int*)calloc( mem->LEN, sizeof(int));
     assert(mem->ARRAY != NULL);
     mem->top_unused = 0;
-}
-void init_MEM_SHORT(struct MEMORY_SHORT* mem, ULONG len){
-    mem->LEN = len;
-    //mem->ARRAY = (int*)malloc(mem->LEN*sizeof(int));
-    mem->ARRAY = (USHORT*)calloc( mem->LEN, sizeof(USHORT));
-    assert(mem->ARRAY != NULL);
-    mem->top_unused = 0;
+
 }
 
-void kill_MEM_ULONG(struct MEMORY_ULONG* mem){
-    free(mem->ARRAY);
-    mem->ARRAY = NULL;
-    mem->LEN = 0;
-    mem->top_unused = EMTY_QUE_SIG;
+void set_Matrix(Matrix* M, int r, int c, int val){
+    int offset = r*M->ncol + c;
+    M->m[offset] = val;
 }
 
-void kill_MEM_SHORT(struct MEMORY_SHORT* mem){
-    free(mem->ARRAY);
-    mem->ARRAY = NULL;
-    mem->LEN = 0;
-    mem->top_unused = EMTY_QUE_SIG;
+int get_Matrix(Matrix*M, int r, int c){
+    int offset = r*M->ncol + c;
+    return M->m[offset];
 }
 
-/*******HASH*******/
+void init_Matrix_ushort(Matrix_ushort* M, int nrow, int ncol){
+    ushort **array = malloc(nrow * sizeof *array + (nrow * (ncol * sizeof **array)));
+    size_t i;
+    ushort * const data = array + nrow;
+    for(i = 0; i < nrow; i++){
+        array[i] = data + i * ncol;
+    }
+
+    M->m = array;
+    M->ncol = ncol;
+    M->nrow = nrow;
+    M->len = (ushort*)calloc(nrow, sizeof(ushort));
+}
+
+void kill_Matrix_ushort(Matrix_ushort* M){
+    free(M->m);
+    free(M->len);
+}
+
+void init_FS(infoFs* info){
+    init_Matrix_ushort(&info->hstack, Q_RABIN, MAX_N_MAIL);
+    info->num_unique = (double*)calloc(MAX_N_MAIL,sizeof(double));
+    info->SimList = (double*)calloc(MAX_N_MAIL, sizeof(double));
+};
+
+void kill_FS(infoFs* info){
+    free(info->num_unique);
+    free(info->SimList);
+    kill_Matrix_ushort(&info->hstack);
+};
+
+void register_hash(infoFs* info, int ID, int hash){
+    if(info->hstack.len[hash] != 0){//check duplicate
+        int end = info->hstack.m[hash][info->hstack.len[hash]-1];
+        if(end == ID){//already appended
+            return;
+        }
+    }
+
+    //Add hash
+    info->hstack.m[hash][info->hstack.len[hash]] = ID;
+    ++info->hstack.len[hash];
+
+    //Register unique count
+    info->num_unique[ID] += 1;
+};
+
+/** Return location*/
 int popTokenHash(char message[], char token[], int iStr, int* Hash){
     char c;
     int asc; //ascii number
@@ -942,7 +1084,6 @@ int popTokenHash(char message[], char token[], int iStr, int* Hash){
             if (isUpperCase_ASCII(c))
                 c = tolower(c);
             token[i] = c;
-            *Hash = updateHash(c, *Hash);
             ++i;
             ++iStr;
         }
@@ -962,204 +1103,111 @@ int popTokenHash(char message[], char token[], int iStr, int* Hash){
     }
 
     token[i] = '\0'; //end of token
+    *Hash = Hash_RK(token);
 
     return iStr;
 }
 
-int updateHash(char c, int Hash_cur){
-    int HashUPD;
-    HashUPD = Hash_cur * D_RABIN + char2num(c);
-    HashUPD = HashUPD % Q_RABIN;
-    return HashUPD;
-}
-
-/*******Main API****/
-void Init_FindSimilar(TxtSmry** smrys, int n_mails){
-    ULONG nmail = (ULONG)n_mails;
-    //Occupied hash index
-    init_MEM_ULONG(&existTokens_mem, nmail*INIT_UNIQUE_TOKEN_SIZE);
-    init_TxtSmry_arr(smrys, nmail, Q_RABIN);
-
-}
-
-void init_TxtSmry(TxtSmry* smry, int hashMapsize){
-    //Check memory is enough
-    assert(existTokens_mem.top_unused+INIT_UNIQUE_TOKEN_SIZE <= existTokens_mem.LEN);
-
-    smry->existTokens = &existTokens_mem.ARRAY[existTokens_mem.top_unused];
-
-    existTokens_mem.top_unused += INIT_UNIQUE_TOKEN_SIZE;
-
-    smry->nToken = 0;
-    smry->existTokens_DymArr = NULL;
-    smry->text = NULL;
-    smry->synced = false;
-    smry->isExistTokens_DymArr = false;
-    smry->maxSpurious = 0;
-}
-
-void init_TxtSmry_arr(TxtSmry** smry, int len, int hashmapSize){
-    int pin_memToken = 0;
-    *smry = (TxtSmry*)calloc(len, sizeof(TxtSmry));
-    assert(*smry !=NULL);
-    for(int i=0;i<len;i++){
-        init_TxtSmry(&(*smry)[i], hashmapSize);
-    }
-}
-
-void append_hash_TxtSmry(TxtSmry* smry, int hash){
-    if(smry->token[hash].count==0){
-        _add_unique_hashlist(smry, hash);
-    }
-    //Count is update here
-    ++smry->token[hash].count;
-}
-
-void _add_unique_hashlist(TxtSmry* smry, int hash){
-    //Augment array
-    if(smry->nToken==INIT_UNIQUE_TOKEN_SIZE){
-        smry->existTokens_DymArr = (dymArr*)malloc(sizeof(dymArr));
-        init_dymArr(smry->existTokens_DymArr, 2*INIT_UNIQUE_TOKEN_SIZE);
-
-        //Set flag    
-        assert(smry->isExistTokens_DymArr == false); //only do this once
-        smry->isExistTokens_DymArr = true;
-    }
-
-    //Data [INIT...]
-    if(smry->isExistTokens_DymArr){
-        append_dymArr(smry->existTokens_DymArr, hash);
-    }
-    else{//Data [0,..INIT-1]
-        smry->existTokens[smry->nToken] = hash;
-    }
-    ++smry->nToken;
-}
-
-int get_unique_hashlist(TxtSmry* smry, int i){
-    int uniHash;
-    if (i<INIT_UNIQUE_TOKEN_SIZE){
-        uniHash = smry->existTokens[i];
-    }
-    else{
-        int len = smry->existTokens_DymArr->len;
-        assert(i-INIT_UNIQUE_TOKEN_SIZE < len);
-        uniHash = smry->existTokens_DymArr->i[i-INIT_UNIQUE_TOKEN_SIZE];
-    }
-    return uniHash;
-}
-
-void kill_TxtSmry_arr(TxtSmry* smry, int len){
-    for(int i=0;i<len;i++){
-        if(smry[i].isExistTokens_DymArr){
-            kill_dymArr(smry[i].existTokens_DymArr);
-            free(smry[i].existTokens_DymArr);
-        }
-    }
-    free(smry);
-}
-
-void Preprocess_FindSimilar(TxtSmry* smrys, mail*  mails, int n_mails){
-
-    for(int i=0;i<n_mails;i++){
-        summarize_content(&smrys[i], &mails[i]);
-    }
-}
-
-void kill_FindSimilar(TxtSmry* smrys, int len){
-    kill_TxtSmry_arr(smrys, len);
-    kill_MEM_ULONG(&existTokens_mem);
-}
-
-void summarize_content(TxtSmry* smry, mail* m){
-    smry->id = m->id;
-    summarize_hash(smry, m->content);
-    smry->synced = true;
-}
-
-void summarize_hash(TxtSmry* smry, char* text){
-    //Record original text
-    smry->text = text;
-    //Retrieving Tokens
-    char token[TOKEN_STRING_LENGTH];
-    char tkH[TOKEN_STRING_LENGTH]; //history token
-    int iloc;
-    int iStrH = 0;
-    int iStr = 0; //Current pin
-    int iNxt; //Next pin
+void append_mHash(infoFs* info, mail* mails, int ID){
+    char* text = mails[ID].content;
+    char* subject = mails[ID].subject;
     int hash;
-    bool next = false;
+    int iNxt;
+    int iStr = 0;
+    char token[TOKEN_STRING_LENGTH];
 
+    // Content
     while(1){
-        next = false;
         iNxt = popTokenHash(text, token, iStr, &hash);
-        if(iNxt == -1){//no token left
+        if(iNxt==-1){
             break;
         }
-
-        //Check new token is duplicate
-        for(int i=0;i<INIT_SPURIOUS_COUNT;i++){
-            if(i<smry->token[hash].count){
-                iStrH = smry->token[hash].loc[i];
-                iStrH = popToken(text, tkH, iStrH);
-                if(strncmp(tkH, token, strlen(token))==0){
-                    next = true;
-                    break;
-                }
-            }
-            else{
-                break;
-            }
-        }
-
-        if (next){
-            //Next token
-            iStr = iNxt;
-            continue;
-        }
-   
-
-        //Append New Hash Until FULL
-        if(smry->token[hash].count<INIT_SPURIOUS_COUNT){
-            iloc = smry->token[hash].count;
-            smry->token[hash].loc[iloc] = iStr;
-        }
-
-        //Append unique hash 
-        //if(smry->token[hash].count==0){//unique token
-        append_hash_TxtSmry(smry, hash);
-        //}
-
-        //Next token
         iStr = iNxt;
-
-        //Check spurious overflow
-        if(smry->maxSpurious<smry->token[hash].count && smry->token[hash].count>1){
-            smry->maxSpurious = smry->token[hash].count - 1;
-        }
+        register_hash(info, ID, hash);
     }
 
+    //Subject
+    iStr = 0;
+    while(1){
+        iNxt = popTokenHash(subject, token, iStr, &hash);
+        if(iNxt==-1){
+            break;
+        }
+        iStr = iNxt;
+        register_hash(info,ID, hash);
+    }
 }
 
-//Similarity
-void answer_FindSimilar(TxtSmry* smrys, int ID, double threshold, int n_mails, int* SimList, int* lenSim){
+void proc_FS(infoFs* info, mail* mails, int n_mail){
+    int ID;
+    for(int i=0;i<n_mail;i++){
+        ID = mails[i].id;
+        append_mHash(info,mails, ID);
+    }
+}
+
+int Hash_RK(char s[]){
+	int i = 0;
+	int RK = 0;
+	while(s[i]!='\0'){
+		RK = (D_RABIN*RK + (int)s[i])%Q_RABIN;
+		i++;
+	}
+	return abs(RK)%Q_RABIN;
+}
+
+void answer_FS(infoFs*info, mail* mails, int ID, int n_mail, double threshold, int* list, int* nlist){
+    bool isVis[Q_RABIN] = {false};
+    double Overlap[MAX_N_MAIL]={0};
+    char* text = mails[ID].content;//Remember to add subject
+    int iNxt;
+    int iStr=0;
+    int hash;
     double sim;
-    *lenSim = 0;
+    char token[TOKEN_STRING_LENGTH];
+    ushort id = (ushort)ID;
+    ushort interID;
+    *nlist = 0;
 
-    //Retrieve Base Summary 
-    TxtSmry* SmryBase = &smrys[ID];
-    assert(SmryBase->id == ID);
-
-    // Increasing order
-    for(int i=0;i<n_mails;i++){
-        if(i==ID){continue;}
-
-        sim = similarity_val(SmryBase, &smrys[i]);
-
-        if(sim>threshold){
-            SimList[*lenSim] = i;
-            ++(*lenSim);
+    // Content
+    while(1){
+        iNxt = popTokenHash(text, token, iStr, &hash);
+        if(iNxt==-1){
+            break;
         }
+        iStr = iNxt;
+
+        if(isVis[hash]){
+            continue;
+        }
+        
+        //Find similar
+        for(int i=0;i<info->hstack.len[hash];i++){
+            interID = info->hstack.m[hash][i];
+            ++Overlap[(int)interID];
+        }
+        isVis[hash] = true;
+    }
+
+    char* subject = mails[ID].subject; 
+    iStr = 0;
+    while(1){
+        iNxt = popTokenHash(subject, token, iStr, &hash);
+        if(iNxt==-1){
+            break;
+        }
+        iStr = iNxt;
+
+        if(isVis[hash]){
+            continue;
+        }
+        
+        //Find similar
+        for(int i=0;i<info->hstack.len[hash];i++){
+            interID = info->hstack.m[hash][i];
+            ++Overlap[(int)interID];
+        }
+        isVis[hash] = true;
     }
 
 }
@@ -1173,11 +1221,7 @@ double similarity_val(TxtSmry* smry1, TxtSmry* smry2){
         hash = get_unique_hashlist(smry1, i);
         if(smry2->token[hash].count>0){
             inter+=1;
+
         }
     }
-
-        //Jaccob Similarity
-        sim = inter / ((double)smry1->nToken + (double)smry2->nToken - inter);
-
-        return sim;
 }

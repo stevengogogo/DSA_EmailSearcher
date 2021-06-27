@@ -438,7 +438,7 @@ static int answer_ExpressionMatch(char expression[], mail* mails, int n_mail,int
 	 	strcat(input, mails[i].content);
 	 	inputHashTable(hashTable, input);
 	 	char* output = expressionPostfix(expression, main_stack, hashTable);
-	 	if(postfixToValue(output, main_stack)==1) list[k++] = i;
+	 	if(postfixToValue(output, main_stack)==1) list[k++] = mails[i].id;
 	 	free(hashTable);
 	 	free(input);
 	 }

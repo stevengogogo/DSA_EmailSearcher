@@ -1,7 +1,5 @@
 var searchData=
 [
-  ['mail_11',['mail',['../structmail.html',1,'']]],
-  ['matrix_12',['Matrix',['../structMatrix.html',1,'']]],
-  ['matrix_5fushort_13',['Matrix_ushort',['../structMatrix__ushort.html',1,'']]],
-  ['merge_14',['merge',['../namespacemerge.html',1,'']]]
+  ['kill_5fmem_5fulong_15',['kill_MEM_ULONG',['../FindSimilar_8h.html#a6e2dd2f8a6e68dd5aaca7c76a32ddc05',1,'FindSimilar.c']]],
+  ['kill_5ftxtsmry_5farr_16',['kill_TxtSmry_arr',['../FindSimilar_8h.html#a59b118272255ea41350b6fc60bff4ecd',1,'FindSimilar.c']]]
 ];

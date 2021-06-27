@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['quicksort_53',['quicksort',['../utils_8h.html#a7f9501e3da8bed7be1eed5abe1b2c035',1,'utils.c']]]
+  ['max_5fsimilarity_5fval_73',['max_similarity_val',['../FindSimilar_8h.html#a61fe077f7d3542ce71eebb229949e97f',1,'FindSimilar.h']]]
 ];

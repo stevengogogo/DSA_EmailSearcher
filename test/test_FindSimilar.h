@@ -120,7 +120,7 @@ void test_data_2(void){
     int ndiff=0;
     for(int i=0;i<nlist;i++){
         TEST_CHECK(OccurAns[list[i]] != 0);
-        TEST_MSG("ID: %d is in Est but not in ANS", list[i]);
+        TEST_MSG("ID: %d is in Est but not in ANS (Compare with %d) ", list[i], mid91);
         if(OccurAns[list[i]] == 0){
             ++ndiff;
         }

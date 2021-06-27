@@ -25,8 +25,6 @@ void kill_Matrix_ushort(Matrix_ushort* M){
 
 
 
-
-
 void init_FS(infoFs* info){
     init_Matrix_ushort(&info->hstack, Q_RABIN, MAX_N_MAIL);
     info->num_unique = (double*)calloc(MAX_N_MAIL,sizeof(double));
@@ -147,7 +145,7 @@ int Hash_RK(char s[]){
 	int i = 0;
 	int RK = 0;
 	while(s[i]!='\0'){
-		RK = (62*RK + (int)s[i])%Q_RABIN;
+		RK = (D_RABIN*RK + (int)s[i])%Q_RABIN;
 		i++;
 	}
 	return abs(RK)%Q_RABIN;

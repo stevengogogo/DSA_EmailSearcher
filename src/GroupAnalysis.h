@@ -14,10 +14,16 @@ typedef struct Node{
 	int parentIdx;
 	int size;
 }node;
-/**/
-static node* makeset(){
 
-	node* arr = (node*)malloc(10*SIZE*sizeof(node));
+typedef struct mem_GA{
+	node* arr;
+	int len;
+} mem_GA;
+
+/**/
+static node* makeset(mem_GA mem){
+
+	node* arr = &mem.arr;
 
 	return arr;
 }
@@ -106,8 +112,17 @@ static void setunion(node* set, char word1[],char word2[], int* count, int* max)
 	}
 }
 
-static void answer_GroupAnalysis(int mid[], int len, mail* mails, int* list, int* nlist){
-	node* arr = makeset();
+static init_GA(mem_GA* mem, int size){
+	mem->arr = (node*)malloc(10*SIZE*sizeof(node));
+	mem->len = size;
+}
+static kill_GA(mem_GA* mem){
+	free(mem->arr);
+	mem->len = 0;
+}
+
+static void answer_GroupAnalysis(int mid[], int len, mail* mails, int* list, int* nlist, mem_GA mem){
+	node* arr = makeset(mem);
 	int count = 0;
 	int max = 0;
 
@@ -119,9 +134,6 @@ static void answer_GroupAnalysis(int mid[], int len, mail* mails, int* list, int
   list[0] = count;
   list[1] = max;
   *nlist = 2;
-
-  free(arr);
-
 }
 
 

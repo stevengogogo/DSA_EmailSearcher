@@ -468,7 +468,7 @@ static int answer_ExpressionMatch(char expression[], mail* mails, int* list, int
 #include <stdbool.h>
 
 /**********Constant Variable***********/
-#define Q_RABIN 7388607
+#define Q_RABIN 4388607//4388607
 #define D_RABIN 36
 #define TOKEN_STRING_LENGTH 4000
 #define ULONG  long
@@ -1041,7 +1041,7 @@ int get_Matrix(Matrix*M, int r, int c){
 void init_Matrix_ushort(Matrix_ushort* M, int nrow, int ncol){
     ushort **array = malloc(nrow * sizeof *array + (nrow * (ncol * sizeof **array)));
     if(array==NULL){
-        printf("Memeory Insufficient: init matrix");
+        printf("\n\n\nMemeory Insufficient: init matrix\n\n\n");
     };
     size_t i;
     ushort * const data = array + nrow;

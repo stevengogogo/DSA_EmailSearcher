@@ -6,7 +6,7 @@
 void init_Matrix_ushort(Matrix_ushort* M, int nrow, int ncol){
     ushort **array = malloc(nrow * sizeof *array + (nrow * (ncol * sizeof **array)));
     if(array==NULL){
-        printf("Memeory Insufficient: init matrix");
+        printf("\n\n\nMemeory Insufficient: init matrix\n\n\n");
     };
     size_t i;
     ushort * const data = array + nrow;
@@ -32,11 +32,13 @@ void init_FS(infoFs* info){
     init_Matrix_ushort(&info->hstack, Q_RABIN, MAX_N_MAIL);
     info->num_unique = (double*)calloc(MAX_N_MAIL,sizeof(double));
     info->SimList = (double*)calloc(MAX_N_MAIL, sizeof(double));
+    info->isVis = (bool*)calloc(Q_RABIN, sizeof(bool));
 };
 
 void kill_FS(infoFs* info){
     free(info->num_unique);
     free(info->SimList);
+    free(info->isVis);
     kill_Matrix_ushort(&info->hstack);
 };
 
@@ -158,7 +160,8 @@ int Hash_RK(char s[]){
 
 
 void answer_FS(infoFs*info, mail* mails, int ID, int n_mail, double threshold, int* list, int* nlist){
-    bool isVis[Q_RABIN] = {false};
+    bool* isVis = info->isVis;
+    memset(isVis, 0, Q_RABIN*sizeof(bool));
     double Overlap[MAX_N_MAIL]={0};
     char* text = mails[ID].content;//Remember to add subject
     int iNxt;
@@ -219,4 +222,5 @@ void answer_FS(infoFs*info, mail* mails, int ID, int n_mail, double threshold, i
             ++(*nlist);
         }
     }
+
 }

@@ -80,12 +80,14 @@ void test_data_2(void){
     int len91 = sizeof(ans91)/sizeof(ans91[0]);
 
     infoFs infs;
-
     init_FS(&infs);
     proc_FS(&infs, mails, num_mail);
 
+    //Occur Map
+    int OccurAns[MAX_N_MAIL] = {0};
 
 
+    //Solve
     answer_FS(&infs, mails, mid30, num_mail, thd30, list, &nlist);
     TEST_CHECK(len30 == nlist);
     TEST_MSG("Expected: %d, Got %d", len30, nlist);
@@ -93,7 +95,6 @@ void test_data_2(void){
         TEST_CHECK(list[i]==ans30[i]);
         TEST_MSG("Exp: %d, Got: %d", ans30[i], list[i]);
     }
-
 
 
     answer_FS(&infs, mails, mid5, num_mail, thd5, list, &nlist);
@@ -105,21 +106,26 @@ void test_data_2(void){
     }
 
 
+
+
     answer_FS(&infs, mails, mid91, num_mail, thd91, list, &nlist);
     TEST_CHECK(len91 == nlist);
     TEST_MSG("Expected: %d, Got %d", len91, nlist);
+
+
+    //Compare
+    for(int i=0;i<len91;i++){
+        OccurAns[ans91[i]] = 1;
+    }
+    int ndiff=0;
     for(int i=0;i<nlist;i++){
-        TEST_CHECK(list[i]==ans91[i]);
-        TEST_MSG("Exp: %d, Got: %d", ans5[i], list[i]);
-        if(list[i]!=ans5[i]){
-            printf("\n%d %d\n", list[i],ans5[i]);
-            break;
+        TEST_CHECK(OccurAns[list[i]] != 0);
+        TEST_MSG("ID: %d is in Est but not in ANS", list[i]);
+        if(OccurAns[list[i]] == 0){
+            ++ndiff;
         }
     }
-
-
-
-
+    printf("\nFalse positive num: %d\n", ndiff);
 
 
 

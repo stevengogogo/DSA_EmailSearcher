@@ -155,7 +155,7 @@ Macros</h2></td></tr>
 #define&#160;</td><td class="memItemRight" valign="bottom"><b>USHORT</b>&#160;&#160;&#160;unsigned short</td></tr>
 <tr class="separator:aea50feaf24fd53b7ffab0e9b62ff30a6"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a6fafc11f63598e7fde1261792e381393"><td class="memItemLeft" align="right" valign="top"><a id="a6fafc11f63598e7fde1261792e381393"></a>
-#define&#160;</td><td class="memItemRight" valign="bottom"><b>ushort</b>&#160;&#160;&#160;unsigned short</td></tr>
+#define&#160;</td><td class="memItemRight" valign="bottom"><b>ushort</b>&#160;&#160;&#160;int</td></tr>
 <tr class="separator:a6fafc11f63598e7fde1261792e381393"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="typedef-members"></a>
@@ -186,9 +186,9 @@ void&#160;</td><td class="memItemRight" valign="bottom"><b>kill_lkmem</b> (<a cl
 <tr class="memitem:acab1c351ce2a475a087d75420f32aa1a"><td class="memItemLeft" align="right" valign="top"><a id="acab1c351ce2a475a087d75420f32aa1a"></a>
 <a class="el" href="structndl.html">ndl</a> *&#160;</td><td class="memItemRight" valign="bottom"><b>get_ndl_mem</b> (<a class="el" href="structlkmem.html">lkmem</a> *lkm)</td></tr>
 <tr class="separator:acab1c351ce2a475a087d75420f32aa1a"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a5b56fea8871cceb9f2c826bcffc45d20"><td class="memItemLeft" align="right" valign="top"><a id="a5b56fea8871cceb9f2c826bcffc45d20"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>append_lk</b> (<a class="el" href="structlklist.html">lklist</a> *list, short val, <a class="el" href="structlkmem.html">lkmem</a> *lkm)</td></tr>
-<tr class="separator:a5b56fea8871cceb9f2c826bcffc45d20"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa9982811e051137c740e19ea6412124e"><td class="memItemLeft" align="right" valign="top"><a id="aa9982811e051137c740e19ea6412124e"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><b>append_lk</b> (<a class="el" href="structlklist.html">lklist</a> *list, ushort val, <a class="el" href="structlkmem.html">lkmem</a> *lkm)</td></tr>
+<tr class="separator:aa9982811e051137c740e19ea6412124e"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a3ad210acc954db653f5af065d704a438"><td class="memItemLeft" align="right" valign="top"><a id="a3ad210acc954db653f5af065d704a438"></a>
 void&#160;</td><td class="memItemRight" valign="bottom"><b>init_Matrix_ushort</b> (<a class="el" href="structMatrix__ushort.html">Matrix_ushort</a> *M, int nrow)</td></tr>
 <tr class="separator:a3ad210acc954db653f5af065d704a438"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -215,9 +215,9 @@ int&#160;</td><td class="memItemRight" valign="bottom"><b>Hash_RK</b> (char s[])
 <tr class="memitem:adf13c3d8eef93c92de06ea0549f7e360"><td class="memItemLeft" align="right" valign="top"><a id="adf13c3d8eef93c92de06ea0549f7e360"></a>
 void&#160;</td><td class="memItemRight" valign="bottom"><b>answer_FS</b> (<a class="el" href="structinfoFS.html">infoFs</a> *info, <a class="el" href="structmail.html">mail</a> *mails, int ID, int n_mail, double threshold, int *list, int *nlist)</td></tr>
 <tr class="separator:adf13c3d8eef93c92de06ea0549f7e360"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a2b92e2b140b5fc3d41bbaf80643a04cb"><td class="memItemLeft" align="right" valign="top"><a id="a2b92e2b140b5fc3d41bbaf80643a04cb"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>register_hash</b> (<a class="el" href="structinfoFS.html">infoFs</a> *info, int ID, int hash, char token[], int i)</td></tr>
-<tr class="separator:a2b92e2b140b5fc3d41bbaf80643a04cb"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a55d99469e73b926ab91e10e2b535bd61"><td class="memItemLeft" align="right" valign="top"><a id="a55d99469e73b926ab91e10e2b535bd61"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><b>register_hash</b> (<a class="el" href="structinfoFS.html">infoFs</a> *info, int ID, int *hash, char token[], int i)</td></tr>
+<tr class="separator:a55d99469e73b926ab91e10e2b535bd61"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>Group Analysis. Use Jaccob's similarity with hash table to identify similar strings. </p>

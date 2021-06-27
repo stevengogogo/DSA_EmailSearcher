@@ -90,7 +90,7 @@ $(function() {
 <div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160;<span class="preprocessor">#define ULONG  long</span></div>
 <div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160;<span class="preprocessor">#define UINT  int</span></div>
 <div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160;<span class="preprocessor">#define USHORT unsigned short</span></div>
-<div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160;<span class="preprocessor">#define ushort unsigned short</span></div>
+<div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160;<span class="preprocessor">#define ushort int</span></div>
 <div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160; </div>
 <div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160;<span class="preprocessor">#include &lt;stdlib.h&gt;</span></div>
 <div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160;<span class="preprocessor">#include &lt;assert.h&gt;</span></div>
@@ -118,7 +118,7 @@ $(function() {
 <div class="line"><a name="l00058"></a><span class="lineno">   58</span>&#160;<span class="keywordtype">void</span> init_lkmem(<a class="code" href="structlkmem.html">lkmem</a>* lkm, <span class="keywordtype">int</span> size);</div>
 <div class="line"><a name="l00059"></a><span class="lineno">   59</span>&#160;<span class="keywordtype">void</span> kill_lkmem(<a class="code" href="structlkmem.html">lkmem</a>* lkm);</div>
 <div class="line"><a name="l00060"></a><span class="lineno">   60</span>&#160;<a class="code" href="structndl.html">ndl</a>* get_ndl_mem(<a class="code" href="structlkmem.html">lkmem</a>*lkm);</div>
-<div class="line"><a name="l00061"></a><span class="lineno">   61</span>&#160;<span class="keywordtype">void</span> append_lk(<a class="code" href="structlklist.html">lklist</a>* list, <span class="keywordtype">short</span> val, <a class="code" href="structlkmem.html">lkmem</a>* lkm);</div>
+<div class="line"><a name="l00061"></a><span class="lineno">   61</span>&#160;<span class="keywordtype">void</span> append_lk(<a class="code" href="structlklist.html">lklist</a>* list, ushort val, <a class="code" href="structlkmem.html">lkmem</a>* lkm);</div>
 <div class="line"><a name="l00062"></a><span class="lineno">   62</span>&#160; </div>
 <div class="line"><a name="l00063"></a><span class="lineno">   63</span>&#160; </div>
 <div class="line"><a name="l00064"></a><span class="lineno">   64</span>&#160; </div>
@@ -140,27 +140,28 @@ $(function() {
 <div class="line"><a name="l00080"></a><span class="lineno">   80</span>&#160;    <span class="keywordtype">bool</span>* isVis;</div>
 <div class="line"><a name="l00081"></a><span class="lineno">   81</span>&#160;    <a class="code" href="structlkmem.html">lkmem</a> lkm;<span class="comment">//nodes memory</span></div>
 <div class="line"><a name="l00082"></a><span class="lineno">   82</span>&#160;    <span class="keywordtype">int</span>* resetID;</div>
-<div class="line"><a name="l00083"></a><span class="lineno">   83</span>&#160;} <a class="code" href="structinfoFS.html">infoFs</a>;</div>
-<div class="line"><a name="l00084"></a><span class="lineno">   84</span>&#160; </div>
+<div class="line"><a name="l00083"></a><span class="lineno">   83</span>&#160;    <a class="code" href="structMatrix__ushort.html">Matrix_ushort</a> tokenID;</div>
+<div class="line"><a name="l00084"></a><span class="lineno">   84</span>&#160;} <a class="code" href="structinfoFS.html">infoFs</a>;</div>
 <div class="line"><a name="l00085"></a><span class="lineno">   85</span>&#160; </div>
-<div class="line"><a name="l00086"></a><span class="lineno">   86</span>&#160;<span class="keywordtype">void</span> init_FS(<a class="code" href="structinfoFS.html">infoFs</a>* info);</div>
-<div class="line"><a name="l00087"></a><span class="lineno">   87</span>&#160;<span class="keywordtype">void</span> kill_FS(<a class="code" href="structinfoFS.html">infoFs</a>* info);</div>
-<div class="line"><a name="l00088"></a><span class="lineno">   88</span>&#160; </div>
-<div class="line"><a name="l00090"></a><span class="lineno">   90</span>&#160;<span class="keywordtype">int</span> <a class="code" href="FindSimilar_8h.html#a5d1c13d719525d926512bacf0d5e154c">popTokenHash</a>(<span class="keywordtype">char</span> message[], <span class="keywordtype">char</span> token[], <span class="keywordtype">int</span> iStr, <span class="keywordtype">int</span>* Hash);</div>
-<div class="line"><a name="l00091"></a><span class="lineno">   91</span>&#160;<span class="keywordtype">void</span> append_mHash(<a class="code" href="structinfoFS.html">infoFs</a>* info,<a class="code" href="structmail.html">mail</a>* mails, <span class="keywordtype">int</span> ID);</div>
-<div class="line"><a name="l00092"></a><span class="lineno">   92</span>&#160; </div>
-<div class="line"><a name="l00093"></a><span class="lineno">   93</span>&#160;<span class="keywordtype">void</span> proc_FS(<a class="code" href="structinfoFS.html">infoFs</a>* info, <a class="code" href="structmail.html">mail</a>* mails, <span class="keywordtype">int</span> n_mail);</div>
-<div class="line"><a name="l00094"></a><span class="lineno">   94</span>&#160; </div>
+<div class="line"><a name="l00086"></a><span class="lineno">   86</span>&#160; </div>
+<div class="line"><a name="l00087"></a><span class="lineno">   87</span>&#160;<span class="keywordtype">void</span> init_FS(<a class="code" href="structinfoFS.html">infoFs</a>* info);</div>
+<div class="line"><a name="l00088"></a><span class="lineno">   88</span>&#160;<span class="keywordtype">void</span> kill_FS(<a class="code" href="structinfoFS.html">infoFs</a>* info);</div>
+<div class="line"><a name="l00089"></a><span class="lineno">   89</span>&#160; </div>
+<div class="line"><a name="l00091"></a><span class="lineno">   91</span>&#160;<span class="keywordtype">int</span> <a class="code" href="FindSimilar_8h.html#a5d1c13d719525d926512bacf0d5e154c">popTokenHash</a>(<span class="keywordtype">char</span> message[], <span class="keywordtype">char</span> token[], <span class="keywordtype">int</span> iStr, <span class="keywordtype">int</span>* Hash);</div>
+<div class="line"><a name="l00092"></a><span class="lineno">   92</span>&#160;<span class="keywordtype">void</span> append_mHash(<a class="code" href="structinfoFS.html">infoFs</a>* info,<a class="code" href="structmail.html">mail</a>* mails, <span class="keywordtype">int</span> ID);</div>
+<div class="line"><a name="l00093"></a><span class="lineno">   93</span>&#160; </div>
+<div class="line"><a name="l00094"></a><span class="lineno">   94</span>&#160;<span class="keywordtype">void</span> proc_FS(<a class="code" href="structinfoFS.html">infoFs</a>* info, <a class="code" href="structmail.html">mail</a>* mails, <span class="keywordtype">int</span> n_mail);</div>
 <div class="line"><a name="l00095"></a><span class="lineno">   95</span>&#160; </div>
-<div class="line"><a name="l00096"></a><span class="lineno">   96</span>&#160;<span class="keywordtype">int</span> Hash_RK(<span class="keywordtype">char</span> s[]);</div>
-<div class="line"><a name="l00097"></a><span class="lineno">   97</span>&#160; </div>
-<div class="line"><a name="l00098"></a><span class="lineno">   98</span>&#160;<span class="keywordtype">void</span> answer_FS(<a class="code" href="structinfoFS.html">infoFs</a>*info, <a class="code" href="structmail.html">mail</a>* mails, <span class="keywordtype">int</span> ID, <span class="keywordtype">int</span> n_mail, <span class="keywordtype">double</span> threshold, <span class="keywordtype">int</span>* list, <span class="keywordtype">int</span>* nlist);</div>
-<div class="line"><a name="l00099"></a><span class="lineno">   99</span>&#160;<span class="keywordtype">void</span> register_hash(<a class="code" href="structinfoFS.html">infoFs</a>* info, <span class="keywordtype">int</span> ID, <span class="keywordtype">int</span> hash, <span class="keywordtype">char</span> token[], <span class="keywordtype">int</span> i);</div>
-<div class="line"><a name="l00100"></a><span class="lineno">  100</span>&#160; </div>
+<div class="line"><a name="l00096"></a><span class="lineno">   96</span>&#160; </div>
+<div class="line"><a name="l00097"></a><span class="lineno">   97</span>&#160;<span class="keywordtype">int</span> Hash_RK(<span class="keywordtype">char</span> s[]);</div>
+<div class="line"><a name="l00098"></a><span class="lineno">   98</span>&#160; </div>
+<div class="line"><a name="l00099"></a><span class="lineno">   99</span>&#160;<span class="keywordtype">void</span> answer_FS(<a class="code" href="structinfoFS.html">infoFs</a>*info, <a class="code" href="structmail.html">mail</a>* mails, <span class="keywordtype">int</span> ID, <span class="keywordtype">int</span> n_mail, <span class="keywordtype">double</span> threshold, <span class="keywordtype">int</span>* list, <span class="keywordtype">int</span>* nlist);</div>
+<div class="line"><a name="l00100"></a><span class="lineno">  100</span>&#160;<span class="keywordtype">void</span> register_hash(<a class="code" href="structinfoFS.html">infoFs</a>* info, <span class="keywordtype">int</span> ID, <span class="keywordtype">int</span>* hash, <span class="keywordtype">char</span> token[], <span class="keywordtype">int</span> i);</div>
 <div class="line"><a name="l00101"></a><span class="lineno">  101</span>&#160; </div>
-<div class="line"><a name="l00102"></a><span class="lineno">  102</span>&#160;<span class="preprocessor">#endif</span></div>
+<div class="line"><a name="l00102"></a><span class="lineno">  102</span>&#160; </div>
+<div class="line"><a name="l00103"></a><span class="lineno">  103</span>&#160;<span class="preprocessor">#endif</span></div>
 <div class="ttc" id="aFindSimilar_8h_html_a24413112ae8bb40dc1567a940a65247d"><div class="ttname"><a href="FindSimilar_8h.html#a24413112ae8bb40dc1567a940a65247d">ndl</a></div><div class="ttdeci">struct ndl ndl</div></div>
-<div class="ttc" id="aFindSimilar_8h_html_a5d1c13d719525d926512bacf0d5e154c"><div class="ttname"><a href="FindSimilar_8h.html#a5d1c13d719525d926512bacf0d5e154c">popTokenHash</a></div><div class="ttdeci">int popTokenHash(char message[], char token[], int iStr, int *Hash)</div><div class="ttdef"><b>Definition:</b> FindSimilar.c:101</div></div>
+<div class="ttc" id="aFindSimilar_8h_html_a5d1c13d719525d926512bacf0d5e154c"><div class="ttname"><a href="FindSimilar_8h.html#a5d1c13d719525d926512bacf0d5e154c">popTokenHash</a></div><div class="ttdeci">int popTokenHash(char message[], char token[], int iStr, int *Hash)</div><div class="ttdef"><b>Definition:</b> FindSimilar.c:107</div></div>
 <div class="ttc" id="astructMatrix__ushort_html"><div class="ttname"><a href="structMatrix__ushort.html">Matrix_ushort</a></div><div class="ttdef"><b>Definition:</b> FindSimilar.h:66</div></div>
 <div class="ttc" id="astructinfoFS_html"><div class="ttname"><a href="structinfoFS.html">infoFS</a></div><div class="ttdef"><b>Definition:</b> FindSimilar.h:76</div></div>
 <div class="ttc" id="astructlklist_html"><div class="ttname"><a href="structlklist.html">lklist</a></div><div class="ttdef"><b>Definition:</b> FindSimilar.h:46</div></div>

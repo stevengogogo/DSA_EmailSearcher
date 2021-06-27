@@ -22,7 +22,7 @@
 
 /**********Constant Variable***********/
 #define Q_RABIN 170001
-#define D_RABIN 67
+#define D_RABIN 36
 #define INIT_SPURIOUS_COUNT 3
 #define INIT_UNIQUE_TOKEN_SIZE 10
 #define TOKEN_STRING_LENGTH 1000

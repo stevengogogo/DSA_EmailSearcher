@@ -144,7 +144,7 @@ int main(void) {
         //Group Analysis
         else {
 
-            answer_GroupAnalysis(queries[i].data.group_analyse_data.mids, queries[i].data.group_analyse_data.len,mails, list, &nlist, memGA);
+            answer_GroupAnalysis(queries[i].data.group_analyse_data.mids, queries[i].data.group_analyse_data.len,mails, list, &nlist, &memGA);
 
             api.answer(queries[i].id, list, nlist);
    
@@ -156,7 +156,7 @@ int main(void) {
     free(mails);
     free(queries);
     free(list);
-    free(&memGA);
+    kill_GA(&memGA);
 
     return 0;
 }

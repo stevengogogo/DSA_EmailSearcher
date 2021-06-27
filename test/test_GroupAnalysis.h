@@ -46,7 +46,8 @@ void test_data_GA(void){
     TEST_CHECK(sizeof(mids11)/sizeof(mids11[0]) == len11);
     TEST_CHECK(sizeof(mids14)/sizeof(mids14[0]) == len14);
 
-
+    mem_GA memGA;
+    init_GA(&memGA, SIZE);
 
     //Problem
     int* list = (int*)malloc(sizeof(int)*10000);
@@ -54,22 +55,22 @@ void test_data_GA(void){
 
 
     //Test sets
-    answer_GroupAnalysis(mids0, len0, mails, list, &nlist); 
+    answer_GroupAnalysis(mids0, len0, mails, list, &nlist, &memGA); 
     test_arr2(ans0, list,0);   
 
-    answer_GroupAnalysis(mids2, len2, mails, list, &nlist); 
+    answer_GroupAnalysis(mids2, len2, mails, list, &nlist, &memGA); 
     test_arr2(ans2, list,2); 
 
-    answer_GroupAnalysis(mids3, len3, mails, list, &nlist); 
+    answer_GroupAnalysis(mids3, len3, mails, list, &nlist, &memGA); 
     test_arr2(ans3, list,3); 
 
-    answer_GroupAnalysis(mids9, len9, mails, list, &nlist); 
+    answer_GroupAnalysis(mids9, len9, mails, list, &nlist, &memGA); 
     test_arr2(ans9, list,9); 
 
-    answer_GroupAnalysis(mids11, len11, mails, list, &nlist); 
+    answer_GroupAnalysis(mids11, len11, mails, list, &nlist, &memGA); 
     test_arr2(ans11, list,11); 
 
-    answer_GroupAnalysis(mids14, len14, mails, list, &nlist); 
+    answer_GroupAnalysis(mids14, len14, mails, list, &nlist, &memGA); 
     test_arr2(ans14, list,14); 
 
     //Memory Test
@@ -77,10 +78,11 @@ void test_data_GA(void){
     for(int i=0;i<MAX_N_MAIL;i++){
         mid[i] = i;
     }
-    answer_GroupAnalysis(mid, 10000, mails, list, &nlist); 
+    answer_GroupAnalysis(mid, 10000, mails, list, &nlist, &memGA); 
 
 
     //Garbage
+    kill_GA(&memGA);
     free(mails);
     free(list);
 }   

@@ -15,15 +15,16 @@ typedef struct Node{
 	int size;
 }node;
 
-typedef struct mem_GA{
+typedef struct MEM_GA{
 	node* arr;
 	int len;
 } mem_GA;
 
 /**/
-static node* makeset(mem_GA mem){
+static node* makeset(mem_GA* mem){
 
-	node* arr = &mem.arr;
+	node* arr = mem->arr;
+	memset(arr, 0,mem->len*sizeof(node));
 
 	return arr;
 }
@@ -112,16 +113,16 @@ static void setunion(node* set, char word1[],char word2[], int* count, int* max)
 	}
 }
 
-static init_GA(mem_GA* mem, int size){
+static void init_GA(mem_GA* mem, int size){
 	mem->arr = (node*)malloc(10*SIZE*sizeof(node));
 	mem->len = size;
 }
-static kill_GA(mem_GA* mem){
+static void kill_GA(mem_GA* mem){
 	free(mem->arr);
 	mem->len = 0;
 }
 
-static void answer_GroupAnalysis(int mid[], int len, mail* mails, int* list, int* nlist, mem_GA mem){
+static void answer_GroupAnalysis(int mid[], int len, mail* mails, int* list, int* nlist, mem_GA* mem){
 	node* arr = makeset(mem);
 	int count = 0;
 	int max = 0;

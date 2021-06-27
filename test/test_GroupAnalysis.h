@@ -73,7 +73,11 @@ void test_data_GA(void){
     test_arr2(ans14, list,14); 
 
     //Memory Test
-    answer_GroupAnalysis(0, 10000, mails, list, &nlist); 
+    int mid[MAX_N_MAIL];
+    for(int i=0;i<MAX_N_MAIL;i++){
+        mid[i] = i;
+    }
+    answer_GroupAnalysis(mid, 10000, mails, list, &nlist); 
 
 
     //Garbage
